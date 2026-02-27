@@ -6,7 +6,1160 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Life OS"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Life OS">
+<meta name="theme-color" content="#080808">
+<title>Life OS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+:root{--bg:#080808;--surface:#111;--surface2:#181818;--border:#252525;--accent:#c8ff47;--accent2:#47d4ff;--accent3:#ff6b35;--accent4:#b47ffe;--text:#efefef;--muted:#555;--green:#3ddc84}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+/* HEADER */
+.header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg);position:sticky;top:0;z-index:100;gap:8px}
+.logo{font-size:17px;font-weight:800;letter-spacing:-.5px;flex-shrink:0}.logo span{color:var(--accent)}
+.tagline{font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px}
+.header-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.date-badge{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:4px 8px;border-radius:4px;white-space:nowrap}
+.hdr-btn{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:10px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Syne',sans-serif;white-space:nowrap;-webkit-appearance:none}
+.hdr-btn:active{border-color:var(--accent);color:var(--accent)}
+.hdr-btn.push{border-color:rgba(200,255,71,.3);color:var(--accent)}
+.hdr-btn.push:active{background:var(--accent);color:#000}
+/* BOTTOM NAV */
+.nav{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--bg);border-top:1px solid var(--border);display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:env(safe-area-inset-bottom)}
+.nav::-webkit-scrollbar{display:none}
+.nav-tab{flex:0 0 auto;padding:8px 12px 6px;font-size:9px;font-weight:700;font-family:'Syne',sans-serif;background:none;border:none;color:var(--muted);cursor:pointer;border-top:2px solid transparent;white-space:nowrap;transition:all .2s;text-transform:uppercase;letter-spacing:.5px;display:flex;flex-direction:column;align-items:center;gap:1px;min-width:58px}
+.nav-tab .ni{font-size:17px}
+.nav-tab.active{color:var(--accent);border-top-color:var(--accent)}
+/* MAIN */
+.main{padding:14px 16px;max-width:100%}
+.tab{display:none}.tab.active{display:block}
+/* GRIDS */
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.stat-label{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:4px}
+.stat-value{font-size:22px;font-weight:800;line-height:1;margin-bottom:2px}
+.stat-sub{font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.pillars-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.pillar-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:11px}
+.pillar-icon{font-size:16px;margin-bottom:4px}.pillar-name{font-size:11px;font-weight:700}
+.roadmap-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.roadmap-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px}
+.roadmap-year{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
+.roadmap-goals{list-style:none}
+.roadmap-goals li{font-size:12px;color:#bbb;padding:5px 0;padding-left:14px;position:relative;cursor:pointer;border-bottom:1px solid var(--border)}
+.roadmap-goals li:last-child{border-bottom:none}
+.roadmap-goals li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:10px;top:6px}
+.two-col{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:14px}
+.three-col{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:14px}
+/* CARD */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:14px}
+.card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;gap:8px}
+.card-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1.3}
+.badge{font-family:'JetBrains Mono',monospace;font-size:8px;padding:3px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;flex-shrink:0}
+.badge-green{background:rgba(61,220,132,.12);color:var(--green)}.badge-yellow{background:rgba(200,255,71,.12);color:var(--accent)}
+.badge-orange{background:rgba(255,107,53,.12);color:var(--accent3)}.badge-blue{background:rgba(71,212,255,.12);color:var(--accent2)}
+.badge-purple{background:rgba(180,127,254,.12);color:var(--accent4)}
+.section-title{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+/* PROGRESS */
+.progress-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin-top:4px}
+.progress-fill{height:100%;border-radius:2px;transition:width .5s ease}
+.rp-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.rp-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .4s}
+.routine-progress{margin-bottom:12px}
+.rp-meta{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}
+.rp-label{color:#bbb}.rp-val{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+.last-reset{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-top:6px}
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.kpi-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center}
+.kpi-num{font-size:20px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:3px}
+.kpi-label{font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+/* UPGRADE / PROTOCOL */
+.upgrade{background:linear-gradient(135deg,rgba(200,255,71,.04),rgba(71,212,255,.04));border:1px solid rgba(200,255,71,.15);border-radius:8px;padding:12px 14px;margin-bottom:8px}
+.upgrade-title{font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.upgrade-body{font-size:12px;color:#aaa;line-height:1.6}
+.protocol{background:var(--surface2);border-left:3px solid var(--accent2);padding:10px 12px;margin-bottom:8px;border-radius:0 6px 6px 0}
+.protocol-title{font-size:10px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px}
+.protocol-body{font-size:12px;color:#aaa;line-height:1.6}
+/* WEEK GRID */
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.day-col{text-align:center}.day-name{font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.day-task{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:5px 2px;font-size:8px;color:#aaa;margin-bottom:3px;line-height:1.3;cursor:pointer}
+.day-task.hl-green{background:rgba(200,255,71,.07);border-color:rgba(200,255,71,.18);color:var(--accent)}
+.day-task.hl-blue{background:rgba(71,212,255,.07);border-color:rgba(71,212,255,.18);color:var(--accent2)}
+.day-task.hl-orange{background:rgba(255,107,53,.07);border-color:rgba(255,107,53,.18);color:var(--accent3)}
+.day-task.hl-purple{background:rgba(180,127,254,.07);border-color:rgba(180,127,254,.18);color:var(--accent4)}
+/* IDEA BANK */
+.idea-bank-item{display:flex;align-items:center;gap:9px;padding:10px 0;font-size:13px;color:#aaa;border-bottom:1px solid var(--border)}
+.idea-bank-item:last-child{border-bottom:none}
+.idea-dot{width:6px;height:6px;border-radius:50%;background:var(--accent4);flex-shrink:0}
+.idea-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;margin-left:auto;padding:4px 6px;flex-shrink:0}
+/* SIMPLE LIST */
+.simple-list{list-style:none;margin-bottom:4px}
+.simple-list li{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);font-size:14px;color:#ccc}
+.simple-list li:last-child{border-bottom:none}
+.simple-list li.done .s-check{background:var(--accent);border-color:var(--accent)}
+.simple-list li.done .s-check::after{content:'✓';font-size:9px;color:#000;font-weight:900}
+.simple-list li.done .s-label{text-decoration:line-through;color:var(--muted)}
+.s-check{width:22px;height:22px;border:1.5px solid var(--border);border-radius:4px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s;cursor:pointer}
+.s-label{flex:1;line-height:1.45}
+.s-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:2px 6px;flex-shrink:0}
+/* ADD ROW */
+.add-row{display:flex;gap:8px;margin-top:12px}
+.add-input{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:11px 12px;font-size:14px;color:var(--text);font-family:'Syne',sans-serif;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.add-input:focus{border-color:var(--accent)}
+.add-btn{background:var(--accent);color:#000;border:none;border-radius:8px;padding:11px 16px;font-size:12px;font-weight:700;font-family:'Syne',sans-serif;cursor:pointer;white-space:nowrap}
+/* ROUTINE */
+.routine-list{list-style:none}
+.routine-item{display:flex;align-items:center;gap:10px;padding:12px 4px;border-bottom:1px solid var(--border);border-radius:4px}
+.routine-item:last-child{border-bottom:none}
+.routine-item.dragging{opacity:.4}.routine-item.drag-over{border-top:2px solid var(--accent)}
+.drag-handle{color:var(--muted);font-size:16px;flex-shrink:0;user-select:none;touch-action:none}
+.r-check{width:22px;height:22px;border:1.5px solid var(--border);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;cursor:pointer}
+.routine-item.done .r-check{background:var(--accent);border-color:var(--accent)}
+.routine-item.done .r-check::after{content:'✓';font-size:10px;color:#000;font-weight:900}
+.routine-item.done .r-text{text-decoration:line-through;color:var(--muted)}
+.r-text{flex:1;font-size:14px;color:#ccc;line-height:1.4}
+.r-sci{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--accent2);background:rgba(71,212,255,.07);padding:2px 5px;border-radius:2px;white-space:nowrap;flex-shrink:0}
+.r-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:2px 4px;flex-shrink:0}
+/* BUTTONS */
+.reset-btn{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:6px 12px;font-size:11px;color:var(--muted);cursor:pointer;font-family:'Syne',sans-serif;white-space:nowrap}
+.reset-btn:active{border-color:var(--accent);color:var(--accent)}
+.counter-btn{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 18px;font-size:16px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Syne',sans-serif;min-width:52px}
+.counter-btn:active{border-color:var(--accent3);color:var(--accent3)}
+.counter-btn.plus:active{border-color:var(--green);color:var(--green)}
+/* HIT LIST */
+.hit-item{display:flex;align-items:flex-start;gap:10px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;cursor:pointer;transition:opacity .2s;margin-bottom:8px}
+.hit-item.done{opacity:.4}
+.hit-check{width:20px;height:20px;border:1.5px solid var(--border);border-radius:4px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.hit-item.done .hit-check{background:var(--accent);border-color:var(--accent)}
+.hit-item.done .hit-check::after{content:'✓';font-size:9px;color:#000;font-weight:900}
+.hit-cat{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;font-family:'JetBrains Mono',monospace;margin-bottom:3px}
+.hit-text{font-size:13px;color:var(--text);line-height:1.4}
+.hit-item.done .hit-text{text-decoration:line-through;color:var(--muted)}
+/* TODO TITLE */
+.todo-title-input{background:none;border:none;border-bottom:1px solid transparent;color:var(--text);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;outline:none;cursor:text;flex:1;min-width:0}
+.todo-title-input:focus{border-bottom-color:var(--accent)}
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:500;align-items:center;justify-content:center;padding:20px}
+.modal-bg.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;width:100%;max-width:500px;max-height:80vh;overflow-y:auto}
+.modal-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;color:var(--accent)}
+.modal textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:11px;color:var(--text);font-family:'JetBrains Mono',monospace;outline:none;resize:vertical;min-height:200px;line-height:1.5}
+.modal-btns{display:flex;gap:8px;margin-top:12px}
+.modal-btns button{flex:1;padding:11px;border-radius:8px;font-size:12px;font-weight:700;font-family:'Syne',sans-serif;cursor:pointer;border:none}
+.btn-primary{background:var(--accent);color:#000}
+.btn-secondary{background:var(--surface2);color:var(--muted);border:1px solid var(--border) !important}
+/* SCROLLBAR */
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+/* DESKTOP */
+@media(min-width:640px){
+  body{padding-bottom:0}
+  .header{padding:20px 32px}
+  .main{padding:24px 32px}
+  .nav{position:static;border-top:none;border-bottom:1px solid var(--border);padding-bottom:0}
+  .nav-tab{flex-direction:row;gap:6px;min-width:auto;border-top:none;border-bottom:2px solid transparent;padding:10px 16px 8px}
+  .nav-tab .ni{font-size:14px}
+  .nav-tab.active{border-bottom-color:var(--accent);border-top-color:transparent}
+  .two-col{grid-template-columns:1fr 1fr}
+  .three-col{grid-template-columns:1fr 1fr 1fr}
+  .overview-grid{grid-template-columns:repeat(2,1fr)}
+  .pillars-grid{grid-template-columns:repeat(4,1fr)}
+  .roadmap-grid{grid-template-columns:repeat(4,1fr)}
+  #hitlist-grid{grid-template-columns:1fr 1fr}
+}
+@media(min-width:900px){
+  .header{padding:24px 40px}
+  .main{padding:28px 40px;max-width:1400px}
+  .overview-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="logo">Life <span>OS</span></div>
+    <div class="tagline">Master System · Age 38</div>
+  </div>
+  <div class="header-right">
+    <div class="date-badge" id="dateBadge"></div>
+    <button class="hdr-btn" onclick="copyData()">📋 Copy Data</button>
+    <button class="hdr-btn push" onclick="openPushModal()">🚀 Push</button>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nav-tab active" onclick="showTab('overview',this)"><span class="ni">⚡</span>Overview</button>
+  <button class="nav-tab" onclick="showTab('morning',this)"><span class="ni">☀️</span>Morning</button>
+  <button class="nav-tab" onclick="showTab('evening',this)"><span class="ni">🌙</span>Evening</button>
+  <button class="nav-tab" onclick="showTab('health',this)"><span class="ni">🧪</span>Health</button>
+  <button class="nav-tab" onclick="showTab('business',this)"><span class="ni">💩</span>Scoop</button>
+  <button class="nav-tab" onclick="showTab('sportsbook',this)"><span class="ni">🎰</span>Books</button>
+  <button class="nav-tab" onclick="showTab('work',this)"><span class="ni">💼</span>Work</button>
+  <button class="nav-tab" onclick="showTab('family',this)"><span class="ni">💖</span>Family</button>
+</div>
+
+<!-- PUSH MODAL -->
+<div class="modal-bg" id="push-modal">
+  <div class="modal">
+    <div class="modal-title">🚀 Push to GitHub</div>
+    <p style="font-size:12px;color:#aaa;margin-bottom:14px;line-height:1.6">Enter your GitHub Personal Access Token to push directly. Token needs <strong style="color:#ddd">repo</strong> scope. <a href="https://github.com/settings/tokens/new" target="_blank" style="color:var(--accent2)">Create one here</a>.</p>
+    <input id="gh-token" type="password" class="add-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" style="margin-bottom:10px;width:100%">
+    <input id="gh-repo" class="add-input" value="jhaines0605/lifeos" placeholder="username/reponame" style="margin-bottom:10px;width:100%">
+    <input id="gh-file" class="add-input" value="index.html" placeholder="filename" style="margin-bottom:4px;width:100%">
+    <p id="push-status" style="font-size:11px;color:var(--muted);min-height:18px;margin-bottom:10px;font-family:'JetBrains Mono',monospace"></p>
+    <div class="modal-btns">
+      <button class="btn-secondary" onclick="closePushModal()">Cancel</button>
+      <button class="btn-primary" onclick="pushToGitHub()">Push Live</button>
+    </div>
+    <p style="font-size:10px;color:var(--muted);margin-top:10px;line-height:1.5">💡 Check "Remember token" to save it on this device so you don't have to re-enter it.</p>
+    <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#aaa;margin-top:6px;cursor:pointer">
+      <input type="checkbox" id="gh-remember" style="accent-color:var(--accent)"> Remember token on this device
+    </label>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════ OVERVIEW ══════════ -->
+<div class="tab active" id="tab-overview">
+
+  <div class="overview-grid">
+    <div class="stat-card"><div class="stat-label">Scoop Clients</div><div class="stat-value" style="color:var(--accent)" id="ov-clients">3</div><div class="stat-sub">Goal: 20 by Apr 2026</div></div>
+    <div class="stat-card"><div class="stat-label">Monthly Revenue</div><div class="stat-value" style="color:var(--green)" id="ov-revenue">$180</div><div class="stat-sub">Target: $1,200+/mo</div></div>
+  </div>
+
+  <div class="section-title">Your 8 Pillars</div>
+  <div class="pillars-grid">
+    <div class="pillar-card"><div class="pillar-icon">💪</div><div class="pillar-name">Health & Vitality</div></div>
+    <div class="pillar-card"><div class="pillar-icon">👨‍👩‍👧‍👦</div><div class="pillar-name">Family & Relationships</div></div>
+    <div class="pillar-card"><div class="pillar-icon">💰</div><div class="pillar-name">Wealth & Freedom</div></div>
+    <div class="pillar-card"><div class="pillar-icon">🚀</div><div class="pillar-name">Purpose & Career</div></div>
+    <div class="pillar-card"><div class="pillar-icon">📚</div><div class="pillar-name">Growth & Learning</div></div>
+    <div class="pillar-card"><div class="pillar-icon">🧘</div><div class="pillar-name">Spirituality & Peace</div></div>
+    <div class="pillar-card"><div class="pillar-icon">🎮</div><div class="pillar-name">Joy & Fun</div></div>
+    <div class="pillar-card"><div class="pillar-icon">🌍</div><div class="pillar-name">Legacy & Contribution</div></div>
+  </div>
+
+  <div class="section-title" style="margin-top:4px">Long-Term Roadmap</div>
+  <div class="roadmap-grid" id="roadmap-grid"></div>
+
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">🎯 Daily Hit List</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date"></div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span id="hitlist-pval" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">0/10</span>
+        <button class="reset-btn" onclick="regenerateHitList()">↺ Shuffle</button>
+      </div>
+    </div>
+    <div class="rp-bar" style="margin-bottom:16px"><div class="rp-fill" id="hitlist-pfill" style="width:0%"></div></div>
+    <div id="hitlist-grid"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-title">📓 Weekly Wins & Notes</div><div class="badge badge-green">Reflection</div></div>
+    <textarea id="weekly-journal" placeholder="What went well this week? Wins, ideas, reflections..." style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:13px;color:var(--text);font-family:'Syne',sans-serif;outline:none;resize:vertical;min-height:140px;line-height:1.6;-webkit-appearance:none" oninput="saveJournal()"></textarea>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px" id="journal-saved"></div>
+  </div>
+</div>
+
+<!-- ══════════ MORNING ══════════ -->
+<div class="tab" id="tab-morning">
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">☀️ Morning Stack</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <button class="reset-btn" onclick="resetRoutine('morning')">↺ Reset</button>
+          <div class="badge badge-green">Science</div>
+        </div>
+      </div>
+      <div class="routine-progress">
+        <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="morning-val">0/0</span></div>
+        <div class="rp-bar"><div class="rp-fill" id="morning-fill" style="width:0%"></div></div>
+      </div>
+      <ul class="routine-list" id="morning-list"></ul>
+      <div class="add-row">
+        <input class="add-input" id="morning-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('morning')">
+        <button class="add-btn" onclick="addRoutineItem('morning')">+ Add</button>
+      </div>
+      <div class="last-reset" id="morning-last-reset"></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">🔬 Science Notes</div></div>
+      <div class="upgrade"><div class="upgrade-title">☀️ Morning Sunlight</div><div class="upgrade-body">Outside within 30 min of waking. Sets circadian clock, times cortisol correctly.</div></div>
+      <div class="upgrade"><div class="upgrade-title">🧊 Cold Shower Finish</div><div class="upgrade-body">30 sec cold at the end. Dopamine +250%. Mental toughness, sharp alertness.</div></div>
+      <div class="upgrade"><div class="upgrade-title">⏰ Delay Caffeine 90 Min</div><div class="upgrade-body">Lets adenosine clear naturally. Prevents afternoon crash. Water first.</div></div>
+      <div class="upgrade"><div class="upgrade-title">📝 3 Daily Targets</div><div class="upgrade-body">Write exactly 3 things that make today a win. Stays on offense every day.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ EVENING ══════════ -->
+<div class="tab" id="tab-evening">
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">🌙 Evening Stack</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <button class="reset-btn" onclick="resetRoutine('evening')">↺ Reset</button>
+          <div class="badge badge-blue">Sleep</div>
+        </div>
+      </div>
+      <div class="routine-progress">
+        <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="evening-val">0/0</span></div>
+        <div class="rp-bar"><div class="rp-fill" id="evening-fill" style="width:0%"></div></div>
+      </div>
+      <ul class="routine-list" id="evening-list"></ul>
+      <div class="add-row">
+        <input class="add-input" id="evening-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('evening')">
+        <button class="add-btn" onclick="addRoutineItem('evening')">+ Add</button>
+      </div>
+      <div class="last-reset" id="evening-last-reset"></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">🔬 Sleep Science</div></div>
+      <div class="upgrade"><div class="upgrade-title">🌡️ Room Temp 65–68°F</div><div class="upgrade-body">Core body temp must drop to initiate sleep. Non-negotiable.</div></div>
+      <div class="upgrade"><div class="upgrade-title">📵 Blue Light Off 9pm</div><div class="upgrade-body">Suppresses melatonin up to 3 hours. Dim lights, phone to night mode.</div></div>
+      <div class="upgrade"><div class="upgrade-title">📓 3-Win Journal</div><div class="upgrade-body">Write 3 wins before sleep. Reduces cortisol, trains brain to scan for positives.</div></div>
+      <div class="upgrade"><div class="upgrade-title">🧴 Retinol + Hyaluronic</div><div class="upgrade-body">Retinol stimulates collagen. Hyaluronic locks hydration. Easiest longevity win.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ HEALTH ══════════ -->
+<div class="tab" id="tab-health">
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">🏋️ Training Split</div><div class="badge badge-green">PPL + VO₂</div></div>
+        <div class="week-grid" style="margin-bottom:14px">
+          <div class="day-col"><div class="day-name">Wed</div><div class="day-task hl-green">💥 Push</div><div class="day-task hl-blue">🚶 15m</div><div class="day-task hl-purple">🧘 10m</div></div>
+          <div class="day-col"><div class="day-name">Thu</div><div class="day-task hl-green">🔗 Pull</div><div class="day-task hl-blue">🚶 15m</div><div class="day-task hl-purple">🧘 10m</div></div>
+          <div class="day-col"><div class="day-name">Fri</div><div class="day-task hl-orange">🤝 Full</div><div class="day-task hl-blue">🚶 15m</div><div class="day-task hl-purple">🧘 10m</div></div>
+          <div class="day-col"><div class="day-name">Sat</div><div class="day-task">😴 Rest</div><div class="day-task hl-blue">🚶 Long</div><div class="day-task hl-purple">🧘 30m</div></div>
+          <div class="day-col"><div class="day-name">Sun</div><div class="day-task hl-orange">🔥 VO₂</div><div class="day-task hl-blue">🚶 15m</div><div class="day-task hl-purple">🧘 10m</div></div>
+          <div class="day-col"><div class="day-name">Mon</div><div class="day-task hl-green">💥 Push</div><div class="day-task hl-blue">🚶 15m</div><div class="day-task hl-purple">🧘 10m</div></div>
+          <div class="day-col"><div class="day-name">Tue</div><div class="day-task hl-green">🔗 Pull</div><div class="day-task hl-blue">🚶 15m</div><div class="day-task hl-purple">🧘 10m</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📅 Weekly Training Log</div>
+          <button class="reset-btn" onclick="resetTrainingLog()">↺ New Week</button>
+        </div>
+        <div id="training-log-grid" class="week-grid"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">💊 Daily Stack</div><div class="badge badge-green">Verified</div></div>
+        <div class="protocol"><div class="protocol-title">Morning</div><div class="protocol-body">5g Creatine · Protein shake · Vitamin C · SPF · Blues pills · Waterpik</div></div>
+        <div class="protocol"><div class="protocol-title">Evening</div><div class="protocol-body">Vitamins @ 8:30pm · Blue medicine · Retinol or Hyaluronic · PM Lotion · Floss</div></div>
+        <div class="protocol"><div class="protocol-title">Zone 2 Target</div><div class="protocol-body">100 min/week minimum. Daily 15 min dog walk counts. Brisk walking pace.</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">🧬 Longevity Notes</div><div class="badge badge-blue">Attia</div></div>
+        <div class="upgrade"><div class="upgrade-title">Muscle = Longevity Insurance</div><div class="upgrade-body">Muscle is the organ of longevity. Strength 3–4x/week protects against metabolic disease, injury, cognitive decline.</div></div>
+        <div class="upgrade"><div class="upgrade-title">VO₂ Max = #1 Health Metric</div><div class="upgrade-body">Higher VO₂ max = lower all-cause mortality. One day/week of hard intervals dramatically improves it.</div></div>
+        <div class="upgrade"><div class="upgrade-title">Sleep is the Multiplier</div><div class="upgrade-body">Every protocol above works 2x better with good sleep. Room at 65–68°F, screens off, consistent bedtime.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SCOOP SQUAD ══════════ -->
+<div class="tab" id="tab-business">
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">💩 Scoop Squad</div>
+          <div class="badge badge-orange" id="scoop-phase-badge">Phase 1: 3→10</div>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi-box">
+            <div class="kpi-num" id="scoop-clients">3</div>
+            <div class="kpi-label">Clients</div>
+            <div style="display:flex;gap:6px;justify-content:center;margin-top:8px">
+              <button class="counter-btn" onclick="scoopAdj('clients',-1)">−</button>
+              <button class="counter-btn plus" onclick="scoopAdj('clients',1)">+</button>
+            </div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-num" id="scoop-revenue">$180</div>
+            <div class="kpi-label">Revenue/mo</div>
+            <div style="display:flex;gap:6px;justify-content:center;margin-top:8px">
+              <button class="counter-btn" onclick="scoopAdj('revenue',-10)">−</button>
+              <button class="counter-btn plus" onclick="scoopAdj('revenue',10)">+</button>
+            </div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-num" id="scoop-routes">1</div>
+            <div class="kpi-label">Routes</div>
+            <div style="display:flex;gap:6px;justify-content:center;margin-top:8px">
+              <button class="counter-btn" onclick="scoopAdj('routes',-1)">−</button>
+              <button class="counter-btn plus" onclick="scoopAdj('routes',1)">+</button>
+            </div>
+          </div>
+        </div>
+        <div style="margin-bottom:8px">
+          <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:#bbb">Clients to 20</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)" id="clients-pct">15%</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="clients-fill" style="width:15%;background:var(--accent)"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:#bbb">Revenue to $1,200</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)" id="revenue-pct">15%</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="revenue-fill" style="width:15%;background:var(--green)"></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">📋 Daily Workflow</div></div>
+        <ul class="simple-list" id="scoop-daily-list"></ul>
+        <div class="add-row">
+          <input class="add-input" id="scoop-daily-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addSimpleItem('scoop-daily')">
+          <button class="add-btn" onclick="addSimpleItem('scoop-daily')">+ Add</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📅 This Week</div>
+          <button class="reset-btn" onclick="resetScoopWeek()">↺ Reset</button>
+        </div>
+        <ul class="simple-list" id="scoop-week-list"></ul>
+        <div class="add-row">
+          <input class="add-input" id="scoop-week-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addSimpleItem('scoop-week')">
+          <button class="add-btn" onclick="addSimpleItem('scoop-week')">+ Add</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">📝 Scoop To-Do List</div></div>
+        <div id="todo-scoop-wrap"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">🚀 Growth Playbook</div><div class="badge badge-orange">Hormozi</div></div>
+        <div class="upgrade"><div class="upgrade-title">Phase 1: 3 → 10 Clients</div><div class="upgrade-body">Door-to-door in neighborhoods where you already scoop. Hand-written notes mentioning nearby clients. Movie in the Park mailer for spring.</div></div>
+        <div class="upgrade"><div class="upgrade-title">Phase 2: 10 → 20 Clients</div><div class="upgrade-body">Referral program: every client who refers someone gets a free scoop week. Partner with local vets and groomers.</div></div>
+        <div class="upgrade"><div class="upgrade-title">Phase 3: Price for Value</div><div class="upgrade-body">At 20 clients, raise rates 10–15% for new clients. Upsell: "premium weekly" vs standard biweekly.</div></div>
+        <div class="upgrade"><div class="upgrade-title">🧠 Volume Solves Rejection</div><div class="upgrade-body">1 in 10 converts = volume problem, not rejection problem. Drop 100 hangers. Math takes care of itself.</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">💡 Idea Bank</div></div>
+        <div id="scoop-ideas-list"></div>
+        <div class="add-row" style="margin-top:12px">
+          <input class="add-input" id="scoop-idea-input" placeholder="Add an idea..." onkeydown="if(event.key==='Enter')addScoopIdea()">
+          <button class="add-btn" onclick="addScoopIdea()">+ Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SPORTSBOOKS ══════════ -->
+<div class="tab" id="tab-sportsbook">
+  <div class="three-col">
+    <div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🎯 Daily Leadership</div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button class="reset-btn" onclick="resetRoutine('sbshift')">↺ Reset</button>
+            <div class="badge badge-blue">Shift</div>
+          </div>
+        </div>
+        <div class="routine-progress">
+          <div class="rp-meta"><span class="rp-label">Shift Progress</span><span class="rp-val" id="sbshift-val">0/0</span></div>
+          <div class="rp-bar"><div class="rp-fill" id="sbshift-fill" style="width:0%"></div></div>
+        </div>
+        <ul class="routine-list" id="sbshift-list"></ul>
+        <div class="add-row">
+          <input class="add-input" id="sbshift-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('sbshift')">
+          <button class="add-btn" onclick="addRoutineItem('sbshift')">+ Add</button>
+        </div>
+        <div class="last-reset" id="sbshift-last-reset"></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">📋 Stay Current</div><div class="badge badge-orange">Nevada Gaming</div></div>
+        <ul class="simple-list" id="sb-current-list"></ul>
+        <div class="add-row">
+          <input class="add-input" id="sb-current-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addSimpleItem('sb-current')">
+          <button class="add-btn" onclick="addSimpleItem('sb-current')">+ Add</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">📝 Work To-Do List</div></div>
+        <div id="todo-work-wrap"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">🧠 Mindset</div></div>
+        <div class="protocol"><div class="protocol-title">Can't Out-Odds Caesars</div><div class="protocol-body">Win on experience, relationships, retention. Know every regular by name.</div></div>
+        <div class="protocol"><div class="protocol-title">🏢 Reno Hub — Flagship</div><div class="protocol-body">Your showcase. Focus on loyalty, atmosphere, converting casino floor players.</div></div>
+        <div class="protocol"><div class="protocol-title">📍 Sparks — Community</div><div class="protocol-body">Wins on familiarity. Wolf Pack, Raiders, Golden Knights are your hooks.</div></div>
+        <div class="protocol"><div class="protocol-title">🛣️ Wendover — Destination</div><div class="protocol-body">Utah drive traffic, often first-timers. Racebook is a differentiator.</div></div>
+        <div class="protocol"><div class="protocol-title">🐎 Racebook Is Your Moat</div><div class="protocol-body">Habitual loyal money at all 5 locations. Protect fiercely.</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">✍️ Mindset Notes</div><div class="badge badge-purple">Personal</div></div>
+        <textarea id="sb-mindset-notes" placeholder="Leadership lessons, patterns, things to remember..." style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:13px;color:var(--text);font-family:'Syne',sans-serif;outline:none;resize:vertical;min-height:120px;line-height:1.6;-webkit-appearance:none" oninput="saveSbNotes()"></textarea>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:5px" id="sb-notes-saved"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">💡 Forward-Thinking Ideas</div><div class="badge badge-purple">Casino × Book</div></div>
+        <div id="sb-ideas-list"></div>
+        <div class="add-row" style="margin-top:12px">
+          <input class="add-input" id="sb-idea-input" placeholder="Add an idea..." onkeydown="if(event.key==='Enter')addSbIdea()">
+          <button class="add-btn" onclick="addSbIdea()">+ Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ WORK & WEALTH ══════════ -->
+<div class="tab" id="tab-work">
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">🚀 Career & Brand</div><div class="badge badge-blue">Leadership</div></div>
+        <ul class="simple-list" id="work-career-list"></ul>
+        <div class="add-row">
+          <input class="add-input" id="work-career-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addSimpleItem('work-career')">
+          <button class="add-btn" onclick="addSimpleItem('work-career')">+ Add</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">🏘️ Rentals — Neil Rd</div><div class="badge badge-yellow">3675/3677</div></div>
+        <ul class="simple-list" id="work-rentals-list"></ul>
+        <div class="add-row">
+          <input class="add-input" id="work-rentals-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addSimpleItem('work-rentals')">
+          <button class="add-btn" onclick="addSimpleItem('work-rentals')">+ Add</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">📚 Learning Stack</div><div class="badge badge-purple">3–4 hrs/week</div></div>
+        <ul class="simple-list" id="work-learning-list"></ul>
+        <div class="add-row">
+          <input class="add-input" id="work-learning-input" placeholder="Add resource..." onkeydown="if(event.key==='Enter')addSimpleItem('work-learning')">
+          <button class="add-btn" onclick="addSimpleItem('work-learning')">+ Add</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">🔮 Future Side Hustles</div></div>
+        <div class="protocol"><div class="protocol-title">🥇 Tier 1 — Most Aligned</div><div class="protocol-body"><strong style="color:#ddd">Casino Leadership Course</strong> — Use your expertise. Start with one 30-min video. Evergreen passive income.<br><br><strong style="color:#ddd">Personal Brand Website</strong> — Builds credibility for the course.</div></div>
+        <div class="protocol"><div class="protocol-title">🥈 Tier 2 — Physical Services</div><div class="protocol-body">Pressure washing, mobile car detailing, lawn maintenance. High demand, low startup. Dog boarding synergistic with Scoop Squad.</div></div>
+        <div class="protocol"><div class="protocol-title">🥉 Tier 3 — Long-Term</div><div class="protocol-body">Lego parties, dog training. Explore after Scoop Squad hits 20 clients.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FAMILY ══════════ -->
+<div class="tab" id="tab-family">
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">💖 Family Weekly</div><div class="badge badge-purple">Gottman</div></div>
+        <ul class="simple-list" id="family-weekly-list"></ul>
+        <div class="add-row">
+          <input class="add-input" id="family-weekly-input" placeholder="Add habit..." onkeydown="if(event.key==='Enter')addSimpleItem('family-weekly')">
+          <button class="add-btn" onclick="addSimpleItem('family-weekly')">+ Add</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">🏠 Home To-Do List</div></div>
+        <div id="todo-home-wrap"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">💑 Marriage Protocols</div><div class="badge badge-purple">Gottman</div></div>
+        <div class="upgrade"><div class="upgrade-title">Daily: The 6-Second Kiss</div><div class="upgrade-body">One meaningful kiss per day, at least 6 seconds. Breaks the roommate phase, maintains oxytocin bonding.</div></div>
+        <div class="upgrade"><div class="upgrade-title">Weekly: 10-Min "State of Us"</div><div class="upgrade-body">"What's going well? What do we need more of?" Catches small frictions before they compound.</div></div>
+        <div class="upgrade"><div class="upgrade-title">Solopreneur Warning</div><div class="upgrade-body">Biggest threat isn't conflict — it's slow drift from being too focused on hustle. Schedule protected family time like work.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .main -->
+
+<script>
+// ─── CORE HELPERS ───
+function todayKey(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
+function mondayKey(){const d=new Date(),day=d.getDay(),diff=d.getDate()-day+(day===0?-6:1),m=new Date(d.setDate(diff));return m.getFullYear()+'-'+(m.getMonth()+1)+'-'+m.getDate();}
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){}return null;}
+function lsj(k,def){try{return JSON.parse(ls(k)||'null')||def;}catch(e){return def;}}
+
+// ─── NAV ───
+function showTab(id,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ─── ROUTINE ENGINE ───
+const ROUTINE_DEFAULTS={
+  morning:[
+    {text:'💧 16oz water immediately on waking',sci:'Cortisol + hydration'},
+    {text:'☀️ Sunlight in eyes within 30 min',sci:'Huberman: circadian'},
+    {text:'💊 Blues pills',sci:''},
+    {text:'🐾 Feed dogs + vacuum rug',sci:''},
+    {text:'🚶 Walk Bob (15+ min Zone 2)',sci:'Zone 2 base'},
+    {text:'🍳 Breakfast with kids',sci:''},
+    {text:'👕 Get kids dressed + brush teeth',sci:''},
+    {text:'🏋️ Strength training per split',sci:'Attia: muscle health'},
+    {text:'🧘 5–10 min stretch or mobility',sci:'Injury prevention'},
+    {text:'🥤 Protein shake + 5g Creatine',sci:'Examine.com'},
+    {text:'🚿 Shower — end with 30 sec cold',sci:'+250% dopamine'},
+    {text:'💧 Waterpik + Vitamin C + SPF',sci:'Longevity basics'},
+    {text:'🦷 Brush teeth',sci:''},
+    {text:'📅 Write 3 targets for today',sci:'Execution focus'},
+    {text:'⚡ Kick ass today',sci:''},
+  ],
+  evening:[
+    {text:'☕ Prep coffee for tomorrow',sci:''},
+    {text:'💊 Vitamins + Blue medicine @ 8:30pm',sci:''},
+    {text:'🏠 Close up the house',sci:''},
+    {text:'🍽️ Run dishwasher + take trash out',sci:''},
+    {text:'🐾 Fill dog food + water + wash water bottles',sci:''},
+    {text:'🛋️ Cover the couch + Blue in cage',sci:''},
+    {text:'👶 Kids room ready',sci:''},
+    {text:'🌡️ Drop room temp to 65–68°F',sci:'Sleep science'},
+    {text:'📵 Dim screens / blue light off after 9pm',sci:'Melatonin'},
+    {text:'🧴 Wash face + Retinol or Hyaluronic Acid',sci:'Skin longevity'},
+    {text:'🧴 PM Lotion',sci:''},
+    {text:'🦷 Floss + brush teeth',sci:''},
+    {text:'📓 3-win journal: write 3 wins from today',sci:'Cortisol'},
+    {text:'📅 Check calendar for tomorrow',sci:''},
+    {text:'📱 Hard screens off by 11:30pm',sci:''},
+    {text:'🐕 Cash potty break',sci:''},
+    {text:'🛏️ Bed by midnight',sci:''},
+  ],
+  sbshift:[
+    {text:'🏢 Walk Reno Hub first — set the tone',sci:'Flagship'},
+    {text:'📞 Check in with Sparks supervisor',sci:'Sparks'},
+    {text:'📞 Check in with Wendover lead',sci:'Wendover'},
+    {text:'🐎 Verify Racebook boards accurate across all locations',sci:'Daily'},
+    {text:'📋 Review overnight issues or guest complaints',sci:'Daily'},
+    {text:'🎰 Scan casino floor — players to invite to the book?',sci:'Conversion'},
+    {text:'👋 Greet at least 3 regulars by name at Reno Hub',sci:'Retention'},
+    {text:'🏆 Acknowledge one team win today',sci:'Culture'},
+    {text:'💡 Identify one thing to improve before end of shift',sci:'Growth'},
+    {text:'📊 End-of-shift check — anything to hand off?',sci:'Ops'},
+  ],
+};
+function getRoutine(name){
+  const saved=lsj('lifeOS_routine_'+name,null);
+  if(saved&&saved.lastReset){
+    if(saved.lastReset!==todayKey()){saved.items.forEach(i=>i.done=false);saved.lastReset=todayKey();ls('lifeOS_routine_'+name,JSON.stringify(saved));}
+    return saved;
+  }
+  return{items:ROUTINE_DEFAULTS[name].map(i=>({...i,done:false})),lastReset:todayKey()};
+}
+function saveRoutine(name,data){ls('lifeOS_routine_'+name,JSON.stringify(data));}
+function renderRoutine(name){
+  const data=getRoutine(name);
+  const ul=document.getElementById(name+'-list');
+  if(!ul)return;
+  ul.innerHTML='';
+  data.items.forEach((item,idx)=>{
+    const li=document.createElement('li');
+    li.className='routine-item'+(item.done?' done':'');
+    li.draggable=true;li.dataset.idx=idx;
+    li.innerHTML=`<span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('${name}',${idx})"></div><span class="r-text">${item.text}</span>${item.sci?`<span class="r-sci">${item.sci}</span>`:''}<button class="r-del" onclick="deleteRoutineItem('${name}',${idx})">✕</button>`;
+    li.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',idx);li.classList.add('dragging');});
+    li.addEventListener('dragend',()=>li.classList.remove('dragging'));
+    li.addEventListener('dragover',e=>{e.preventDefault();li.classList.add('drag-over');});
+    li.addEventListener('dragleave',()=>li.classList.remove('drag-over'));
+    li.addEventListener('drop',e=>{e.preventDefault();li.classList.remove('drag-over');const from=parseInt(e.dataTransfer.getData('text/plain')),to=idx;if(from===to)return;const d=getRoutine(name);const moved=d.items.splice(from,1)[0];d.items.splice(to,0,moved);saveRoutine(name,d);renderRoutine(name);});
+    ul.appendChild(li);
+  });
+  const total=data.items.length,done=data.items.filter(i=>i.done).length,pct=total?Math.round((done/total)*100):0;
+  const f=document.getElementById(name+'-fill'),v=document.getElementById(name+'-val');
+  if(f)f.style.width=pct+'%';if(v)v.textContent=done+'/'+total;
+  const r=document.getElementById(name+'-last-reset');if(r)r.textContent='Last reset: '+data.lastReset;
+}
+function toggleRoutineItem(name,idx){const d=getRoutine(name);d.items[idx].done=!d.items[idx].done;saveRoutine(name,d);renderRoutine(name);}
+function deleteRoutineItem(name,idx){const d=getRoutine(name);d.items.splice(idx,1);saveRoutine(name,d);renderRoutine(name);}
+function addRoutineItem(name){const input=document.getElementById(name+'-new-input');const text=input.value.trim();if(!text)return;const d=getRoutine(name);d.items.push({text,sci:'',done:false});saveRoutine(name,d);input.value='';renderRoutine(name);}
+function resetRoutine(name){const d=getRoutine(name);d.items.forEach(i=>i.done=false);d.lastReset=todayKey();saveRoutine(name,d);renderRoutine(name);}
+setInterval(()=>['morning','evening','sbshift'].forEach(n=>{const d=getRoutine(n);if(d.lastReset!==todayKey()){d.items.forEach(i=>i.done=false);d.lastReset=todayKey();saveRoutine(n,d);renderRoutine(n);}}),60000);
+
+// ─── TODO BLOCKS (now embedded in tabs) ───
+// Each block: { title, items:[{text,done}] }
+const TODO_DEFAULTS={
+  home:{title:'🏠 Home',items:[
+    {text:'Replace AC drain',done:false},{text:'Fix pipe under house',done:false},
+    {text:'Fix shed door',done:false},{text:'Wash house',done:false},
+    {text:'Build large sandbox',done:false},{text:"Dad's: Research garage solution",done:false},
+  ]},
+  work:{title:'💼 Work',items:[
+    {text:'Phone app welcome screen',done:false},{text:'Wendover Numbers',done:false},
+    {text:'House Rules document',done:false},{text:'Rental AC filter — Neil Rd',done:false},
+  ]},
+  scoop:{title:'💩 Scoop Squad',items:[
+    {text:'Order car magnet',done:false},{text:'Design + print door hangers',done:false},
+    {text:'Blue Tennis Balls',done:false},{text:'Set up Google My Business',done:false},
+  ]},
+};
+function getTodo(key){return lsj('lifeOS_todo_'+key,{...TODO_DEFAULTS[key],items:TODO_DEFAULTS[key].items.map(i=>({...i}))});}
+function saveTodo(key,d){ls('lifeOS_todo_'+key,JSON.stringify(d));}
+function renderTodoBlock(key,wrapId){
+  const data=getTodo(key);
+  const wrap=document.getElementById(wrapId);
+  if(!wrap)return;
+  wrap.innerHTML='';
+  const ul=document.createElement('ul');ul.className='simple-list';ul.id='todo-'+key+'-list';
+  data.items.forEach((item,ii)=>{
+    const li=document.createElement('li');li.className=item.done?'done':'';
+    li.innerHTML=`<div class="s-check" onclick="toggleTodoItem('${key}',${ii})"></div><span class="s-label">${item.text}</span><button class="s-del" onclick="deleteTodoItem('${key}',${ii})">✕</button>`;
+    ul.appendChild(li);
+  });
+  wrap.appendChild(ul);
+  const addRow=document.createElement('div');addRow.className='add-row';
+  addRow.innerHTML=`<input class="add-input" id="todo-${key}-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addTodoItem('${key}')"><button class="add-btn" onclick="addTodoItem('${key}')">+ Add</button>`;
+  wrap.appendChild(addRow);
+}
+function toggleTodoItem(key,ii){
+  const d=getTodo(key);d.items[ii].done=!d.items[ii].done;saveTodo(key,d);
+  renderTodoBlock(key,'todo-'+key+'-wrap');
+  renderHitList(); // sync hit list
+}
+function deleteTodoItem(key,ii){const d=getTodo(key);d.items.splice(ii,1);saveTodo(key,d);renderTodoBlock(key,'todo-'+key+'-wrap');}
+function addTodoItem(key){
+  const input=document.getElementById('todo-'+key+'-input');
+  const text=input.value.trim();if(!text)return;
+  const d=getTodo(key);d.items.push({text,done:false});saveTodo(key,d);input.value='';
+  renderTodoBlock(key,'todo-'+key+'-wrap');
+}
+
+// ─── SIMPLE LISTS ───
+const SLIST_DEFAULTS={
+  'scoop-daily':[
+    {text:'📱 Check client messages + invoicing',done:false},
+    {text:'📣 Post 1 flyer, social post, or handout',done:false},
+    {text:'📧 Check emails',done:false},
+    {text:'💰 Review income, expenses, mileage',done:false},
+  ],
+  'scoop-week':[
+    {text:'Order car magnet',done:false},{text:'Design + print door hangers',done:false},
+    {text:'Blue Tennis Balls (branding)',done:false},{text:'Start saving for branded polo',done:false},
+    {text:'Set up Google My Business',done:false},
+  ],
+  'sb-current':[
+    {text:'Nevada Gaming Control Board — check for regulatory updates',done:false},
+    {text:'CTR filings current and compliant across all 5 books',done:false},
+    {text:'SAR log reviewed this week',done:false},
+    {text:'Staff AML training hours documented',done:false},
+    {text:'House rules posted and consistent across all locations',done:false},
+    {text:'What are Caesars and William Hill running for promos?',done:false},
+    {text:'Utah drive market — any events that spike Wendover traffic?',done:false},
+    {text:'Racebook regulars check — any at-risk of reduced visits?',done:false},
+    {text:'Upcoming major events mapped out',done:false},
+    {text:'Wendover books — seasonal occupancy trends reviewed?',done:false},
+    {text:'Sparks book — local community events to partner around?',done:false},
+  ],
+  'work-career':[
+    {text:'Weekly leadership check-in with team',done:false},
+    {text:'Document 1 insight or process improvement',done:false},
+    {text:'Give or request feedback',done:false},
+    {text:'Proxy Service — prep for 2026–27 season',done:false},
+    {text:'Phone app welcome screen',done:false},
+    {text:'Wendover Numbers',done:false},
+    {text:'House Rules document',done:false},
+  ],
+  'work-rentals':[
+    {text:'Change AC filter',done:false},{text:'Brainstorm sewer fix solution',done:false},
+    {text:'Verify rent is at current market rate',done:false},
+    {text:'Document all open maintenance items',done:false},
+  ],
+  'work-learning':[
+    {text:'🟢 Health/Longevity: Huberman, Attia, Bryan Johnson',done:false},
+    {text:'🟠 Leadership: Leila + Alex Hormozi',done:false},
+    {text:'🟡 Business/Ops: $100M Offers, Leads',done:false},
+    {text:'🔵 Finance: Coffee Hour',done:false},
+    {text:'🟣 Parenting: Jordan Peterson',done:false},
+  ],
+  'family-weekly':[
+    {text:'1-on-1 time with each kid this week',done:false},
+    {text:'Weekly date night with wife',done:false},
+    {text:'Morning breakfast conversation with kids',done:false},
+    {text:'Phone-free during family dinner',done:false},
+    {text:"Tell each kid one specific thing you're proud of",done:false},
+    {text:'10-min "State of Us" check-in with wife',done:false},
+  ],
+};
+function getSList(key){return lsj('lifeOS_slist_'+key,SLIST_DEFAULTS[key]?SLIST_DEFAULTS[key].map(i=>({...i})):[]);}
+function saveSList(key,data){ls('lifeOS_slist_'+key,JSON.stringify(data));}
+function renderSimpleList(key){
+  const items=getSList(key),ul=document.getElementById(key+'-list');
+  if(!ul)return;ul.innerHTML='';
+  items.forEach((item,idx)=>{
+    const li=document.createElement('li');li.className=item.done?'done':'';
+    li.innerHTML=`<div class="s-check" onclick="toggleSList('${key}',${idx})"></div><span class="s-label">${item.text}</span><button class="s-del" onclick="deleteSList('${key}',${idx})">✕</button>`;
+    ul.appendChild(li);
+  });
+}
+function toggleSList(key,idx){const d=getSList(key);d[idx].done=!d[idx].done;saveSList(key,d);renderSimpleList(key);}
+function deleteSList(key,idx){const d=getSList(key);d.splice(idx,1);saveSList(key,d);renderSimpleList(key);}
+function addSimpleItem(key){
+  const input=document.getElementById(key+'-input');const text=input.value.trim();if(!text)return;
+  const d=getSList(key);d.push({text,done:false});saveSList(key,d);input.value='';renderSimpleList(key);
+}
+
+// ─── SCOOP SQUAD ───
+function getScoopData(){return lsj('lifeOS_scoop',{clients:3,revenue:180,routes:1});}
+function saveScoopData(d){ls('lifeOS_scoop',JSON.stringify(d));}
+function scoopAdj(field,delta){const d=getScoopData();d[field]=Math.max(0,d[field]+delta);saveScoopData(d);renderScoop();}
+function renderScoop(){
+  const d=getScoopData();
+  document.getElementById('scoop-clients').textContent=d.clients;
+  document.getElementById('scoop-revenue').textContent='$'+d.revenue;
+  document.getElementById('scoop-routes').textContent=d.routes;
+  const cp=Math.min(100,Math.round((d.clients/20)*100));
+  const rp=Math.min(100,Math.round((d.revenue/1200)*100));
+  document.getElementById('clients-fill').style.width=cp+'%';
+  document.getElementById('clients-pct').textContent=cp+'%';
+  document.getElementById('revenue-fill').style.width=rp+'%';
+  document.getElementById('revenue-pct').textContent=rp+'%';
+  document.getElementById('ov-clients').textContent=d.clients;
+  document.getElementById('ov-revenue').textContent='$'+d.revenue;
+  const badge=document.getElementById('scoop-phase-badge');
+  if(d.clients<10){badge.textContent='Phase 1: 3→10';badge.className='badge badge-orange';}
+  else if(d.clients<20){badge.textContent='Phase 2: 10→20';badge.className='badge badge-yellow';}
+  else{badge.textContent='🎉 Goal Reached!';badge.className='badge badge-green';}
+}
+function resetScoopWeek(){const d=getSList('scoop-week');d.forEach(i=>i.done=false);saveSList('scoop-week',d);renderSimpleList('scoop-week');}
+(function(){const stored=ls('lifeOS_sweek');if(stored!==mondayKey()){resetScoopWeek();ls('lifeOS_sweek',mondayKey());}})();
+
+// Scoop ideas
+const SCOOP_IDEAS_DEF=['Referral program for existing clients','Partner with local vets, groomers, pet shops','Movie in the Park (spring) — mailer tie-in','Dog birthday treats for client pets','Flowers/card for clients with deceased dogs','Hand-written notes — mention address + nearby clients','Google My Business profile (FREE inbound leads)','"Account in progress" sign for active job sites','Texts for client Stan'];
+function getScoopIdeas(){return lsj('lifeOS_scoop_ideas',[...SCOOP_IDEAS_DEF]);}
+function renderScoopIdeas(){
+  const data=getScoopIdeas(),el=document.getElementById('scoop-ideas-list');
+  if(!el)return;el.innerHTML='';
+  data.forEach((idea,idx)=>{const d=document.createElement('div');d.className='idea-bank-item';d.innerHTML=`<div class="idea-dot"></div><span style="flex:1">${idea}</span><button class="idea-del" onclick="deleteScoopIdea(${idx})">✕</button>`;el.appendChild(d);});
+}
+function deleteScoopIdea(idx){const d=getScoopIdeas();d.splice(idx,1);ls('lifeOS_scoop_ideas',JSON.stringify(d));renderScoopIdeas();}
+function addScoopIdea(){const input=document.getElementById('scoop-idea-input');const text=input.value.trim();if(!text)return;const d=getScoopIdeas();d.push(text);ls('lifeOS_scoop_ideas',JSON.stringify(d));input.value='';renderScoopIdeas();}
+
+// ─── SPORTSBOOK IDEAS ───
+const SB_IDEAS_DEF=[
+  '🏢 RENO: VIP Bettor lounge — reserved seating, dedicated TV wall, comp drink tier',
+  '🏢 RENO: Watch Party events for Super Bowl, March Madness, Kentucky Derby',
+  '🏢 RENO: Daily Best Bet board — curated 3 picks, builds credibility',
+  '🏢 RENO: Casino floor crossover — coordinate with table games pit',
+  '📍 SPARKS: Local sports tie-in — Wolf Pack, Raiders, Golden Knights promos',
+  '📍 SPARKS: Neighborhood loyalty punch card for Sparks regulars',
+  '📍 SPARKS: Staff should know every regular by name and their team',
+  '📍 SPARKS: Partner with local bar for joint Super Bowl promotion',
+  '🛣️ WENDOVER: Utah drive-in traffic is seasonal — identify peak weekends',
+  '🛣️ WENDOVER: First-time bettor welcome kit — lower barrier to entry',
+  '🛣️ WENDOVER: Weekend event promotions — destination experience',
+  '🛣️ WENDOVER: Digital signage in casino entrance promoting the book',
+  '🐎 RACEBOOK: Loyalty punch card — after X daily tickets, earn a free ticket',
+  '🐎 RACEBOOK: Horse racing tips sheet for new visitors',
+  '🐎 RACEBOOK: Kentucky Derby + Breeders Cup themed viewing parties',
+  '💡 GENERAL: Beginner betting guide at every terminal',
+  '💡 GENERAL: Post-game recap board — celebrate big parlay wins publicly',
+  '💡 GENERAL: Seasonal promos tied to casino player rewards card',
+];
+function getSbIdeas(){return lsj('lifeOS_sb_ideas',[...SB_IDEAS_DEF]);}
+function renderSbIdeas(){
+  const data=getSbIdeas(),el=document.getElementById('sb-ideas-list');
+  if(!el)return;el.innerHTML='';
+  const colors={'🏢':'var(--accent)','📍':'var(--accent2)','🛣️':'var(--accent3)','🐎':'var(--green)','💡':'var(--accent4)'};
+  data.forEach((idea,idx)=>{const color=colors[idea[0]]||'var(--accent4)';const d=document.createElement('div');d.className='idea-bank-item';d.innerHTML=`<div class="idea-dot" style="background:${color}"></div><span style="flex:1">${idea}</span><button class="idea-del" onclick="deleteSbIdea(${idx})">✕</button>`;el.appendChild(d);});
+}
+function deleteSbIdea(idx){const d=getSbIdeas();d.splice(idx,1);ls('lifeOS_sb_ideas',JSON.stringify(d));renderSbIdeas();}
+function addSbIdea(){const input=document.getElementById('sb-idea-input');const text=input.value.trim();if(!text)return;const d=getSbIdeas();d.push(text);ls('lifeOS_sb_ideas',JSON.stringify(d));input.value='';renderSbIdeas();}
+function saveSbNotes(){ls('lifeOS_sb_mindset',document.getElementById('sb-mindset-notes').value);const el=document.getElementById('sb-notes-saved');if(el)el.textContent='Saved';setTimeout(()=>{const e=document.getElementById('sb-notes-saved');if(e)e.textContent='';},2000);}
+function loadSbNotes(){const val=ls('lifeOS_sb_mindset')||'',el=document.getElementById('sb-mindset-notes');if(el)el.value=val;}
+
+// ─── ROADMAP ───
+const ROADMAP_DEF=[
+  {year:'1 Year — Apr 2026',color:'var(--accent)',items:[{text:'✅ Citi card paid off',done:true},{text:'20 Scoop Squad clients',done:false},{text:'Car magnet + door hangers live',done:false},{text:'Morning/evening routines locked in',done:false}]},
+  {year:'2 Years — Apr 2027',color:'var(--accent2)',items:[{text:'Debt free',done:false},{text:'Scoop Squad second route',done:false},{text:'First hire or partner',done:false},{text:'Rental property optimized',done:false}]},
+  {year:'5 Years — 2029',color:'var(--accent3)',items:[{text:'Hawaii trip with the kids',done:false},{text:'Side hustle #2 launched',done:false},{text:'Personal brand / content live',done:false},{text:'Physical peak maintained',done:false}]},
+  {year:'10 Years — 2036',color:'var(--accent4)',items:[{text:'Camper + annual family trips',done:false},{text:'Second rental property',done:false},{text:'Business #1 complete, #2 started',done:false},{text:'Annual vacation savings funded',done:false}]},
+];
+function getRoadmap(){return lsj('lifeOS_roadmap',ROADMAP_DEF.map(b=>({...b,items:b.items.map(i=>({...i}))})));}
+function saveRoadmap(d){ls('lifeOS_roadmap',JSON.stringify(d));}
+function renderRoadmap(){
+  const data=getRoadmap(),grid=document.getElementById('roadmap-grid');
+  if(!grid)return;grid.innerHTML='';
+  data.forEach((block,bi)=>{
+    const done=block.items.filter(i=>i.done).length,pct=Math.round((done/block.items.length)*100);
+    const div=document.createElement('div');div.className='roadmap-item';div.style.borderTop=`3px solid ${block.color}`;
+    div.innerHTML=`<div class="roadmap-year">${block.year}</div><div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:${pct}%;background:${block.color}"></div></div><ul class="roadmap-goals" id="rm-${bi}"></ul>`;
+    grid.appendChild(div);
+    const ul=div.querySelector(`#rm-${bi}`);
+    block.items.forEach((item,ii)=>{
+      const li=document.createElement('li');li.style.cssText=item.done?'color:var(--muted);text-decoration:line-through':'';
+      li.innerHTML=`${item.done?'✅':'→'} ${item.text}`;
+      li.onclick=()=>{data[bi].items[ii].done=!data[bi].items[ii].done;saveRoadmap(data);renderRoadmap();};
+      ul.appendChild(li);
+    });
+  });
+}
+
+// ─── JOURNAL ───
+function saveJournal(){ls('lifeOS_journal_'+mondayKey(),document.getElementById('weekly-journal').value);const el=document.getElementById('journal-saved');if(el)el.textContent='Saved · Week of '+mondayKey();}
+function loadJournal(){const val=ls('lifeOS_journal_'+mondayKey())||'',el=document.getElementById('weekly-journal');if(el)el.value=val;const info=document.getElementById('journal-saved');if(info&&val)info.textContent='Saved · Week of '+mondayKey();}
+
+// ─── TRAINING LOG ───
+const TRAIN_DAYS=[{name:'Wed',task:'💥 Push',color:'hl-green'},{name:'Thu',task:'🔗 Pull',color:'hl-green'},{name:'Fri',task:'🤝 Full Body',color:'hl-orange'},{name:'Sat',task:'😴 Rest',color:''},{name:'Sun',task:'🔥 VO₂ Max',color:'hl-orange'},{name:'Mon',task:'💥 Push',color:'hl-green'},{name:'Tue',task:'🔗 Pull',color:'hl-green'}];
+function getTrainLog(){return lsj('lifeOS_train_'+mondayKey(),TRAIN_DAYS.map(d=>({...d,strength:false,walk:false,mobility:false})));}
+function saveTrainLog(d){ls('lifeOS_train_'+mondayKey(),JSON.stringify(d));}
+function renderTrainingLog(){
+  const data=getTrainLog(),grid=document.getElementById('training-log-grid');
+  if(!grid)return;grid.innerHTML='';
+  data.forEach((day,i)=>{
+    const isRest=day.name==='Sat';
+    const col=document.createElement('div');col.className='day-col';
+    col.innerHTML=`<div class="day-name">${day.name}</div><div class="day-task ${day.color}" style="opacity:${day.strength?1:.4}" onclick="toggleTrain(${i},'strength')">${day.task}<br>${day.strength?'✅':'tap'}</div><div class="day-task hl-blue" style="opacity:${day.walk?1:.4}" onclick="toggleTrain(${i},'walk')">🚶 Walk<br>${day.walk?'✅':'tap'}</div><div class="day-task hl-purple" style="opacity:${day.mobility?1:.4}" onclick="toggleTrain(${i},'mobility')">🧘 ${isRest?'30':'10'}m<br>${day.mobility?'✅':'tap'}</div>`;
+    grid.appendChild(col);
+  });
+}
+function toggleTrain(i,field){const d=getTrainLog();d[i][field]=!d[i][field];saveTrainLog(d);renderTrainingLog();}
+function resetTrainingLog(){saveTrainLog(TRAIN_DAYS.map(d=>({...d,strength:false,walk:false,mobility:false})));renderTrainingLog();}
+
+// ─── DAILY HIT LIST (pulls from todo blocks only, bidirectional sync) ───
+const HL_SIZE=10;
+const HL_SOURCES=[
+  {key:'home', icon:'🏠', label:'Home',    color:'var(--muted)'},
+  {key:'work', icon:'💼', label:'Work',    color:'var(--accent2)'},
+  {key:'scoop',icon:'💩', label:'Scoop',   color:'var(--accent3)'},
+];
+
+function getHitListPool(){
+  // Returns flat array of {text, key, idx, done, icon, label, color}
+  const pool=[];
+  HL_SOURCES.forEach(src=>{
+    const data=getTodo(src.key);
+    data.items.forEach((item,idx)=>{
+      pool.push({text:item.text,key:src.key,idx,done:item.done,icon:src.icon,label:src.label,color:src.color});
+    });
+  });
+  return pool;
+}
+
+function getHitList(){return lsj('lifeOS_hitlist2',null);}
+function saveHitList(d){ls('lifeOS_hitlist2',JSON.stringify(d));}
+
+function buildHitList(prev){
+  const pool=getHitListPool();
+  const undone=pool.filter(p=>!p.done);
+  const result=[];
+  const used=new Set(); // key+idx combos
+
+  // If previous list exists, carry over same items that still exist (keeping their current done state)
+  if(prev&&prev.items){
+    prev.items.forEach(old=>{
+      const live=pool.find(p=>p.key===old.key&&p.idx===old.idx);
+      if(live&&!used.has(old.key+'_'+old.idx)){
+        result.push({...live});
+        used.add(old.key+'_'+old.idx);
+      }
+    });
+  }
+
+  // Fill remaining slots — balance across categories
+  while(result.length<HL_SIZE){
+    const catCount={};
+    HL_SOURCES.forEach(s=>catCount[s.key]=result.filter(r=>r.key===s.key).length);
+    let bestKey=null,bestCount=999;
+    HL_SOURCES.forEach(s=>{
+      const avail=undone.filter(p=>p.key===s.key&&!used.has(p.key+'_'+p.idx));
+      if(avail.length>0&&catCount[s.key]<bestCount){bestCount=catCount[s.key];bestKey=s.key;}
+    });
+    if(!bestKey){
+      const any=undone.find(p=>!used.has(p.key+'_'+p.idx));
+      if(!any)break;
+      result.push({...any});used.add(any.key+'_'+any.idx);
+    } else {
+      const pick=undone.filter(p=>p.key===bestKey&&!used.has(p.key+'_'+p.idx))[0];
+      result.push({...pick});used.add(pick.key+'_'+pick.idx);
+    }
+  }
+  return{items:result.slice(0,HL_SIZE),date:todayKey()};
+}
+
+function getOrBuildHitList(){
+  const saved=getHitList();
+  // Refresh daily OR sync done states from source
+  const built=buildHitList(saved&&saved.date===todayKey()?saved:null);
+  if(!saved||saved.date!==todayKey()){saveHitList(built);}
+  // Always sync done states from actual todo blocks
+  const pool=getHitListPool();
+  built.items.forEach(item=>{
+    const live=pool.find(p=>p.key===item.key&&p.idx===item.idx);
+    if(live)item.done=live.done;
+  });
+  return built;
+}
+
+function toggleHitItem(key,idx){
+  // Toggle in the source todo block
+  const d=getTodo(key);
+  d.items[idx].done=!d.items[idx].done;
+  saveTodo(key,d);
+  renderTodoBlock(key,'todo-'+key+'-wrap');
+  renderHitList();
+}
+
+function regenerateHitList(){
+  saveHitList(null); // clear saved state
+  ls('lifeOS_hitlist2',null);
+  renderHitList();
+}
+
+function renderHitList(){
+  const d=getOrBuildHitList();
+  const grid=document.getElementById('hitlist-grid');
+  const dateEl=document.getElementById('hitlist-date');
+  const pfill=document.getElementById('hitlist-pfill');
+  const pval=document.getElementById('hitlist-pval');
+  if(!grid)return;
+  if(dateEl)dateEl.textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});
+  grid.innerHTML='';
+  d.items.forEach((item,i)=>{
+    const src=HL_SOURCES.find(s=>s.key===item.key)||{icon:'📌',label:'misc',color:'var(--muted)'};
+    const div=document.createElement('div');
+    div.className='hit-item'+(item.done?' done':'');
+    div.onclick=()=>toggleHitItem(item.key,item.idx);
+    div.innerHTML=`<div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:${src.color}">${src.icon} ${src.label}</div><div class="hit-text">${item.text}</div></div>`;
+    grid.appendChild(div);
+  });
+  const done=d.items.filter(i=>i.done).length,pct=d.items.length?Math.round((done/d.items.length)*100):0;
+  if(pfill)pfill.style.width=pct+'%';
+  if(pval)pval.textContent=done+'/'+d.items.length;
+}
+
+// ─── COPY DATA ───
+function copyData(){
+  const data={};
+  for(let i=0;i<localStorage.length;i++){
+    const k=localStorage.key(i);
+    if(k&&k.startsWith('lifeOS_'))data[k]=localStorage.getItem(k);
+  }
+  const json=JSON.stringify(data,null,2);
+  navigator.clipboard.writeText(json).then(()=>{
+    const btn=document.querySelector('.hdr-btn');
+    if(btn){const orig=btn.textContent;btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent=orig,2000);}
+  }).catch(()=>{
+    // fallback
+    const ta=document.createElement('textarea');ta.value=json;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    const btn=document.querySelector('.hdr-btn');
+    if(btn){const orig=btn.textContent;btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent=orig,2000);}
+  });
+}
+
+// ─── PUSH TO GITHUB ───
+function openPushModal(){
+  const saved=ls('lifeOS_gh_token');
+  if(saved){document.getElementById('gh-token').value=saved;document.getElementById('gh-remember').checked=true;}
+  document.getElementById('push-modal').classList.add('open');
+  document.getElementById('push-status').textContent='';
+}
+function closePushModal(){document.getElementById('push-modal').classList.remove('open');}
+
+async function pushToGitHub(){
+  const token=document.getElementById('gh-token').value.trim();
+  const repo=document.getElementById('gh-repo').value.trim();
+  const file=document.getElementById('gh-file').value.trim();
+  const remember=document.getElementById('gh-remember').checked;
+  const statusEl=document.getElementById('push-status');
+
+  if(!token||!repo||!file){statusEl.textContent='⚠️ Fill in all fields.';return;}
+  if(remember)ls('lifeOS_gh_token',token); else ls('lifeOS_gh_token',null);
+
+  statusEl.textContent='Getting current file SHA...';
+
+  try{
+    // 1. Get current file SHA
+    const getRes=await fetch(`https://api.github.com/repos/${repo}/contents/${file}`,{
+      headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}
+    });
+    if(!getRes.ok&&getRes.status!==404){statusEl.textContent='❌ Could not reach repo. Check token + repo name.';return;}
+    const getSha=getRes.ok?(await getRes.json()).sha:null;
+
+    // 2. Get current page HTML
+    statusEl.textContent='Encoding file...';
+    const html=document.documentElement.outerHTML;
+    const encoded=btoa(unescape(encodeURIComponent(html)));
+
+    // 3. Push
+    statusEl.textContent='Pushing to GitHub...';
+    const body={message:'Life OS update — '+new Date().toLocaleString(),content:encoded,branch:'main'};
+    if(getSha)body.sha=getSha;
+
+    const pushRes=await fetch(`https://api.github.com/repos/${repo}/contents/${file}`,{
+      method:'PUT',
+      headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify(body)
+    });
+
+    if(pushRes.ok){
+      statusEl.style.color='var(--accent)';
+      statusEl.textContent='✅ Pushed! Site updates in ~60 seconds.';
+      setTimeout(closePushModal,3000);
+    } else {
+      const err=await pushRes.json();
+      statusEl.style.color='var(--accent3)';
+      statusEl.textContent='❌ '+(err.message||'Push failed');
+    }
+  }catch(e){
+    statusEl.style.color='var(--accent3)';
+    statusEl.textContent='❌ Network error: '+e.message;
+  }
+}
+
+// ─── INIT ───
+document.getElementById('dateBadge').textContent=new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+renderRoutine('morning');
+renderRoutine('evening');
+renderRoutine('sbshift');
+['scoop-daily','scoop-week','sb-current','work-career','work-rentals','work-learning','family-weekly'].forEach(k=>renderSimpleList(k));
+renderTodoBlock('home','todo-home-wrap');
+renderTodoBlock('work','todo-work-wrap');
+renderTodoBlock('scoop','todo-scoop-wrap');
+renderScoop();
+renderScoopIdeas();
+renderSbIdeas();
+loadSbNotes();
+renderRoadmap();
+loadJournal();
+renderTrainingLog();
+renderHitList();
+</script>
+</body>
+</html>
+
 <meta name="theme-color" content="#080808">
 <title>Life OS</title>
 <style>
