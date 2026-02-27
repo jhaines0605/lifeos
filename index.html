@@ -170,6 +170,8 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
   .main{padding:28px 40px;max-width:1400px}
   .overview-grid{grid-template-columns:repeat(2,1fr)}
 }
+.push-btn-desktop{display:none !important}
+@media(min-width:1024px){.push-btn-desktop{display:block !important}}
 </style>
 </head>
 <body>
@@ -182,7 +184,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
   <div class="header-right">
     <div class="date-badge" id="dateBadge">Fri, Feb 27, 2026</div>
     <button class="hdr-btn" onclick="copyData()">📋 Copy Data</button>
-    <button class="hdr-btn push" onclick="openPushModal()" id="push-btn" style="display: block;">🚀 Push</button>
+    <button class="hdr-btn push" onclick="openPushModal()" id="push-btn">🚀 Push</button>
   </div>
 </div>
 
@@ -1053,10 +1055,6 @@ async function pushToGitHub(){
 
 // ─── INIT ───
 document.getElementById('dateBadge').textContent=new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
-// Only show Push button on non-touch devices (desktops)
-const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-if(!isTouch){document.getElementById('push-btn').style.display='block';}
-// Always make sure modal starts closed
 document.getElementById('push-modal').classList.remove('open');
 renderRoutine('morning');
 renderRoutine('evening');
