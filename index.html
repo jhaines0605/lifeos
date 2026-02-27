@@ -1053,7 +1053,11 @@ async function pushToGitHub(){
 
 // ─── INIT ───
 document.getElementById('dateBadge').textContent=new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
-if(window.innerWidth>=640){document.getElementById('push-btn').style.display='block';}
+// Only show Push button on non-touch devices (desktops)
+const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+if(!isTouch){document.getElementById('push-btn').style.display='block';}
+// Always make sure modal starts closed
+document.getElementById('push-modal').classList.remove('open');
 renderRoutine('morning');
 renderRoutine('evening');
 renderRoutine('sbshift');
