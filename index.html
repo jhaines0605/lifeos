@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="mobile-web-app-capable" content="yes">
@@ -184,9 +182,9 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
     <div class="tagline">Master System · Age 38</div>
   </div>
   <div class="header-right">
-    <div class="date-badge" id="dateBadge"></div>
+    <div class="date-badge" id="dateBadge">Sun, Mar 8, 2026</div>
     <button class="hdr-btn" onclick="copyData()">📋 Copy Data</button>
-    <button class="hdr-btn push" onclick="openPushModal()" id="push-btn" class="push-btn-desktop">🚀 Push</button>
+    <button class="hdr-btn push" onclick="openPushModal()" id="push-btn">🚀 Push</button>
   </div>
 </div>
 
@@ -201,14 +199,14 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 </div>
 
 <!-- PUSH MODAL -->
-<div class="modal-bg" id="push-modal">
+<div class="modal-bg open" id="push-modal">
   <div class="modal">
     <div class="modal-title">🚀 Push to GitHub</div>
     <p style="font-size:12px;color:#aaa;margin-bottom:14px;line-height:1.6">Enter your GitHub Personal Access Token to push directly. Token needs <strong style="color:#ddd">repo</strong> scope. <a href="https://github.com/settings/tokens/new" target="_blank" style="color:var(--accent2)">Create one here</a>.</p>
     <input id="gh-token" type="password" class="add-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" style="margin-bottom:10px;width:100%">
     <input id="gh-repo" class="add-input" value="jhaines0605/lifeos" placeholder="username/reponame" style="margin-bottom:10px;width:100%">
     <input id="gh-file" class="add-input" value="index.html" placeholder="filename" style="margin-bottom:4px;width:100%">
-    <p id="push-status" style="font-size:11px;color:var(--muted);min-height:18px;margin-bottom:10px;font-family:'JetBrains Mono',monospace"></p>
+    <p id="push-status" style="font-size:11px;color:var(--muted);min-height:18px;margin-bottom:10px;font-family:'JetBrains Mono',monospace">Encoding file...</p>
     <div class="modal-btns">
       <button class="btn-secondary" onclick="closePushModal()">Cancel</button>
       <button class="btn-primary" onclick="pushToGitHub()">Push Live</button>
@@ -231,25 +229,25 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
   </div>
 
   <div class="section-title">Long-Term Roadmap</div>
-  <div class="roadmap-grid" id="roadmap-grid"></div>
+  <div class="roadmap-grid" id="roadmap-grid"><div class="roadmap-item" style="border-top: 3px solid var(--accent);"><div class="roadmap-year">1 Year — Apr 2026</div><div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:75%;background:var(--accent)"></div></div><ul class="roadmap-goals" id="rm-0"><li style="color: var(--muted); text-decoration: line-through;">✅ ✅ Citi card paid off</li><li style="">→ 20 Scoop Squad clients</li><li style="color: var(--muted); text-decoration: line-through;">✅ Car magnet + door hangers live</li><li style="color: var(--muted); text-decoration: line-through;">✅ Morning/evening routines locked in</li></ul></div><div class="roadmap-item" style="border-top: 3px solid var(--accent2);"><div class="roadmap-year">2 Years — Apr 2027</div><div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;background:var(--accent2)"></div></div><ul class="roadmap-goals" id="rm-1"><li style="">→ Debt free</li><li style="">→ Scoop Squad second route</li><li style="">→ First hire or partner</li><li style="">→ Rental property optimized</li></ul></div><div class="roadmap-item" style="border-top: 3px solid var(--accent3);"><div class="roadmap-year">5 Years — 2029</div><div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;background:var(--accent3)"></div></div><ul class="roadmap-goals" id="rm-2"><li style="">→ Hawaii trip with the kids</li><li style="">→ Side hustle #2 launched</li><li style="">→ Personal brand / content live</li><li style="">→ Physical peak maintained</li></ul></div><div class="roadmap-item" style="border-top: 3px solid var(--accent4);"><div class="roadmap-year">10 Years — 2036</div><div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;background:var(--accent4)"></div></div><ul class="roadmap-goals" id="rm-3"><li style="">→ Camper + annual family trips</li><li style="">→ Second rental property</li><li style="">→ Business #1 complete, #2 started</li><li style="">→ Annual vacation savings funded</li></ul></div></div>
 
   <div class="card">
     <div class="card-header">
       <div>
         <div class="card-title">🎯 Daily Hit List</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date"></div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date">Sunday, Mar 8</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
         <span id="hitlist-pval" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">0/10</span>
         <button class="reset-btn" onclick="regenerateHitList()">↺ Shuffle</button>
       </div>
     </div>
-    <div class="rp-bar" style="margin-bottom:16px"><div class="rp-fill" id="hitlist-pfill" style="width:0%"></div></div>
-    <div id="hitlist-grid"></div>
+    <div class="rp-bar" style="margin-bottom:16px"><div class="rp-fill" id="hitlist-pfill" style="width: 0%;"></div></div>
+    <div id="hitlist-grid"><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--muted)">🏠 Home</div><div class="hit-text">Fix pipe under house</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--accent2)">💼 Work</div><div class="hit-text">Phone app welcome screen</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--accent3)">💩 Scoop</div><div class="hit-text">Order car magnet</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--muted)">🏠 Home</div><div class="hit-text">Wash house</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--accent2)">💼 Work</div><div class="hit-text">Wendover Numbers</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--accent3)">💩 Scoop</div><div class="hit-text">Design + print door hangers</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--muted)">🏠 Home</div><div class="hit-text">Build large sandbox</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--accent2)">💼 Work</div><div class="hit-text">House Rules document</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--accent3)">💩 Scoop</div><div class="hit-text">Blue Tennis Balls</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--muted)">🏠 Home</div><div class="hit-text">Dad's: Research garage solution</div></div></div></div>
   </div>
 
   <div class="card">
-    <div class="card-header"><div class="card-title">📓 Weekly Wins & Notes</div><div class="badge badge-green">Reflection</div></div>
+    <div class="card-header"><div class="card-title">📓 Weekly Wins &amp; Notes</div><div class="badge badge-green">Reflection</div></div>
     <textarea id="weekly-journal" placeholder="What went well this week? Wins, ideas, reflections..." style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:13px;color:var(--text);font-family:'Syne',sans-serif;outline:none;resize:vertical;min-height:140px;line-height:1.6;-webkit-appearance:none" oninput="saveJournal()"></textarea>
     <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px" id="journal-saved"></div>
   </div>
@@ -267,15 +265,15 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
         </div>
       </div>
       <div class="routine-progress">
-        <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="morning-val">0/0</span></div>
+        <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="morning-val">0/15</span></div>
         <div class="rp-bar"><div class="rp-fill" id="morning-fill" style="width:0%"></div></div>
       </div>
-      <ul class="routine-list" id="morning-list"></ul>
+      <ul class="routine-list" id="morning-list"><li class="routine-item" draggable="true" data-idx="0"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',0)"></div><span class="r-text">💧 16oz water immediately on waking</span><span class="r-sci">Cortisol + hydration</span><button class="r-del" onclick="deleteRoutineItem('morning',0)">✕</button></li><li class="routine-item" draggable="true" data-idx="1"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',1)"></div><span class="r-text">☀️ Sunlight in eyes within 30 min</span><span class="r-sci">Huberman: circadian</span><button class="r-del" onclick="deleteRoutineItem('morning',1)">✕</button></li><li class="routine-item" draggable="true" data-idx="2"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',2)"></div><span class="r-text">💊 Blues pills</span><button class="r-del" onclick="deleteRoutineItem('morning',2)">✕</button></li><li class="routine-item" draggable="true" data-idx="3"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',3)"></div><span class="r-text">🐾 Feed dogs + vacuum rug</span><button class="r-del" onclick="deleteRoutineItem('morning',3)">✕</button></li><li class="routine-item" draggable="true" data-idx="4"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',4)"></div><span class="r-text">🚶 Walk Bob (15+ min Zone 2)</span><span class="r-sci">Zone 2 base</span><button class="r-del" onclick="deleteRoutineItem('morning',4)">✕</button></li><li class="routine-item" draggable="true" data-idx="5"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',5)"></div><span class="r-text">🍳 Breakfast with kids</span><button class="r-del" onclick="deleteRoutineItem('morning',5)">✕</button></li><li class="routine-item" draggable="true" data-idx="6"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',6)"></div><span class="r-text">👕 Get kids dressed + brush teeth</span><button class="r-del" onclick="deleteRoutineItem('morning',6)">✕</button></li><li class="routine-item" draggable="true" data-idx="7"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',7)"></div><span class="r-text">🏋️ Strength training per split</span><span class="r-sci">Attia: muscle health</span><button class="r-del" onclick="deleteRoutineItem('morning',7)">✕</button></li><li class="routine-item" draggable="true" data-idx="8"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',8)"></div><span class="r-text">🧘 5–10 min stretch or mobility</span><span class="r-sci">Injury prevention</span><button class="r-del" onclick="deleteRoutineItem('morning',8)">✕</button></li><li class="routine-item" draggable="true" data-idx="9"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',9)"></div><span class="r-text">🥤 Protein shake + 5g Creatine</span><span class="r-sci">Examine.com</span><button class="r-del" onclick="deleteRoutineItem('morning',9)">✕</button></li><li class="routine-item" draggable="true" data-idx="10"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',10)"></div><span class="r-text">🚿 Shower — end with 30 sec cold</span><span class="r-sci">+250% dopamine</span><button class="r-del" onclick="deleteRoutineItem('morning',10)">✕</button></li><li class="routine-item" draggable="true" data-idx="11"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',11)"></div><span class="r-text">💧 Waterpik + Vitamin C + SPF</span><span class="r-sci">Longevity basics</span><button class="r-del" onclick="deleteRoutineItem('morning',11)">✕</button></li><li class="routine-item" draggable="true" data-idx="12"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',12)"></div><span class="r-text">🦷 Brush teeth</span><button class="r-del" onclick="deleteRoutineItem('morning',12)">✕</button></li><li class="routine-item" draggable="true" data-idx="13"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',13)"></div><span class="r-text">📅 Write 3 targets for today</span><span class="r-sci">Execution focus</span><button class="r-del" onclick="deleteRoutineItem('morning',13)">✕</button></li><li class="routine-item" draggable="true" data-idx="14"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',14)"></div><span class="r-text">⚡ Kick ass today</span><button class="r-del" onclick="deleteRoutineItem('morning',14)">✕</button></li></ul>
       <div class="add-row">
         <input class="add-input" id="morning-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('morning')">
         <button class="add-btn" onclick="addRoutineItem('morning')">+ Add</button>
       </div>
-      <div class="last-reset" id="morning-last-reset"></div>
+      <div class="last-reset" id="morning-last-reset">Last reset: 2026-3-8</div>
     </div>
     <div class="card">
       <div class="card-header"><div class="card-title">🔬 Science Notes</div></div>
@@ -299,15 +297,15 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
         </div>
       </div>
       <div class="routine-progress">
-        <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="evening-val">0/0</span></div>
+        <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="evening-val">0/17</span></div>
         <div class="rp-bar"><div class="rp-fill" id="evening-fill" style="width:0%"></div></div>
       </div>
-      <ul class="routine-list" id="evening-list"></ul>
+      <ul class="routine-list" id="evening-list"><li class="routine-item" draggable="true" data-idx="0"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',0)"></div><span class="r-text">☕ Prep coffee for tomorrow</span><button class="r-del" onclick="deleteRoutineItem('evening',0)">✕</button></li><li class="routine-item" draggable="true" data-idx="1"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',1)"></div><span class="r-text">💊 Vitamins + Blue medicine @ 8:30pm</span><button class="r-del" onclick="deleteRoutineItem('evening',1)">✕</button></li><li class="routine-item" draggable="true" data-idx="2"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',2)"></div><span class="r-text">🏠 Close up the house</span><button class="r-del" onclick="deleteRoutineItem('evening',2)">✕</button></li><li class="routine-item" draggable="true" data-idx="3"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',3)"></div><span class="r-text">🍽️ Run dishwasher + take trash out</span><button class="r-del" onclick="deleteRoutineItem('evening',3)">✕</button></li><li class="routine-item" draggable="true" data-idx="4"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',4)"></div><span class="r-text">🐾 Fill dog food + water + wash water bottles</span><button class="r-del" onclick="deleteRoutineItem('evening',4)">✕</button></li><li class="routine-item" draggable="true" data-idx="5"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',5)"></div><span class="r-text">🛋️ Cover the couch + Blue in cage</span><button class="r-del" onclick="deleteRoutineItem('evening',5)">✕</button></li><li class="routine-item" draggable="true" data-idx="6"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',6)"></div><span class="r-text">👶 Kids room ready</span><button class="r-del" onclick="deleteRoutineItem('evening',6)">✕</button></li><li class="routine-item" draggable="true" data-idx="7"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',7)"></div><span class="r-text">🌡️ Drop room temp to 65–68°F</span><span class="r-sci">Sleep science</span><button class="r-del" onclick="deleteRoutineItem('evening',7)">✕</button></li><li class="routine-item" draggable="true" data-idx="8"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',8)"></div><span class="r-text">📵 Dim screens / blue light off after 9pm</span><span class="r-sci">Melatonin</span><button class="r-del" onclick="deleteRoutineItem('evening',8)">✕</button></li><li class="routine-item" draggable="true" data-idx="9"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',9)"></div><span class="r-text">🧴 Wash face + Retinol or Hyaluronic Acid</span><span class="r-sci">Skin longevity</span><button class="r-del" onclick="deleteRoutineItem('evening',9)">✕</button></li><li class="routine-item" draggable="true" data-idx="10"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',10)"></div><span class="r-text">🧴 PM Lotion</span><button class="r-del" onclick="deleteRoutineItem('evening',10)">✕</button></li><li class="routine-item" draggable="true" data-idx="11"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',11)"></div><span class="r-text">🦷 Floss + brush teeth</span><button class="r-del" onclick="deleteRoutineItem('evening',11)">✕</button></li><li class="routine-item" draggable="true" data-idx="12"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',12)"></div><span class="r-text">📓 3-win journal: write 3 wins from today</span><span class="r-sci">Cortisol</span><button class="r-del" onclick="deleteRoutineItem('evening',12)">✕</button></li><li class="routine-item" draggable="true" data-idx="13"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',13)"></div><span class="r-text">📅 Check calendar for tomorrow</span><button class="r-del" onclick="deleteRoutineItem('evening',13)">✕</button></li><li class="routine-item" draggable="true" data-idx="14"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',14)"></div><span class="r-text">📱 Hard screens off by 11:30pm</span><button class="r-del" onclick="deleteRoutineItem('evening',14)">✕</button></li><li class="routine-item" draggable="true" data-idx="15"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',15)"></div><span class="r-text">🐕 Cash potty break</span><button class="r-del" onclick="deleteRoutineItem('evening',15)">✕</button></li><li class="routine-item" draggable="true" data-idx="16"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',16)"></div><span class="r-text">🛏️ Bed by midnight</span><button class="r-del" onclick="deleteRoutineItem('evening',16)">✕</button></li></ul>
       <div class="add-row">
         <input class="add-input" id="evening-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('evening')">
         <button class="add-btn" onclick="addRoutineItem('evening')">+ Add</button>
       </div>
-      <div class="last-reset" id="evening-last-reset"></div>
+      <div class="last-reset" id="evening-last-reset">Last reset: 2026-3-8</div>
     </div>
     <div class="card">
       <div class="card-header"><div class="card-title">🔬 Sleep Science</div></div>
@@ -340,7 +338,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           <div class="card-title">📅 Weekly Training Log</div>
           <button class="reset-btn" onclick="resetTrainingLog()">↺ New Week</button>
         </div>
-        <div id="training-log-grid" class="week-grid"></div>
+        <div id="training-log-grid" class="week-grid"><div class="day-col"><div class="day-name">Wed</div><div class="day-task hl-green" style="opacity:0.4" onclick="toggleTrain(0,'strength')">💥 Push<br>tap</div><div class="day-task hl-blue" style="opacity:0.4" onclick="toggleTrain(0,'walk')">🚶 Walk<br>tap</div><div class="day-task hl-purple" style="opacity:0.4" onclick="toggleTrain(0,'mobility')">🧘 10m<br>tap</div></div><div class="day-col"><div class="day-name">Thu</div><div class="day-task hl-green" style="opacity:0.4" onclick="toggleTrain(1,'strength')">🔗 Pull<br>tap</div><div class="day-task hl-blue" style="opacity:0.4" onclick="toggleTrain(1,'walk')">🚶 Walk<br>tap</div><div class="day-task hl-purple" style="opacity:0.4" onclick="toggleTrain(1,'mobility')">🧘 10m<br>tap</div></div><div class="day-col"><div class="day-name">Fri</div><div class="day-task hl-orange" style="opacity:0.4" onclick="toggleTrain(2,'strength')">🤝 Full Body<br>tap</div><div class="day-task hl-blue" style="opacity:0.4" onclick="toggleTrain(2,'walk')">🚶 Walk<br>tap</div><div class="day-task hl-purple" style="opacity:0.4" onclick="toggleTrain(2,'mobility')">🧘 10m<br>tap</div></div><div class="day-col"><div class="day-name">Sat</div><div class="day-task " style="opacity:0.4" onclick="toggleTrain(3,'strength')">😴 Rest<br>tap</div><div class="day-task hl-blue" style="opacity:0.4" onclick="toggleTrain(3,'walk')">🚶 Walk<br>tap</div><div class="day-task hl-purple" style="opacity:0.4" onclick="toggleTrain(3,'mobility')">🧘 30m<br>tap</div></div><div class="day-col"><div class="day-name">Sun</div><div class="day-task hl-orange" style="opacity:0.4" onclick="toggleTrain(4,'strength')">🔥 VO₂ Max<br>tap</div><div class="day-task hl-blue" style="opacity:0.4" onclick="toggleTrain(4,'walk')">🚶 Walk<br>tap</div><div class="day-task hl-purple" style="opacity:0.4" onclick="toggleTrain(4,'mobility')">🧘 10m<br>tap</div></div><div class="day-col"><div class="day-name">Mon</div><div class="day-task hl-green" style="opacity:0.4" onclick="toggleTrain(5,'strength')">💥 Push<br>tap</div><div class="day-task hl-blue" style="opacity:0.4" onclick="toggleTrain(5,'walk')">🚶 Walk<br>tap</div><div class="day-task hl-purple" style="opacity:0.4" onclick="toggleTrain(5,'mobility')">🧘 10m<br>tap</div></div><div class="day-col"><div class="day-name">Tue</div><div class="day-task hl-green" style="opacity:0.4" onclick="toggleTrain(6,'strength')">🔗 Pull<br>tap</div><div class="day-task hl-blue" style="opacity:0.4" onclick="toggleTrain(6,'walk')">🚶 Walk<br>tap</div><div class="day-task hl-purple" style="opacity:0.4" onclick="toggleTrain(6,'mobility')">🧘 10m<br>tap</div></div></div>
       </div>
     </div>
     <div>
@@ -379,7 +377,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
             </div>
           </div>
           <div class="kpi-box">
-            <div class="kpi-num" id="scoop-revenue">$180</div>
+            <div class="kpi-num" id="scoop-revenue">$210</div>
             <div class="kpi-label">Revenue/mo</div>
             <div style="display:flex;gap:6px;justify-content:center;margin-top:8px">
               <button class="counter-btn" onclick="scoopAdj('revenue',-10)">−</button>
@@ -397,16 +395,16 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
         </div>
         <div style="margin-bottom:8px">
           <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:#bbb">Clients to 20</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)" id="clients-pct">15%</span></div>
-          <div class="progress-bar"><div class="progress-fill" id="clients-fill" style="width:15%;background:var(--accent)"></div></div>
+          <div class="progress-bar"><div class="progress-fill" id="clients-fill" style="width: 15%; background: var(--accent);"></div></div>
         </div>
         <div>
-          <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:#bbb">Revenue to $1,200</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)" id="revenue-pct">15%</span></div>
-          <div class="progress-bar"><div class="progress-fill" id="revenue-fill" style="width:15%;background:var(--green)"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:#bbb">Revenue to $1,200</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)" id="revenue-pct">18%</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="revenue-fill" style="width: 18%; background: var(--green);"></div></div>
         </div>
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">📋 Daily Workflow</div></div>
-        <ul class="simple-list" id="scoop-daily-list"></ul>
+        <ul class="simple-list" id="scoop-daily-list"><li class=""><div class="s-check" onclick="toggleSList('scoop-daily',0)"></div><span class="s-label">📱 Check client messages + invoicing</span><button class="s-del" onclick="deleteSList('scoop-daily',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-daily',1)"></div><span class="s-label">📣 Post 1 flyer, social post, or handout</span><button class="s-del" onclick="deleteSList('scoop-daily',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-daily',2)"></div><span class="s-label">📧 Check emails</span><button class="s-del" onclick="deleteSList('scoop-daily',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-daily',3)"></div><span class="s-label">💰 Review income, expenses, mileage</span><button class="s-del" onclick="deleteSList('scoop-daily',3)">✕</button></li></ul>
         <div class="add-row">
           <input class="add-input" id="scoop-daily-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addSimpleItem('scoop-daily')">
           <button class="add-btn" onclick="addSimpleItem('scoop-daily')">+ Add</button>
@@ -417,7 +415,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           <div class="card-title">📅 This Week</div>
           <button class="reset-btn" onclick="resetScoopWeek()">↺ Reset</button>
         </div>
-        <ul class="simple-list" id="scoop-week-list"></ul>
+        <ul class="simple-list" id="scoop-week-list"><li class=""><div class="s-check" onclick="toggleSList('scoop-week',0)"></div><span class="s-label">Order car magnet</span><button class="s-del" onclick="deleteSList('scoop-week',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-week',1)"></div><span class="s-label">Design + print door hangers</span><button class="s-del" onclick="deleteSList('scoop-week',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-week',2)"></div><span class="s-label">Blue Tennis Balls (branding)</span><button class="s-del" onclick="deleteSList('scoop-week',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-week',3)"></div><span class="s-label">Start saving for branded polo</span><button class="s-del" onclick="deleteSList('scoop-week',3)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-week',4)"></div><span class="s-label">Set up Google My Business (FREE lead gen)</span><button class="s-del" onclick="deleteSList('scoop-week',4)">✕</button></li></ul>
         <div class="add-row">
           <input class="add-input" id="scoop-week-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addSimpleItem('scoop-week')">
           <button class="add-btn" onclick="addSimpleItem('scoop-week')">+ Add</button>
@@ -425,7 +423,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">📝 Scoop To-Do List</div></div>
-        <div id="todo-scoop-wrap"></div>
+        <div id="todo-scoop-wrap"><ul class="simple-list" id="todo-scoop-list"><li class=""><div class="s-check" onclick="toggleTodoItem('scoop',0)"></div><span class="s-label">Order car magnet</span><button class="s-del" onclick="deleteTodoItem('scoop',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('scoop',1)"></div><span class="s-label">Design + print door hangers</span><button class="s-del" onclick="deleteTodoItem('scoop',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('scoop',2)"></div><span class="s-label">Blue Tennis Balls</span><button class="s-del" onclick="deleteTodoItem('scoop',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('scoop',3)"></div><span class="s-label">Set up Google My Business</span><button class="s-del" onclick="deleteTodoItem('scoop',3)">✕</button></li></ul><div class="add-row"><input class="add-input" id="todo-scoop-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addTodoItem('scoop')"><button class="add-btn" onclick="addTodoItem('scoop')">+ Add</button></div></div>
       </div>
     </div>
     <div>
@@ -438,7 +436,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">💡 Idea Bank</div></div>
-        <div id="scoop-ideas-list"></div>
+        <div id="scoop-ideas-list"><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">Referral program for existing clients</span><button class="idea-del" onclick="deleteScoopIdea(0)">✕</button></div><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">Partner with local vets, groomers, pet shops</span><button class="idea-del" onclick="deleteScoopIdea(1)">✕</button></div><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">Movie in the Park (spring) — mailer tie-in</span><button class="idea-del" onclick="deleteScoopIdea(2)">✕</button></div><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">Dog birthday treats for client pets</span><button class="idea-del" onclick="deleteScoopIdea(3)">✕</button></div><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">Flowers/card for clients with deceased dogs</span><button class="idea-del" onclick="deleteScoopIdea(4)">✕</button></div><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">Hand-written notes — mention address + nearby clients</span><button class="idea-del" onclick="deleteScoopIdea(5)">✕</button></div><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">Google My Business profile (FREE inbound leads)</span><button class="idea-del" onclick="deleteScoopIdea(6)">✕</button></div><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">"Account in progress" sign for active job sites</span><button class="idea-del" onclick="deleteScoopIdea(7)">✕</button></div><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">Texts for client Stan</span><button class="idea-del" onclick="deleteScoopIdea(8)">✕</button></div></div>
         <div class="add-row" style="margin-top:12px">
           <input class="add-input" id="scoop-idea-input" placeholder="Add an idea..." onkeydown="if(event.key==='Enter')addScoopIdea()">
           <button class="add-btn" onclick="addScoopIdea()">+ Add</button>
@@ -461,19 +459,19 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           </div>
         </div>
         <div class="routine-progress">
-          <div class="rp-meta"><span class="rp-label">Shift Progress</span><span class="rp-val" id="sbshift-val">0/0</span></div>
+          <div class="rp-meta"><span class="rp-label">Shift Progress</span><span class="rp-val" id="sbshift-val">0/10</span></div>
           <div class="rp-bar"><div class="rp-fill" id="sbshift-fill" style="width:0%"></div></div>
         </div>
-        <ul class="routine-list" id="sbshift-list"></ul>
+        <ul class="routine-list" id="sbshift-list"><li class="routine-item" draggable="true" data-idx="0"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',0)"></div><span class="r-text">🏢 Walk Reno Hub first — set the tone</span><span class="r-sci">Flagship</span><button class="r-del" onclick="deleteRoutineItem('sbshift',0)">✕</button></li><li class="routine-item" draggable="true" data-idx="1"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',1)"></div><span class="r-text">📞 Check in with Sparks supervisor</span><span class="r-sci">Sparks</span><button class="r-del" onclick="deleteRoutineItem('sbshift',1)">✕</button></li><li class="routine-item" draggable="true" data-idx="2"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',2)"></div><span class="r-text">📞 Check in with Wendover lead</span><span class="r-sci">Wendover</span><button class="r-del" onclick="deleteRoutineItem('sbshift',2)">✕</button></li><li class="routine-item" draggable="true" data-idx="3"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',3)"></div><span class="r-text">🐎 Verify Racebook boards accurate across all locations</span><span class="r-sci">Daily</span><button class="r-del" onclick="deleteRoutineItem('sbshift',3)">✕</button></li><li class="routine-item" draggable="true" data-idx="4"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',4)"></div><span class="r-text">📋 Review overnight issues or guest complaints</span><span class="r-sci">Daily</span><button class="r-del" onclick="deleteRoutineItem('sbshift',4)">✕</button></li><li class="routine-item" draggable="true" data-idx="5"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',5)"></div><span class="r-text">🎰 Scan casino floor — players to invite to the book?</span><span class="r-sci">Conversion</span><button class="r-del" onclick="deleteRoutineItem('sbshift',5)">✕</button></li><li class="routine-item" draggable="true" data-idx="6"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',6)"></div><span class="r-text">👋 Greet at least 3 regulars by name at Reno Hub</span><span class="r-sci">Retention</span><button class="r-del" onclick="deleteRoutineItem('sbshift',6)">✕</button></li><li class="routine-item" draggable="true" data-idx="7"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',7)"></div><span class="r-text">🏆 Acknowledge one team win today</span><span class="r-sci">Culture</span><button class="r-del" onclick="deleteRoutineItem('sbshift',7)">✕</button></li><li class="routine-item" draggable="true" data-idx="8"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',8)"></div><span class="r-text">💡 Identify one thing to improve before end of shift</span><span class="r-sci">Growth</span><button class="r-del" onclick="deleteRoutineItem('sbshift',8)">✕</button></li><li class="routine-item" draggable="true" data-idx="9"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',9)"></div><span class="r-text">📊 End-of-shift check — anything to hand off?</span><span class="r-sci">Ops</span><button class="r-del" onclick="deleteRoutineItem('sbshift',9)">✕</button></li></ul>
         <div class="add-row">
           <input class="add-input" id="sbshift-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('sbshift')">
           <button class="add-btn" onclick="addRoutineItem('sbshift')">+ Add</button>
         </div>
-        <div class="last-reset" id="sbshift-last-reset"></div>
+        <div class="last-reset" id="sbshift-last-reset">Last reset: 2026-3-8</div>
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">📋 Stay Current</div><div class="badge badge-orange">Nevada Gaming</div></div>
-        <ul class="simple-list" id="sb-current-list"></ul>
+        <ul class="simple-list" id="sb-current-list"><li class=""><div class="s-check" onclick="toggleSList('sb-current',0)"></div><span class="s-label">Nevada Gaming Control Board — check for regulatory updates</span><button class="s-del" onclick="deleteSList('sb-current',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',1)"></div><span class="s-label">CTR filings current and compliant across all 5 books</span><button class="s-del" onclick="deleteSList('sb-current',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',2)"></div><span class="s-label">SAR log reviewed this week</span><button class="s-del" onclick="deleteSList('sb-current',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',3)"></div><span class="s-label">Staff AML training hours documented</span><button class="s-del" onclick="deleteSList('sb-current',3)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',4)"></div><span class="s-label">House rules posted and consistent across all locations</span><button class="s-del" onclick="deleteSList('sb-current',4)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',5)"></div><span class="s-label">What are Caesars and William Hill running for promos?</span><button class="s-del" onclick="deleteSList('sb-current',5)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',6)"></div><span class="s-label">Utah drive market — any events that spike Wendover traffic?</span><button class="s-del" onclick="deleteSList('sb-current',6)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',7)"></div><span class="s-label">Racebook regulars check — any at-risk of reduced visits?</span><button class="s-del" onclick="deleteSList('sb-current',7)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',8)"></div><span class="s-label">Upcoming major events mapped out</span><button class="s-del" onclick="deleteSList('sb-current',8)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',9)"></div><span class="s-label">Wendover books — seasonal occupancy trends reviewed?</span><button class="s-del" onclick="deleteSList('sb-current',9)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',10)"></div><span class="s-label">Sparks book — local community events to partner around?</span><button class="s-del" onclick="deleteSList('sb-current',10)">✕</button></li></ul>
         <div class="add-row">
           <input class="add-input" id="sb-current-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addSimpleItem('sb-current')">
           <button class="add-btn" onclick="addSimpleItem('sb-current')">+ Add</button>
@@ -481,7 +479,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">📝 Work To-Do List</div></div>
-        <div id="todo-work-wrap"></div>
+        <div id="todo-work-wrap"><ul class="simple-list" id="todo-work-list"><li class=""><div class="s-check" onclick="toggleTodoItem('work',0)"></div><span class="s-label">Phone app welcome screen</span><button class="s-del" onclick="deleteTodoItem('work',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('work',1)"></div><span class="s-label">Wendover Numbers</span><button class="s-del" onclick="deleteTodoItem('work',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('work',2)"></div><span class="s-label">House Rules document</span><button class="s-del" onclick="deleteTodoItem('work',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('work',3)"></div><span class="s-label">Rental AC filter — Neil Rd</span><button class="s-del" onclick="deleteTodoItem('work',3)">✕</button></li></ul><div class="add-row"><input class="add-input" id="todo-work-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addTodoItem('work')"><button class="add-btn" onclick="addTodoItem('work')">+ Add</button></div></div>
       </div>
     </div>
     <div>
@@ -502,7 +500,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
     <div>
       <div class="card">
         <div class="card-header"><div class="card-title">💡 Forward-Thinking Ideas</div><div class="badge badge-purple">Casino × Book</div></div>
-        <div id="sb-ideas-list"></div>
+        <div id="sb-ideas-list"><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🏢 RENO: VIP Bettor lounge — reserved seating, dedicated TV wall, comp drink tier</span><button class="idea-del" onclick="deleteSbIdea(0)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🏢 RENO: Watch Party events for Super Bowl, March Madness, Kentucky Derby</span><button class="idea-del" onclick="deleteSbIdea(1)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🏢 RENO: Daily Best Bet board — curated 3 picks, builds credibility</span><button class="idea-del" onclick="deleteSbIdea(2)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🏢 RENO: Casino floor crossover — coordinate with table games pit</span><button class="idea-del" onclick="deleteSbIdea(3)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">📍 SPARKS: Local sports tie-in — Wolf Pack, Raiders, Golden Knights promos</span><button class="idea-del" onclick="deleteSbIdea(4)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">📍 SPARKS: Neighborhood loyalty punch card for Sparks regulars</span><button class="idea-del" onclick="deleteSbIdea(5)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">📍 SPARKS: Staff should know every regular by name and their team</span><button class="idea-del" onclick="deleteSbIdea(6)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">📍 SPARKS: Partner with local bar for joint Super Bowl promotion</span><button class="idea-del" onclick="deleteSbIdea(7)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🛣️ WENDOVER: Utah drive-in traffic is seasonal — identify peak weekends</span><button class="idea-del" onclick="deleteSbIdea(8)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🛣️ WENDOVER: First-time bettor welcome kit — lower barrier to entry</span><button class="idea-del" onclick="deleteSbIdea(9)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🛣️ WENDOVER: Weekend event promotions — destination experience</span><button class="idea-del" onclick="deleteSbIdea(10)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🛣️ WENDOVER: Digital signage in casino entrance promoting the book</span><button class="idea-del" onclick="deleteSbIdea(11)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🐎 RACEBOOK: Loyalty punch card — after X daily tickets, earn a free ticket</span><button class="idea-del" onclick="deleteSbIdea(12)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🐎 RACEBOOK: Horse racing tips sheet for new visitors</span><button class="idea-del" onclick="deleteSbIdea(13)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🐎 RACEBOOK: Kentucky Derby + Breeders Cup themed viewing parties</span><button class="idea-del" onclick="deleteSbIdea(14)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">💡 GENERAL: Beginner betting guide at every terminal</span><button class="idea-del" onclick="deleteSbIdea(15)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">💡 GENERAL: Post-game recap board — celebrate big parlay wins publicly</span><button class="idea-del" onclick="deleteSbIdea(16)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">💡 GENERAL: Seasonal promos tied to casino player rewards card</span><button class="idea-del" onclick="deleteSbIdea(17)">✕</button></div></div>
         <div class="add-row" style="margin-top:12px">
           <input class="add-input" id="sb-idea-input" placeholder="Add an idea..." onkeydown="if(event.key==='Enter')addSbIdea()">
           <button class="add-btn" onclick="addSbIdea()">+ Add</button>
@@ -519,7 +517,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
     <div>
       <div class="card">
         <div class="card-header"><div class="card-title">💖 Family Weekly</div><div class="badge badge-purple">Gottman</div></div>
-        <ul class="simple-list" id="family-weekly-list"></ul>
+        <ul class="simple-list" id="family-weekly-list"><li class=""><div class="s-check" onclick="toggleSList('family-weekly',0)"></div><span class="s-label">1-on-1 time with each kid this week</span><button class="s-del" onclick="deleteSList('family-weekly',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('family-weekly',1)"></div><span class="s-label">Weekly date night with wife</span><button class="s-del" onclick="deleteSList('family-weekly',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('family-weekly',2)"></div><span class="s-label">Tell each kid one specific thing you're proud of</span><button class="s-del" onclick="deleteSList('family-weekly',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('family-weekly',3)"></div><span class="s-label">10-min "State of Us" check-in with wife</span><button class="s-del" onclick="deleteSList('family-weekly',3)">✕</button></li></ul>
         <div class="add-row">
           <input class="add-input" id="family-weekly-input" placeholder="Add habit..." onkeydown="if(event.key==='Enter')addSimpleItem('family-weekly')">
           <button class="add-btn" onclick="addSimpleItem('family-weekly')">+ Add</button>
@@ -527,7 +525,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">🏠 Home To-Do List</div></div>
-        <div id="todo-home-wrap"></div>
+        <div id="todo-home-wrap"><ul class="simple-list" id="todo-home-list"><li class="done"><div class="s-check" onclick="toggleTodoItem('home',0)"></div><span class="s-label">Replace AC drain</span><button class="s-del" onclick="deleteTodoItem('home',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('home',1)"></div><span class="s-label">Fix pipe under house</span><button class="s-del" onclick="deleteTodoItem('home',1)">✕</button></li><li class="done"><div class="s-check" onclick="toggleTodoItem('home',2)"></div><span class="s-label">Fix shed door</span><button class="s-del" onclick="deleteTodoItem('home',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('home',3)"></div><span class="s-label">Wash house</span><button class="s-del" onclick="deleteTodoItem('home',3)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('home',4)"></div><span class="s-label">Build large sandbox</span><button class="s-del" onclick="deleteTodoItem('home',4)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('home',5)"></div><span class="s-label">Dad's: Research garage solution</span><button class="s-del" onclick="deleteTodoItem('home',5)">✕</button></li></ul><div class="add-row"><input class="add-input" id="todo-home-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addTodoItem('home')"><button class="add-btn" onclick="addTodoItem('home')">+ Add</button></div></div>
       </div>
     </div>
     <div>
@@ -618,62 +616,6 @@ function getRoutine(name){
   return{items:ROUTINE_DEFAULTS[name].map(i=>({...i,done:false})),lastReset:todayKey()};
 }
 function saveRoutine(name,data){ls('lifeOS_routine_'+name,JSON.stringify(data));}
-// ─── TOUCH DRAG STATE ───
-let _touchDrag={active:false,name:null,fromIdx:null,el:null,clone:null,startY:0,lastOver:null};
-
-function _touchStart(e,name,idx){
-  const handle=e.target.closest('.drag-handle');
-  if(!handle)return;
-  e.preventDefault();
-  const li=handle.closest('li');
-  const touch=e.touches[0];
-  const rect=li.getBoundingClientRect();
-  _touchDrag={active:true,name,fromIdx:idx,el:li,startY:touch.clientY,lastOver:null,
-    clone:null,offsetY:touch.clientY-rect.top};
-  // Create floating clone
-  const clone=li.cloneNode(true);
-  clone.style.cssText=`position:fixed;left:${rect.left}px;top:${rect.top}px;width:${rect.width}px;opacity:.85;z-index:999;pointer-events:none;background:var(--surface2);border:1px solid var(--accent);border-radius:6px;`;
-  document.body.appendChild(clone);
-  _touchDrag.clone=clone;
-  li.style.opacity='.3';
-}
-
-function _touchMove(e){
-  if(!_touchDrag.active)return;
-  e.preventDefault();
-  const touch=e.touches[0];
-  const clone=_touchDrag.clone;
-  if(clone) clone.style.top=(touch.clientY-_touchDrag.offsetY)+'px';
-  // Find which item we're hovering over
-  clone&&(clone.style.display='none');
-  const el=document.elementFromPoint(touch.clientX,touch.clientY);
-  clone&&(clone.style.display='');
-  const overLi=el?el.closest('li.routine-item'):null;
-  document.querySelectorAll('li.routine-item').forEach(l=>l.classList.remove('drag-over'));
-  if(overLi&&overLi!==_touchDrag.el){overLi.classList.add('drag-over');_touchDrag.lastOver=overLi;}
-}
-
-function _touchEnd(e){
-  if(!_touchDrag.active)return;
-  const{name,fromIdx,el,clone,lastOver}=_touchDrag;
-  if(clone)clone.remove();
-  el.style.opacity='';
-  document.querySelectorAll('li.routine-item').forEach(l=>l.classList.remove('drag-over'));
-  if(lastOver&&lastOver!==el){
-    const toIdx=parseInt(lastOver.dataset.idx);
-    const d=getRoutine(name);
-    const moved=d.items.splice(fromIdx,1)[0];
-    d.items.splice(toIdx,0,moved);
-    saveRoutine(name,d);
-    renderRoutine(name);
-  }
-  _touchDrag={active:false,name:null,fromIdx:null,el:null,clone:null,startY:0,lastOver:null};
-}
-
-document.addEventListener('touchmove',_touchMove,{passive:false});
-document.addEventListener('touchend',_touchEnd);
-document.addEventListener('touchcancel',_touchEnd);
-
 function renderRoutine(name){
   const data=getRoutine(name);
   const ul=document.getElementById(name+'-list');
@@ -684,14 +626,11 @@ function renderRoutine(name){
     li.className='routine-item'+(item.done?' done':'');
     li.draggable=true;li.dataset.idx=idx;
     li.innerHTML=`<span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('${name}',${idx})"></div><span class="r-text">${item.text}</span>${item.sci?`<span class="r-sci">${item.sci}</span>`:''}<button class="r-del" onclick="deleteRoutineItem('${name}',${idx})">✕</button>`;
-    // Mouse drag
     li.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',idx);li.classList.add('dragging');});
     li.addEventListener('dragend',()=>li.classList.remove('dragging'));
     li.addEventListener('dragover',e=>{e.preventDefault();li.classList.add('drag-over');});
     li.addEventListener('dragleave',()=>li.classList.remove('drag-over'));
     li.addEventListener('drop',e=>{e.preventDefault();li.classList.remove('drag-over');const from=parseInt(e.dataTransfer.getData('text/plain')),to=idx;if(from===to)return;const d=getRoutine(name);const moved=d.items.splice(from,1)[0];d.items.splice(to,0,moved);saveRoutine(name,d);renderRoutine(name);});
-    // Touch drag — only triggers from the handle
-    li.addEventListener('touchstart',e=>_touchStart(e,name,idx),{passive:false});
     ul.appendChild(li);
   });
   const total=data.items.length,done=data.items.filter(i=>i.done).length,pct=total?Math.round((done/total)*100):0;
@@ -1133,5 +1072,6 @@ loadJournal();
 renderTrainingLog();
 renderHitList();
 </script>
-</body>
-</html>
+
+
+<div id="give-freely-root-ejkiikneibegknkgimmihdpcbcedgmpo" class="give-freely-root" data-extension-id="ejkiikneibegknkgimmihdpcbcedgmpo" data-extension-name="Volume Booster" style="display: block;"></div></body></html>
