@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Life OS">
 <meta name="theme-color" content="#080808">
-<title>Life OS v1.3</title>
+<title>Life OS</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 :root{--bg:#080808;--surface:#111;--surface2:#181818;--border:#252525;--accent:#c8ff47;--accent2:#47d4ff;--accent3:#ff6b35;--accent4:#b47ffe;--text:#efefef;--muted:#555;--green:#3ddc84}
@@ -115,9 +115,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 .routine-item.done .r-check{background:var(--accent);border-color:var(--accent)}
 .routine-item.done .r-check::after{content:'✓';font-size:10px;color:#000;font-weight:900}
 .routine-item.done .r-text{text-decoration:line-through;color:var(--muted)}
-.r-text{flex:1;font-size:14px;color:#ccc;line-height:1.4;cursor:text}
-.r-edit{flex:1;background:var(--surface2);border:1px solid var(--accent);border-radius:6px;padding:6px 8px;font-size:14px;color:var(--text);font-family:'Syne',sans-serif;outline:none;min-width:0}
-.s-edit{flex:1;background:var(--surface2);border:1px solid var(--accent);border-radius:6px;padding:6px 8px;font-size:14px;color:var(--text);font-family:'Syne',sans-serif;outline:none;min-width:0}
+.r-text{flex:1;font-size:14px;color:#ccc;line-height:1.4}
 .r-sci{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--accent2);background:rgba(71,212,255,.07);padding:2px 5px;border-radius:2px;white-space:nowrap;flex-shrink:0}
 .r-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:2px 4px;flex-shrink:0}
 /* BUTTONS */
@@ -148,6 +146,41 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 .modal-btns button{flex:1;padding:11px;border-radius:8px;font-size:12px;font-weight:700;font-family:'Syne',sans-serif;cursor:pointer;border:none}
 .btn-primary{background:var(--accent);color:#000}
 .btn-secondary{background:var(--surface2);color:var(--muted);border:1px solid var(--border) !important}
+
+/* REST TIMER */
+.rt-preset-active{border-color:rgba(200,255,71,.6) !important;color:var(--accent) !important;background:rgba(200,255,71,.08) !important}
+
+/* WORKOUT PER-SET */
+.wb-exercise{padding:10px 0;border-bottom:1px solid var(--border)}
+.wb-exercise:last-child{border-bottom:none}
+.wb-ex-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.wb-ex-name{flex:1;font-size:13px;color:#ddd;font-weight:600}
+.wb-add-set{background:none;border:1px solid var(--border);border-radius:4px;color:var(--accent2);font-size:10px;padding:2px 7px;cursor:pointer;font-family:"Syne",sans-serif;white-space:nowrap}
+.wb-add-set:active{border-color:var(--accent2)}
+.wb-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:2px 4px;flex-shrink:0}
+.wb-sets-table{width:100%;border-collapse:collapse}
+.wb-sets-table th{font-size:8px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);text-align:left;padding:2px 4px 4px;font-family:"JetBrains Mono",monospace;font-weight:400}
+.wb-sets-table th:nth-child(3),.wb-sets-table th:nth-child(4){text-align:center}
+.wb-sets-table td{padding:3px 4px;vertical-align:middle}
+.wb-input-sm{width:58px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 6px;font-size:12px;color:var(--text);font-family:"JetBrains Mono",monospace;text-align:center;outline:none;-webkit-appearance:none;display:block}
+.wb-input-sm:focus{border-color:var(--accent)}
+.wb-input-sm.bw{color:var(--muted);font-size:11px}
+.wb-set-done{width:26px;height:26px;border:1.5px solid var(--border);border-radius:5px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted);transition:all .2s;margin:0 auto}
+.wb-set-done.done{background:var(--accent);border-color:var(--accent);color:#000;font-weight:900}
+.wb-set-del-row{background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:2px;opacity:0.5}
+/* EXERCISE LIBRARY */
+.ex-lib-cat-btn{background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:4px 10px;font-size:10px;color:var(--muted);cursor:pointer;font-family:"Syne",sans-serif;white-space:nowrap}
+.ex-lib-cat-btn.active{border-color:rgba(200,255,71,.5);color:var(--accent);background:rgba(200,255,71,.06)}
+.ex-lib-item{display:flex;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);gap:10px}
+.ex-lib-item:last-child{border-bottom:none}
+.ex-lib-item-name{flex:1;font-size:13px;color:#ccc}
+.ex-lib-item-cat{font-size:8px;font-family:"JetBrains Mono",monospace;color:var(--muted);text-transform:uppercase;letter-spacing:1px;min-width:36px}
+.ex-lib-add-btn{background:var(--surface2);border:1px solid rgba(200,255,71,.3);border-radius:5px;color:var(--accent);font-size:11px;padding:4px 10px;cursor:pointer;font-family:"Syne",sans-serif;white-space:nowrap;flex-shrink:0}
+.ex-lib-add-btn:active{background:rgba(200,255,71,.12)}
+
+/* POMO */
+.pomo-preset-btn{transition:all .2s}
+.pomo-preset-btn.active{border-color:rgba(200,255,71,.5);color:var(--accent);background:rgba(200,255,71,.07)}
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:3px;height:3px}
 ::-webkit-scrollbar-track{background:var(--bg)}
@@ -174,48 +207,6 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 }
 .push-btn-desktop{display:none !important}
 @media(min-width:1024px){.push-btn-desktop{display:block !important}}
-/* SUB TABS */
-.sub-tab{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:7px 14px;font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Syne',sans-serif;white-space:nowrap;transition:all .2s;flex-shrink:0}
-.sub-tab.active{background:var(--accent);color:#000;border-color:var(--accent)}
-.sub-panel{display:none}.sub-panel.active{display:block}
-/* WORKOUT */
-.exercise-block{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px}
-.exercise-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;display:flex;align-items:center;justify-content:space-between}
-.prev-best{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:10px}
-.set-row{display:grid;grid-template-columns:28px 1fr 1fr auto;gap:8px;align-items:center;margin-bottom:8px}
-.set-num{font-size:11px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace;text-align:center}
-.set-input{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:9px 10px;font-size:14px;color:var(--text);font-family:'JetBrains Mono',monospace;outline:none;width:100%;text-align:center;-webkit-appearance:none}
-.set-input:focus{border-color:var(--accent)}
-.set-done-btn{width:32px;height:32px;border-radius:6px;border:1.5px solid var(--border);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .2s;flex-shrink:0}
-.set-done-btn.done{background:var(--accent);border-color:var(--accent)}
-.add-set-btn{width:100%;background:none;border:1px dashed var(--border);border-radius:6px;padding:7px;font-size:11px;color:var(--muted);cursor:pointer;font-family:'Syne',sans-serif;margin-top:4px}
-.add-set-btn:active{border-color:var(--accent);color:var(--accent)}
-.po-badge{font-size:9px;padding:2px 7px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-weight:700}
-.po-up{background:rgba(61,220,132,.15);color:var(--green)}
-.po-same{background:rgba(200,255,71,.1);color:var(--accent)}
-.po-down{background:rgba(255,107,53,.12);color:var(--accent3)}
-/* WEEK SUMMARY */
-.week-day-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px}
-.week-day-row:last-child{border-bottom:none}
-.week-day-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.week-day-name{color:#bbb;min-width:36px;font-family:'JetBrains Mono',monospace;font-size:10px}
-.week-day-type{color:var(--text);flex:1}
-.week-day-vol{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px}
-/* PR LIST */
-.pr-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
-.pr-row:last-child{border-bottom:none}
-.pr-name{color:#bbb}
-.pr-val{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);font-weight:700}
-/* BW STATS */
-.bw-stat{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}
-.bw-stat-val{font-size:18px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:2px}
-.bw-stat-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-/* EXERCISE PICKER */
-.ex-pick-item{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border);cursor:pointer}
-.ex-pick-item:last-child{border-bottom:none}
-.ex-pick-name{font-size:13px;color:#ccc}
-.ex-pick-cat{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace}
-.ex-pick-add{background:var(--accent);color:#000;border:none;border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Syne',sans-serif}
 </style>
 </head>
 <body>
@@ -223,20 +214,19 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 <div class="header">
   <div>
     <div class="logo">Life <span>OS</span></div>
-    <div class="tagline">Master System · Age 38 · v1.3</div>
+    <div class="tagline">Master System · Age 38</div>
   </div>
   <div class="header-right">
-    <div class="date-badge" id="dateBadge">Tue, Mar 10, 2026</div>
-    <div id="sync-status" style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 9px; color: var(--muted);">☁️ Synced</div>
+    <div class="date-badge" id="dateBadge">Fri, Mar 13, 2026</div>
     <button class="hdr-btn" onclick="copyData()">📋 Copy Data</button>
     <button class="hdr-btn push" onclick="openPushModal()" id="push-btn">🚀 Push</button>
   </div>
 </div>
 
 <div class="nav">
-  <button class="nav-tab" onclick="showTab('overview',this)"><span class="ni">⚡</span>Overview</button>
+  <button class="nav-tab active" onclick="showTab('overview',this)"><span class="ni">⚡</span>Overview</button>
   <button class="nav-tab" onclick="showTab('morning',this)"><span class="ni">☀️</span>Morning</button>
-  <button class="nav-tab active" onclick="showTab('evening',this)"><span class="ni">🌙</span>Evening</button>
+  <button class="nav-tab" onclick="showTab('evening',this)"><span class="ni">🌙</span>Evening</button>
   <button class="nav-tab" onclick="showTab('health',this)"><span class="ni">🧪</span>Health</button>
   <button class="nav-tab" onclick="showTab('business',this)"><span class="ni">💩</span>Scoop</button>
   <button class="nav-tab" onclick="showTab('sportsbook',this)"><span class="ni">🎰</span>Books</button>
@@ -266,7 +256,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 <div class="main">
 
 <!-- ══════════ OVERVIEW ══════════ -->
-<div class="tab" id="tab-overview">
+<div class="tab active" id="tab-overview">
 
   <div class="overview-grid">
     <div class="stat-card"><div class="stat-label">Scoop Clients</div><div class="stat-value" style="color:var(--accent)" id="ov-clients">3</div><div class="stat-sub">Goal: 20 by Apr 2026</div></div>
@@ -274,13 +264,34 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
   </div>
 
   <div class="section-title">Long-Term Roadmap</div>
-  <div class="roadmap-grid" id="roadmap-grid"><div class="roadmap-item" style="border-top: 3px solid var(--accent);"><div class="roadmap-year">1 Year — Apr 2026</div><div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:50%;background:var(--accent)"></div></div><ul class="roadmap-goals" id="rm-0"><li style="color: var(--muted); text-decoration: line-through;">✅ ✅ Citi card paid off</li><li style="">→ 20 Scoop Squad clients (full day route)</li><li style="">→ Car magnet + door hangers live</li><li style="color: var(--muted); text-decoration: line-through;">✅ Morning/evening routines locked in</li></ul></div><div class="roadmap-item" style="border-top: 3px solid var(--accent2);"><div class="roadmap-year">2 Years — Apr 2027</div><div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;background:var(--accent2)"></div></div><ul class="roadmap-goals" id="rm-1"><li style="">→ Debt free</li><li style="">→ Scoop Squad second route</li><li style="">→ First hire or partner</li><li style="">→ Rental property optimized</li></ul></div><div class="roadmap-item" style="border-top: 3px solid var(--accent3);"><div class="roadmap-year">5 Years — 2029</div><div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;background:var(--accent3)"></div></div><ul class="roadmap-goals" id="rm-2"><li style="">→ Hawaii trip with the kids</li><li style="">→ Side hustle #2 launched</li><li style="">→ Personal brand / content live</li><li style="">→ Physical peak maintained</li></ul></div><div class="roadmap-item" style="border-top: 3px solid var(--accent4);"><div class="roadmap-year">10 Years — 2036</div><div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;background:var(--accent4)"></div></div><ul class="roadmap-goals" id="rm-3"><li style="">→ Camper + annual family trips</li><li style="">→ Second rental property</li><li style="">→ Business #1 complete, #2 started</li><li style="">→ Annual vacation savings funded</li></ul></div></div>
+  <div class="roadmap-grid" id="roadmap-grid"><div class="roadmap-item" style="border-top: 3px solid var(--accent);"><div class="roadmap-year">1 Year — Apr 2026</div><div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:75%;background:var(--accent)"></div></div><ul class="roadmap-goals" id="rm-0"><li style="color: var(--muted); text-decoration: line-through;">✅ ✅ Citi card paid off</li><li style="">→ 20 Scoop Squad clients</li><li style="color: var(--muted); text-decoration: line-through;">✅ Car magnet + door hangers live</li><li style="color: var(--muted); text-decoration: line-through;">✅ Morning/evening routines locked in</li></ul></div><div class="roadmap-item" style="border-top: 3px solid var(--accent2);"><div class="roadmap-year">2 Years — Apr 2027</div><div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;background:var(--accent2)"></div></div><ul class="roadmap-goals" id="rm-1"><li style="">→ Debt free</li><li style="">→ Scoop Squad second route</li><li style="">→ First hire or partner</li><li style="">→ Rental property optimized</li></ul></div><div class="roadmap-item" style="border-top: 3px solid var(--accent3);"><div class="roadmap-year">5 Years — 2029</div><div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;background:var(--accent3)"></div></div><ul class="roadmap-goals" id="rm-2"><li style="">→ Hawaii trip with the kids</li><li style="">→ Side hustle #2 launched</li><li style="">→ Personal brand / content live</li><li style="">→ Physical peak maintained</li></ul></div><div class="roadmap-item" style="border-top: 3px solid var(--accent4);"><div class="roadmap-year">10 Years — 2036</div><div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:0%;background:var(--accent4)"></div></div><ul class="roadmap-goals" id="rm-3"><li style="">→ Camper + annual family trips</li><li style="">→ Second rental property</li><li style="">→ Business #1 complete, #2 started</li><li style="">→ Annual vacation savings funded</li></ul></div></div>
+
+  <div class="card" style="text-align:center">
+    <div class="card-header" style="justify-content:center;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px">
+      <div>
+        <div class="card-title" style="text-align:center">☕ Focus Timer</div>
+        <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:3px">Pomodoro Style</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap">
+      <button class="reset-btn pomo-preset-btn active" id="pp-25" onclick="pomoSetPreset(25,'FOCUS','🍅')">🍅 25m</button>
+      <button class="reset-btn pomo-preset-btn" id="pp-52" onclick="pomoSetPreset(52,'DEEP WORK','⚡')">⚡ 52m</button>
+      <button class="reset-btn pomo-preset-btn" id="pp-15" onclick="pomoSetPreset(15,'QUICK HIT','☕')">☕ 15m</button>
+      <button class="reset-btn pomo-preset-btn" id="pp-5" onclick="pomoSetPreset(5,'BREAK','😮‍💨')">😮‍💨 5m</button>
+    </div>
+    <canvas id="pomo-canvas" width="200" height="200" style="display:block;margin:0 auto;image-rendering:pixelated"></canvas>
+    <div id="pomo-label" style="font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-top:10px;font-family:'JetBrains Mono',monospace">FOCUS</div>
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:12px">
+      <button class="add-btn" id="pomo-start-btn" onclick="togglePomo()" style="min-width:100px">▶ Start</button>
+      <button class="reset-btn" onclick="resetPomo()">↺ Reset</button>
+    </div>
+  </div>
 
   <div class="card">
     <div class="card-header">
       <div>
         <div class="card-title">🎯 Daily Hit List</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date">Tuesday, Mar 10</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date">Friday, Mar 13</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
         <span id="hitlist-pval" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">0/10</span>
@@ -306,32 +317,26 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
         <div class="card-title">☀️ Morning Stack</div>
         <div style="display:flex;align-items:center;gap:8px">
           <button class="reset-btn" onclick="resetRoutine('morning')">↺ Reset</button>
-          <div class="badge badge-green">Science</div>
+          
         </div>
       </div>
       <div class="routine-progress">
         <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="morning-val">0/15</span></div>
         <div class="rp-bar"><div class="rp-fill" id="morning-fill" style="width:0%"></div></div>
       </div>
-      <ul class="routine-list" id="morning-list"><li class="routine-item" draggable="true" data-idx="0"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',0)"></div><span class="r-text" onclick="editRoutineItem(this,'morning',0)">💧 16oz water immediately on waking</span><span class="r-sci">Cortisol + hydration</span><button class="r-del" onclick="deleteRoutineItem('morning',0)">✕</button></li><li class="routine-item" draggable="true" data-idx="1"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',1)"></div><span class="r-text" onclick="editRoutineItem(this,'morning',1)">☀️ Sunlight in eyes within 30 min (outside or open window)</span><span class="r-sci">Huberman: circadian</span><button class="r-del" onclick="deleteRoutineItem('morning',1)">✕</button></li><li class="routine-item" draggable="true" data-idx="2"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',2)"></div><span class="r-text" onclick="editRoutineItem(this,'morning',2)">🧘 5–10 min stretch or mobility</span><span class="r-sci">Injury prevention</span><button class="r-del" onclick="deleteRoutineItem('morning',2)">✕</button></li><li class="routine-item" draggable="true" data-idx="3"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',3)"></div><span class="r-text" onclick="editRoutineItem(this,'morning',3)">🏋️ 30 min PPL strength training</span><span class="r-sci">Attia: muscle health</span><button class="r-del" onclick="deleteRoutineItem('morning',3)">✕</button></li><li class="routine-item" draggable="true" data-idx="4"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',4)"></div><span class="r-text" onclick="editRoutineItem(this,'morning',4)">🥤 Protein shake + 5g Creatine</span><span class="r-sci">Examine.com verified</span><button class="r-del" onclick="deleteRoutineItem('morning',4)">✕</button></li><li class="routine-item" draggable="true" data-idx="5"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',5)"></div><span class="r-text" onclick="editRoutineItem(this,'morning',5)">💊 Blues pills</span><button class="r-del" onclick="deleteRoutineItem('morning',5)">✕</button></li><li class="routine-item" draggable="true" data-idx="6"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',6)"></div><span class="r-text" onclick="editRoutineItem(this,'morning',6)">🐾 Feed dogs + vacuum rug</span><button class="r-del" onclick="deleteRoutineItem('morning',6)">✕</button></li><li class="routine-item" draggable="true" data-idx="7"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',7)"></div><span class="r-text" onclick="editRoutineItem(this,'morning',7)">🍳 Breakfast with kids — "What are we working on today?"</span><button class="r-del" onclick="deleteRoutineItem('morning',7)">✕</button></li><li class="routine-item" draggable="true" data-idx="8"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',8)"></div><span class="r-text" onclick="editRoutineItem(this,'morning',8)">👕 Get kids dressed + brush teeth</span><button class="r-del" onclick="deleteRoutineItem('morning',8)">✕</button></li><li class="routine-item" draggable="true" data-idx="9"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',9)"></div><span class="r-text" onclick="editRoutineItem(this,'morning',9)">🚶Dog walk (15+min Zone 2) - Aim for 100 min/week total</span><button class="r-del" onclick="deleteRoutineItem('morning',9)">✕</button></li><li class="routine-item" draggable="true" data-idx="10"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',10)"></div><span class="r-text" onclick="editRoutineItem(this,'morning',10)">🚿 Shower — end with 30 sec cold</span><span class="r-sci">+250% dopamine</span><button class="r-del" onclick="deleteRoutineItem('morning',10)">✕</button></li><li class="routine-item" draggable="true" data-idx="11"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',11)"></div><span class="r-text" onclick="editRoutineItem(this,'morning',11)">💧 Waterpik + Vitamin C + SPF Lotion</span><span class="r-sci">Longevity basics</span><button class="r-del" onclick="deleteRoutineItem('morning',11)">✕</button></li><li class="routine-item" draggable="true" data-idx="12"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',12)"></div><span class="r-text" onclick="editRoutineItem(this,'morning',12)">🦷 Brush teeth</span><button class="r-del" onclick="deleteRoutineItem('morning',12)">✕</button></li><li class="routine-item" draggable="true" data-idx="13"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',13)"></div><span class="r-text" onclick="editRoutineItem(this,'morning',13)">📅 Write 3 targets that make today a win</span><span class="r-sci">Execution focus</span><button class="r-del" onclick="deleteRoutineItem('morning',13)">✕</button></li><li class="routine-item" draggable="true" data-idx="14"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',14)"></div><span class="r-text" onclick="editRoutineItem(this,'morning',14)">⚡ Kick ass today</span><button class="r-del" onclick="deleteRoutineItem('morning',14)">✕</button></li></ul>
+      <ul class="routine-list" id="morning-list"><li class="routine-item" draggable="true" data-idx="0"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',0)"></div><span class="r-text">💧 16oz water immediately on waking</span><button class="r-del" onclick="deleteRoutineItem('morning',0)">✕</button></li><li class="routine-item" draggable="true" data-idx="1"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',1)"></div><span class="r-text">☀️ Sunlight in eyes within 30 min</span><button class="r-del" onclick="deleteRoutineItem('morning',1)">✕</button></li><li class="routine-item" draggable="true" data-idx="2"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',2)"></div><span class="r-text">💊 Blues pills</span><button class="r-del" onclick="deleteRoutineItem('morning',2)">✕</button></li><li class="routine-item" draggable="true" data-idx="3"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',3)"></div><span class="r-text">🐾 Feed dogs + vacuum rug</span><button class="r-del" onclick="deleteRoutineItem('morning',3)">✕</button></li><li class="routine-item" draggable="true" data-idx="4"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',4)"></div><span class="r-text">🚶 Walk Bob (15+ min Zone 2)</span><button class="r-del" onclick="deleteRoutineItem('morning',4)">✕</button></li><li class="routine-item" draggable="true" data-idx="5"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',5)"></div><span class="r-text">🍳 Breakfast with kids</span><button class="r-del" onclick="deleteRoutineItem('morning',5)">✕</button></li><li class="routine-item" draggable="true" data-idx="6"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',6)"></div><span class="r-text">👕 Get kids dressed + brush teeth</span><button class="r-del" onclick="deleteRoutineItem('morning',6)">✕</button></li><li class="routine-item" draggable="true" data-idx="7"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',7)"></div><span class="r-text">🏋️ Strength training per split</span><button class="r-del" onclick="deleteRoutineItem('morning',7)">✕</button></li><li class="routine-item" draggable="true" data-idx="8"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',8)"></div><span class="r-text">🧘 5–10 min stretch or mobility</span><button class="r-del" onclick="deleteRoutineItem('morning',8)">✕</button></li><li class="routine-item" draggable="true" data-idx="9"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',9)"></div><span class="r-text">🥤 Protein shake + 5g Creatine</span><button class="r-del" onclick="deleteRoutineItem('morning',9)">✕</button></li><li class="routine-item" draggable="true" data-idx="10"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',10)"></div><span class="r-text">🚿 Shower — end with 30 sec cold</span><button class="r-del" onclick="deleteRoutineItem('morning',10)">✕</button></li><li class="routine-item" draggable="true" data-idx="11"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',11)"></div><span class="r-text">💧 Waterpik + Vitamin C + SPF</span><button class="r-del" onclick="deleteRoutineItem('morning',11)">✕</button></li><li class="routine-item" draggable="true" data-idx="12"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',12)"></div><span class="r-text">🦷 Brush teeth</span><button class="r-del" onclick="deleteRoutineItem('morning',12)">✕</button></li><li class="routine-item" draggable="true" data-idx="13"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',13)"></div><span class="r-text">📅 Write 3 targets for today</span><button class="r-del" onclick="deleteRoutineItem('morning',13)">✕</button></li><li class="routine-item" draggable="true" data-idx="14"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('morning',14)"></div><span class="r-text">⚡ Kick ass today</span><button class="r-del" onclick="deleteRoutineItem('morning',14)">✕</button></li></ul>
       <div class="add-row">
         <input class="add-input" id="morning-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('morning')">
         <button class="add-btn" onclick="addRoutineItem('morning')">+ Add</button>
       </div>
-      <div class="last-reset" id="morning-last-reset">Last reset: 2026-3-10</div>
+      <div class="last-reset" id="morning-last-reset">Last reset: 2026-3-13</div>
     </div>
-    <div class="card">
-      <div class="card-header"><div class="card-title">🔬 Science Notes</div></div>
-      <div class="upgrade"><div class="upgrade-title">☀️ Morning Sunlight</div><div class="upgrade-body">Outside within 30 min of waking. Sets circadian clock, times cortisol correctly.</div></div>
-      <div class="upgrade"><div class="upgrade-title">🧊 Cold Shower Finish</div><div class="upgrade-body">30 sec cold at the end. Dopamine +250%. Mental toughness, sharp alertness.</div></div>
-      <div class="upgrade"><div class="upgrade-title">⏰ Delay Caffeine 90 Min</div><div class="upgrade-body">Lets adenosine clear naturally. Prevents afternoon crash. Water first.</div></div>
-      <div class="upgrade"><div class="upgrade-title">📝 3 Daily Targets</div><div class="upgrade-body">Write exactly 3 things that make today a win. Stays on offense every day.</div></div>
-    </div>
+
   </div>
 </div>
 
 <!-- ══════════ EVENING ══════════ -->
-<div class="tab active" id="tab-evening">
+<div class="tab" id="tab-evening">
   <div class="two-col">
     <div class="card">
       <div class="card-header">
@@ -345,269 +350,169 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
         <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="evening-val">0/17</span></div>
         <div class="rp-bar"><div class="rp-fill" id="evening-fill" style="width:0%"></div></div>
       </div>
-      <ul class="routine-list" id="evening-list"><li class="routine-item" draggable="true" data-idx="0"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',0)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',0)">🏠 Close up the house</span><button class="r-del" onclick="deleteRoutineItem('evening',0)">✕</button></li><li class="routine-item" draggable="true" data-idx="1"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',1)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',1)">💊 Vitamins + Blue medicine @ 8:30pm</span><button class="r-del" onclick="deleteRoutineItem('evening',1)">✕</button></li><li class="routine-item" draggable="true" data-idx="2"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',2)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',2)">☕ Prep coffee for tomorrow</span><button class="r-del" onclick="deleteRoutineItem('evening',2)">✕</button></li><li class="routine-item" draggable="true" data-idx="3"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',3)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',3)">🍽️ Run dishwasher + take trash out</span><button class="r-del" onclick="deleteRoutineItem('evening',3)">✕</button></li><li class="routine-item" draggable="true" data-idx="4"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',4)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',4)">🐾 Fill dog food + water + wash water bottles</span><button class="r-del" onclick="deleteRoutineItem('evening',4)">✕</button></li><li class="routine-item" draggable="true" data-idx="5"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',5)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',5)">👶 Kids room ready</span><button class="r-del" onclick="deleteRoutineItem('evening',5)">✕</button></li><li class="routine-item" draggable="true" data-idx="6"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',6)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',6)">🌡️ Drop room temp to 65–68°F</span><span class="r-sci">Sleep science</span><button class="r-del" onclick="deleteRoutineItem('evening',6)">✕</button></li><li class="routine-item" draggable="true" data-idx="7"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',7)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',7)">🛋️ Cover the couch + Blue in cage</span><button class="r-del" onclick="deleteRoutineItem('evening',7)">✕</button></li><li class="routine-item" draggable="true" data-idx="8"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',8)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',8)">📵 Dim screens / blue light off after 9pm</span><span class="r-sci">Melatonin protect</span><button class="r-del" onclick="deleteRoutineItem('evening',8)">✕</button></li><li class="routine-item" draggable="true" data-idx="9"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',9)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',9)">🧴 Wash face + Retinol or Hyaluronic Acid</span><span class="r-sci">Skin longevity</span><button class="r-del" onclick="deleteRoutineItem('evening',9)">✕</button></li><li class="routine-item" draggable="true" data-idx="10"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',10)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',10)">🧴 PM Lotion</span><button class="r-del" onclick="deleteRoutineItem('evening',10)">✕</button></li><li class="routine-item" draggable="true" data-idx="11"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',11)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',11)">🦷 Floss + brush teeth</span><button class="r-del" onclick="deleteRoutineItem('evening',11)">✕</button></li><li class="routine-item" draggable="true" data-idx="12"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',12)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',12)">📓 3-win journal: write 3 wins from today</span><span class="r-sci">Cortisol reduction</span><button class="r-del" onclick="deleteRoutineItem('evening',12)">✕</button></li><li class="routine-item" draggable="true" data-idx="13"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',13)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',13)">📅 Check calendar for tomorrow</span><button class="r-del" onclick="deleteRoutineItem('evening',13)">✕</button></li><li class="routine-item" draggable="true" data-idx="14"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',14)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',14)">📱 Hard screens off by 11:30pm</span><button class="r-del" onclick="deleteRoutineItem('evening',14)">✕</button></li><li class="routine-item" draggable="true" data-idx="15"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',15)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',15)">🐕 Cash potty break</span><button class="r-del" onclick="deleteRoutineItem('evening',15)">✕</button></li><li class="routine-item" draggable="true" data-idx="16"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',16)"></div><span class="r-text" onclick="editRoutineItem(this,'evening',16)">🛏️ Bed by midnight</span><button class="r-del" onclick="deleteRoutineItem('evening',16)">✕</button></li></ul>
+      <ul class="routine-list" id="evening-list"><li class="routine-item" draggable="true" data-idx="0"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',0)"></div><span class="r-text">☕ Prep coffee for tomorrow</span><button class="r-del" onclick="deleteRoutineItem('evening',0)">✕</button></li><li class="routine-item" draggable="true" data-idx="1"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',1)"></div><span class="r-text">💊 Vitamins + Blue medicine @ 8:30pm</span><button class="r-del" onclick="deleteRoutineItem('evening',1)">✕</button></li><li class="routine-item" draggable="true" data-idx="2"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',2)"></div><span class="r-text">🏠 Close up the house</span><button class="r-del" onclick="deleteRoutineItem('evening',2)">✕</button></li><li class="routine-item" draggable="true" data-idx="3"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',3)"></div><span class="r-text">🍽️ Run dishwasher + take trash out</span><button class="r-del" onclick="deleteRoutineItem('evening',3)">✕</button></li><li class="routine-item" draggable="true" data-idx="4"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',4)"></div><span class="r-text">🐾 Fill dog food + water + wash water bottles</span><button class="r-del" onclick="deleteRoutineItem('evening',4)">✕</button></li><li class="routine-item" draggable="true" data-idx="5"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',5)"></div><span class="r-text">🛋️ Cover the couch + Blue in cage</span><button class="r-del" onclick="deleteRoutineItem('evening',5)">✕</button></li><li class="routine-item" draggable="true" data-idx="6"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',6)"></div><span class="r-text">👶 Kids room ready</span><button class="r-del" onclick="deleteRoutineItem('evening',6)">✕</button></li><li class="routine-item" draggable="true" data-idx="7"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',7)"></div><span class="r-text">🌡️ Drop room temp to 65–68°F</span><button class="r-del" onclick="deleteRoutineItem('evening',7)">✕</button></li><li class="routine-item" draggable="true" data-idx="8"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',8)"></div><span class="r-text">📵 Dim screens / blue light off after 9pm</span><button class="r-del" onclick="deleteRoutineItem('evening',8)">✕</button></li><li class="routine-item" draggable="true" data-idx="9"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',9)"></div><span class="r-text">🧴 Wash face + Retinol or Hyaluronic Acid</span><button class="r-del" onclick="deleteRoutineItem('evening',9)">✕</button></li><li class="routine-item" draggable="true" data-idx="10"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',10)"></div><span class="r-text">🧴 PM Lotion</span><button class="r-del" onclick="deleteRoutineItem('evening',10)">✕</button></li><li class="routine-item" draggable="true" data-idx="11"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',11)"></div><span class="r-text">🦷 Floss + brush teeth</span><button class="r-del" onclick="deleteRoutineItem('evening',11)">✕</button></li><li class="routine-item" draggable="true" data-idx="12"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',12)"></div><span class="r-text">📓 3-win journal: write 3 wins from today</span><button class="r-del" onclick="deleteRoutineItem('evening',12)">✕</button></li><li class="routine-item" draggable="true" data-idx="13"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',13)"></div><span class="r-text">📅 Check calendar for tomorrow</span><button class="r-del" onclick="deleteRoutineItem('evening',13)">✕</button></li><li class="routine-item" draggable="true" data-idx="14"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',14)"></div><span class="r-text">📱 Hard screens off by 11:30pm</span><button class="r-del" onclick="deleteRoutineItem('evening',14)">✕</button></li><li class="routine-item" draggable="true" data-idx="15"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',15)"></div><span class="r-text">🐕 Cash potty break</span><button class="r-del" onclick="deleteRoutineItem('evening',15)">✕</button></li><li class="routine-item" draggable="true" data-idx="16"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('evening',16)"></div><span class="r-text">🛏️ Bed by midnight</span><button class="r-del" onclick="deleteRoutineItem('evening',16)">✕</button></li></ul>
       <div class="add-row">
         <input class="add-input" id="evening-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('evening')">
         <button class="add-btn" onclick="addRoutineItem('evening')">+ Add</button>
       </div>
-      <div class="last-reset" id="evening-last-reset">Last reset: 2026-3-10</div>
+      <div class="last-reset" id="evening-last-reset">Last reset: 2026-3-13</div>
     </div>
-    <div class="card">
-      <div class="card-header"><div class="card-title">🔬 Sleep Science</div></div>
-      <div class="upgrade"><div class="upgrade-title">🌡️ Room Temp 65–68°F</div><div class="upgrade-body">Core body temp must drop to initiate sleep. Non-negotiable.</div></div>
-      <div class="upgrade"><div class="upgrade-title">📵 Blue Light Off 9pm</div><div class="upgrade-body">Suppresses melatonin up to 3 hours. Dim lights, phone to night mode.</div></div>
-      <div class="upgrade"><div class="upgrade-title">📓 3-Win Journal</div><div class="upgrade-body">Write 3 wins before sleep. Reduces cortisol, trains brain to scan for positives.</div></div>
-      <div class="upgrade"><div class="upgrade-title">🧴 Retinol + Hyaluronic</div><div class="upgrade-body">Retinol stimulates collagen. Hyaluronic locks hydration. Easiest longevity win.</div></div>
-    </div>
+
   </div>
 </div>
 
 <!-- ══════════ HEALTH ══════════ -->
 <div class="tab" id="tab-health">
-
-  <!-- SUB NAV -->
-  <div style="display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;padding-bottom:2px">
-    <button class="sub-tab active" onclick="showSubTab('workout',this)">🏋️ Workout</button>
-    <button class="sub-tab" onclick="showSubTab('bw',this)">⚖️ Bodyweight</button>
-    <button class="sub-tab" onclick="showSubTab('progress',this)">📈 Progress</button>
-    <button class="sub-tab" onclick="showSubTab('stack',this)">💊 Stack</button>
-  </div>
-
-  <!-- WORKOUT LOG -->
-  <div class="sub-panel active" id="sub-workout">
-    <div class="two-col">
-      <div>
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title" id="workout-day-title">💥 Today's Session</div>
-              <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="workout-date-label">Tuesday, Mar 10</div>
-            </div>
-            <div style="display:flex;gap:6px;align-items:center">
-              <select id="workout-type-select" onchange="switchWorkoutType(this.value)" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);font-family:'Syne',sans-serif;font-size:11px;padding:5px 8px;border-radius:6px;outline:none">
-                <option value="push">💥 Push</option>
-                <option value="pull">🔗 Pull</option>
-                <option value="full">🤝 Full Body</option>
-                <option value="vo2">🔥 VO₂ / Cardio</option>
-                <option value="rest">😴 Rest</option>
-              </select>
-              <button class="reset-btn" onclick="finishWorkout()">✅ Done</button>
-            </div>
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">🏋️ Training Split</div><div class="badge badge-green">PPL + VO₂</div></div>
+        <div class="week-grid" style="margin-bottom:14px">
+          <div class="day-col"><div class="day-name">Wed</div><div class="day-task hl-green">💥 Push</div><div class="day-task hl-blue">🚶 15m</div><div class="day-task hl-purple">🧘 10m</div></div>
+          <div class="day-col"><div class="day-name">Thu</div><div class="day-task hl-green">🔗 Pull</div><div class="day-task hl-blue">🚶 15m</div><div class="day-task hl-purple">🧘 10m</div></div>
+          <div class="day-col"><div class="day-name">Fri</div><div class="day-task hl-orange">🤝 Full</div><div class="day-task hl-blue">🚶 15m</div><div class="day-task hl-purple">🧘 10m</div></div>
+          <div class="day-col"><div class="day-name">Sat</div><div class="day-task">😴 Rest</div><div class="day-task hl-blue">🚶 Long</div><div class="day-task hl-purple">🧘 30m</div></div>
+          <div class="day-col"><div class="day-name">Sun</div><div class="day-task hl-orange">🔥 VO₂</div><div class="day-task hl-blue">🚶 15m</div><div class="day-task hl-purple">🧘 10m</div></div>
+          <div class="day-col"><div class="day-name">Mon</div><div class="day-task hl-green">💥 Push</div><div class="day-task hl-blue">🚶 15m</div><div class="day-task hl-purple">🧘 10m</div></div>
+          <div class="day-col"><div class="day-name">Tue</div><div class="day-task hl-green">🔗 Pull</div><div class="day-task hl-blue">🚶 15m</div><div class="day-task hl-purple">🧘 10m</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📅 Weekly Training Log</div>
+          <button class="reset-btn" onclick="resetTrainingLog()">↺ New Week</button>
+        </div>
+        <div id="training-log-grid" class="week-grid"><div class="day-col"><div class="day-name">Wed</div><div class="day-task hl-green" style="opacity:0.4" onclick="toggleTrain(0,'strength')">💥 Push<br>tap</div><div class="day-task hl-blue" style="opacity:0.4" onclick="toggleTrain(0,'walk')">🚶 Walk<br>tap</div><div class="day-task hl-purple" style="opacity:0.4" onclick="toggleTrain(0,'mobility')">🧘 10m<br>tap</div></div><div class="day-col"><div class="day-name">Thu</div><div class="day-task hl-green" style="opacity:0.4" onclick="toggleTrain(1,'strength')">🔗 Pull<br>tap</div><div class="day-task hl-blue" style="opacity:0.4" onclick="toggleTrain(1,'walk')">🚶 Walk<br>tap</div><div class="day-task hl-purple" style="opacity:0.4" onclick="toggleTrain(1,'mobility')">🧘 10m<br>tap</div></div><div class="day-col"><div class="day-name">Fri</div><div class="day-task hl-orange" style="opacity:0.4" onclick="toggleTrain(2,'strength')">🤝 Full Body<br>tap</div><div class="day-task hl-blue" style="opacity:0.4" onclick="toggleTrain(2,'walk')">🚶 Walk<br>tap</div><div class="day-task hl-purple" style="opacity:0.4" onclick="toggleTrain(2,'mobility')">🧘 10m<br>tap</div></div><div class="day-col"><div class="day-name">Sat</div><div class="day-task " style="opacity:0.4" onclick="toggleTrain(3,'strength')">😴 Rest<br>tap</div><div class="day-task hl-blue" style="opacity:0.4" onclick="toggleTrain(3,'walk')">🚶 Walk<br>tap</div><div class="day-task hl-purple" style="opacity:0.4" onclick="toggleTrain(3,'mobility')">🧘 30m<br>tap</div></div><div class="day-col"><div class="day-name">Sun</div><div class="day-task hl-orange" style="opacity:0.4" onclick="toggleTrain(4,'strength')">🔥 VO₂ Max<br>tap</div><div class="day-task hl-blue" style="opacity:0.4" onclick="toggleTrain(4,'walk')">🚶 Walk<br>tap</div><div class="day-task hl-purple" style="opacity:0.4" onclick="toggleTrain(4,'mobility')">🧘 10m<br>tap</div></div><div class="day-col"><div class="day-name">Mon</div><div class="day-task hl-green" style="opacity:0.4" onclick="toggleTrain(5,'strength')">💥 Push<br>tap</div><div class="day-task hl-blue" style="opacity:0.4" onclick="toggleTrain(5,'walk')">🚶 Walk<br>tap</div><div class="day-task hl-purple" style="opacity:0.4" onclick="toggleTrain(5,'mobility')">🧘 10m<br>tap</div></div><div class="day-col"><div class="day-name">Tue</div><div class="day-task hl-green" style="opacity:0.4" onclick="toggleTrain(6,'strength')">🔗 Pull<br>tap</div><div class="day-task hl-blue" style="opacity:0.4" onclick="toggleTrain(6,'walk')">🚶 Walk<br>tap</div><div class="day-task hl-purple" style="opacity:0.4" onclick="toggleTrain(6,'mobility')">🧘 10m<br>tap</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">🏋️ Workout Builder</div>
           </div>
-          <div id="workout-exercises"><div class="exercise-block">
-      <div class="exercise-name">
-        <span>DB Chest Press (Floor)</span>
-        <div style="display:flex;gap:6px;align-items:center">
-          
-          <button onclick="removeExercise(0)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:2px">✕</button>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">
+            <button class="reset-btn" id="wb-tab-push" onclick="wbShowDay('push')" style="border-color: rgba(200, 255, 71, 0.4); color: var(--accent);">Push</button>
+            <button class="reset-btn" id="wb-tab-pull" onclick="wbShowDay('pull')">Pull</button>
+            <button class="reset-btn" id="wb-tab-full" onclick="wbShowDay('full')">Full</button>
+            <button class="reset-btn" id="wb-tab-vo2" onclick="wbShowDay('vo2')">VO₂</button>
+          </div>
         </div>
-      </div>
-      <div class="prev-best">No history yet</div>
-      <div style="display:grid;grid-template-columns:28px 1fr 1fr auto;gap:8px;margin-bottom:6px">
-        <div style="font-size:9px;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace">SET</div>
-        <div style="font-size:9px;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace">LBS</div>
-        <div style="font-size:9px;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace">REPS</div>
-        <div style="width:32px"></div>
-      </div>
-      <div id="sets-0"><div class="set-row">
-        <div class="set-num">1</div>
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(0,0,'weight',this.value)" inputmode="decimal">
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(0,0,'reps',this.value)" inputmode="numeric">
-        <button class="set-done-btn" onclick="toggleSetDone(0,0)">○</button>
-      </div><div class="set-row">
-        <div class="set-num">2</div>
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(0,1,'weight',this.value)" inputmode="decimal">
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(0,1,'reps',this.value)" inputmode="numeric">
-        <button class="set-done-btn" onclick="toggleSetDone(0,1)">○</button>
-      </div><div class="set-row">
-        <div class="set-num">3</div>
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(0,2,'weight',this.value)" inputmode="decimal">
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(0,2,'reps',this.value)" inputmode="numeric">
-        <button class="set-done-btn" onclick="toggleSetDone(0,2)">○</button>
-      </div></div>
-      <button class="add-set-btn" onclick="addSet(0)">+ Add Set</button>
-    </div><div class="exercise-block">
-      <div class="exercise-name">
-        <span>DB Fly (Floor)</span>
-        <div style="display:flex;gap:6px;align-items:center">
-          
-          <button onclick="removeExercise(1)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:2px">✕</button>
-        </div>
-      </div>
-      <div class="prev-best">No history yet</div>
-      <div style="display:grid;grid-template-columns:28px 1fr 1fr auto;gap:8px;margin-bottom:6px">
-        <div style="font-size:9px;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace">SET</div>
-        <div style="font-size:9px;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace">LBS</div>
-        <div style="font-size:9px;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace">REPS</div>
-        <div style="width:32px"></div>
-      </div>
-      <div id="sets-1"><div class="set-row">
-        <div class="set-num">1</div>
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(1,0,'weight',this.value)" inputmode="decimal">
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(1,0,'reps',this.value)" inputmode="numeric">
-        <button class="set-done-btn" onclick="toggleSetDone(1,0)">○</button>
-      </div><div class="set-row">
-        <div class="set-num">2</div>
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(1,1,'weight',this.value)" inputmode="decimal">
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(1,1,'reps',this.value)" inputmode="numeric">
-        <button class="set-done-btn" onclick="toggleSetDone(1,1)">○</button>
-      </div><div class="set-row">
-        <div class="set-num">3</div>
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(1,2,'weight',this.value)" inputmode="decimal">
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(1,2,'reps',this.value)" inputmode="numeric">
-        <button class="set-done-btn" onclick="toggleSetDone(1,2)">○</button>
-      </div></div>
-      <button class="add-set-btn" onclick="addSet(1)">+ Add Set</button>
-    </div><div class="exercise-block">
-      <div class="exercise-name">
-        <span>DB Shoulder Press</span>
-        <div style="display:flex;gap:6px;align-items:center">
-          
-          <button onclick="removeExercise(2)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:2px">✕</button>
-        </div>
-      </div>
-      <div class="prev-best">No history yet</div>
-      <div style="display:grid;grid-template-columns:28px 1fr 1fr auto;gap:8px;margin-bottom:6px">
-        <div style="font-size:9px;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace">SET</div>
-        <div style="font-size:9px;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace">LBS</div>
-        <div style="font-size:9px;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace">REPS</div>
-        <div style="width:32px"></div>
-      </div>
-      <div id="sets-2"><div class="set-row">
-        <div class="set-num">1</div>
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(2,0,'weight',this.value)" inputmode="decimal">
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(2,0,'reps',this.value)" inputmode="numeric">
-        <button class="set-done-btn" onclick="toggleSetDone(2,0)">○</button>
-      </div><div class="set-row">
-        <div class="set-num">2</div>
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(2,1,'weight',this.value)" inputmode="decimal">
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(2,1,'reps',this.value)" inputmode="numeric">
-        <button class="set-done-btn" onclick="toggleSetDone(2,1)">○</button>
-      </div><div class="set-row">
-        <div class="set-num">3</div>
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(2,2,'weight',this.value)" inputmode="decimal">
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(2,2,'reps',this.value)" inputmode="numeric">
-        <button class="set-done-btn" onclick="toggleSetDone(2,2)">○</button>
-      </div></div>
-      <button class="add-set-btn" onclick="addSet(2)">+ Add Set</button>
-    </div><div class="exercise-block">
-      <div class="exercise-name">
-        <span>DB Lateral Raise</span>
-        <div style="display:flex;gap:6px;align-items:center">
-          
-          <button onclick="removeExercise(3)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:2px">✕</button>
-        </div>
-      </div>
-      <div class="prev-best">No history yet</div>
-      <div style="display:grid;grid-template-columns:28px 1fr 1fr auto;gap:8px;margin-bottom:6px">
-        <div style="font-size:9px;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace">SET</div>
-        <div style="font-size:9px;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace">LBS</div>
-        <div style="font-size:9px;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace">REPS</div>
-        <div style="width:32px"></div>
-      </div>
-      <div id="sets-3"><div class="set-row">
-        <div class="set-num">1</div>
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(3,0,'weight',this.value)" inputmode="decimal">
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(3,0,'reps',this.value)" inputmode="numeric">
-        <button class="set-done-btn" onclick="toggleSetDone(3,0)">○</button>
-      </div><div class="set-row">
-        <div class="set-num">2</div>
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(3,1,'weight',this.value)" inputmode="decimal">
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(3,1,'reps',this.value)" inputmode="numeric">
-        <button class="set-done-btn" onclick="toggleSetDone(3,1)">○</button>
-      </div><div class="set-row">
-        <div class="set-num">3</div>
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(3,2,'weight',this.value)" inputmode="decimal">
-        <input class="set-input" type="number" placeholder="-" value="" onchange="updateSet(3,2,'reps',this.value)" inputmode="numeric">
-        <button class="set-done-btn" onclick="toggleSetDone(3,2)">○</button>
-      </div></div>
-      <button class="add-set-btn" onclick="addSet(3)">+ Add Set</button>
-    </div></div>
-          <button onclick="openAddExercise()" style="width:100%;margin-top:10px;background:var(--surface2);border:1px dashed var(--border);border-radius:8px;padding:10px;font-size:12px;color:var(--muted);cursor:pointer;font-family:'Syne',sans-serif">+ Add Exercise</button>
-        </div>
-      </div>
-      <div>
-        <div class="card">
-          <div class="card-header"><div class="card-title">📅 This Week</div><div class="badge badge-green" id="week-vol-badge">Vol: 0k lbs</div></div>
-          <div id="week-summary"><div class="week-day-row"><div class="week-day-dot" style="background:var(--border)"></div><div class="week-day-name">Invalid Date</div><div class="week-day-type">—</div><div class="week-day-vol"></div></div><div class="week-day-row"><div class="week-day-dot" style="background:var(--accent)"></div><div class="week-day-name">Invalid Date</div><div class="week-day-type">💥 Push</div><div class="week-day-vol"></div></div><div class="week-day-row"><div class="week-day-dot" style="background:var(--border)"></div><div class="week-day-name">Invalid Date</div><div class="week-day-type">—</div><div class="week-day-vol"></div></div><div class="week-day-row"><div class="week-day-dot" style="background:var(--border)"></div><div class="week-day-name">Invalid Date</div><div class="week-day-type">—</div><div class="week-day-vol"></div></div><div class="week-day-row"><div class="week-day-dot" style="background:var(--border)"></div><div class="week-day-name">Invalid Date</div><div class="week-day-type">—</div><div class="week-day-vol"></div></div><div class="week-day-row"><div class="week-day-dot" style="background:var(--border)"></div><div class="week-day-name">Invalid Date</div><div class="week-day-type">—</div><div class="week-day-vol"></div></div><div class="week-day-row"><div class="week-day-dot" style="background:var(--border)"></div><div class="week-day-name">Invalid Date</div><div class="week-day-type">—</div><div class="week-day-vol"></div></div></div>
-        </div>
-        <div class="card">
-          <div class="card-header"><div class="card-title">💊 Daily Stack</div><div class="badge badge-green">Verified</div></div>
-          <div class="protocol"><div class="protocol-title">Morning</div><div class="protocol-body">5g Creatine · Protein shake · Vitamin C · SPF · Blues pills · Waterpik</div></div>
-          <div class="protocol"><div class="protocol-title">Evening</div><div class="protocol-body">Vitamins @ 8:30pm · Blue medicine · Retinol or Hyaluronic · PM Lotion · Floss</div></div>
-          <div class="protocol"><div class="protocol-title">Zone 2 Target</div><div class="protocol-body">100 min/week. Daily 15 min dog walk counts.</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BODYWEIGHT -->
-  <div class="sub-panel" id="sub-bw">
-    <div class="card">
-      <div class="card-header"><div class="card-title">⚖️ Bodyweight Log</div><div class="badge badge-blue">Daily</div></div>
-      <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px">
-        <input id="bw-input" type="number" class="add-input" placeholder="lbs e.g. 185" style="max-width:160px" step="0.1">
-        <button class="add-btn" onclick="logBodyweight()">Log Today</button>
-        <span id="bw-today-val" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)"></span>
-      </div>
-      <canvas id="bw-chart" style="width:100%;max-height:220px"></canvas>
-      <div id="bw-stats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px"><div style="color:var(--muted);font-size:12px;text-align:center;padding:10px;grid-column:1/-1">Log your first weigh-in above</div></div>
-    </div>
-  </div>
-
-  <!-- PROGRESS CHARTS -->
-  <div class="sub-panel" id="sub-progress">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">📈 Volume Over Time</div>
-        <div class="badge badge-yellow">Weekly</div>
-      </div>
-      <canvas id="vol-chart" style="width:100%;max-height:220px"></canvas>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">💪 Estimated 1RM</div>
-        <select id="orm-exercise-select" onchange="renderOrmChart()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);font-family:'Syne',sans-serif;font-size:11px;padding:5px 8px;border-radius:6px;outline:none"></select>
-      </div>
-      <canvas id="orm-chart" style="width:100%;max-height:220px"></canvas>
-    </div>
-    <div class="card">
-      <div class="card-header"><div class="card-title">🏆 Personal Records</div><div class="badge badge-purple">All Time</div></div>
-      <div id="pr-list"></div>
-    </div>
-  </div>
-
-  <!-- STACK -->
-  <div class="sub-panel" id="sub-stack">
-    <div class="two-col">
-      <div class="card">
-        <div class="card-header"><div class="card-title">🧬 Longevity Notes</div><div class="badge badge-blue">Attia</div></div>
-        <div class="upgrade"><div class="upgrade-title">Muscle = Longevity Insurance</div><div class="upgrade-body">Muscle is the organ of longevity. Strength 3–4x/week protects against metabolic disease, injury, cognitive decline.</div></div>
-        <div class="upgrade"><div class="upgrade-title">VO₂ Max = #1 Health Metric</div><div class="upgrade-body">Higher VO₂ max = lower all-cause mortality. One day/week of hard intervals dramatically improves it.</div></div>
-        <div class="upgrade"><div class="upgrade-title">Sleep is the Multiplier</div><div class="upgrade-body">Every protocol above works 2x better with good sleep. Room at 65–68°F, screens off, consistent bedtime.</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header"><div class="card-title">🏋️ Your Exercise Library</div></div>
-        <div id="exercise-library-list"></div>
+        <div id="wb-day-label" style="font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:10px;font-family:'JetBrains Mono',monospace">💥 Push Day</div>
+        <div id="wb-exercise-list"><div class="wb-exercise"><div class="wb-ex-header">
+      <span class="wb-ex-name">DB Bench Press</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)">0/2</span>
+      <button class="wb-add-set" onclick="wbAddSet('push',0)">+ Set</button>
+      <button class="wb-del" onclick="wbDelExercise('push',0)">✕</button></div><table class="wb-sets-table"><thead><tr><th>Set</th><th>lbs</th><th>Reps</th><th>Done</th><th></th></tr></thead><tbody><tr>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">1</td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',0,0,'weight',this.value)" onfocus="if(this.value==='BW')this.value=''" onblur="if(this.value==='')this.value=''"></td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',0,0,'reps',this.value)"></td>
+        <td><div class="wb-set-done" onclick="wbToggleSet('push',0,0)"></div></td>
+        <td><button class="wb-set-del-row" onclick="wbRemoveSet('push',0,0)" title="Remove set">✕</button></td></tr><tr>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">2</td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',0,1,'weight',this.value)" onfocus="if(this.value==='BW')this.value=''" onblur="if(this.value==='')this.value=''"></td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',0,1,'reps',this.value)"></td>
+        <td><div class="wb-set-done" onclick="wbToggleSet('push',0,1)"></div></td>
+        <td><button class="wb-set-del-row" onclick="wbRemoveSet('push',0,1)" title="Remove set">✕</button></td></tr></tbody></table></div><div class="wb-exercise"><div class="wb-ex-header">
+      <span class="wb-ex-name">DB Shoulder Press</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)">0/2</span>
+      <button class="wb-add-set" onclick="wbAddSet('push',1)">+ Set</button>
+      <button class="wb-del" onclick="wbDelExercise('push',1)">✕</button></div><table class="wb-sets-table"><thead><tr><th>Set</th><th>lbs</th><th>Reps</th><th>Done</th><th></th></tr></thead><tbody><tr>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">1</td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',1,0,'weight',this.value)" onfocus="if(this.value==='BW')this.value=''" onblur="if(this.value==='')this.value=''"></td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',1,0,'reps',this.value)"></td>
+        <td><div class="wb-set-done" onclick="wbToggleSet('push',1,0)"></div></td>
+        <td><button class="wb-set-del-row" onclick="wbRemoveSet('push',1,0)" title="Remove set">✕</button></td></tr><tr>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">2</td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',1,1,'weight',this.value)" onfocus="if(this.value==='BW')this.value=''" onblur="if(this.value==='')this.value=''"></td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',1,1,'reps',this.value)"></td>
+        <td><div class="wb-set-done" onclick="wbToggleSet('push',1,1)"></div></td>
+        <td><button class="wb-set-del-row" onclick="wbRemoveSet('push',1,1)" title="Remove set">✕</button></td></tr></tbody></table></div><div class="wb-exercise"><div class="wb-ex-header">
+      <span class="wb-ex-name">DB Lateral Raises</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)">0/2</span>
+      <button class="wb-add-set" onclick="wbAddSet('push',2)">+ Set</button>
+      <button class="wb-del" onclick="wbDelExercise('push',2)">✕</button></div><table class="wb-sets-table"><thead><tr><th>Set</th><th>lbs</th><th>Reps</th><th>Done</th><th></th></tr></thead><tbody><tr>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">1</td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',2,0,'weight',this.value)" onfocus="if(this.value==='BW')this.value=''" onblur="if(this.value==='')this.value=''"></td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',2,0,'reps',this.value)"></td>
+        <td><div class="wb-set-done" onclick="wbToggleSet('push',2,0)"></div></td>
+        <td><button class="wb-set-del-row" onclick="wbRemoveSet('push',2,0)" title="Remove set">✕</button></td></tr><tr>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">2</td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',2,1,'weight',this.value)" onfocus="if(this.value==='BW')this.value=''" onblur="if(this.value==='')this.value=''"></td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',2,1,'reps',this.value)"></td>
+        <td><div class="wb-set-done" onclick="wbToggleSet('push',2,1)"></div></td>
+        <td><button class="wb-set-del-row" onclick="wbRemoveSet('push',2,1)" title="Remove set">✕</button></td></tr></tbody></table></div><div class="wb-exercise"><div class="wb-ex-header">
+      <span class="wb-ex-name">DB Chest Fly</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)">0/2</span>
+      <button class="wb-add-set" onclick="wbAddSet('push',3)">+ Set</button>
+      <button class="wb-del" onclick="wbDelExercise('push',3)">✕</button></div><table class="wb-sets-table"><thead><tr><th>Set</th><th>lbs</th><th>Reps</th><th>Done</th><th></th></tr></thead><tbody><tr>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">1</td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',3,0,'weight',this.value)" onfocus="if(this.value==='BW')this.value=''" onblur="if(this.value==='')this.value=''"></td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',3,0,'reps',this.value)"></td>
+        <td><div class="wb-set-done" onclick="wbToggleSet('push',3,0)"></div></td>
+        <td><button class="wb-set-del-row" onclick="wbRemoveSet('push',3,0)" title="Remove set">✕</button></td></tr><tr>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">2</td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',3,1,'weight',this.value)" onfocus="if(this.value==='BW')this.value=''" onblur="if(this.value==='')this.value=''"></td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',3,1,'reps',this.value)"></td>
+        <td><div class="wb-set-done" onclick="wbToggleSet('push',3,1)"></div></td>
+        <td><button class="wb-set-del-row" onclick="wbRemoveSet('push',3,1)" title="Remove set">✕</button></td></tr></tbody></table></div><div class="wb-exercise"><div class="wb-ex-header">
+      <span class="wb-ex-name">Push-Ups</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)">0/2</span>
+      <button class="wb-add-set" onclick="wbAddSet('push',4)">+ Set</button>
+      <button class="wb-del" onclick="wbDelExercise('push',4)">✕</button></div><table class="wb-sets-table"><thead><tr><th>Set</th><th>Type</th><th>Reps</th><th>Done</th><th></th></tr></thead><tbody><tr>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">1</td>
+        <td><input class="wb-input-sm bw" type="text" value="BW" placeholder="BW" min="0" onchange="wbSaveSet('push',4,0,'weight',this.value)" onfocus="if(this.value==='BW')this.value=''" onblur="if(this.value==='')this.value='BW'"></td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',4,0,'reps',this.value)"></td>
+        <td><div class="wb-set-done" onclick="wbToggleSet('push',4,0)"></div></td>
+        <td><button class="wb-set-del-row" onclick="wbRemoveSet('push',4,0)" title="Remove set">✕</button></td></tr><tr>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">2</td>
+        <td><input class="wb-input-sm bw" type="text" value="BW" placeholder="BW" min="0" onchange="wbSaveSet('push',4,1,'weight',this.value)" onfocus="if(this.value==='BW')this.value=''" onblur="if(this.value==='')this.value='BW'"></td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',4,1,'reps',this.value)"></td>
+        <td><div class="wb-set-done" onclick="wbToggleSet('push',4,1)"></div></td>
+        <td><button class="wb-set-del-row" onclick="wbRemoveSet('push',4,1)" title="Remove set">✕</button></td></tr></tbody></table></div><div class="wb-exercise"><div class="wb-ex-header">
+      <span class="wb-ex-name">Tricep Dips</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)">0/2</span>
+      <button class="wb-add-set" onclick="wbAddSet('push',5)">+ Set</button>
+      <button class="wb-del" onclick="wbDelExercise('push',5)">✕</button></div><table class="wb-sets-table"><thead><tr><th>Set</th><th>Type</th><th>Reps</th><th>Done</th><th></th></tr></thead><tbody><tr>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">1</td>
+        <td><input class="wb-input-sm bw" type="text" value="BW" placeholder="BW" min="0" onchange="wbSaveSet('push',5,0,'weight',this.value)" onfocus="if(this.value==='BW')this.value=''" onblur="if(this.value==='')this.value='BW'"></td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',5,0,'reps',this.value)"></td>
+        <td><div class="wb-set-done" onclick="wbToggleSet('push',5,0)"></div></td>
+        <td><button class="wb-set-del-row" onclick="wbRemoveSet('push',5,0)" title="Remove set">✕</button></td></tr><tr>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">2</td>
+        <td><input class="wb-input-sm bw" type="text" value="BW" placeholder="BW" min="0" onchange="wbSaveSet('push',5,1,'weight',this.value)" onfocus="if(this.value==='BW')this.value=''" onblur="if(this.value==='')this.value='BW'"></td>
+        <td><input class="wb-input-sm" type="number" value="" placeholder="—" min="0" onchange="wbSaveSet('push',5,1,'reps',this.value)"></td>
+        <td><div class="wb-set-done" onclick="wbToggleSet('push',5,1)"></div></td>
+        <td><button class="wb-set-del-row" onclick="wbRemoveSet('push',5,1)" title="Remove set">✕</button></td></tr></tbody></table></div></div>
         <div class="add-row" style="margin-top:10px">
-          <input class="add-input" id="new-exercise-input" placeholder="Add exercise...">
-          <button class="add-btn" onclick="addExerciseToLibrary()">+ Add</button>
+          <input class="add-input" id="wb-new-name" placeholder="Custom exercise..." style="flex:2">
+          <button class="add-btn" onclick="wbAddExercise()">+ Add</button>
+          <button class="reset-btn" onclick="openExLib()" style="border-color:rgba(71,212,255,.4);color:var(--accent2);white-space:nowrap">📚 Library</button>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- ADD EXERCISE MODAL -->
-  <div class="modal-bg" id="add-exercise-modal">
-    <div class="modal">
-      <div class="modal-title">➕ Add Exercise to Session</div>
-      <div id="exercise-picker-list" style="max-height:300px;overflow-y:auto;margin-bottom:12px"></div>
-      <div class="modal-btns">
-        <button class="btn-secondary" onclick="closeAddExercise()">Cancel</button>
+    <div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">⏱️ Rest Timer</div><div class="badge badge-green">Weightlifting</div></div>
+        <div id="rt-display" style="font-family:'JetBrains Mono',monospace;font-size:52px;font-weight:700;color:var(--accent);text-align:center;padding:14px 0 8px;letter-spacing:3px;line-height:1">2:00</div>
+        <div class="progress-bar" style="margin-bottom:14px;height:6px"><div class="rp-fill" id="rt-prog" style="width:100%;background:var(--accent)"></div></div>
+        <div style="display:flex;gap:8px;justify-content:center;margin-bottom:12px">
+          <button class="reset-btn" id="rt-p60" onclick="restPreset(60)">1:00</button>
+          <button class="reset-btn" id="rt-p90" onclick="restPreset(90)">1:30</button>
+          <button class="reset-btn rt-preset-active" id="rt-p120" onclick="restPreset(120)" style="border-color:rgba(200,255,71,.4);color:var(--accent)">2:00</button>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:center">
+          <button class="add-btn" id="rt-start-btn" onclick="toggleRestTimer()" style="min-width:90px">▶ Start</button>
+          <button class="reset-btn" onclick="resetRestTimer()">↺ Reset</button>
+        </div>
       </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">💊 Daily Stack</div><div class="badge badge-green">Verified</div></div>
+        <div class="protocol"><div class="protocol-title">Morning</div><div class="protocol-body">5g Creatine · Protein shake · Vitamin C · SPF · Blues pills · Waterpik</div></div>
+        <div class="protocol"><div class="protocol-title">Evening</div><div class="protocol-body">Vitamins @ 8:30pm · Blue medicine · Retinol or Hyaluronic · PM Lotion · Floss</div></div>
+        <div class="protocol"><div class="protocol-title">Zone 2 Target</div><div class="protocol-body">100 min/week minimum. Daily 15 min dog walk counts. Brisk walking pace.</div></div>
+      </div>
+
     </div>
   </div>
-
 </div>
 
 <!-- ══════════ SCOOP SQUAD ══════════ -->
@@ -656,7 +561,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">📋 Daily Workflow</div></div>
-        <ul class="simple-list" id="scoop-daily-list"><li class=""><div class="s-check" onclick="toggleSList('scoop-daily',0)"></div><span class="s-label" onclick="editSListItem(this,'scoop-daily',0)">📱 Check client messages + invoicing</span><button class="s-del" onclick="deleteSList('scoop-daily',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-daily',1)"></div><span class="s-label" onclick="editSListItem(this,'scoop-daily',1)">📣 Post 1 flyer, social post, or handout</span><button class="s-del" onclick="deleteSList('scoop-daily',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-daily',2)"></div><span class="s-label" onclick="editSListItem(this,'scoop-daily',2)">📧 Check emails</span><button class="s-del" onclick="deleteSList('scoop-daily',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-daily',3)"></div><span class="s-label" onclick="editSListItem(this,'scoop-daily',3)">💰 Review income, expenses, mileage</span><button class="s-del" onclick="deleteSList('scoop-daily',3)">✕</button></li></ul>
+        <ul class="simple-list" id="scoop-daily-list"><li class=""><div class="s-check" onclick="toggleSList('scoop-daily',0)"></div><span class="s-label">📱 Check client messages + invoicing</span><button class="s-del" onclick="deleteSList('scoop-daily',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-daily',1)"></div><span class="s-label">📣 Post 1 flyer, social post, or handout</span><button class="s-del" onclick="deleteSList('scoop-daily',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-daily',2)"></div><span class="s-label">📧 Check emails</span><button class="s-del" onclick="deleteSList('scoop-daily',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-daily',3)"></div><span class="s-label">💰 Review income, expenses, mileage</span><button class="s-del" onclick="deleteSList('scoop-daily',3)">✕</button></li></ul>
         <div class="add-row">
           <input class="add-input" id="scoop-daily-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addSimpleItem('scoop-daily')">
           <button class="add-btn" onclick="addSimpleItem('scoop-daily')">+ Add</button>
@@ -667,7 +572,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           <div class="card-title">📅 This Week</div>
           <button class="reset-btn" onclick="resetScoopWeek()">↺ Reset</button>
         </div>
-        <ul class="simple-list" id="scoop-week-list"></ul>
+        <ul class="simple-list" id="scoop-week-list"><li class=""><div class="s-check" onclick="toggleSList('scoop-week',0)"></div><span class="s-label">Order car magnet</span><button class="s-del" onclick="deleteSList('scoop-week',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-week',1)"></div><span class="s-label">Design + print door hangers</span><button class="s-del" onclick="deleteSList('scoop-week',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-week',2)"></div><span class="s-label">Blue Tennis Balls (branding)</span><button class="s-del" onclick="deleteSList('scoop-week',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-week',3)"></div><span class="s-label">Start saving for branded polo</span><button class="s-del" onclick="deleteSList('scoop-week',3)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('scoop-week',4)"></div><span class="s-label">Set up Google My Business (FREE lead gen)</span><button class="s-del" onclick="deleteSList('scoop-week',4)">✕</button></li></ul>
         <div class="add-row">
           <input class="add-input" id="scoop-week-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addSimpleItem('scoop-week')">
           <button class="add-btn" onclick="addSimpleItem('scoop-week')">+ Add</button>
@@ -675,17 +580,11 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">📝 Scoop To-Do List</div></div>
-        <div id="todo-scoop-wrap"><ul class="simple-list" id="todo-scoop-list"><li class=""><div class="s-check" onclick="toggleTodoItem('scoop',0)"></div><span class="s-label" onclick="editTodoItem(this,'scoop',0)">Order car magnet</span><button class="s-del" onclick="deleteTodoItem('scoop',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('scoop',1)"></div><span class="s-label" onclick="editTodoItem(this,'scoop',1)">Design + print door hangers</span><button class="s-del" onclick="deleteTodoItem('scoop',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('scoop',2)"></div><span class="s-label" onclick="editTodoItem(this,'scoop',2)">Blue Tennis Balls</span><button class="s-del" onclick="deleteTodoItem('scoop',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('scoop',3)"></div><span class="s-label" onclick="editTodoItem(this,'scoop',3)">Set up Google My Business</span><button class="s-del" onclick="deleteTodoItem('scoop',3)">✕</button></li></ul><div class="add-row"><input class="add-input" id="todo-scoop-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addTodoItem('scoop')"><button class="add-btn" onclick="addTodoItem('scoop')">+ Add</button></div></div>
+        <div id="todo-scoop-wrap"><ul class="simple-list" id="todo-scoop-list"><li class=""><div class="s-check" onclick="toggleTodoItem('scoop',0)"></div><span class="s-label">Order car magnet</span><button class="s-del" onclick="deleteTodoItem('scoop',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('scoop',1)"></div><span class="s-label">Design + print door hangers</span><button class="s-del" onclick="deleteTodoItem('scoop',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('scoop',2)"></div><span class="s-label">Blue Tennis Balls</span><button class="s-del" onclick="deleteTodoItem('scoop',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('scoop',3)"></div><span class="s-label">Set up Google My Business</span><button class="s-del" onclick="deleteTodoItem('scoop',3)">✕</button></li></ul><div class="add-row"><input class="add-input" id="todo-scoop-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addTodoItem('scoop')"><button class="add-btn" onclick="addTodoItem('scoop')">+ Add</button></div></div>
       </div>
     </div>
     <div>
-      <div class="card">
-        <div class="card-header"><div class="card-title">🚀 Growth Playbook</div><div class="badge badge-orange">Hormozi</div></div>
-        <div class="upgrade"><div class="upgrade-title">Phase 1: 3 → 10 Clients</div><div class="upgrade-body">Door-to-door in neighborhoods where you already scoop. Hand-written notes mentioning nearby clients. Movie in the Park mailer for spring.</div></div>
-        <div class="upgrade"><div class="upgrade-title">Phase 2: 10 → 20 Clients</div><div class="upgrade-body">Referral program: every client who refers someone gets a free scoop week. Partner with local vets and groomers.</div></div>
-        <div class="upgrade"><div class="upgrade-title">Phase 3: Price for Value</div><div class="upgrade-body">At 20 clients, raise rates 10–15% for new clients. Upsell: "premium weekly" vs standard biweekly.</div></div>
-        <div class="upgrade"><div class="upgrade-title">🧠 Volume Solves Rejection</div><div class="upgrade-body">1 in 10 converts = volume problem, not rejection problem. Drop 100 hangers. Math takes care of itself.</div></div>
-      </div>
+
       <div class="card">
         <div class="card-header"><div class="card-title">💡 Idea Bank</div></div>
         <div id="scoop-ideas-list"><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">Referral program for existing clients</span><button class="idea-del" onclick="deleteScoopIdea(0)">✕</button></div><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">Partner with local vets, groomers, pet shops</span><button class="idea-del" onclick="deleteScoopIdea(1)">✕</button></div><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">Movie in the Park (spring) — mailer tie-in</span><button class="idea-del" onclick="deleteScoopIdea(2)">✕</button></div><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">Dog birthday treats for client pets</span><button class="idea-del" onclick="deleteScoopIdea(3)">✕</button></div><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">Flowers/card for clients with deceased dogs</span><button class="idea-del" onclick="deleteScoopIdea(4)">✕</button></div><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">Hand-written notes — mention address + nearby clients</span><button class="idea-del" onclick="deleteScoopIdea(5)">✕</button></div><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">Google My Business profile (FREE inbound leads)</span><button class="idea-del" onclick="deleteScoopIdea(6)">✕</button></div><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">"Account in progress" sign for active job sites</span><button class="idea-del" onclick="deleteScoopIdea(7)">✕</button></div><div class="idea-bank-item"><div class="idea-dot"></div><span style="flex:1">Texts for client Stan</span><button class="idea-del" onclick="deleteScoopIdea(8)">✕</button></div></div>
@@ -714,16 +613,16 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           <div class="rp-meta"><span class="rp-label">Shift Progress</span><span class="rp-val" id="sbshift-val">0/10</span></div>
           <div class="rp-bar"><div class="rp-fill" id="sbshift-fill" style="width:0%"></div></div>
         </div>
-        <ul class="routine-list" id="sbshift-list"><li class="routine-item" draggable="true" data-idx="0"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',0)"></div><span class="r-text" onclick="editRoutineItem(this,'sbshift',0)">🏢 Walk Reno Hub first — set the tone</span><span class="r-sci">Flagship</span><button class="r-del" onclick="deleteRoutineItem('sbshift',0)">✕</button></li><li class="routine-item" draggable="true" data-idx="1"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',1)"></div><span class="r-text" onclick="editRoutineItem(this,'sbshift',1)">📞 Check in with Sparks supervisor</span><span class="r-sci">Sparks</span><button class="r-del" onclick="deleteRoutineItem('sbshift',1)">✕</button></li><li class="routine-item" draggable="true" data-idx="2"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',2)"></div><span class="r-text" onclick="editRoutineItem(this,'sbshift',2)">📞 Check in with Wendover lead</span><span class="r-sci">Wendover</span><button class="r-del" onclick="deleteRoutineItem('sbshift',2)">✕</button></li><li class="routine-item" draggable="true" data-idx="3"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',3)"></div><span class="r-text" onclick="editRoutineItem(this,'sbshift',3)">🐎 Verify Racebook boards accurate across all locations</span><span class="r-sci">Daily</span><button class="r-del" onclick="deleteRoutineItem('sbshift',3)">✕</button></li><li class="routine-item" draggable="true" data-idx="4"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',4)"></div><span class="r-text" onclick="editRoutineItem(this,'sbshift',4)">📋 Review overnight issues or guest complaints</span><span class="r-sci">Daily</span><button class="r-del" onclick="deleteRoutineItem('sbshift',4)">✕</button></li><li class="routine-item" draggable="true" data-idx="5"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',5)"></div><span class="r-text" onclick="editRoutineItem(this,'sbshift',5)">🎰 Scan casino floor — players to invite to the book?</span><span class="r-sci">Conversion</span><button class="r-del" onclick="deleteRoutineItem('sbshift',5)">✕</button></li><li class="routine-item" draggable="true" data-idx="6"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',6)"></div><span class="r-text" onclick="editRoutineItem(this,'sbshift',6)">👋 Greet at least 3 regulars by name at Reno Hub</span><span class="r-sci">Retention</span><button class="r-del" onclick="deleteRoutineItem('sbshift',6)">✕</button></li><li class="routine-item" draggable="true" data-idx="7"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',7)"></div><span class="r-text" onclick="editRoutineItem(this,'sbshift',7)">🏆 Acknowledge one team win today</span><span class="r-sci">Culture</span><button class="r-del" onclick="deleteRoutineItem('sbshift',7)">✕</button></li><li class="routine-item" draggable="true" data-idx="8"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',8)"></div><span class="r-text" onclick="editRoutineItem(this,'sbshift',8)">💡 Identify one thing to improve before end of shift</span><span class="r-sci">Growth</span><button class="r-del" onclick="deleteRoutineItem('sbshift',8)">✕</button></li><li class="routine-item" draggable="true" data-idx="9"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',9)"></div><span class="r-text" onclick="editRoutineItem(this,'sbshift',9)">📊 End-of-shift check — anything to hand off?</span><span class="r-sci">Ops</span><button class="r-del" onclick="deleteRoutineItem('sbshift',9)">✕</button></li></ul>
+        <ul class="routine-list" id="sbshift-list"><li class="routine-item" draggable="true" data-idx="0"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',0)"></div><span class="r-text">🏢 Walk Reno Hub first — set the tone</span><button class="r-del" onclick="deleteRoutineItem('sbshift',0)">✕</button></li><li class="routine-item" draggable="true" data-idx="1"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',1)"></div><span class="r-text">📞 Check in with Sparks supervisor</span><button class="r-del" onclick="deleteRoutineItem('sbshift',1)">✕</button></li><li class="routine-item" draggable="true" data-idx="2"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',2)"></div><span class="r-text">📞 Check in with Wendover lead</span><button class="r-del" onclick="deleteRoutineItem('sbshift',2)">✕</button></li><li class="routine-item" draggable="true" data-idx="3"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',3)"></div><span class="r-text">🐎 Verify Racebook boards accurate across all locations</span><button class="r-del" onclick="deleteRoutineItem('sbshift',3)">✕</button></li><li class="routine-item" draggable="true" data-idx="4"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',4)"></div><span class="r-text">📋 Review overnight issues or guest complaints</span><button class="r-del" onclick="deleteRoutineItem('sbshift',4)">✕</button></li><li class="routine-item" draggable="true" data-idx="5"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',5)"></div><span class="r-text">🎰 Scan casino floor — players to invite to the book?</span><button class="r-del" onclick="deleteRoutineItem('sbshift',5)">✕</button></li><li class="routine-item" draggable="true" data-idx="6"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',6)"></div><span class="r-text">👋 Greet at least 3 regulars by name at Reno Hub</span><button class="r-del" onclick="deleteRoutineItem('sbshift',6)">✕</button></li><li class="routine-item" draggable="true" data-idx="7"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',7)"></div><span class="r-text">🏆 Acknowledge one team win today</span><button class="r-del" onclick="deleteRoutineItem('sbshift',7)">✕</button></li><li class="routine-item" draggable="true" data-idx="8"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',8)"></div><span class="r-text">💡 Identify one thing to improve before end of shift</span><button class="r-del" onclick="deleteRoutineItem('sbshift',8)">✕</button></li><li class="routine-item" draggable="true" data-idx="9"><span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('sbshift',9)"></div><span class="r-text">📊 End-of-shift check — anything to hand off?</span><button class="r-del" onclick="deleteRoutineItem('sbshift',9)">✕</button></li></ul>
         <div class="add-row">
           <input class="add-input" id="sbshift-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('sbshift')">
           <button class="add-btn" onclick="addRoutineItem('sbshift')">+ Add</button>
         </div>
-        <div class="last-reset" id="sbshift-last-reset">Last reset: 2026-3-10</div>
+        <div class="last-reset" id="sbshift-last-reset">Last reset: 2026-3-13</div>
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">📋 Stay Current</div><div class="badge badge-orange">Nevada Gaming</div></div>
-        <ul class="simple-list" id="sb-current-list"><li class=""><div class="s-check" onclick="toggleSList('sb-current',0)"></div><span class="s-label" onclick="editSListItem(this,'sb-current',0)">Nevada Gaming Control Board — check for regulatory updates</span><button class="s-del" onclick="deleteSList('sb-current',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',1)"></div><span class="s-label" onclick="editSListItem(this,'sb-current',1)">CTR filings current and compliant across all 5 books</span><button class="s-del" onclick="deleteSList('sb-current',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',2)"></div><span class="s-label" onclick="editSListItem(this,'sb-current',2)">SAR log reviewed this week</span><button class="s-del" onclick="deleteSList('sb-current',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',3)"></div><span class="s-label" onclick="editSListItem(this,'sb-current',3)">Staff AML training hours documented</span><button class="s-del" onclick="deleteSList('sb-current',3)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',4)"></div><span class="s-label" onclick="editSListItem(this,'sb-current',4)">House rules posted and consistent across all locations</span><button class="s-del" onclick="deleteSList('sb-current',4)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',5)"></div><span class="s-label" onclick="editSListItem(this,'sb-current',5)">What are Caesars and William Hill running for promos?</span><button class="s-del" onclick="deleteSList('sb-current',5)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',6)"></div><span class="s-label" onclick="editSListItem(this,'sb-current',6)">Utah drive market — any events that spike Wendover traffic?</span><button class="s-del" onclick="deleteSList('sb-current',6)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',7)"></div><span class="s-label" onclick="editSListItem(this,'sb-current',7)">Racebook regulars check — any at-risk of reduced visits?</span><button class="s-del" onclick="deleteSList('sb-current',7)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',8)"></div><span class="s-label" onclick="editSListItem(this,'sb-current',8)">Upcoming major events mapped out</span><button class="s-del" onclick="deleteSList('sb-current',8)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',9)"></div><span class="s-label" onclick="editSListItem(this,'sb-current',9)">Wendover books — seasonal occupancy trends reviewed?</span><button class="s-del" onclick="deleteSList('sb-current',9)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',10)"></div><span class="s-label" onclick="editSListItem(this,'sb-current',10)">Sparks book — local community events to partner around?</span><button class="s-del" onclick="deleteSList('sb-current',10)">✕</button></li></ul>
+        <ul class="simple-list" id="sb-current-list"><li class=""><div class="s-check" onclick="toggleSList('sb-current',0)"></div><span class="s-label">Nevada Gaming Control Board — check for regulatory updates</span><button class="s-del" onclick="deleteSList('sb-current',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',1)"></div><span class="s-label">CTR filings current and compliant across all 5 books</span><button class="s-del" onclick="deleteSList('sb-current',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',2)"></div><span class="s-label">SAR log reviewed this week</span><button class="s-del" onclick="deleteSList('sb-current',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',3)"></div><span class="s-label">Staff AML training hours documented</span><button class="s-del" onclick="deleteSList('sb-current',3)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',4)"></div><span class="s-label">House rules posted and consistent across all locations</span><button class="s-del" onclick="deleteSList('sb-current',4)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',5)"></div><span class="s-label">What are Caesars and William Hill running for promos?</span><button class="s-del" onclick="deleteSList('sb-current',5)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',6)"></div><span class="s-label">Utah drive market — any events that spike Wendover traffic?</span><button class="s-del" onclick="deleteSList('sb-current',6)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',7)"></div><span class="s-label">Racebook regulars check — any at-risk of reduced visits?</span><button class="s-del" onclick="deleteSList('sb-current',7)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',8)"></div><span class="s-label">Upcoming major events mapped out</span><button class="s-del" onclick="deleteSList('sb-current',8)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',9)"></div><span class="s-label">Wendover books — seasonal occupancy trends reviewed?</span><button class="s-del" onclick="deleteSList('sb-current',9)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('sb-current',10)"></div><span class="s-label">Sparks book — local community events to partner around?</span><button class="s-del" onclick="deleteSList('sb-current',10)">✕</button></li></ul>
         <div class="add-row">
           <input class="add-input" id="sb-current-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addSimpleItem('sb-current')">
           <button class="add-btn" onclick="addSimpleItem('sb-current')">+ Add</button>
@@ -731,18 +630,11 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">📝 Work To-Do List</div></div>
-        <div id="todo-work-wrap"><ul class="simple-list" id="todo-work-list"><li class=""><div class="s-check" onclick="toggleTodoItem('work',0)"></div><span class="s-label" onclick="editTodoItem(this,'work',0)">Phone app welcome screen</span><button class="s-del" onclick="deleteTodoItem('work',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('work',1)"></div><span class="s-label" onclick="editTodoItem(this,'work',1)">Wendover Numbers</span><button class="s-del" onclick="deleteTodoItem('work',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('work',2)"></div><span class="s-label" onclick="editTodoItem(this,'work',2)">House Rules document</span><button class="s-del" onclick="deleteTodoItem('work',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('work',3)"></div><span class="s-label" onclick="editTodoItem(this,'work',3)">Rental AC filter — Neil Rd</span><button class="s-del" onclick="deleteTodoItem('work',3)">✕</button></li></ul><div class="add-row"><input class="add-input" id="todo-work-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addTodoItem('work')"><button class="add-btn" onclick="addTodoItem('work')">+ Add</button></div></div>
+        <div id="todo-work-wrap"><ul class="simple-list" id="todo-work-list"><li class=""><div class="s-check" onclick="toggleTodoItem('work',0)"></div><span class="s-label">Phone app welcome screen</span><button class="s-del" onclick="deleteTodoItem('work',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('work',1)"></div><span class="s-label">Wendover Numbers</span><button class="s-del" onclick="deleteTodoItem('work',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('work',2)"></div><span class="s-label">House Rules document</span><button class="s-del" onclick="deleteTodoItem('work',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('work',3)"></div><span class="s-label">Rental AC filter — Neil Rd</span><button class="s-del" onclick="deleteTodoItem('work',3)">✕</button></li></ul><div class="add-row"><input class="add-input" id="todo-work-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addTodoItem('work')"><button class="add-btn" onclick="addTodoItem('work')">+ Add</button></div></div>
       </div>
     </div>
     <div>
-      <div class="card">
-        <div class="card-header"><div class="card-title">🧠 Mindset</div></div>
-        <div class="protocol"><div class="protocol-title">Can't Out-Odds Caesars</div><div class="protocol-body">Win on experience, relationships, retention. Know every regular by name.</div></div>
-        <div class="protocol"><div class="protocol-title">🏢 Reno Hub — Flagship</div><div class="protocol-body">Your showcase. Focus on loyalty, atmosphere, converting casino floor players.</div></div>
-        <div class="protocol"><div class="protocol-title">📍 Sparks — Community</div><div class="protocol-body">Wins on familiarity. Wolf Pack, Raiders, Golden Knights are your hooks.</div></div>
-        <div class="protocol"><div class="protocol-title">🛣️ Wendover — Destination</div><div class="protocol-body">Utah drive traffic, often first-timers. Racebook is a differentiator.</div></div>
-        <div class="protocol"><div class="protocol-title">🐎 Racebook Is Your Moat</div><div class="protocol-body">Habitual loyal money at all 5 locations. Protect fiercely.</div></div>
-      </div>
+
       <div class="card">
         <div class="card-header"><div class="card-title">✍️ Mindset Notes</div><div class="badge badge-purple">Personal</div></div>
         <textarea id="sb-mindset-notes" placeholder="Leadership lessons, patterns, things to remember..." style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:13px;color:var(--text);font-family:'Syne',sans-serif;outline:none;resize:vertical;min-height:120px;line-height:1.6;-webkit-appearance:none" oninput="saveSbNotes()"></textarea>
@@ -752,7 +644,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
     <div>
       <div class="card">
         <div class="card-header"><div class="card-title">💡 Forward-Thinking Ideas</div><div class="badge badge-purple">Casino × Book</div></div>
-        <div id="sb-ideas-list"><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🏢 RENO: VIP Bettor lounge — reserved seating, dedicated TV wall, comp drink tier</span><button class="idea-del" onclick="deleteSbIdea(0)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🏢 RENO: Watch Party events for Super Bowl, March Madness, Kentucky Derby</span><button class="idea-del" onclick="deleteSbIdea(1)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🏢 RENO: Daily Best Bet board — curated 3 picks, builds credibility</span><button class="idea-del" onclick="deleteSbIdea(2)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🏢 RENO: Casino floor crossover — coordinate with table games pit</span><button class="idea-del" onclick="deleteSbIdea(3)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">📍 SPARKS: Local sports tie-in — Wolf Pack, Raiders, Golden Knights promos</span><button class="idea-del" onclick="deleteSbIdea(4)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">📍 SPARKS: Neighborhood loyalty punch card for Sparks regulars</span><button class="idea-del" onclick="deleteSbIdea(5)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">📍 SPARKS: Staff should know every regular by name and their team</span><button class="idea-del" onclick="deleteSbIdea(6)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">📍 SPARKS: Partner with local bar for joint Super Bowl promotion</span><button class="idea-del" onclick="deleteSbIdea(7)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🛣️ WENDOVER: Utah drive-in traffic is seasonal — identify peak weekends</span><button class="idea-del" onclick="deleteSbIdea(8)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🛣️ WENDOVER: First-time bettor welcome kit — lower barrier to entry</span><button class="idea-del" onclick="deleteSbIdea(9)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🛣️ WENDOVER: Weekend event promotions — destination experience</span><button class="idea-del" onclick="deleteSbIdea(10)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🛣️ WENDOVER: Digital signage in casino entrance promoting the book</span><button class="idea-del" onclick="deleteSbIdea(11)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🐎 RACEBOOK: Loyalty punch card — after X daily tickets, earn a free ticket</span><button class="idea-del" onclick="deleteSbIdea(12)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🐎 RACEBOOK: Horse racing tips sheet for new visitors</span><button class="idea-del" onclick="deleteSbIdea(13)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🐎 RACEBOOK: Kentucky Derby + Breeders Cup themed viewing parties</span><button class="idea-del" onclick="deleteSbIdea(14)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">💡 GENERAL: Beginner betting guide at every terminal</span><button class="idea-del" onclick="deleteSbIdea(15)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">💡 GENERAL: Post-game recap board — celebrate big parlay wins publicly</span><button class="idea-del" onclick="deleteSbIdea(16)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">💡 GENERAL: Seasonal promos tied to casino player rewards card</span><button class="idea-del" onclick="deleteSbIdea(17)">✕</button></div></div>
+        <div id="sb-ideas-list"><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🏢 RENO: Daily Best Bet board — curated 3 picks, builds credibility with casual bettors</span><button class="idea-del" onclick="deleteSbIdea(0)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🏢 RENO: Casino floor crossover — coordinate with table games pit to flag players</span><button class="idea-del" onclick="deleteSbIdea(1)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">📍 SPARKS: Local sports tie-in — Wolf Pack, Raiders, Golden Knights promos for community feel</span><button class="idea-del" onclick="deleteSbIdea(2)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">📍 SPARKS: Staff should know every regular by name and their team</span><button class="idea-del" onclick="deleteSbIdea(3)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🛣️ WENDOVER: Utah drive-in traffic is seasonal — identify peak weekends and staff/promo accordingly</span><button class="idea-del" onclick="deleteSbIdea(4)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🛣️ WENDOVER: First-time bettor welcome kit — lower barrier to entry for casual visitors</span><button class="idea-del" onclick="deleteSbIdea(5)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🛣️ WENDOVER: Weekend event promotions — visitors want a full destination experience</span><button class="idea-del" onclick="deleteSbIdea(6)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🛣️ WENDOVER: Racebook is a differentiator for Utah visitors — horses less available at home</span><button class="idea-del" onclick="deleteSbIdea(7)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🛣️ WENDOVER: Digital signage in casino entrance promoting the book</span><button class="idea-del" onclick="deleteSbIdea(8)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">🐎 RACEBOOK: Horse racing tips sheet for new visitors — reduce intimidation</span><button class="idea-del" onclick="deleteSbIdea(9)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">💡 GENERAL: Beginner betting guide at every terminal — How to place your first bet in 3 steps</span><button class="idea-del" onclick="deleteSbIdea(10)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">💡 GENERAL: Post-game recap board — celebrate big parlay wins publicly</span><button class="idea-del" onclick="deleteSbIdea(11)">✕</button></div><div class="idea-bank-item"><div class="idea-dot" style="background:var(--accent4)"></div><span style="flex:1">💡 GENERAL: Seasonal promotions tied to casino player rewards card</span><button class="idea-del" onclick="deleteSbIdea(12)">✕</button></div></div>
         <div class="add-row" style="margin-top:12px">
           <input class="add-input" id="sb-idea-input" placeholder="Add an idea..." onkeydown="if(event.key==='Enter')addSbIdea()">
           <button class="add-btn" onclick="addSbIdea()">+ Add</button>
@@ -768,8 +660,8 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
   <div class="two-col">
     <div>
       <div class="card">
-        <div class="card-header"><div class="card-title">💖 Family Weekly</div><div class="badge badge-purple">Gottman</div></div>
-        <ul class="simple-list" id="family-weekly-list"><li class=""><div class="s-check" onclick="toggleSList('family-weekly',0)"></div><span class="s-label" onclick="editSListItem(this,'family-weekly',0)">1-on-1 time with each kid this week</span><button class="s-del" onclick="deleteSList('family-weekly',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('family-weekly',1)"></div><span class="s-label" onclick="editSListItem(this,'family-weekly',1)">Weekly date night with wife</span><button class="s-del" onclick="deleteSList('family-weekly',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('family-weekly',2)"></div><span class="s-label" onclick="editSListItem(this,'family-weekly',2)">Morning breakfast conversation with kids</span><button class="s-del" onclick="deleteSList('family-weekly',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('family-weekly',3)"></div><span class="s-label" onclick="editSListItem(this,'family-weekly',3)">Phone-free during family dinner</span><button class="s-del" onclick="deleteSList('family-weekly',3)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('family-weekly',4)"></div><span class="s-label" onclick="editSListItem(this,'family-weekly',4)">Tell each kid one specific thing you're proud of</span><button class="s-del" onclick="deleteSList('family-weekly',4)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('family-weekly',5)"></div><span class="s-label" onclick="editSListItem(this,'family-weekly',5)">10-min "State of Us" check-in with wife</span><button class="s-del" onclick="deleteSList('family-weekly',5)">✕</button></li></ul>
+        <div class="card-header"><div class="card-title">💖 Family Weekly</div></div>
+        <ul class="simple-list" id="family-weekly-list"><li class=""><div class="s-check" onclick="toggleSList('family-weekly',0)"></div><span class="s-label">1-on-1 time with each kid this week</span><button class="s-del" onclick="deleteSList('family-weekly',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('family-weekly',1)"></div><span class="s-label">Weekly date night with wife</span><button class="s-del" onclick="deleteSList('family-weekly',1)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('family-weekly',2)"></div><span class="s-label">Tell each kid one specific thing you're proud of</span><button class="s-del" onclick="deleteSList('family-weekly',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleSList('family-weekly',3)"></div><span class="s-label">10-min "State of Us" check-in with wife</span><button class="s-del" onclick="deleteSList('family-weekly',3)">✕</button></li></ul>
         <div class="add-row">
           <input class="add-input" id="family-weekly-input" placeholder="Add habit..." onkeydown="if(event.key==='Enter')addSimpleItem('family-weekly')">
           <button class="add-btn" onclick="addSimpleItem('family-weekly')">+ Add</button>
@@ -777,129 +669,37 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">🏠 Home To-Do List</div></div>
-        <div id="todo-home-wrap"><ul class="simple-list" id="todo-home-list"><li class="done"><div class="s-check" onclick="toggleTodoItem('home',0)"></div><span class="s-label" onclick="editTodoItem(this,'home',0)">Replace AC drain</span><button class="s-del" onclick="deleteTodoItem('home',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('home',1)"></div><span class="s-label" onclick="editTodoItem(this,'home',1)">Fix pipe under house</span><button class="s-del" onclick="deleteTodoItem('home',1)">✕</button></li><li class="done"><div class="s-check" onclick="toggleTodoItem('home',2)"></div><span class="s-label" onclick="editTodoItem(this,'home',2)">Fix shed door</span><button class="s-del" onclick="deleteTodoItem('home',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('home',3)"></div><span class="s-label" onclick="editTodoItem(this,'home',3)">Wash house</span><button class="s-del" onclick="deleteTodoItem('home',3)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('home',4)"></div><span class="s-label" onclick="editTodoItem(this,'home',4)">Build large sandbox</span><button class="s-del" onclick="deleteTodoItem('home',4)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('home',5)"></div><span class="s-label" onclick="editTodoItem(this,'home',5)">Dad's: Research garage solution</span><button class="s-del" onclick="deleteTodoItem('home',5)">✕</button></li></ul><div class="add-row"><input class="add-input" id="todo-home-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addTodoItem('home')"><button class="add-btn" onclick="addTodoItem('home')">+ Add</button></div></div>
+        <div id="todo-home-wrap"><ul class="simple-list" id="todo-home-list"><li class="done"><div class="s-check" onclick="toggleTodoItem('home',0)"></div><span class="s-label">Replace AC drain</span><button class="s-del" onclick="deleteTodoItem('home',0)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('home',1)"></div><span class="s-label">Fix pipe under house</span><button class="s-del" onclick="deleteTodoItem('home',1)">✕</button></li><li class="done"><div class="s-check" onclick="toggleTodoItem('home',2)"></div><span class="s-label">Fix shed door</span><button class="s-del" onclick="deleteTodoItem('home',2)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('home',3)"></div><span class="s-label">Wash house</span><button class="s-del" onclick="deleteTodoItem('home',3)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('home',4)"></div><span class="s-label">Build large sandbox</span><button class="s-del" onclick="deleteTodoItem('home',4)">✕</button></li><li class=""><div class="s-check" onclick="toggleTodoItem('home',5)"></div><span class="s-label">Dad's: Research garage solution</span><button class="s-del" onclick="deleteTodoItem('home',5)">✕</button></li></ul><div class="add-row"><input class="add-input" id="todo-home-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addTodoItem('home')"><button class="add-btn" onclick="addTodoItem('home')">+ Add</button></div></div>
       </div>
     </div>
     <div>
-      <div class="card">
-        <div class="card-header"><div class="card-title">💑 Marriage Protocols</div><div class="badge badge-purple">Gottman</div></div>
-        <div class="upgrade"><div class="upgrade-title">Daily: The 6-Second Kiss</div><div class="upgrade-body">One meaningful kiss per day, at least 6 seconds. Breaks the roommate phase, maintains oxytocin bonding.</div></div>
-        <div class="upgrade"><div class="upgrade-title">Weekly: 10-Min "State of Us"</div><div class="upgrade-body">"What's going well? What do we need more of?" Catches small frictions before they compound.</div></div>
-        <div class="upgrade"><div class="upgrade-title">Solopreneur Warning</div><div class="upgrade-body">Biggest threat isn't conflict — it's slow drift from being too focused on hustle. Schedule protected family time like work.</div></div>
-      </div>
+
     </div>
   </div>
 </div>
 
 </div><!-- end .main -->
 
-<script type="module">
-// ─── FIREBASE ───
-import{initializeApp}from'https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js';
-import{getFirestore,doc,getDoc,setDoc,onSnapshot,collection}from'https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js';
+<!-- ══════════ EXERCISE LIBRARY MODAL ══════════ -->
+<div class="modal-bg" id="ex-lib-modal">
+  <div class="modal" style="max-height:85vh">
+    <div class="modal-title">📚 Exercise Library</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px" id="ex-lib-cats"></div>
+    <input class="add-input" id="ex-lib-search" placeholder="Search exercises..." oninput="renderExLib()" style="width:100%;margin-bottom:10px">
+    <div id="ex-lib-list" style="max-height:52vh;overflow-y:auto"></div>
+    <div class="modal-btns" style="margin-top:10px">
+      <button class="btn-secondary" onclick="closeExLib()">Close</button>
+    </div>
+  </div>
+</div>
 
-const firebaseConfig={
-  apiKey:"AIzaSyBmAT83uUAkOEQ7KkwujM31eJ9V5G2r-xc",
-  authDomain:"life-os-bb03f.firebaseapp.com",
-  projectId:"life-os-bb03f",
-  storageBucket:"life-os-bb03f.firebasestorage.app",
-  messagingSenderId:"370436018480",
-  appId:"1:370436018480:web:0b51ed2934629f96b278f5"
-};
-const _app=initializeApp(firebaseConfig);
-const _db=getFirestore(_app);
-const _UID='john'; // single user
 
-// Show sync indicator
-function _syncStatus(msg,color='var(--muted)'){
-  const el=document.getElementById('sync-status');
-  if(el){el.textContent=msg;el.style.color=color;clearTimeout(el._t);if(msg)el._t=setTimeout(()=>{if(el)el.textContent='☁️ Synced';el.style.color='var(--muted)';},2500);}
-}
-
+<script>
 // ─── CORE HELPERS ───
 function todayKey(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
 function mondayKey(){const d=new Date(),day=d.getDay(),diff=d.getDate()-day+(day===0?-6:1),m=new Date(d.setDate(diff));return m.getFullYear()+'-'+(m.getMonth()+1)+'-'+m.getDate();}
 function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){}return null;}
 function lsj(k,def){try{return JSON.parse(ls(k)||'null')||def;}catch(e){return def;}}
-
-// ─── FIREBASE SYNC ───
-// Each localStorage key maps to a Firestore doc in collection 'lifeos' / doc _UID / collection 'data' / doc key
-async function fbSet(key,val){
-  try{
-    await setDoc(doc(_db,'lifeos',_UID,'data',key.replace(/[^a-zA-Z0-9_\-]/g,'_')),{v:val,t:Date.now()});
-    _syncStatus('☁️ Synced','var(--muted)');
-  }catch(e){_syncStatus('⚠️ Sync error','var(--accent3)');}
-}
-async function fbGet(key){
-  try{
-    const snap=await getDoc(doc(_db,'lifeos',_UID,'data',key.replace(/[^a-zA-Z0-9_\-]/g,'_')));
-    return snap.exists()?snap.data().v:null;
-  }catch(e){return null;}
-}
-
-// Save: write to localStorage immediately + async write to Firebase
-function lsSave(key,val){
-  ls(key,val);
-  fbSet(key,val);
-}
-
-// On load: pull all Firebase data and merge into localStorage, then re-render
-async function fbPullAll(){
-  _syncStatus('⟳ Syncing...','var(--accent2)');
-  try{
-    const{getDocs}=await import('https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js');
-    const snap=await getDocs(collection(_db,'lifeos',_UID,'data'));
-    let changed=false;
-    snap.forEach(d=>{
-      const key=d.id.replace(/_/g,match=>{
-        // restore original key separators — firebase key used _ for / but our keys use _ already so just use as-is
-        return '_';
-      });
-      // Find matching localStorage key
-      const lsKey=Array.from({length:localStorage.length},(_,i)=>localStorage.key(i))
-        .find(k=>k&&k.replace(/[^a-zA-Z0-9_\-]/g,'_')===d.id);
-      const fbTime=d.data().t||0;
-      const fbVal=d.data().v;
-      if(lsKey){
-        // Compare timestamps — Firebase wins if newer
-        const localMeta=lsj('lifeOS_meta_'+lsKey,{t:0});
-        if(fbTime>localMeta.t){ls(lsKey,fbVal);changed=true;}
-      } else {
-        // Key exists in Firebase but not locally — restore it
-        // Map doc ID back to likely ls key
-        const restored='lifeOS_'+d.id.replace(/^lifeOS_/,'');
-        ls(restored,fbVal);changed=true;
-      }
-    });
-    if(changed)reRenderAll();
-    _syncStatus('☁️ Synced','var(--muted)');
-  }catch(e){_syncStatus('⚠️ Offline','var(--accent3)');}
-}
-
-// Listen for real-time changes from other devices
-function fbListen(){
-  try{
-    onSnapshot(collection(_db,'lifeos',_UID,'data'),snap=>{
-      snap.docChanges().forEach(change=>{
-        if(change.type==='modified'||change.type==='added'){
-          const d=change.doc;
-          const fbVal=d.data().v;
-          const fbTime=d.data().t||0;
-          // Find ls key
-          const lsKey=Array.from({length:localStorage.length},(_,i)=>localStorage.key(i))
-            .find(k=>k&&k.replace(/[^a-zA-Z0-9_\-]/g,'_')===d.id)||('lifeOS_'+d.id);
-          const localMeta=lsj('lifeOS_meta_'+lsKey,{t:0});
-          if(fbTime>localMeta.t){
-            ls(lsKey,fbVal);
-            ls('lifeOS_meta_'+lsKey,JSON.stringify({t:fbTime}));
-            reRenderAll();
-            _syncStatus('☁️ Updated from cloud','var(--accent2)');
-          }
-        }
-      });
-    });
-  }catch(e){}
-}
 
 // ─── NAV ───
 function showTab(id,btn){
@@ -968,63 +768,7 @@ function getRoutine(name){
   }
   return{items:ROUTINE_DEFAULTS[name].map(i=>({...i,done:false})),lastReset:todayKey()};
 }
-function saveRoutine(name,data){lsSave('lifeOS_routine_'+name,JSON.stringify(data));}
-// ─── TOUCH DRAG STATE ───
-let _touchDrag={active:false,name:null,fromIdx:null,el:null,clone:null,startY:0,lastOver:null};
-
-function _touchStart(e,name,idx){
-  const handle=e.target.closest('.drag-handle');
-  if(!handle)return;
-  e.preventDefault();
-  const li=handle.closest('li');
-  const touch=e.touches[0];
-  const rect=li.getBoundingClientRect();
-  _touchDrag={active:true,name,fromIdx:idx,el:li,startY:touch.clientY,lastOver:null,
-    clone:null,offsetY:touch.clientY-rect.top};
-  // Create floating clone
-  const clone=li.cloneNode(true);
-  clone.style.cssText=`position:fixed;left:${rect.left}px;top:${rect.top}px;width:${rect.width}px;opacity:.85;z-index:999;pointer-events:none;background:var(--surface2);border:1px solid var(--accent);border-radius:6px;`;
-  document.body.appendChild(clone);
-  _touchDrag.clone=clone;
-  li.style.opacity='.3';
-}
-
-function _touchMove(e){
-  if(!_touchDrag.active)return;
-  e.preventDefault();
-  const touch=e.touches[0];
-  const clone=_touchDrag.clone;
-  if(clone) clone.style.top=(touch.clientY-_touchDrag.offsetY)+'px';
-  // Find which item we're hovering over
-  clone&&(clone.style.display='none');
-  const el=document.elementFromPoint(touch.clientX,touch.clientY);
-  clone&&(clone.style.display='');
-  const overLi=el?el.closest('li.routine-item'):null;
-  document.querySelectorAll('li.routine-item').forEach(l=>l.classList.remove('drag-over'));
-  if(overLi&&overLi!==_touchDrag.el){overLi.classList.add('drag-over');_touchDrag.lastOver=overLi;}
-}
-
-function _touchEnd(e){
-  if(!_touchDrag.active)return;
-  const{name,fromIdx,el,clone,lastOver}=_touchDrag;
-  if(clone)clone.remove();
-  el.style.opacity='';
-  document.querySelectorAll('li.routine-item').forEach(l=>l.classList.remove('drag-over'));
-  if(lastOver&&lastOver!==el){
-    const toIdx=parseInt(lastOver.dataset.idx);
-    const d=getRoutine(name);
-    const moved=d.items.splice(fromIdx,1)[0];
-    d.items.splice(toIdx,0,moved);
-    saveRoutine(name,d);
-    renderRoutine(name);
-  }
-  _touchDrag={active:false,name:null,fromIdx:null,el:null,clone:null,startY:0,lastOver:null};
-}
-
-document.addEventListener('touchmove',_touchMove,{passive:false});
-document.addEventListener('touchend',_touchEnd);
-document.addEventListener('touchcancel',_touchEnd);
-
+function saveRoutine(name,data){ls('lifeOS_routine_'+name,JSON.stringify(data));}
 function renderRoutine(name){
   const data=getRoutine(name);
   const ul=document.getElementById(name+'-list');
@@ -1034,15 +778,12 @@ function renderRoutine(name){
     const li=document.createElement('li');
     li.className='routine-item'+(item.done?' done':'');
     li.draggable=true;li.dataset.idx=idx;
-    li.innerHTML=`<span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('${name}',${idx})"></div><span class="r-text" onclick="editRoutineItem(this,'${name}',${idx})">${item.text}</span>${item.sci?`<span class="r-sci">${item.sci}</span>`:''}<button class="r-del" onclick="deleteRoutineItem('${name}',${idx})">✕</button>`;
-    // Mouse drag
+    li.innerHTML=`<span class="drag-handle">⠿</span><div class="r-check" onclick="toggleRoutineItem('${name}',${idx})"></div><span class="r-text">${item.text}</span><button class="r-del" onclick="deleteRoutineItem('${name}',${idx})">✕</button>`;
     li.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',idx);li.classList.add('dragging');});
     li.addEventListener('dragend',()=>li.classList.remove('dragging'));
     li.addEventListener('dragover',e=>{e.preventDefault();li.classList.add('drag-over');});
     li.addEventListener('dragleave',()=>li.classList.remove('drag-over'));
     li.addEventListener('drop',e=>{e.preventDefault();li.classList.remove('drag-over');const from=parseInt(e.dataTransfer.getData('text/plain')),to=idx;if(from===to)return;const d=getRoutine(name);const moved=d.items.splice(from,1)[0];d.items.splice(to,0,moved);saveRoutine(name,d);renderRoutine(name);});
-    // Touch drag — only triggers from the handle
-    li.addEventListener('touchstart',e=>_touchStart(e,name,idx),{passive:false});
     ul.appendChild(li);
   });
   const total=data.items.length,done=data.items.filter(i=>i.done).length,pct=total?Math.round((done/total)*100):0;
@@ -1054,15 +795,6 @@ function toggleRoutineItem(name,idx){const d=getRoutine(name);d.items[idx].done=
 function deleteRoutineItem(name,idx){const d=getRoutine(name);d.items.splice(idx,1);saveRoutine(name,d);renderRoutine(name);}
 function addRoutineItem(name){const input=document.getElementById(name+'-new-input');const text=input.value.trim();if(!text)return;const d=getRoutine(name);d.items.push({text,sci:'',done:false});saveRoutine(name,d);input.value='';renderRoutine(name);}
 function resetRoutine(name){const d=getRoutine(name);d.items.forEach(i=>i.done=false);d.lastReset=todayKey();saveRoutine(name,d);renderRoutine(name);}
-
-function editRoutineItem(span,name,idx){
-  const input=document.createElement('input');
-  input.className='r-edit';input.value=span.textContent;
-  span.replaceWith(input);input.focus();input.select();
-  function save(){const val=input.value.trim();if(val){const d=getRoutine(name);d.items[idx].text=val;saveRoutine(name,d);}renderRoutine(name);}
-  input.addEventListener('blur',save);
-  input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();save();}if(e.key==='Escape')renderRoutine(name);});
-}
 setInterval(()=>['morning','evening','sbshift'].forEach(n=>{const d=getRoutine(n);if(d.lastReset!==todayKey()){d.items.forEach(i=>i.done=false);d.lastReset=todayKey();saveRoutine(n,d);renderRoutine(n);}}),60000);
 
 // ─── TODO BLOCKS (now embedded in tabs) ───
@@ -1083,7 +815,7 @@ const TODO_DEFAULTS={
   ]},
 };
 function getTodo(key){return lsj('lifeOS_todo_'+key,{...TODO_DEFAULTS[key],items:TODO_DEFAULTS[key].items.map(i=>({...i}))});}
-function saveTodo(key,d){lsSave('lifeOS_todo_'+key,JSON.stringify(d));}
+function saveTodo(key,d){ls('lifeOS_todo_'+key,JSON.stringify(d));}
 function renderTodoBlock(key,wrapId){
   const data=getTodo(key);
   const wrap=document.getElementById(wrapId);
@@ -1092,7 +824,7 @@ function renderTodoBlock(key,wrapId){
   const ul=document.createElement('ul');ul.className='simple-list';ul.id='todo-'+key+'-list';
   data.items.forEach((item,ii)=>{
     const li=document.createElement('li');li.className=item.done?'done':'';
-    li.innerHTML=`<div class="s-check" onclick="toggleTodoItem('${key}',${ii})"></div><span class="s-label" onclick="editTodoItem(this,'${key}',${ii})">${item.text}</span><button class="s-del" onclick="deleteTodoItem('${key}',${ii})">✕</button>`;
+    li.innerHTML=`<div class="s-check" onclick="toggleTodoItem('${key}',${ii})"></div><span class="s-label">${item.text}</span><button class="s-del" onclick="deleteTodoItem('${key}',${ii})">✕</button>`;
     ul.appendChild(li);
   });
   wrap.appendChild(ul);
@@ -1103,7 +835,7 @@ function renderTodoBlock(key,wrapId){
 function toggleTodoItem(key,ii){
   const d=getTodo(key);d.items[ii].done=!d.items[ii].done;saveTodo(key,d);
   renderTodoBlock(key,'todo-'+key+'-wrap');
-  renderHitList();
+  renderHitList(); // sync hit list
 }
 function deleteTodoItem(key,ii){const d=getTodo(key);d.items.splice(ii,1);saveTodo(key,d);renderTodoBlock(key,'todo-'+key+'-wrap');}
 function addTodoItem(key){
@@ -1111,14 +843,6 @@ function addTodoItem(key){
   const text=input.value.trim();if(!text)return;
   const d=getTodo(key);d.items.push({text,done:false});saveTodo(key,d);input.value='';
   renderTodoBlock(key,'todo-'+key+'-wrap');
-}
-function editTodoItem(span,key,ii){
-  const input=document.createElement('input');
-  input.className='s-edit';input.value=span.textContent;
-  span.replaceWith(input);input.focus();input.select();
-  function save(){const val=input.value.trim();if(val){const d=getTodo(key);d.items[ii].text=val;saveTodo(key,d);}renderTodoBlock(key,'todo-'+key+'-wrap');}
-  input.addEventListener('blur',save);
-  input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();save();}if(e.key==='Escape')renderTodoBlock(key,'todo-'+key+'-wrap');});
 }
 
 // ─── SIMPLE LISTS ───
@@ -1156,13 +880,13 @@ const SLIST_DEFAULTS={
   ],
 };
 function getSList(key){return lsj('lifeOS_slist_'+key,SLIST_DEFAULTS[key]?SLIST_DEFAULTS[key].map(i=>({...i})):[]);}
-function saveSList(key,data){lsSave('lifeOS_slist_'+key,JSON.stringify(data));}
+function saveSList(key,data){ls('lifeOS_slist_'+key,JSON.stringify(data));}
 function renderSimpleList(key){
   const items=getSList(key),ul=document.getElementById(key+'-list');
   if(!ul)return;ul.innerHTML='';
   items.forEach((item,idx)=>{
     const li=document.createElement('li');li.className=item.done?'done':'';
-    li.innerHTML=`<div class="s-check" onclick="toggleSList('${key}',${idx})"></div><span class="s-label" onclick="editSListItem(this,'${key}',${idx})">${item.text}</span><button class="s-del" onclick="deleteSList('${key}',${idx})">✕</button>`;
+    li.innerHTML=`<div class="s-check" onclick="toggleSList('${key}',${idx})"></div><span class="s-label">${item.text}</span><button class="s-del" onclick="deleteSList('${key}',${idx})">✕</button>`;
     ul.appendChild(li);
   });
 }
@@ -1172,18 +896,10 @@ function addSimpleItem(key){
   const input=document.getElementById(key+'-input');const text=input.value.trim();if(!text)return;
   const d=getSList(key);d.push({text,done:false});saveSList(key,d);input.value='';renderSimpleList(key);
 }
-function editSListItem(span,key,idx){
-  const input=document.createElement('input');
-  input.className='s-edit';input.value=span.textContent;
-  span.replaceWith(input);input.focus();input.select();
-  function save(){const val=input.value.trim();if(val){const d=getSList(key);d[idx].text=val;saveSList(key,d);}renderSimpleList(key);}
-  input.addEventListener('blur',save);
-  input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();save();}if(e.key==='Escape')renderSimpleList(key);});
-}
 
 // ─── SCOOP SQUAD ───
 function getScoopData(){return lsj('lifeOS_scoop',{clients:3,revenue:210,routes:1});}
-function saveScoopData(d){lsSave('lifeOS_scoop',JSON.stringify(d));}
+function saveScoopData(d){ls('lifeOS_scoop',JSON.stringify(d));}
 function scoopAdj(field,delta){const d=getScoopData();d[field]=Math.max(0,d[field]+delta);saveScoopData(d);renderScoop();}
 function renderScoop(){
   const d=getScoopData();
@@ -1214,8 +930,8 @@ function renderScoopIdeas(){
   if(!el)return;el.innerHTML='';
   data.forEach((idea,idx)=>{const d=document.createElement('div');d.className='idea-bank-item';d.innerHTML=`<div class="idea-dot"></div><span style="flex:1">${idea}</span><button class="idea-del" onclick="deleteScoopIdea(${idx})">✕</button>`;el.appendChild(d);});
 }
-function deleteScoopIdea(idx){const d=getScoopIdeas();d.splice(idx,1);lsSave('lifeOS_scoop_ideas',JSON.stringify(d));renderScoopIdeas();}
-function addScoopIdea(){const input=document.getElementById('scoop-idea-input');const text=input.value.trim();if(!text)return;const d=getScoopIdeas();d.push(text);lsSave('lifeOS_scoop_ideas',JSON.stringify(d));input.value='';renderScoopIdeas();}
+function deleteScoopIdea(idx){const d=getScoopIdeas();d.splice(idx,1);ls('lifeOS_scoop_ideas',JSON.stringify(d));renderScoopIdeas();}
+function addScoopIdea(){const input=document.getElementById('scoop-idea-input');const text=input.value.trim();if(!text)return;const d=getScoopIdeas();d.push(text);ls('lifeOS_scoop_ideas',JSON.stringify(d));input.value='';renderScoopIdeas();}
 
 // ─── SPORTSBOOK IDEAS ───
 const SB_IDEAS_DEF=[
@@ -1245,9 +961,9 @@ function renderSbIdeas(){
   const colors={'🏢':'var(--accent)','📍':'var(--accent2)','🛣️':'var(--accent3)','🐎':'var(--green)','💡':'var(--accent4)'};
   data.forEach((idea,idx)=>{const color=colors[idea[0]]||'var(--accent4)';const d=document.createElement('div');d.className='idea-bank-item';d.innerHTML=`<div class="idea-dot" style="background:${color}"></div><span style="flex:1">${idea}</span><button class="idea-del" onclick="deleteSbIdea(${idx})">✕</button>`;el.appendChild(d);});
 }
-function deleteSbIdea(idx){const d=getSbIdeas();d.splice(idx,1);lsSave('lifeOS_sb_ideas',JSON.stringify(d));renderSbIdeas();}
-function addSbIdea(){const input=document.getElementById('sb-idea-input');const text=input.value.trim();if(!text)return;const d=getSbIdeas();d.push(text);lsSave('lifeOS_sb_ideas',JSON.stringify(d));input.value='';renderSbIdeas();}
-function saveSbNotes(){lsSave('lifeOS_sb_mindset',document.getElementById('sb-mindset-notes').value);const el=document.getElementById('sb-notes-saved');if(el)el.textContent='Saved';setTimeout(()=>{const e=document.getElementById('sb-notes-saved');if(e)e.textContent='';},2000);}
+function deleteSbIdea(idx){const d=getSbIdeas();d.splice(idx,1);ls('lifeOS_sb_ideas',JSON.stringify(d));renderSbIdeas();}
+function addSbIdea(){const input=document.getElementById('sb-idea-input');const text=input.value.trim();if(!text)return;const d=getSbIdeas();d.push(text);ls('lifeOS_sb_ideas',JSON.stringify(d));input.value='';renderSbIdeas();}
+function saveSbNotes(){ls('lifeOS_sb_mindset',document.getElementById('sb-mindset-notes').value);const el=document.getElementById('sb-notes-saved');if(el)el.textContent='Saved';setTimeout(()=>{const e=document.getElementById('sb-notes-saved');if(e)e.textContent='';},2000);}
 function loadSbNotes(){const val=ls('lifeOS_sb_mindset')||'',el=document.getElementById('sb-mindset-notes');if(el)el.value=val;}
 
 // ─── ROADMAP ───
@@ -1258,7 +974,7 @@ const ROADMAP_DEF=[
   {year:'10 Years — 2036',color:'var(--accent4)',items:[{text:'Camper + annual family trips',done:false},{text:'Second rental property',done:false},{text:'Business #1 complete, #2 started',done:false},{text:'Annual vacation savings funded',done:false}]},
 ];
 function getRoadmap(){return lsj('lifeOS_roadmap',ROADMAP_DEF.map(b=>({...b,items:b.items.map(i=>({...i}))})));}
-function saveRoadmap(d){lsSave('lifeOS_roadmap',JSON.stringify(d));}
+function saveRoadmap(d){ls('lifeOS_roadmap',JSON.stringify(d));}
 function renderRoadmap(){
   const data=getRoadmap(),grid=document.getElementById('roadmap-grid');
   if(!grid)return;grid.innerHTML='';
@@ -1278,13 +994,13 @@ function renderRoadmap(){
 }
 
 // ─── JOURNAL ───
-function saveJournal(){lsSave('lifeOS_journal_'+mondayKey(),document.getElementById('weekly-journal').value);const el=document.getElementById('journal-saved');if(el)el.textContent='Saved · Week of '+mondayKey();}
+function saveJournal(){ls('lifeOS_journal_'+mondayKey(),document.getElementById('weekly-journal').value);const el=document.getElementById('journal-saved');if(el)el.textContent='Saved · Week of '+mondayKey();}
 function loadJournal(){const val=ls('lifeOS_journal_'+mondayKey())||'',el=document.getElementById('weekly-journal');if(el)el.value=val;const info=document.getElementById('journal-saved');if(info&&val)info.textContent='Saved · Week of '+mondayKey();}
 
 // ─── TRAINING LOG ───
 const TRAIN_DAYS=[{name:'Wed',task:'💥 Push',color:'hl-green'},{name:'Thu',task:'🔗 Pull',color:'hl-green'},{name:'Fri',task:'🤝 Full Body',color:'hl-orange'},{name:'Sat',task:'😴 Rest',color:''},{name:'Sun',task:'🔥 VO₂ Max',color:'hl-orange'},{name:'Mon',task:'💥 Push',color:'hl-green'},{name:'Tue',task:'🔗 Pull',color:'hl-green'}];
 function getTrainLog(){return lsj('lifeOS_train_'+mondayKey(),TRAIN_DAYS.map(d=>({...d,strength:false,walk:false,mobility:false})));}
-function saveTrainLog(d){lsSave('lifeOS_train_'+mondayKey(),JSON.stringify(d));}
+function saveTrainLog(d){ls('lifeOS_train_'+mondayKey(),JSON.stringify(d));}
 function renderTrainingLog(){
   const data=getTrainLog(),grid=document.getElementById('training-log-grid');
   if(!grid)return;grid.innerHTML='';
@@ -1319,7 +1035,7 @@ function getHitListPool(){
 }
 
 function getHitList(){return lsj('lifeOS_hitlist2',null);}
-function saveHitList(d){lsSave('lifeOS_hitlist2',JSON.stringify(d));}
+function saveHitList(d){ls('lifeOS_hitlist2',JSON.stringify(d));}
 
 function buildHitList(prev){
   const pool=getHitListPool();
@@ -1490,505 +1206,622 @@ async function pushToGitHub(){
   }
 }
 
-// ─── RE-RENDER ALL ───
-function reRenderAll(){
-  renderRoutine('morning');
-  renderRoutine('evening');
-  renderRoutine('sbshift');
-  ['scoop-daily','scoop-week','sb-current','family-weekly'].forEach(k=>renderSimpleList(k));
-  renderTodoBlock('home','todo-home-wrap');
-  renderTodoBlock('work','todo-work-wrap');
-  renderTodoBlock('scoop','todo-scoop-wrap');
-  renderScoop();
-  renderScoopIdeas();
-  renderSbIdeas();
-  loadSbNotes();
-  renderRoadmap();
-  loadJournal();
-  renderTrainingLog();
-  renderHitList();
+
+// ─── REST TIMER ───
+let _rtDuration=120,_rtRemain=120,_rtInterval=null,_rtRunning=false;
+function fmtTime(s){return Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;}
+function updateRtDisplay(){
+  document.getElementById('rt-display').textContent=fmtTime(_rtRemain);
+  const pct=_rtDuration>0?(_rtRemain/_rtDuration)*100:0;
+  document.getElementById('rt-prog').style.width=pct+'%';
+  document.getElementById('rt-prog').style.background=pct<25?'var(--accent3)':pct<50?'var(--accent2)':'var(--accent)';
 }
-
-// ─── WORKOUT TRACKER ───
-function showSubTab(id,btn){
-  document.querySelectorAll('.sub-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.sub-tab').forEach(b=>b.classList.remove('active'));
-  document.getElementById('sub-'+id).classList.add('active');
-  btn.classList.add('active');
-  if(id==='progress'){renderVolChart();renderOrmChart();renderPRList();}
-  if(id==='bw'){renderBwChart();}
-  if(id==='stack'){renderExerciseLibrary();}
-}
-
-// Exercise library — 30+ dumbbell-only exercises
-const DB_EXERCISES_DEFAULT=[
-  {name:'DB Chest Press (Floor)',cat:'Push',type:'push'},
-  {name:'DB Fly (Floor)',cat:'Push',type:'push'},
-  {name:'DB Shoulder Press',cat:'Push',type:'push'},
-  {name:'DB Lateral Raise',cat:'Push',type:'push'},
-  {name:'DB Front Raise',cat:'Push',type:'push'},
-  {name:'DB Arnold Press',cat:'Push',type:'push'},
-  {name:'DB Tricep Kickback',cat:'Push',type:'push'},
-  {name:'DB Overhead Tricep Extension',cat:'Push',type:'push'},
-  {name:'DB Close Grip Press (Floor)',cat:'Push',type:'push'},
-  {name:'DB Incline Press (on floor angle)',cat:'Push',type:'push'},
-  {name:'DB Row (Single Arm)',cat:'Pull',type:'pull'},
-  {name:'DB Bent Over Row',cat:'Pull',type:'pull'},
-  {name:'DB Bicep Curl',cat:'Pull',type:'pull'},
-  {name:'DB Hammer Curl',cat:'Pull',type:'pull'},
-  {name:'DB Reverse Curl',cat:'Pull',type:'pull'},
-  {name:'DB Concentration Curl',cat:'Pull',type:'pull'},
-  {name:'DB Upright Row',cat:'Pull',type:'pull'},
-  {name:'DB Rear Delt Fly',cat:'Pull',type:'pull'},
-  {name:'DB Shrug',cat:'Pull',type:'pull'},
-  {name:'DB Pullover (Floor)',cat:'Pull',type:'pull'},
-  {name:'DB Goblet Squat',cat:'Full Body',type:'full'},
-  {name:'DB Romanian Deadlift',cat:'Full Body',type:'full'},
-  {name:'DB Lunge (Alternating)',cat:'Full Body',type:'full'},
-  {name:'DB Step-Up (on stair/box)',cat:'Full Body',type:'full'},
-  {name:'DB Sumo Squat',cat:'Full Body',type:'full'},
-  {name:'DB Hip Hinge',cat:'Full Body',type:'full'},
-  {name:'DB Farmer Carry',cat:'Full Body',type:'full'},
-  {name:'DB Thruster',cat:'Full Body',type:'full'},
-  {name:'DB Squat to Press',cat:'Full Body',type:'full'},
-  {name:'DB Side Lunge',cat:'Full Body',type:'full'},
-  {name:'DB Plank Row',cat:'Full Body',type:'full'},
-  {name:'DB Russian Twist',cat:'Full Body',type:'full'},
-  {name:'DB Woodchop',cat:'Full Body',type:'full'},
-];
-
-function getExerciseLibrary(){return lsj('lifeOS_ex_library',DB_EXERCISES_DEFAULT.map(e=>({...e})));}
-function saveExerciseLibrary(d){lsSave('lifeOS_ex_library',JSON.stringify(d));}
-
-function addExerciseToLibrary(){
-  const input=document.getElementById('new-exercise-input');
-  const text=input.value.trim();if(!text)return;
-  const d=getExerciseLibrary();
-  d.push({name:text,cat:'Custom',type:'full'});
-  saveExerciseLibrary(d);input.value='';
-  renderExerciseLibrary();
-}
-
-function renderExerciseLibrary(){
-  const el=document.getElementById('exercise-library-list');
-  if(!el)return;
-  const d=getExerciseLibrary();
-  el.innerHTML='';
-  ['Push','Pull','Full Body','Custom'].forEach(cat=>{
-    const items=d.filter(e=>e.cat===cat);
-    if(!items.length)return;
-    const title=document.createElement('div');
-    title.style.cssText='font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin:10px 0 6px;font-weight:700';
-    title.textContent=cat;el.appendChild(title);
-    items.forEach((ex,i)=>{
-      const row=document.createElement('div');
-      row.style.cssText='display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;color:#ccc';
-      row.innerHTML=`<span>${ex.name}</span><button onclick="deleteExerciseFromLibrary('${ex.name}')" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:15px;padding:2px 4px">✕</button>`;
-      el.appendChild(row);
-    });
+function restPreset(sec){
+  if(_rtRunning)return;
+  _rtDuration=sec;_rtRemain=sec;
+  ['60','90','120'].forEach(s=>{
+    const el=document.getElementById('rt-p'+s);
+    if(el)el.classList.remove('rt-preset-active');
   });
+  const map={60:'rt-p60',90:'rt-p90',120:'rt-p120'};
+  const el=document.getElementById(map[sec]);
+  if(el)el.classList.add('rt-preset-active');
+  updateRtDisplay();
 }
-
-function deleteExerciseFromLibrary(name){
-  const d=getExerciseLibrary().filter(e=>e.name!==name);
-  saveExerciseLibrary(d);renderExerciseLibrary();
-}
-
-// ─── SESSION DATA ───
-// Session: { date, type, exercises:[{name, sets:[{weight,reps,done}]}] }
-function getTodaySession(){
-  const key='lifeOS_session_'+todayKey();
-  return lsj(key,null);
-}
-function saveTodaySession(d){
-  lsSave('lifeOS_session_'+todayKey(),JSON.stringify(d));
-}
-function getSessionHistory(){
-  // Returns array of all session keys sorted newest first
-  const keys=[];
-  for(let i=0;i<localStorage.length;i++){
-    const k=localStorage.key(i);
-    if(k&&k.startsWith('lifeOS_session_'))keys.push(k);
-  }
-  return keys.sort().reverse().map(k=>lsj(k,null)).filter(Boolean);
-}
-
-function initTodaySession(type){
-  const lib=getExerciseLibrary();
-  const exercises=lib.filter(e=>e.type===type||type==='full').slice(0,4).map(e=>({
-    name:e.name,
-    sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]
-  }));
-  return{date:todayKey(),type,exercises};
-}
-
-function switchWorkoutType(type){
-  let session=getTodaySession();
-  if(!session||session.type!==type){
-    // Keep existing exercises if any, just update type
-    if(session){session.type=type;saveTodaySession(session);}
-    else{session=initTodaySession(type);saveTodaySession(session);}
-  }
-  renderWorkoutSession();
-}
-
-// ─── RENDER SESSION ───
-function renderWorkoutSession(){
-  const session=getTodaySession()||initTodaySession('push');
-  const el=document.getElementById('workout-exercises');
-  const dateLabel=document.getElementById('workout-date-label');
-  const sel=document.getElementById('workout-type-select');
-  if(!el)return;
-  if(dateLabel)dateLabel.textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});
-  if(sel)sel.value=session.type||'push';
-  el.innerHTML='';
-
-  session.exercises.forEach((ex,ei)=>{
-    const prev=getPrevBest(ex.name);
-    const currVol=ex.sets.filter(s=>s.done&&s.weight&&s.reps).reduce((a,s)=>a+(parseFloat(s.weight)*parseInt(s.reps)),0);
-    const poClass=prev?currVol>prev.vol?'po-up':currVol===prev.vol?'po-same':'po-down':'';
-    const poText=prev?currVol>prev.vol?`↑ +${Math.round(currVol-prev.vol)} lbs vol`:currVol===prev.vol?'= matched':'↓ below last':'First session';
-
-    const block=document.createElement('div');
-    block.className='exercise-block';
-    block.innerHTML=`
-      <div class="exercise-name">
-        <span>${ex.name}</span>
-        <div style="display:flex;gap:6px;align-items:center">
-          ${prev?`<span class="po-badge ${poClass}">${poText}</span>`:''}
-          <button onclick="removeExercise(${ei})" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:2px">✕</button>
-        </div>
-      </div>
-      <div class="prev-best">${prev?`Last: ${prev.sets} sets · Best set ${prev.bestW}lbs × ${prev.bestR} reps`:'No history yet'}</div>
-      <div style="display:grid;grid-template-columns:28px 1fr 1fr auto;gap:8px;margin-bottom:6px">
-        <div style="font-size:9px;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace">SET</div>
-        <div style="font-size:9px;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace">LBS</div>
-        <div style="font-size:9px;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace">REPS</div>
-        <div style="width:32px"></div>
-      </div>
-      <div id="sets-${ei}"></div>
-      <button class="add-set-btn" onclick="addSet(${ei})">+ Add Set</button>
-    `;
-    el.appendChild(block);
-
-    const setsEl=block.querySelector(`#sets-${ei}`);
-    ex.sets.forEach((set,si)=>{
-      const row=document.createElement('div');
-      row.className='set-row';
-      row.innerHTML=`
-        <div class="set-num">${si+1}</div>
-        <input class="set-input" type="number" placeholder="${prev?prev.bestW:'-'}" value="${set.weight}" onchange="updateSet(${ei},${si},'weight',this.value)" inputmode="decimal">
-        <input class="set-input" type="number" placeholder="${prev?prev.bestR:'-'}" value="${set.reps}" onchange="updateSet(${ei},${si},'reps',this.value)" inputmode="numeric">
-        <button class="set-done-btn${set.done?' done':''}" onclick="toggleSetDone(${ei},${si})">${set.done?'✓':'○'}</button>
-      `;
-      setsEl.appendChild(row);
-    });
-  });
-  renderWeekSummary();
-}
-
-function updateSet(ei,si,field,val){
-  const session=getTodaySession();if(!session)return;
-  session.exercises[ei].sets[si][field]=val;
-  saveTodaySession(session);
-  renderWorkoutSession();
-}
-
-function toggleSetDone(ei,si){
-  const session=getTodaySession();if(!session)return;
-  const set=session.exercises[ei].sets[si];
-  set.done=!set.done;
-  saveTodaySession(session);
-  renderWorkoutSession();
-}
-
-function addSet(ei){
-  const session=getTodaySession();if(!session)return;
-  const prev=session.exercises[ei].sets.slice(-1)[0];
-  session.exercises[ei].sets.push({weight:prev?prev.weight:'',reps:prev?prev.reps:'',done:false});
-  saveTodaySession(session);
-  renderWorkoutSession();
-}
-
-function removeExercise(ei){
-  const session=getTodaySession();if(!session)return;
-  session.exercises.splice(ei,1);
-  saveTodaySession(session);
-  renderWorkoutSession();
-}
-
-function finishWorkout(){
-  const session=getTodaySession();if(!session)return;
-  // Mark all sets with data as done
-  session.exercises.forEach(ex=>ex.sets.forEach(s=>{if(s.weight&&s.reps)s.done=true;}));
-  session.finished=true;
-  saveTodaySession(session);
-  renderWorkoutSession();
-  renderWeekSummary();
-  _syncStatus('✅ Workout saved!','var(--green)');
-}
-
-function openAddExercise(){
-  const lib=getExerciseLibrary();
-  const session=getTodaySession();
-  const existing=session?session.exercises.map(e=>e.name):[];
-  const el=document.getElementById('exercise-picker-list');
-  el.innerHTML='';
-  lib.forEach(ex=>{
-    const already=existing.includes(ex.name);
-    const row=document.createElement('div');row.className='ex-pick-item';
-    row.innerHTML=`<div><div class="ex-pick-name">${ex.name}</div><div class="ex-pick-cat">${ex.cat}</div></div><button class="ex-pick-add" ${already?'disabled style="opacity:.4"':''} onclick="addExerciseToSession('${ex.name.replace(/'/g,"\\'")}')">+Add</button>`;
-    el.appendChild(row);
-  });
-  document.getElementById('add-exercise-modal').classList.add('open');
-}
-
-function closeAddExercise(){document.getElementById('add-exercise-modal').classList.remove('open');}
-
-function addExerciseToSession(name){
-  let session=getTodaySession();
-  if(!session){session=initTodaySession('push');}
-  if(session.exercises.find(e=>e.name===name))return;
-  session.exercises.push({name,sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]});
-  saveTodaySession(session);
-  closeAddExercise();
-  renderWorkoutSession();
-}
-
-// ─── PREV BEST ───
-function getPrevBest(exName){
-  const history=getSessionHistory();
-  for(const session of history){
-    if(session.date===todayKey())continue;
-    const ex=session.exercises&&session.exercises.find(e=>e.name===exName);
-    if(ex&&ex.sets){
-      const doneSets=ex.sets.filter(s=>s.done&&s.weight&&s.reps);
-      if(doneSets.length){
-        const vol=doneSets.reduce((a,s)=>a+(parseFloat(s.weight)*parseInt(s.reps)),0);
-        const bestW=Math.max(...doneSets.map(s=>parseFloat(s.weight)));
-        const bestR=Math.max(...doneSets.map(s=>parseInt(s.reps)));
-        return{vol,sets:doneSets.length,bestW,bestR,date:session.date};
+function toggleRestTimer(){
+  if(_rtRemain<=0){resetRestTimer();return;}
+  _rtRunning=!_rtRunning;
+  const btn=document.getElementById('rt-start-btn');
+  if(_rtRunning){
+    btn.textContent='⏸ Pause';
+    btn.style.background='var(--accent3)';
+    _rtInterval=setInterval(()=>{
+      _rtRemain--;
+      updateRtDisplay();
+      if(_rtRemain<=0){
+        clearInterval(_rtInterval);_rtRunning=false;
+        btn.textContent='✅ Done';
+        btn.style.background='var(--green)';
+        // Pulse the display
+        const d=document.getElementById('rt-display');
+        d.style.color='var(--green)';
+        d.textContent='REST';
+        setTimeout(()=>{d.style.color='var(--accent)';},3000);
       }
-    }
+    },1000);
+  } else {
+    clearInterval(_rtInterval);
+    btn.textContent='▶ Start';
+    btn.style.background='var(--accent)';
   }
-  return null;
 }
-
-// ─── WEEK SUMMARY ───
-function renderWeekSummary(){
-  const el=document.getElementById('week-summary');
-  const badge=document.getElementById('week-vol-badge');
-  if(!el)return;
-  const history=getSessionHistory();
-  // Get this week's sessions
-  const d=new Date();const day=d.getDay();
-  const weekDates=[];
-  for(let i=0;i<7;i++){const dd=new Date(d);dd.setDate(d.getDate()-day+1+i);weekDates.push(dd.getFullYear()+'-'+(dd.getMonth()+1)+'-'+dd.getDate());}
-  const typeColors={push:'var(--accent)',pull:'var(--accent2)',full:'var(--accent3)',vo2:'var(--green)',rest:'var(--muted)'};
-  const typeLabels={push:'💥 Push',pull:'🔗 Pull',full:'🤝 Full Body',vo2:'🔥 VO₂',rest:'😴 Rest'};
-  let totalVol=0;
-  el.innerHTML='';
-  weekDates.forEach(date=>{
-    const session=history.find(s=>s.date===date);
-    const vol=session?session.exercises.reduce((a,ex)=>a+ex.sets.filter(s=>s.done&&s.weight&&s.reps).reduce((b,s)=>b+(parseFloat(s.weight)*parseInt(s.reps)),0),0):0;
-    totalVol+=vol;
-    const label=new Date(date+'T12:00:00').toLocaleDateString('en-US',{weekday:'short'});
-    const row=document.createElement('div');row.className='week-day-row';
-    row.innerHTML=`<div class="week-day-dot" style="background:${session?typeColors[session.type]||'var(--muted)':'var(--border)'}"></div><div class="week-day-name">${label}</div><div class="week-day-type">${session?typeLabels[session.type]||session.type:'—'}</div><div class="week-day-vol">${vol?Math.round(vol).toLocaleString()+' lbs':''}</div>`;
-    el.appendChild(row);
-  });
-  if(badge)badge.textContent='Vol: '+Math.round(totalVol/1000*10)/10+'k lbs';
+function resetRestTimer(){
+  clearInterval(_rtInterval);_rtRunning=false;_rtRemain=_rtDuration;
+  const btn=document.getElementById('rt-start-btn');
+  btn.textContent='▶ Start';
+  btn.style.background='var(--accent)';
+  document.getElementById('rt-display').style.color='var(--accent)';
+  updateRtDisplay();
 }
+// init rest timer default
+(function(){restPreset(120);})();
 
-// ─── PROGRESS CHARTS (using Canvas, no deps) ───
-function calcWeeklyVolume(){
-  const history=getSessionHistory();
-  const weeks={};
-  history.forEach(session=>{
-    const d=new Date(session.date+'T12:00:00');
-    const day=d.getDay(),diff=d.getDate()-day+(day===0?-6:1);
-    const mon=new Date(d);mon.setDate(diff);
-    const wk=mon.getFullYear()+'-'+(mon.getMonth()+1)+'-'+mon.getDate();
-    const vol=session.exercises.reduce((a,ex)=>a+ex.sets.filter(s=>s.done&&s.weight&&s.reps).reduce((b,s)=>b+(parseFloat(s.weight)*parseInt(s.reps)),0),0);
-    weeks[wk]=(weeks[wk]||0)+vol;
-  });
-  const sorted=Object.keys(weeks).sort().slice(-52);
-  return{labels:sorted.map(w=>w.slice(5)),values:sorted.map(w=>Math.round(weeks[w]))};
+// ─── WORKOUT BUILDER ───
+// Set structure: {weight:'', reps:'', done:false}
+// Exercise structure: {name, sets:[...set objects]}
+const WB_DEFAULTS={
+  push:[
+    {name:'DB Bench Press',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'DB Shoulder Press',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'DB Lateral Raises',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'DB Chest Fly',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'Push-Ups',sets:[{weight:'BW',reps:'',done:false},{weight:'BW',reps:'',done:false}]},
+    {name:'Tricep Dips',sets:[{weight:'BW',reps:'',done:false},{weight:'BW',reps:'',done:false}]},
+  ],
+  pull:[
+    {name:'DB Single-Arm Row',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'Pull-Ups',sets:[{weight:'BW',reps:'',done:false},{weight:'BW',reps:'',done:false}]},
+    {name:'DB Curl',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'Hammer Curls',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'Inverted Row',sets:[{weight:'BW',reps:'',done:false},{weight:'BW',reps:'',done:false}]},
+  ],
+  full:[
+    {name:'DB Romanian Deadlift',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'DB Goblet Squat',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'DB Walking Lunges',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'DB Overhead Press',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'Plank',sets:[{weight:'BW',reps:'',done:false},{weight:'BW',reps:'',done:false}]},
+  ],
+  vo2:[
+    {name:'Zone 2 Run / Walk',sets:[{weight:'BW',reps:'',done:false}]},
+    {name:'Burpees',sets:[{weight:'BW',reps:'',done:false},{weight:'BW',reps:'',done:false},{weight:'BW',reps:'',done:false}]},
+    {name:'Jump Rope Intervals',sets:[{weight:'BW',reps:'',done:false},{weight:'BW',reps:'',done:false},{weight:'BW',reps:'',done:false}]},
+    {name:'Mountain Climbers',sets:[{weight:'BW',reps:'',done:false},{weight:'BW',reps:'',done:false}]},
+  ],
+};
+const WB_DAY_LABELS={push:'💥 Push Day',pull:'🔗 Pull Day',full:'🤝 Full Body',vo2:'🔥 VO₂ Max'};
+let _wbDay='push';
+
+// Persistent def (user's custom exercise list per day)
+function getWbDef(day){return lsj('lifeOS_wbdef3_'+day, WB_DEFAULTS[day].map(e=>({name:e.name,sets:e.sets.map(s=>({...s}))})));}
+function saveWbDef(day,d){ls('lifeOS_wbdef3_'+day,JSON.stringify(d));}
+
+// Today's session (weight/reps/done per set — persists weight/reps across days)
+function getWbSession(day){
+  const sessionKey='lifeOS_wb_sess3_'+day+'_'+todayKey();
+  const def=getWbDef(day);
+  const saved=lsj(sessionKey,null);
+  // Build fresh from def, merging in today's done states if session exists
+  const fresh=def.map((ex,ei)=>({
+    name:ex.name,
+    sets:ex.sets.map((s,si)=>({
+      weight: (saved&&saved[ei]&&saved[ei].sets[si]) ? saved[ei].sets[si].weight : s.weight,
+      reps:   (saved&&saved[ei]&&saved[ei].sets[si]) ? saved[ei].sets[si].reps   : s.reps,
+      done:   (saved&&saved[ei]&&saved[ei].sets[si]) ? saved[ei].sets[si].done   : false,
+    }))
+  }));
+  return fresh;
 }
+function saveWbSession(day,d){ls('lifeOS_wb_sess3_'+day+'_'+todayKey(),JSON.stringify(d));}
 
-function calcOrmHistory(exName){
-  // Epley formula: 1RM = w * (1 + r/30)
-  const history=getSessionHistory().reverse();
-  const points=[];
-  history.forEach(session=>{
-    const ex=session.exercises&&session.exercises.find(e=>e.name===exName);
-    if(ex){
-      const best=ex.sets.filter(s=>s.done&&s.weight&&s.reps).reduce((best,s)=>{
-        const orm=parseFloat(s.weight)*(1+parseInt(s.reps)/30);
-        return orm>best?orm:best;
-      },0);
-      if(best>0)points.push({date:session.date,orm:Math.round(best)});
-    }
-  });
-  return points;
-}
-
-function drawLineChart(canvasId,labels,values,color){
-  const canvas=document.getElementById(canvasId);
-  if(!canvas||!values.length)return;
-  const ctx=canvas.getContext('2d');
-  canvas.width=canvas.offsetWidth*2;canvas.height=220*2;
-  canvas.style.height='220px';
-  ctx.scale(2,2);
-  const w=canvas.offsetWidth,h=110;
-  const pad={t:10,r:10,b:30,l:50};
-  const maxV=Math.max(...values)*1.1||1;
-  ctx.clearRect(0,0,w,h+pad.t+pad.b);
-  // Grid lines
-  ctx.strokeStyle='#252525';ctx.lineWidth=1;
-  for(let i=0;i<=4;i++){const y=pad.t+((h)/4)*i;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(w-pad.r,y);ctx.stroke();}
-  // Y labels
-  ctx.fillStyle='#555';ctx.font='9px JetBrains Mono';ctx.textAlign='right';
-  for(let i=0;i<=4;i++){const v=Math.round(maxV*(1-i/4));const y=pad.t+((h)/4)*i;ctx.fillText(v.toLocaleString(),pad.l-4,y+3);}
-  // Line
-  const xs=values.map((_,i)=>pad.l+(i/(Math.max(values.length-1,1)))*(w-pad.l-pad.r));
-  const ys=values.map(v=>pad.t+h*(1-v/maxV));
-  // Fill
-  ctx.beginPath();ctx.moveTo(xs[0],h+pad.t);
-  xs.forEach((x,i)=>ctx.lineTo(x,ys[i]));
-  ctx.lineTo(xs[xs.length-1],h+pad.t);ctx.closePath();
-  ctx.fillStyle=color+'22';ctx.fill();
-  // Stroke
-  ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=2;ctx.lineJoin='round';
-  xs.forEach((x,i)=>i===0?ctx.moveTo(x,ys[i]):ctx.lineTo(x,ys[i]));
-  ctx.stroke();
-  // Dots
-  xs.forEach((x,i)=>{ctx.beginPath();ctx.arc(x,ys[i],3,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();});
-  // X labels — show every nth
-  ctx.fillStyle='#555';ctx.font='8px JetBrains Mono';ctx.textAlign='center';
-  const every=Math.ceil(labels.length/8);
-  labels.forEach((l,i)=>{if(i%every===0)ctx.fillText(l,xs[i],h+pad.t+14);});
-}
-
-function renderVolChart(){
-  const{labels,values}=calcWeeklyVolume();
-  if(!labels.length){const c=document.getElementById('vol-chart');if(c){const ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle='#555';ctx.font='12px Syne';ctx.textAlign='center';ctx.fillText('No workout data yet',c.offsetWidth/2,60);}return;}
-  setTimeout(()=>drawLineChart('vol-chart',labels,values,'#c8ff47'),50);
-}
-
-function renderOrmChart(){
-  const sel=document.getElementById('orm-exercise-select');
-  if(!sel)return;
-  // Populate select
-  const lib=getExerciseLibrary();
-  if(sel.options.length===0){lib.forEach(ex=>{const o=document.createElement('option');o.value=ex.name;o.textContent=ex.name;sel.appendChild(o);});}
-  const exName=sel.value;
-  const points=calcOrmHistory(exName);
-  if(!points.length){const c=document.getElementById('orm-chart');if(c){const ctx=c.getContext('2d');c.width=c.offsetWidth*2;c.height=220*2;c.style.height='220px';ctx.scale(2,2);ctx.clearRect(0,0,c.offsetWidth,110);ctx.fillStyle='#555';ctx.font='12px Syne';ctx.textAlign='center';ctx.fillText('No data for this exercise yet',c.offsetWidth/2,60);}return;}
-  setTimeout(()=>drawLineChart('orm-chart',points.map(p=>p.date.slice(5)),points.map(p=>p.orm),'#47d4ff'),50);
-}
-
-function renderPRList(){
-  const el=document.getElementById('pr-list');if(!el)return;
-  const lib=getExerciseLibrary();
-  const history=getSessionHistory();
-  const prs={};
-  history.forEach(session=>{
-    session.exercises&&session.exercises.forEach(ex=>{
-      ex.sets.filter(s=>s.done&&s.weight&&s.reps).forEach(s=>{
-        const w=parseFloat(s.weight),r=parseInt(s.reps);
-        const orm=Math.round(w*(1+r/30));
-        if(!prs[ex.name]||orm>prs[ex.name].orm)prs[ex.name]={orm,w,r,date:session.date};
-      });
+// Also persist weight/reps back to def so they survive to tomorrow
+function persistWbToDef(day,session){
+  const def=getWbDef(day);
+  session.forEach((ex,ei)=>{
+    if(!def[ei])return;
+    ex.sets.forEach((s,si)=>{
+      if(!def[ei].sets[si])return;
+      def[ei].sets[si].weight=s.weight;
+      def[ei].sets[si].reps=s.reps;
     });
   });
-  el.innerHTML='';
-  const sorted=Object.entries(prs).sort((a,b)=>b[1].orm-a[1].orm);
-  if(!sorted.length){el.innerHTML='<div style="color:var(--muted);font-size:12px;text-align:center;padding:20px">Log workouts to see PRs here</div>';return;}
-  sorted.forEach(([name,pr])=>{
-    const row=document.createElement('div');row.className='pr-row';
-    row.innerHTML=`<div class="pr-name">${name}</div><div style="text-align:right"><div class="pr-val">${pr.w}lbs × ${pr.r} reps</div><div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">1RM ~${pr.orm} lbs · ${pr.date}</div></div>`;
-    el.appendChild(row);
+  saveWbDef(day,def);
+}
+
+function wbShowDay(day){
+  _wbDay=day;
+  ['push','pull','full','vo2'].forEach(d=>{
+    const btn=document.getElementById('wb-tab-'+d);
+    if(btn){btn.style.borderColor='';btn.style.color='';}
+  });
+  const activeBtn=document.getElementById('wb-tab-'+day);
+  if(activeBtn){activeBtn.style.borderColor='rgba(200,255,71,.4)';activeBtn.style.color='var(--accent)';}
+  document.getElementById('wb-day-label').textContent=WB_DAY_LABELS[day]||day;
+  renderWbList();
+}
+
+function renderWbList(){
+  const day=_wbDay;
+  const session=getWbSession(day);
+  const el=document.getElementById('wb-exercise-list');
+  if(!el)return;el.innerHTML='';
+  session.forEach((ex,ei)=>{
+    const div=document.createElement('div');div.className='wb-exercise';
+    const isBW=ex.sets.every(s=>s.weight==='BW');
+    const completedSets=ex.sets.filter(s=>s.done).length;
+    const totalSets=ex.sets.length;
+    // Header row
+    const headerDiv=document.createElement('div');headerDiv.className='wb-ex-header';
+    headerDiv.innerHTML=`
+      <span class="wb-ex-name">${ex.name}</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)">${completedSets}/${totalSets}</span>
+      <button class="wb-add-set" onclick="wbAddSet('${day}',${ei})">+ Set</button>
+      <button class="wb-del" onclick="wbDelExercise('${day}',${ei})">✕</button>`;
+    div.appendChild(headerDiv);
+    // Sets table
+    const table=document.createElement('table');table.className='wb-sets-table';
+    table.innerHTML=`<thead><tr><th>Set</th><th>${isBW?'Type':'lbs'}</th><th>Reps</th><th>Done</th><th></th></tr></thead>`;
+    const tbody=document.createElement('tbody');
+    ex.sets.forEach((s,si)=>{
+      const tr=document.createElement('tr');
+      const wtVal=s.weight||'';
+      tr.innerHTML=`
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">${si+1}</td>
+        <td><input class="wb-input-sm${isBW?' bw':''}" type="${isBW?'text':'number'}"
+          value="${wtVal}" placeholder="${isBW?'BW':'—'}" min="0"
+          onchange="wbSaveSet('${day}',${ei},${si},'weight',this.value)"
+          onfocus="if(this.value==='BW')this.value=''"
+          onblur="if(this.value==='')this.value='${isBW?'BW':''}'"></td>
+        <td><input class="wb-input-sm" type="number" value="${s.reps||''}" placeholder="—" min="0"
+          onchange="wbSaveSet('${day}',${ei},${si},'reps',this.value)"></td>
+        <td><div class="wb-set-done${s.done?' done':''}" onclick="wbToggleSet('${day}',${ei},${si})">${s.done?'✓':''}</div></td>
+        <td><button class="wb-set-del-row" onclick="wbRemoveSet('${day}',${ei},${si})" title="Remove set">✕</button></td>`;
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    div.appendChild(table);
+    el.appendChild(div);
   });
 }
 
-// ─── BODYWEIGHT ───
-function getBwLog(){return lsj('lifeOS_bw_log',{});}
-function saveBwLog(d){lsSave('lifeOS_bw_log',JSON.stringify(d));}
-
-function logBodyweight(){
-  const input=document.getElementById('bw-input');
-  const val=parseFloat(input.value);if(!val||val<50||val>500)return;
-  const d=getBwLog();d[todayKey()]=val;saveBwLog(d);
-  input.value='';renderBwChart();
+function wbSaveSet(day,ei,si,field,val){
+  const session=getWbSession(day);
+  if(!session[ei]||!session[ei].sets[si])return;
+  session[ei].sets[si][field]=val;
+  saveWbSession(day,session);
+  persistWbToDef(day,session);
 }
 
-function renderBwChart(){
-  const log=getBwLog();
-  const keys=Object.keys(log).sort().slice(-90);
-  if(!keys.length){
-    const todayEl=document.getElementById('bw-today-val');if(todayEl)todayEl.textContent='';
-    const statsEl=document.getElementById('bw-stats');if(statsEl)statsEl.innerHTML='<div style="color:var(--muted);font-size:12px;text-align:center;padding:10px;grid-column:1/-1">Log your first weigh-in above</div>';
-    return;
+function wbToggleSet(day,ei,si){
+  const session=getWbSession(day);
+  session[ei].sets[si].done=!session[ei].sets[si].done;
+  saveWbSession(day,session);renderWbList();
+}
+
+function wbAddSet(day,ei){
+  const session=getWbSession(day);
+  const ex=session[ei];
+  const lastSet=ex.sets[ex.sets.length-1]||{weight:'',reps:''};
+  ex.sets.push({weight:lastSet.weight,reps:'',done:false});
+  saveWbSession(day,session);
+  // Add to def too
+  const def=getWbDef(day);
+  if(def[ei]) def[ei].sets.push({weight:lastSet.weight,reps:'',done:false});
+  saveWbDef(day,def);
+  renderWbList();
+}
+
+function wbRemoveSet(day,ei,si){
+  const session=getWbSession(day);
+  if(session[ei].sets.length<=1)return; // keep at least 1
+  session[ei].sets.splice(si,1);
+  saveWbSession(day,session);
+  const def=getWbDef(day);
+  if(def[ei]&&def[ei].sets.length>1) def[ei].sets.splice(si,1);
+  saveWbDef(day,def);
+  renderWbList();
+}
+
+function wbDelExercise(day,ei){
+  const def=getWbDef(day);def.splice(ei,1);saveWbDef(day,def);
+  const session=getWbSession(day);session.splice(ei,1);saveWbSession(day,session);
+  renderWbList();
+}
+
+function wbAddExercise(nameOverride){
+  const nameEl=document.getElementById('wb-new-name');
+  const name=(nameOverride||nameEl.value).trim();
+  if(!name)return;
+  const day=_wbDay;
+  const newEx={name,sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]};
+  const def=getWbDef(day);def.push({...newEx,sets:[...newEx.sets.map(s=>({...s}))]});saveWbDef(day,def);
+  const session=getWbSession(day);session.push({...newEx});saveWbSession(day,session);
+  if(nameEl)nameEl.value='';
+  renderWbList();
+  closeExLib();
+}
+(function(){wbShowDay('push');})();
+
+// ─── EXERCISE LIBRARY ───
+const EX_LIBRARY=[
+  // Push
+  {name:'DB Bench Press',cat:'Push',bw:false},
+  {name:'DB Incline Press',cat:'Push',bw:false},
+  {name:'DB Decline Press',cat:'Push',bw:false},
+  {name:'DB Shoulder Press',cat:'Push',bw:false},
+  {name:'DB Arnold Press',cat:'Push',bw:false},
+  {name:'DB Chest Fly',cat:'Push',bw:false},
+  {name:'DB Lateral Raises',cat:'Push',bw:false},
+  {name:'DB Front Raises',cat:'Push',bw:false},
+  {name:'DB Overhead Tricep Extension',cat:'Push',bw:false},
+  {name:'DB Tricep Kickback',cat:'Push',bw:false},
+  {name:'Push-Ups',cat:'Push',bw:true},
+  {name:'Pike Push-Ups',cat:'Push',bw:true},
+  {name:'Diamond Push-Ups',cat:'Push',bw:true},
+  {name:'Tricep Dips',cat:'Push',bw:true},
+  {name:'Close-Grip Push-Ups',cat:'Push',bw:true},
+  // Pull
+  {name:'DB Single-Arm Row',cat:'Pull',bw:false},
+  {name:'DB Bent-Over Row',cat:'Pull',bw:false},
+  {name:'DB Renegade Row',cat:'Pull',bw:false},
+  {name:'DB Curl',cat:'Pull',bw:false},
+  {name:'DB Hammer Curl',cat:'Pull',bw:false},
+  {name:'DB Concentration Curl',cat:'Pull',bw:false},
+  {name:'DB Reverse Curl',cat:'Pull',bw:false},
+  {name:'DB Shrug',cat:'Pull',bw:false},
+  {name:'Pull-Ups',cat:'Pull',bw:true},
+  {name:'Chin-Ups',cat:'Pull',bw:true},
+  {name:'Inverted Row',cat:'Pull',bw:true},
+  {name:'Neutral-Grip Pull-Ups',cat:'Pull',bw:true},
+  // Legs
+  {name:'DB Goblet Squat',cat:'Legs',bw:false},
+  {name:'DB Romanian Deadlift',cat:'Legs',bw:false},
+  {name:'DB Walking Lunges',cat:'Legs',bw:false},
+  {name:'DB Reverse Lunges',cat:'Legs',bw:false},
+  {name:'DB Step-Ups',cat:'Legs',bw:false},
+  {name:'DB Bulgarian Split Squat',cat:'Legs',bw:false},
+  {name:'DB Sumo Squat',cat:'Legs',bw:false},
+  {name:'DB Calf Raises',cat:'Legs',bw:false},
+  {name:'Squat',cat:'Legs',bw:true},
+  {name:'Jump Squats',cat:'Legs',bw:true},
+  {name:'Glute Bridge',cat:'Legs',bw:true},
+  {name:'Nordic Curl',cat:'Legs',bw:true},
+  {name:'Wall Sit',cat:'Legs',bw:true},
+  // Core
+  {name:'Plank',cat:'Core',bw:true},
+  {name:'Side Plank',cat:'Core',bw:true},
+  {name:'Dead Bug',cat:'Core',bw:true},
+  {name:'Hollow Body Hold',cat:'Core',bw:true},
+  {name:'Ab Wheel Rollout',cat:'Core',bw:true},
+  {name:'Bicycle Crunches',cat:'Core',bw:true},
+  {name:'Hanging Knee Raises',cat:'Core',bw:true},
+  {name:'Russian Twists',cat:'Core',bw:true},
+  {name:'Leg Raises',cat:'Core',bw:true},
+  {name:'V-Ups',cat:'Core',bw:true},
+  // VO2 / Cardio
+  {name:'Burpees',cat:'VO₂',bw:true},
+  {name:'Jump Rope Intervals',cat:'VO₂',bw:true},
+  {name:'Mountain Climbers',cat:'VO₂',bw:true},
+  {name:'Box Jumps',cat:'VO₂',bw:true},
+  {name:'High Knees',cat:'VO₂',bw:true},
+  {name:'Bear Crawl',cat:'VO₂',bw:true},
+  {name:'Zone 2 Run / Walk',cat:'VO₂',bw:true},
+  {name:'Sprint Intervals',cat:'VO₂',bw:true},
+  {name:'Jumping Jacks',cat:'VO₂',bw:true},
+];
+let _exLibCat='All';
+function openExLib(){
+  document.getElementById('ex-lib-modal').classList.add('open');
+  renderExLibCats();
+  renderExLib();
+}
+function closeExLib(){document.getElementById('ex-lib-modal').classList.remove('open');}
+function renderExLibCats(){
+  const cats=['All','Push','Pull','Legs','Core','VO₂'];
+  const el=document.getElementById('ex-lib-cats');
+  if(!el)return;el.innerHTML='';
+  cats.forEach(c=>{
+    const btn=document.createElement('button');btn.className='ex-lib-cat-btn'+(_exLibCat===c?' active':'');
+    btn.textContent=c;btn.onclick=()=>{_exLibCat=c;renderExLibCats();renderExLib();};
+    el.appendChild(btn);
+  });
+}
+function renderExLib(){
+  const q=(document.getElementById('ex-lib-search')?.value||'').toLowerCase();
+  const el=document.getElementById('ex-lib-list');if(!el)return;el.innerHTML='';
+  const filtered=EX_LIBRARY.filter(e=>{
+    const catMatch=_exLibCat==='All'||e.cat===_exLibCat;
+    const searchMatch=!q||e.name.toLowerCase().includes(q);
+    return catMatch&&searchMatch;
+  });
+  if(!filtered.length){el.innerHTML='<div style="color:var(--muted);font-size:13px;padding:12px 0">No exercises found</div>';return;}
+  filtered.forEach(e=>{
+    const div=document.createElement('div');div.className='ex-lib-item';
+    div.innerHTML=`
+      <span class="ex-lib-item-cat" style="color:${e.bw?'var(--accent2)':'var(--accent)'}">${e.cat}</span>
+      <span class="ex-lib-item-name">${e.name}</span>
+      <span style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">${e.bw?'BW':'DB'}</span>
+      <button class="ex-lib-add-btn" onclick="wbAddFromLib('${e.name.replace(/'/g,"\\'")}',${e.bw})">+ Add</button>`;
+    el.appendChild(div);
+  });
+}
+function wbAddFromLib(name,isBW){
+  const day=_wbDay;
+  const defaultWeight=isBW?'BW':'';
+  const newEx={name,sets:[
+    {weight:defaultWeight,reps:'',done:false},
+    {weight:defaultWeight,reps:'',done:false}
+  ]};
+  const def=getWbDef(day);def.push({...newEx,sets:newEx.sets.map(s=>({...s}))});saveWbDef(day,def);
+  const session=getWbSession(day);session.push({...newEx,sets:newEx.sets.map(s=>({...s}))});saveWbSession(day,session);
+  renderWbList();
+  closeExLib();
+}
+
+// ─── POMODORO COFFEE CUP ───
+let _pomoTotal=25*60,_pomoRemain=25*60,_pomoRunning=false,_pomoInterval=null,_pomoMode='FOCUS',_pomoIcon='🍅';
+const _pomoCanvas=()=>document.getElementById('pomo-canvas');
+const COFFEE_COLOR='#5c3317';
+const COFFEE_DARK='#3a1f0a';
+const CUP_COLOR='#c8ff47';
+const STEAM_COLOR='rgba(200,255,71,0.35)';
+
+function drawPomoCup(pct){ // pct 0-1
+  const canvas=_pomoCanvas();if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width,H=canvas.height;
+  ctx.clearRect(0,0,W,H);
+
+  // Mug dimensions
+  const mw=100, mh=80;     // mug inner body width & height
+  const wallT=7;            // wall thickness
+  const rimH=10;            // rim height above body
+  const cx=W/2-10;          // center x (offset left to leave room for handle)
+  const ty=28;              // top of rim
+  // Outer mug body (slightly tapered: wider at top)
+  const topW=mw+wallT*2;
+  const botW=mw+wallT*2-6;
+  const bodyTop=ty+rimH;
+  const bodyBot=bodyTop+mh;
+
+  // ── STEAM (when > 30% full) ──
+  if(pct>0.15){
+    const t=Date.now()/800;
+    ctx.save();
+    for(let i=0;i<3;i++){
+      const sx=cx-18+i*18+Math.sin(t+i*2.1)*4;
+      const fadeH=20+i*4;
+      const alpha=Math.max(0,(pct-0.15)*0.8);
+      const steamGrad=ctx.createLinearGradient(sx,ty-fadeH,sx,ty-4);
+      steamGrad.addColorStop(0,'transparent');
+      steamGrad.addColorStop(1,`rgba(200,255,71,${alpha*0.5})`);
+      ctx.strokeStyle=steamGrad;
+      ctx.lineWidth=2.5;
+      ctx.lineCap='round';
+      ctx.beginPath();
+      ctx.moveTo(sx,ty-4);
+      ctx.bezierCurveTo(sx+6,ty-10,sx-5,ty-16,sx+3,ty-fadeH);
+      ctx.stroke();
+    }
+    ctx.restore();
   }
-  const vals=keys.map(k=>log[k]);
-  const today=log[todayKey()];
-  const todayEl=document.getElementById('bw-today-val');
-  if(todayEl)todayEl.textContent=today?today+' lbs today':'';
-  // Stats
-  const statsEl=document.getElementById('bw-stats');
-  if(statsEl){
-    const avg=Math.round(vals.reduce((a,b)=>a+b,0)/vals.length*10)/10;
-    const min=Math.min(...vals);const max=Math.max(...vals);
-    const trend=vals.length>7?Math.round((vals[vals.length-1]-vals[vals.length-8])*10)/10:null;
-    statsEl.innerHTML=`
-      <div class="bw-stat"><div class="bw-stat-val">${today||'—'}</div><div class="bw-stat-label">Today</div></div>
-      <div class="bw-stat"><div class="bw-stat-val">${avg}</div><div class="bw-stat-label">90-day avg</div></div>
-      <div class="bw-stat"><div class="bw-stat-val" style="color:${trend<0?'var(--green)':trend>0?'var(--accent3)':'var(--accent)'}">${trend!==null?(trend>0?'+':'')+trend+' lbs':'—'}</div><div class="bw-stat-label">7-day trend</div></div>
-    `;
+
+  // ── SAUCER ──
+  const saucerY=bodyBot+8;
+  const saucerW=topW+22;
+  const saucerH=10;
+  ctx.save();
+  // Saucer shadow
+  ctx.fillStyle='rgba(0,0,0,0.3)';
+  ctx.beginPath();
+  ctx.ellipse(cx,saucerY+saucerH+3,saucerW/2-4,5,0,0,Math.PI*2);
+  ctx.fill();
+  // Saucer top ellipse
+  const sg=ctx.createLinearGradient(cx-saucerW/2,saucerY,cx+saucerW/2,saucerY+saucerH);
+  sg.addColorStop(0,'#2a2a2a');sg.addColorStop(0.5,'#383838');sg.addColorStop(1,'#1e1e1e');
+  ctx.fillStyle=sg;
+  ctx.beginPath();
+  ctx.ellipse(cx,saucerY+saucerH/2,saucerW/2,saucerH/2,0,0,Math.PI*2);
+  ctx.fill();
+  ctx.strokeStyle='rgba(200,255,71,0.25)';ctx.lineWidth=1.5;
+  ctx.beginPath();
+  ctx.ellipse(cx,saucerY,saucerW/2,4,0,0,Math.PI);
+  ctx.stroke();
+  ctx.restore();
+
+  // ── MUG BODY (trapezoid) ──
+  ctx.save();
+  // Clip region for coffee fill = inside the mug walls
+  const innerLeft=cx-mw/2;
+  const innerRight=cx+mw/2;
+  const innerTop=bodyTop;
+  const innerBot=bodyBot;
+
+  // Draw mug outer shape (gradient ceramic)
+  const mugGrad=ctx.createLinearGradient(cx-topW/2,0,cx+topW/2,0);
+  mugGrad.addColorStop(0,'#1e1e1e');mugGrad.addColorStop(0.15,'#2e2e2e');
+  mugGrad.addColorStop(0.85,'#2a2a2a');mugGrad.addColorStop(1,'#181818');
+  ctx.fillStyle=mugGrad;
+  ctx.beginPath();
+  ctx.moveTo(cx-topW/2, bodyTop);
+  ctx.lineTo(cx+topW/2, bodyTop);
+  ctx.lineTo(cx+botW/2, bodyBot);
+  ctx.arc(cx,bodyBot,botW/2,0,Math.PI);
+  ctx.closePath();
+  ctx.fill();
+
+  // Coffee fill (clipped inside mug)
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(cx-mw/2+1, bodyTop);
+  ctx.lineTo(cx+mw/2-1, bodyTop);
+  ctx.lineTo(cx+mw/2-4, bodyBot);
+  ctx.arc(cx,bodyBot,mw/2-4,0,Math.PI);
+  ctx.closePath();
+  ctx.clip();
+
+  if(pct>0){
+    const fillTop=bodyBot-((bodyBot-bodyTop)*pct);
+    // Coffee gradient
+    const cg=ctx.createLinearGradient(cx,fillTop,cx,bodyBot);
+    cg.addColorStop(0,'#7b4a1e');cg.addColorStop(0.5,'#5c3317');cg.addColorStop(1,'#3a1f0a');
+    ctx.fillStyle=cg;
+    ctx.fillRect(cx-mw/2,fillTop,mw,bodyBot-fillTop+10);
+    // Coffee surface sheen
+    ctx.fillStyle='rgba(200,140,60,0.15)';
+    ctx.beginPath();
+    ctx.ellipse(cx,fillTop,mw/2-2,5,0,0,Math.PI*2);
+    ctx.fill();
+    // Tiny light reflection on surface
+    ctx.fillStyle='rgba(255,200,100,0.2)';
+    ctx.beginPath();
+    ctx.ellipse(cx-mw/6,fillTop+1,mw/8,2,0,0,Math.PI*2);
+    ctx.fill();
   }
-  setTimeout(()=>drawLineChart('bw-chart',keys.map(k=>k.slice(5)),vals,'#b47ffe'),50);
+  ctx.restore(); // end coffee clip
+
+  // Rim
+  const rimGrad=ctx.createLinearGradient(cx-topW/2,ty,cx+topW/2,ty+rimH);
+  rimGrad.addColorStop(0,'#3a3a3a');rimGrad.addColorStop(0.5,'#4a4a4a');rimGrad.addColorStop(1,'#2a2a2a');
+  ctx.fillStyle=rimGrad;
+  ctx.beginPath();
+  ctx.moveTo(cx-topW/2-2,ty);
+  ctx.lineTo(cx+topW/2+2,ty);
+  ctx.lineTo(cx+topW/2,bodyTop);
+  ctx.lineTo(cx-topW/2,bodyTop);
+  ctx.closePath();
+  ctx.fill();
+
+  // Mug outer border highlight
+  ctx.strokeStyle='rgba(200,255,71,0.35)';ctx.lineWidth=1.5;
+  ctx.beginPath();
+  ctx.moveTo(cx-topW/2-2,ty);
+  ctx.lineTo(cx+topW/2+2,ty);
+  ctx.stroke();
+  ctx.strokeStyle='rgba(200,255,71,0.15)';
+  ctx.beginPath();
+  ctx.moveTo(cx-topW/2,bodyTop);ctx.lineTo(cx-botW/2,bodyBot);
+  ctx.stroke();
+  ctx.restore();
+
+  // ── HANDLE ──
+  ctx.save();
+  const hx=cx+topW/2+2;
+  const hy1=bodyTop+mh*0.2;
+  const hy2=bodyTop+mh*0.75;
+  const handleW=28;
+  ctx.strokeStyle='rgba(200,255,71,0.4)';ctx.lineWidth=8;ctx.lineCap='round';ctx.lineJoin='round';
+  ctx.beginPath();
+  ctx.moveTo(hx,hy1);
+  ctx.bezierCurveTo(hx+handleW,hy1, hx+handleW,hy2, hx,hy2);
+  ctx.stroke();
+  // Handle inner lighter line
+  ctx.strokeStyle='rgba(80,60,40,0.5)';ctx.lineWidth=3;
+  ctx.beginPath();
+  ctx.moveTo(hx+1,hy1+2);
+  ctx.bezierCurveTo(hx+handleW-4,hy1+3, hx+handleW-4,hy2-3, hx+1,hy2-2);
+  ctx.stroke();
+  ctx.restore();
+
+  // ── TIMER TEXT ──
+  const textY=bodyTop+(bodyBot-bodyTop)/2+4;
+  const timeStr=fmtTime(_pomoRemain);
+  const timerColor=pct<0.2?'#ff6b35':pct<0.45?'#47d4ff':'#c8ff47';
+  ctx.save();
+  ctx.font='bold 22px "JetBrains Mono",monospace';
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  // Shadow
+  ctx.fillStyle='rgba(0,0,0,0.9)';
+  ctx.fillText(timeStr,cx+1,textY+1);
+  ctx.fillStyle=timerColor;
+  ctx.fillText(timeStr,cx,textY);
+  ctx.restore();
 }
 
-// ─── INIT WORKOUT SECTION ───
-function initWorkoutSection(){
-  const dateLabel=document.getElementById('workout-date-label');
-  if(dateLabel)dateLabel.textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});
-  let session=getTodaySession();
-  if(!session){session=initTodaySession('push');saveTodaySession(session);}
-  const sel=document.getElementById('workout-type-select');
-  if(sel)sel.value=session.type||'push';
-  renderWorkoutSession();
-  renderBwChart();
+let _pomoAnimFrame=null;
+function pomoAnimate(){
+  const pct=_pomoTotal>0?_pomoRemain/_pomoTotal:0;
+  drawPomoCup(pct);
+  if(_pomoRunning||pct>0)_pomoAnimFrame=requestAnimationFrame(pomoAnimate);
 }
-
-// ─── EXPOSE NEW FUNCTIONS ───
-Object.assign(window,{
-  showTab,showSubTab,
-  toggleRoutineItem,deleteRoutineItem,addRoutineItem,resetRoutine,editRoutineItem,
-  toggleTodoItem,deleteTodoItem,addTodoItem,editTodoItem,
-  toggleSList,deleteSList,addSimpleItem,editSListItem,
-  scoopAdj,resetScoopWeek,addScoopIdea,deleteScoopIdea,
-  addSbIdea,deleteSbIdea,saveSbNotes,
-  regenerateHitList,saveJournal,
-  toggleTrain,resetTrainingLog,
-  copyData,openPushModal,closePushModal,pushToGitHub,
-  switchWorkoutType,updateSet,toggleSetDone,addSet,removeExercise,finishWorkout,
-  openAddExercise,closeAddExercise,addExerciseToSession,
-  addExerciseToLibrary,deleteExerciseFromLibrary,
-  logBodyweight,renderOrmChart,
-});
+function pomoSetPreset(min,mode,icon){
+  if(_pomoRunning)return;
+  _pomoTotal=min*60;_pomoRemain=min*60;_pomoMode=mode;_pomoIcon=icon;
+  document.getElementById('pomo-label').textContent=mode;
+  document.querySelectorAll('.pomo-preset-btn').forEach(b=>b.classList.remove('active'));
+  const ids={25:'pp-25',52:'pp-52',15:'pp-15',5:'pp-5'};
+  const btn=document.getElementById(ids[min]);
+  if(btn)btn.classList.add('active');
+  drawPomoCup(1);
+}
+function togglePomo(){
+  if(_pomoRemain<=0){resetPomo();return;}
+  _pomoRunning=!_pomoRunning;
+  const btn=document.getElementById('pomo-start-btn');
+  if(_pomoRunning){
+    btn.textContent='⏸ Pause';btn.style.background='var(--accent3)';
+    if(_pomoAnimFrame)cancelAnimationFrame(_pomoAnimFrame);
+    pomoAnimate();
+    _pomoInterval=setInterval(()=>{
+      _pomoRemain--;
+      if(_pomoRemain<=0){
+        clearInterval(_pomoInterval);_pomoRunning=false;
+        btn.textContent='✅ Done';btn.style.background='var(--green)';
+        if(_pomoAnimFrame)cancelAnimationFrame(_pomoAnimFrame);
+        drawPomoCup(0);
+        document.getElementById('pomo-label').textContent='☕ DONE! TAKE A BREAK';
+      }
+    },1000);
+  } else {
+    clearInterval(_pomoInterval);
+    if(_pomoAnimFrame)cancelAnimationFrame(_pomoAnimFrame);
+    btn.textContent='▶ Start';btn.style.background='var(--accent)';
+  }
+}
+function resetPomo(){
+  clearInterval(_pomoInterval);_pomoRunning=false;
+  if(_pomoAnimFrame)cancelAnimationFrame(_pomoAnimFrame);
+  _pomoRemain=_pomoTotal;
+  const btn=document.getElementById('pomo-start-btn');
+  btn.textContent='▶ Start';btn.style.background='var(--accent)';
+  document.getElementById('pomo-label').textContent=_pomoMode;
+  drawPomoCup(1);
+}
+(function(){
+  // Set default preset to 25m
+  document.getElementById('pp-25').classList.add('active');
+  drawPomoCup(1);
+})();
 
 // ─── INIT ───
 document.getElementById('dateBadge').textContent=new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
 document.getElementById('push-modal').classList.remove('open');
-reRenderAll();
-initWorkoutSection();
-fbPullAll().then(()=>fbListen());
+renderRoutine('morning');
+renderRoutine('evening');
+renderRoutine('sbshift');
+['scoop-daily','scoop-week','sb-current','family-weekly'].forEach(k=>renderSimpleList(k));
+renderTodoBlock('home','todo-home-wrap');
+renderTodoBlock('work','todo-work-wrap');
+renderTodoBlock('scoop','todo-scoop-wrap');
+renderScoop();
+renderScoopIdeas();
+renderSbIdeas();
+loadSbNotes();
+renderRoadmap();
+loadJournal();
+renderTrainingLog();
+renderHitList();
 </script>
-
-
-
 
 
 </body></html>
