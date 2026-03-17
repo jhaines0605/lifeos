@@ -199,6 +199,43 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 .wb-link-btn{background:none;border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;font-size:10px;padding:2px 7px;font-family:'Syne',sans-serif;white-space:nowrap;flex-shrink:0;transition:all .15s}
 .wb-link-btn:hover{border-color:rgba(71,212,255,.4);color:var(--accent2)}
 .wb-link-btn.linked{border-color:rgba(71,212,255,.5);color:var(--accent2);background:rgba(71,212,255,.07)}
+
+/* CARDIO TRACKER */
+.cardio-week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:10px 0 6px}
+.cardio-day{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:6px 4px;text-align:center;transition:all .2s;cursor:pointer;position:relative}
+.cardio-day.has-cardio{border-color:rgba(61,220,132,.4);background:rgba(61,220,132,.06)}
+.cardio-day-name{font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.cardio-day-min{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--green);line-height:1}
+.cardio-day-min.zero{color:var(--muted)}
+.cardio-adj{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin:8px 0 4px}
+.cardio-quick-btn{background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:5px 10px;font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Syne',sans-serif;transition:all .15s}
+.cardio-quick-btn:active{border-color:var(--green);color:var(--green);background:rgba(61,220,132,.08)}
+.cardio-goal-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:6px}
+.cardio-goal-fill{height:100%;background:var(--green);border-radius:3px;transition:width .4s ease}
+/* MONTHLY WORKOUT MAP */
+.wk-month-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:6px}
+.wk-day-cell{border-radius:5px;padding:4px 2px;text-align:center;min-height:42px;background:var(--surface2);border:1px solid var(--border);position:relative;cursor:default}
+.wk-day-cell.today{border-color:rgba(200,255,71,.5);box-shadow:0 0 0 1px rgba(200,255,71,.2)}
+.wk-day-cell.empty{background:transparent;border-color:transparent}
+.wk-day-num{font-size:8px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:2px}
+.wk-day-type{font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;line-height:1.2}
+.wk-day-vol{font-size:7px;font-family:'JetBrains Mono',monospace;color:var(--muted);margin-top:1px;line-height:1}
+.wk-day-cell.push-day{background:rgba(200,255,71,.07);border-color:rgba(200,255,71,.3)}
+.wk-day-cell.pull-day{background:rgba(71,212,255,.07);border-color:rgba(71,212,255,.3)}
+.wk-day-cell.full-day{background:rgba(255,107,53,.07);border-color:rgba(255,107,53,.3)}
+.wk-day-cell.vo2-day{background:rgba(180,127,254,.07);border-color:rgba(180,127,254,.3)}
+.wk-day-cell.rest-day{background:transparent}
+.wk-month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.wk-month-label{font-size:11px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:1px}
+.wk-nav-btn{background:none;border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;font-size:12px;padding:3px 8px;font-family:'Syne',sans-serif}
+.wk-nav-btn:active{border-color:var(--accent);color:var(--accent)}
+.wk-dow-label{font-size:7px;color:var(--muted);text-transform:uppercase;text-align:center;padding:2px 0;letter-spacing:.5px}
+.wk-vol-total{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+.wk-legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.wk-legend-item{display:flex;align-items:center;gap:4px;font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.wk-legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+/* Volume highlight */
+.vol-badge{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);font-weight:700}
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:3px;height:3px}
 ::-webkit-scrollbar-track{background:var(--bg)}
@@ -235,17 +272,17 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
     <div class="tagline">Master System · Age 38</div>
   </div>
   <div class="header-right">
-    <div class="date-badge" id="dateBadge">Mon, Mar 16, 2026</div>
+    <div class="date-badge" id="dateBadge">Tue, Mar 17, 2026</div>
     <button class="hdr-btn" onclick="copyData()">📋 Copy Data</button>
     <button class="hdr-btn push" onclick="openPushModal()" id="push-btn">🚀 Push</button>
   </div>
 </div>
 
 <div class="nav">
-  <button class="nav-tab active" onclick="showTab('overview',this)"><span class="ni">⚡</span>Overview</button>
+  <button class="nav-tab" onclick="showTab('overview',this)"><span class="ni">⚡</span>Overview</button>
   <button class="nav-tab" onclick="showTab('morning',this)"><span class="ni">☀️</span>Morning</button>
   <button class="nav-tab" onclick="showTab('evening',this)"><span class="ni">🌙</span>Evening</button>
-  <button class="nav-tab" onclick="showTab('health',this)"><span class="ni">🧪</span>Health</button>
+  <button class="nav-tab active" onclick="showTab('health',this)"><span class="ni">🧪</span>Health</button>
   <button class="nav-tab" onclick="showTab('business',this)"><span class="ni">💩</span>Scoop</button>
   <button class="nav-tab" onclick="showTab('sportsbook',this)"><span class="ni">🎰</span>Books</button>
   <button class="nav-tab" onclick="showTab('family',this)"><span class="ni">💖</span>Family</button>
@@ -274,7 +311,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 <div class="main">
 
 <!-- ══════════ OVERVIEW ══════════ -->
-<div class="tab active" id="tab-overview">
+<div class="tab" id="tab-overview">
 
   <div class="overview-grid">
     <div class="stat-card"><div class="stat-label">Scoop Clients</div><div class="stat-value" style="color:var(--accent)" id="ov-clients">3</div><div class="stat-sub">Goal: 20 by Apr 2026</div></div>
@@ -309,7 +346,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
     <div class="card-header">
       <div>
         <div class="card-title">🎯 Daily Hit List</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date">Monday, Mar 16</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date">Tuesday, Mar 17</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
         <span id="hitlist-pval" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">0/9</span>
@@ -323,7 +360,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
   <div class="card">
     <div class="card-header"><div class="card-title">📓 Weekly Wins &amp; Notes</div><div class="badge badge-green">Reflection</div></div>
     <textarea id="weekly-journal" placeholder="What went well this week? Wins, ideas, reflections..." style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:13px;color:var(--text);font-family:'Syne',sans-serif;outline:none;resize:vertical;min-height:140px;line-height:1.6;-webkit-appearance:none" oninput="saveJournal()"></textarea>
-    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px" id="journal-saved"></div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px" id="journal-saved">Saved · Week of 2026-3-16</div>
   </div>
 </div>
 
@@ -347,7 +384,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
         <input class="add-input" id="morning-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('morning')">
         <button class="add-btn" onclick="addRoutineItem('morning')">+ Add</button>
       </div>
-      <div class="last-reset" id="morning-last-reset">Last reset: 2026-3-16</div>
+      <div class="last-reset" id="morning-last-reset">Last reset: 2026-3-17</div>
     </div>
 
   </div>
@@ -373,14 +410,35 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
         <input class="add-input" id="evening-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('evening')">
         <button class="add-btn" onclick="addRoutineItem('evening')">+ Add</button>
       </div>
-      <div class="last-reset" id="evening-last-reset">Last reset: 2026-3-16</div>
+      <div class="last-reset" id="evening-last-reset">Last reset: 2026-3-17</div>
     </div>
 
   </div>
 </div>
 
 <!-- ══════════ HEALTH ══════════ -->
-<div class="tab" id="tab-health">
+<div class="tab active" id="tab-health">
+
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-header" style="margin-bottom:8px">
+      <div>
+        <div class="card-title">🏃 Cardio This Week</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span id="cardio-total-display" style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--green)">0</span>
+        <span style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">/ 100 min</span>
+      </div>
+    </div>
+    <div class="cardio-goal-bar"><div class="cardio-goal-fill" id="cardio-goal-fill" style="width:0%"></div></div>
+    <div class="cardio-week-grid" id="cardio-week-grid"></div>
+    <div class="cardio-adj">
+      <button class="cardio-quick-btn" onclick="addCardio(15)">+15</button>
+      <button class="cardio-quick-btn" onclick="addCardio(20)">+20</button>
+      <button class="cardio-quick-btn" onclick="addCardio(30)">+30</button>
+      <button class="cardio-quick-btn" onclick="addCardio(45)">+45</button>
+      <button class="cardio-quick-btn" onclick="addCardio(-5)" style="color:var(--muted)">−5</button>
+    </div>
+  </div>
 
   <div class="card">
     <div class="card-header"><div class="card-title">⏱️ Rest Timer</div><div class="badge badge-green">Weightlifting</div></div>
@@ -389,7 +447,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
     <div style="display:flex;gap:8px;justify-content:center;margin-bottom:12px">
       <button class="reset-btn" id="rt-p60" onclick="restPreset(60)">1:00</button>
       <button class="reset-btn" id="rt-p90" onclick="restPreset(90)">1:30</button>
-      <button class="reset-btn rt-preset-active" id="rt-p120" onclick="restPreset(120)" style="border-color:rgba(200,255,71,.4);color:var(--accent)">2:00</button>
+      <button class="reset-btn rt-preset-active" id="rt-p120" onclick="restPreset(120)">2:00</button>
     </div>
     <div style="display:flex;gap:8px;justify-content:center">
       <button class="add-btn" id="rt-start-btn" onclick="toggleRestTimer()" style="min-width:90px">▶ Start</button>
@@ -484,7 +542,33 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
     </div>
     <div>
 
-
+      <div class="card">
+        <div class="card-header" style="margin-bottom:6px">
+          <div class="card-title">📅 Workout History</div>
+          <div class="badge badge-purple">Monthly</div>
+        </div>
+        <div class="wk-month-nav">
+          <button class="wk-nav-btn" onclick="wkPrevMonth()">‹</button>
+          <span class="wk-month-label" id="wk-month-label">undefined undefined</span>
+          <button class="wk-nav-btn" onclick="wkNextMonth()">›</button>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:4px">
+          <div class="wk-dow-label">Sun</div><div class="wk-dow-label">Mon</div><div class="wk-dow-label">Tue</div>
+          <div class="wk-dow-label">Wed</div><div class="wk-dow-label">Thu</div><div class="wk-dow-label">Fri</div>
+          <div class="wk-dow-label">Sat</div>
+        </div>
+        <div class="wk-month-grid" id="wk-month-grid"></div>
+        <div class="wk-vol-total">
+          <span style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Month Volume</span>
+          <span class="vol-badge" id="wk-month-vol">0 lbs</span>
+        </div>
+        <div class="wk-legend">
+          <div class="wk-legend-item"><div class="wk-legend-dot" style="background:rgba(200,255,71,.5)"></div>Push</div>
+          <div class="wk-legend-item"><div class="wk-legend-dot" style="background:rgba(71,212,255,.5)"></div>Pull</div>
+          <div class="wk-legend-item"><div class="wk-legend-dot" style="background:rgba(255,107,53,.5)"></div>Full</div>
+          <div class="wk-legend-item"><div class="wk-legend-dot" style="background:rgba(180,127,254,.5)"></div>VO₂</div>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -593,7 +677,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           <input class="add-input" id="sbshift-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('sbshift')">
           <button class="add-btn" onclick="addRoutineItem('sbshift')">+ Add</button>
         </div>
-        <div class="last-reset" id="sbshift-last-reset">Last reset: 2026-3-16</div>
+        <div class="last-reset" id="sbshift-last-reset">Last reset: 2026-3-17</div>
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">📋 Stay Current</div><div class="badge badge-orange">Nevada Gaming</div></div>
@@ -841,7 +925,8 @@ function renderTodoBlock(key,wrapId){
 function toggleTodoItem(key,ii){
   const d=getTodo(key);d.items[ii].done=!d.items[ii].done;saveTodo(key,d);
   renderTodoBlock(key,'todo-'+key+'-wrap');
-  renderHitList(); // sync hit list
+  renderHitList();
+renderCardioTracker();
 }
 function deleteTodoItem(key,ii){const d=getTodo(key);d.items.splice(ii,1);saveTodo(key,d);renderTodoBlock(key,'todo-'+key+'-wrap');}
 function addTodoItem(key){
@@ -1392,6 +1477,11 @@ function wbShowDay(day){
   if(activeBtn){activeBtn.style.borderColor='rgba(200,255,71,.4)';activeBtn.style.color='var(--accent)';}
   document.getElementById('wb-day-label').textContent=WB_DAY_LABELS[day]||day;
   renderWbList();
+  // Log the workout type for today when you open a day
+  const existingLog = getWkLog(todayKey());
+  if(!existingLog || existingLog.type === day){
+    autoLogWorkout(day);
+  }
 }
 
 // ── Superset helpers ──
@@ -1521,7 +1611,9 @@ function wbSaveSet(day,ei,si,field,val){
 function wbToggleSet(day,ei,si){
   const session=getWbSession(day);
   session[ei].sets[si].done=!session[ei].sets[si].done;
-  saveWbSession(day,session);renderWbList();
+  saveWbSession(day,session);
+  autoLogWorkout(day);
+  renderWbList();
 }
 
 function wbAddSet(day,ei){
@@ -1975,6 +2067,171 @@ function resetPomo(){
   document.getElementById('pp-25').classList.add('active');
   drawPomoCup(1);
 })();
+
+
+// ─── CARDIO TRACKER ───
+var _wkViewYear = new Date().getFullYear();
+var _wkViewMonth = new Date().getMonth();
+const CARDIO_GOAL = 100; // minutes per week
+const CARDIO_DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function cardioKey(dateKey){ return 'lifeOS_cardio_' + dateKey; }
+function getCardioDayMin(dateKey){ return parseInt(ls(cardioKey(dateKey)) || '0') || 0; }
+function saveCardioDayMin(dateKey, min){ ls(cardioKey(dateKey), String(Math.max(0, min))); }
+
+function getWeekDays(){
+  // Returns array of 7 dateKeys for the current week (Sun–Sat)
+  const today = new Date();
+  const sunday = new Date(today);
+  sunday.setDate(today.getDate() - today.getDay());
+  return Array.from({length:7}, (_,i) => {
+    const d = new Date(sunday);
+    d.setDate(sunday.getDate() + i);
+    return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+  });
+}
+
+function addCardio(delta){
+  const key = todayKey();
+  const cur = getCardioDayMin(key);
+  saveCardioDayMin(key, cur + delta);
+  renderCardioTracker();
+}
+
+function renderCardioTracker(){
+  const days = getWeekDays();
+  const todayK = todayKey();
+  let total = 0;
+  days.forEach(k => total += getCardioDayMin(k));
+
+  // Update total display
+  const td = document.getElementById('cardio-total-display');
+  if(td) td.textContent = total;
+  const fill = document.getElementById('cardio-goal-fill');
+  if(fill) fill.style.width = Math.min(100, Math.round(total/CARDIO_GOAL*100)) + '%';
+
+  // Render day cells
+  const grid = document.getElementById('cardio-week-grid');
+  if(!grid) return;
+  grid.innerHTML = '';
+  const today = new Date();
+  days.forEach((key, i) => {
+    const min = getCardioDayMin(key);
+    const isToday = key === todayK;
+    const cell = document.createElement('div');
+    cell.className = 'cardio-day' + (min > 0 ? ' has-cardio' : '') + (isToday ? ' today' : '');
+    cell.style.cursor = 'pointer';
+    if(isToday) cell.style.borderColor = min > 0 ? '' : 'rgba(200,255,71,.3)';
+    cell.innerHTML = `
+      <div class="cardio-day-name">${CARDIO_DAYS[i]}</div>
+      <div class="cardio-day-min${min===0?' zero':''}">${min>0?min:'—'}</div>`;
+    cell.onclick = () => {
+      if(key === todayK){
+        // tap today cell to add 15 min
+        addCardio(15);
+      }
+    };
+    grid.appendChild(cell);
+  });
+}
+
+// ─── WORKOUT LOG (daily record of type + volume) ───
+function wkLogKey(dateKey){ return 'lifeOS_wklog_' + dateKey; }
+function getWkLog(dateKey){ return lsj(wkLogKey(dateKey), null); }
+function saveWkLog(dateKey, data){ ls(wkLogKey(dateKey), JSON.stringify(data)); }
+
+function calcSessionVolume(day){
+  // Sum weight*reps for all DONE sets across all exercises
+  const session = getWbSession(day);
+  let vol = 0;
+  session.forEach(ex => {
+    ex.sets.forEach(s => {
+      if(s.done){
+        const w = parseFloat(s.weight) || 0;
+        const r = parseInt(s.reps) || 0;
+        vol += w * r;
+      }
+    });
+  });
+  return Math.round(vol);
+}
+
+function autoLogWorkout(day){
+  const vol = calcSessionVolume(day);
+  const existing = getWkLog(todayKey()) || {};
+  const logType = existing.type || day;
+  saveWkLog(todayKey(), { type: logType, volume: vol, day: todayKey() });
+  renderMonthMap();
+}
+
+// ─── MONTHLY WORKOUT MAP ───
+
+
+const WK_TYPE_CONFIG = {
+  push: { label:'PUSH', css:'push-day', color:'var(--accent)', hex:'#c8ff47' },
+  pull: { label:'PULL', css:'pull-day', color:'var(--accent2)', hex:'#47d4ff' },
+  full: { label:'FULL', css:'full-day', color:'var(--accent3)', hex:'#ff6b35' },
+  vo2:  { label:'VO₂',  css:'vo2-day',  color:'var(--accent4)', hex:'#b47ffe' },
+};
+
+function wkPrevMonth(){
+  _wkViewMonth--;
+  if(_wkViewMonth < 0){ _wkViewMonth = 11; _wkViewYear--; }
+  renderMonthMap();
+}
+function wkNextMonth(){
+  _wkViewMonth++;
+  if(_wkViewMonth > 11){ _wkViewMonth = 0; _wkViewYear++; }
+  renderMonthMap();
+}
+
+function renderMonthMap(){
+  const grid = document.getElementById('wk-month-grid');
+  const label = document.getElementById('wk-month-label');
+  const volEl = document.getElementById('wk-month-vol');
+  if(!grid) return;
+
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  if(label) label.textContent = MONTHS[_wkViewMonth] + ' ' + _wkViewYear;
+
+  const today = new Date();
+  const firstDay = new Date(_wkViewYear, _wkViewMonth, 1).getDay(); // 0=Sun
+  const daysInMonth = new Date(_wkViewYear, _wkViewMonth+1, 0).getDate();
+
+  grid.innerHTML = '';
+  let monthVol = 0;
+
+  // Empty cells before first day
+  for(let i=0; i<firstDay; i++){
+    const empty = document.createElement('div');
+    empty.className = 'wk-day-cell empty';
+    grid.appendChild(empty);
+  }
+
+  for(let d=1; d<=daysInMonth; d++){
+    const dateKey = _wkViewYear+'-'+(_wkViewMonth+1)+'-'+d;
+    const log = getWkLog(dateKey);
+    const isToday = (today.getFullYear()===_wkViewYear && today.getMonth()===_wkViewMonth && today.getDate()===d);
+    const cfg = log ? WK_TYPE_CONFIG[log.type] : null;
+
+    const cell = document.createElement('div');
+    cell.className = 'wk-day-cell' + (cfg ? ' '+cfg.css : '') + (isToday ? ' today' : '');
+
+    const vol = log ? (log.volume || 0) : 0;
+    if(vol > 0) monthVol += vol;
+
+    const volStr = vol > 0 ? (vol >= 1000 ? (vol/1000).toFixed(1)+'k' : vol+'') : '';
+
+    cell.innerHTML = `
+      <div class="wk-day-num">${d}</div>
+      ${cfg ? `<div class="wk-day-type" style="color:${cfg.color}">${cfg.label}</div>` : ''}
+      ${volStr ? `<div class="wk-day-vol">${volStr}</div>` : ''}`;
+
+    grid.appendChild(cell);
+  }
+
+  if(volEl) volEl.textContent = monthVol >= 1000 ? (monthVol/1000).toFixed(1)+'k lbs' : monthVol+' lbs';
+}
 
 // ─── INIT ───
 document.getElementById('dateBadge').textContent=new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
