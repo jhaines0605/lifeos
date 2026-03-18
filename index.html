@@ -284,12 +284,12 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 </div>
 
 <div class="nav">
-  <button class="nav-tab active" onclick="showTab('overview',this)"><span class="ni">⚡</span>Overview</button>
+  <button class="nav-tab" onclick="showTab('overview',this)"><span class="ni">⚡</span>Overview</button>
   <button class="nav-tab" onclick="showTab('hitlist',this)"><span class="ni">🎯</span>Hit List</button>
   <button class="nav-tab" onclick="showTab('routines',this)"><span class="ni">⚙️</span>Routines</button>
   <button class="nav-tab" onclick="showTab('health',this)"><span class="ni">🧪</span>Health</button>
   <button class="nav-tab" onclick="showTab('ideas',this)"><span class="ni">💡</span>Ideas</button>
-  <button class="nav-tab" onclick="showTab('blueprint',this)"><span class="ni">🧬</span>Blueprint</button>
+  <button class="nav-tab active" onclick="showTab('blueprint',this)"><span class="ni">🧬</span>Blueprint</button>
 </div>
 
 <!-- PUSH MODAL -->
@@ -315,7 +315,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 <div class="main">
 
 <!-- ══════════ OVERVIEW ══════════ -->
-<div class="tab active" id="tab-overview">
+<div class="tab" id="tab-overview">
 
   <div class="card" style="text-align:center">
     <div class="card-header" style="justify-content:center;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px">
@@ -769,7 +769,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 </div>
 
 <!-- ══════════ BLUEPRINT ══════════ -->
-<div class="tab" id="tab-blueprint">
+<div class="tab active" id="tab-blueprint">
 
   <!-- ── ROW 1: Weight + Cardio charts ── -->
   <div class="two-col">
