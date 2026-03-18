@@ -236,6 +236,11 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 .wk-legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
 /* Volume highlight */
 .vol-badge{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);font-weight:700}
+
+/* BLUEPRINT CHARTS */
+#bp-weight-chart-big,#bp-cardio-chart,#bp-volume-chart{
+  background:var(--surface2);border-radius:8px;padding:8px;box-sizing:border-box;
+}
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:3px;height:3px}
 ::-webkit-scrollbar-track{background:var(--bg)}
@@ -272,7 +277,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
     <div class="tagline">Master System · Age 38</div>
   </div>
   <div class="header-right">
-    <div class="date-badge" id="dateBadge">Tue, Mar 17, 2026</div>
+    <div class="date-badge" id="dateBadge">Wed, Mar 18, 2026</div>
     <button class="hdr-btn" onclick="copyData()">📋 Copy Data</button>
     <button class="hdr-btn push" onclick="openPushModal()" id="push-btn">🚀 Push</button>
   </div>
@@ -353,7 +358,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
     <div class="card-header">
       <div>
         <div class="card-title">🎯 Daily Hit List</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date">Tuesday, Mar 17</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date">Wednesday, Mar 18</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
         <span id="hitlist-pval" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">0/9</span>
@@ -413,7 +418,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           <input class="add-input" id="morning-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('morning')">
           <button class="add-btn" onclick="addRoutineItem('morning')">+ Add</button>
         </div>
-        <div class="last-reset" id="morning-last-reset">Last reset: 2026-3-17</div>
+        <div class="last-reset" id="morning-last-reset">Last reset: 2026-3-18</div>
       </div>
     </div>
     <div>
@@ -434,7 +439,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           <input class="add-input" id="evening-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('evening')">
           <button class="add-btn" onclick="addRoutineItem('evening')">+ Add</button>
         </div>
-        <div class="last-reset" id="evening-last-reset">Last reset: 2026-3-17</div>
+        <div class="last-reset" id="evening-last-reset">Last reset: 2026-3-18</div>
       </div>
     </div>
     <div>
@@ -455,7 +460,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           <input class="add-input" id="sbshift-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('sbshift')">
           <button class="add-btn" onclick="addRoutineItem('sbshift')">+ Add</button>
         </div>
-        <div class="last-reset" id="sbshift-last-reset">Last reset: 2026-3-17</div>
+        <div class="last-reset" id="sbshift-last-reset">Last reset: 2026-3-18</div>
       </div>
     </div>
   </div>
@@ -479,9 +484,9 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
       <div class="cardio-day-name">Sun</div>
       <div class="cardio-day-min zero">—</div></div><div class="cardio-day" style="cursor: pointer;">
       <div class="cardio-day-name">Mon</div>
-      <div class="cardio-day-min zero">—</div></div><div class="cardio-day has-cardio today" style="cursor: pointer;">
+      <div class="cardio-day-min zero">—</div></div><div class="cardio-day has-cardio" style="cursor: pointer;">
       <div class="cardio-day-name">Tue</div>
-      <div class="cardio-day-min">30</div></div><div class="cardio-day" style="cursor: pointer;">
+      <div class="cardio-day-min">30</div></div><div class="cardio-day today" style="cursor: pointer; border-color: rgba(200, 255, 71, 0.3);">
       <div class="cardio-day-name">Wed</div>
       <div class="cardio-day-min zero">—</div></div><div class="cardio-day" style="cursor: pointer;">
       <div class="cardio-day-name">Thu</div>
@@ -678,12 +683,12 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
       </div><div class="wk-day-cell">
       <div class="wk-day-num">16</div>
       
-      </div><div class="wk-day-cell push-day today">
+      </div><div class="wk-day-cell push-day">
       <div class="wk-day-num">17</div>
       <div class="wk-day-type" style="color:var(--accent)">PUSH</div>
-      </div><div class="wk-day-cell">
+      </div><div class="wk-day-cell push-day today">
       <div class="wk-day-num">18</div>
-      
+      <div class="wk-day-type" style="color:var(--accent)">PUSH</div>
       </div><div class="wk-day-cell">
       <div class="wk-day-num">19</div>
       
@@ -766,35 +771,78 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 <!-- ══════════ BLUEPRINT ══════════ -->
 <div class="tab" id="tab-blueprint">
 
+  <!-- ── ROW 1: Weight + Cardio charts ── -->
+  <div class="two-col">
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">⚖️ Weight Trend</div>
+          <div id="bp-weight-streak" style="font-size:9px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace">Log today to start your streak</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span id="bp-current-weight" style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--accent)">—</span>
+          <span style="font-size:9px;color:var(--muted)">lbs</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:12px">
+        <input class="add-input" id="bp-weight-input" type="number" placeholder="Today's weight..." step="0.1" style="flex:1">
+        <button class="add-btn" onclick="logWeight()">Log</button>
+      </div>
+      <div id="bp-weight-chart-big" style="width:100%;height:120px;position:relative"><div style="color:var(--muted);font-size:11px;text-align:center;padding:40px 0">Log at least 2 days to see your weight trend</div></div>
+      <div style="display:flex;justify-content:space-between;margin-top:4px">
+        <span style="font-size:8px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="bp-weight-range-label"></span>
+        <div style="display:flex;gap:12px">
+          <span style="font-size:9px;color:var(--muted)" id="bp-weight-delta"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">🏃 Cardio Trend</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green)" id="bp-cardio-avg">30 min/wk avg</div>
+      </div>
+      <div id="bp-cardio-chart" style="width:100%;height:120px;position:relative"><svg width="100%" height="120" viewBox="0 0 300 120" style="overflow:visible;display:block">
+    <defs><linearGradient id="g0bp-cardio-chart" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="var(--green)" stop-opacity="0.2"></stop>
+      <stop offset="100%" stop-color="var(--green)" stop-opacity="0"></stop>
+    </linearGradient></defs><line x1="36" y1="10" x2="288" y2="10" stroke="rgba(37,37,37,0.8)" stroke-width="1"></line><text x="32" y="13" text-anchor="end" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono, monospace">31</text><line x1="36" y1="39.33333333333333" x2="288" y2="39.33333333333333" stroke="rgba(37,37,37,0.8)" stroke-width="1"></line><text x="32" y="42.33333333333333" text-anchor="end" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono, monospace">30</text><line x1="36" y1="68.66666666666666" x2="288" y2="68.66666666666666" stroke="rgba(37,37,37,0.8)" stroke-width="1"></line><text x="32" y="71.66666666666666" text-anchor="end" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono, monospace">30</text><line x1="36" y1="98" x2="288" y2="98" stroke="rgba(37,37,37,0.8)" stroke-width="1"></line><text x="32" y="101" text-anchor="end" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono, monospace">29</text><text x="36.0" y="117" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">1/25</text><text x="72.0" y="117" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">2/1</text><text x="108.0" y="117" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">2/8</text><text x="144.0" y="117" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">2/15</text><text x="180.0" y="117" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">2/22</text><text x="216.0" y="117" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">3/1</text><text x="252.0" y="117" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">3/8</text><text x="288.0" y="117" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">3/15</text></svg></div>
+      <div style="display:flex;justify-content:space-between;margin-top:4px">
+        <span style="font-size:8px;color:var(--muted)">Last 8 weeks</span>
+        <span style="font-size:8px;color:var(--green)">Goal: 100 min/wk ────</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── ROW 2: Volume Chart (Push/Pull/Full lines) ── -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">💪 Volume Trend</div>
+      <div style="display:flex;gap:10px">
+        <span style="font-size:9px;color:var(--accent);font-family:'JetBrains Mono',monospace">— Push</span>
+        <span style="font-size:9px;color:var(--accent2);font-family:'JetBrains Mono',monospace">— Pull</span>
+        <span style="font-size:9px;color:var(--accent3);font-family:'JetBrains Mono',monospace">— Full</span>
+      </div>
+    </div>
+    <div id="bp-volume-chart" style="width:100%;height:140px;position:relative"><div style="color:var(--muted);font-size:11px;text-align:center;padding:62px 0">No data yet — log some entries</div></div>
+    <div style="display:flex;justify-content:space-between;margin-top:4px">
+      <span style="font-size:8px;color:var(--muted)">Last 30 days · lbs moved</span>
+      <span style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="bp-vol-peak"></span>
+    </div>
+  </div>
+
+  <!-- ── ROW 3: Blood Work ── -->
   <div class="card">
     <div class="card-header">
       <div>
-        <div class="card-title">⚖️ Weight Log</div>
-        <div id="bp-weight-streak" style="font-size:9px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace">Log today to start streak</div>
+        <div class="card-title">🩸 Blood Work Panel</div>
+        <div style="font-size:9px;color:var(--muted);margin-top:2px">What each number tells you</div>
       </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span id="bp-current-weight" style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--accent)">—</span>
-        <span style="font-size:9px;color:var(--muted)">lbs</span>
-      </div>
+      <div class="badge badge-blue">Labs</div>
     </div>
-    <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px">
-      <input class="add-input" id="bp-weight-input" type="number" placeholder="Today's weight (lbs)" step="0.1" min="50" max="400" style="flex:1">
-      <button class="add-btn" onclick="logWeight()">Log</button>
-    </div>
-    <div id="bp-weight-chart" style="height:60px;position:relative;margin-bottom:4px"></div>
-    <div id="bp-weight-history" style="display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none"><div style="flex-shrink: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; text-align: center; min-width: 44px;"><div style="font-size:8px;color:var(--muted);font-family:'JetBrains Mono',monospace">We</div>
-      <div style="font-size:11px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace">—</div></div><div style="flex-shrink: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; text-align: center; min-width: 44px;"><div style="font-size:8px;color:var(--muted);font-family:'JetBrains Mono',monospace">Th</div>
-      <div style="font-size:11px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace">—</div></div><div style="flex-shrink: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; text-align: center; min-width: 44px;"><div style="font-size:8px;color:var(--muted);font-family:'JetBrains Mono',monospace">Fr</div>
-      <div style="font-size:11px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace">—</div></div><div style="flex-shrink: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; text-align: center; min-width: 44px;"><div style="font-size:8px;color:var(--muted);font-family:'JetBrains Mono',monospace">Sa</div>
-      <div style="font-size:11px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace">—</div></div><div style="flex-shrink: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; text-align: center; min-width: 44px;"><div style="font-size:8px;color:var(--muted);font-family:'JetBrains Mono',monospace">Su</div>
-      <div style="font-size:11px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace">—</div></div><div style="flex-shrink: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; text-align: center; min-width: 44px;"><div style="font-size:8px;color:var(--muted);font-family:'JetBrains Mono',monospace">Mo</div>
-      <div style="font-size:11px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace">—</div></div><div style="flex-shrink: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; text-align: center; min-width: 44px;"><div style="font-size:8px;color:var(--muted);font-family:'JetBrains Mono',monospace">Tu</div>
-      <div style="font-size:11px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace">—</div></div></div>
-  </div>
-
-  <div class="card">
-    <div class="card-header"><div class="card-title">🩸 Health Metrics</div><div class="badge badge-blue">Blood Work</div></div>
-    <div id="bp-metrics-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px"><div style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; min-width: 0px;">
+    <div id="bp-metrics-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px"><div style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; min-width: 0px;">
       <div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-family:'JetBrains Mono',monospace;margin-bottom:3px">Glucose</div>
       <div style="display:flex;align-items:baseline;gap:4px">
         <span style="font-size:18px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace">—</span>
@@ -843,13 +891,95 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
         <span style="font-size:9px;color:var(--muted)">mg/L</span>
       </div>
       <div style="font-size:8px;color:var(--muted);margin-top:2px">Ideal: &lt;1.0</div></div></div>
-    <button class="reset-btn" onclick="openMetricModal()" style="width:100%;text-align:center">+ Update Numbers</button>
+    <button class="reset-btn" onclick="openMetricModal()" style="width:100%;text-align:center;margin-bottom:10px">+ Update Numbers</button>
+
+    <!-- What each biomarker means -->
+    <div style="border-top:1px solid var(--border);padding-top:10px">
+      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:8px">What to test &amp; why</div>
+      <div id="bp-biomarker-guide"><div style="padding: 9px 0px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start;">
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+          <span style="font-size:12px;font-weight:700;color:var(--text)">HbA1c</span>
+          <span style="font-size:8px;color:var(--accent2);border:1px solid rgba(71,212,255,.3);border-radius:3px;padding:1px 5px;font-family:JetBrains Mono,monospace">FASTED</span>
+        </div>
+        <div style="font-size:11px;color:#aaa;line-height:1.5;margin-bottom:3px">3-month blood sugar average. High = metabolic dysfunction, dementia risk, cardiovascular disease. Your zone 2 cardio and diet move this most.</div>
+        <div style="font-size:9px;color:var(--green);font-family:'JetBrains Mono',monospace">Ideal: &lt; 5.7%</div>
+      </div></div><div style="padding: 9px 0px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start;">
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+          <span style="font-size:12px;font-weight:700;color:var(--text)">Fasting Glucose + Insulin</span>
+          <span style="font-size:8px;color:var(--accent2);border:1px solid rgba(71,212,255,.3);border-radius:3px;padding:1px 5px;font-family:JetBrains Mono,monospace">FASTED</span>
+        </div>
+        <div style="font-size:11px;color:#aaa;line-height:1.5;margin-bottom:3px">Catches insulin resistance years before HbA1c moves. Morning light protocol and sleep quality directly regulate this.</div>
+        <div style="font-size:9px;color:var(--green);font-family:'JetBrains Mono',monospace">Ideal: &lt; 100 mg/dL glucose</div>
+      </div></div><div style="padding: 9px 0px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start;">
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+          <span style="font-size:12px;font-weight:700;color:var(--text)">Testosterone (Total + Free)</span>
+          
+        </div>
+        <div style="font-size:11px;color:#aaa;line-height:1.5;margin-bottom:3px">Key male vitality marker. Low levels = 40% higher all-cause mortality. Strength training, sleep, morning sunlight, and Vitamin D all raise it.</div>
+        <div style="font-size:9px;color:var(--green);font-family:'JetBrains Mono',monospace">Ideal: 400–900 ng/dL</div>
+      </div></div><div style="padding: 9px 0px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start;">
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+          <span style="font-size:12px;font-weight:700;color:var(--text)">Vitamin D</span>
+          
+        </div>
+        <div style="font-size:11px;color:#aaa;line-height:1.5;margin-bottom:3px">Most people are deficient. Directly tied to testosterone, immune function, mood, and bone density. Your morning garage light protocol addresses this.</div>
+        <div style="font-size:9px;color:var(--green);font-family:'JetBrains Mono',monospace">Ideal: 40–60 ng/mL</div>
+      </div></div><div style="padding: 9px 0px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start;">
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+          <span style="font-size:12px;font-weight:700;color:var(--text)">HDL + LDL + Triglycerides</span>
+          <span style="font-size:8px;color:var(--accent2);border:1px solid rgba(71,212,255,.3);border-radius:3px;padding:1px 5px;font-family:JetBrains Mono,monospace">FASTED</span>
+        </div>
+        <div style="font-size:11px;color:#aaa;line-height:1.5;margin-bottom:3px">Zone 2 cardio raises HDL and drops triglycerides within 6–8 weeks. Ask for ApoB too — more predictive than LDL alone.</div>
+        <div style="font-size:9px;color:var(--green);font-family:'JetBrains Mono',monospace">Ideal: HDL &gt;60 / TG &lt;150</div>
+      </div></div><div style="padding: 9px 0px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start;">
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+          <span style="font-size:12px;font-weight:700;color:var(--text)">hsCRP</span>
+          
+        </div>
+        <div style="font-size:11px;color:#aaa;line-height:1.5;margin-bottom:3px">Inflammation marker. Cold showers, zone 2, and sleep all reduce it. High hsCRP is a proxy for how well your recovery protocols are working.</div>
+        <div style="font-size:9px;color:var(--green);font-family:'JetBrains Mono',monospace">Ideal: &lt; 1.0 mg/L</div>
+      </div></div><div style="padding: 9px 0px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start;">
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+          <span style="font-size:12px;font-weight:700;color:var(--text)">Ferritin</span>
+          
+        </div>
+        <div style="font-size:11px;color:#aaa;line-height:1.5;margin-bottom:3px">Iron storage. Low ferritin tanks energy and recovery even when everything else looks fine — often misses because standard panels skip it. Request it specifically.</div>
+        <div style="font-size:9px;color:var(--green);font-family:'JetBrains Mono',monospace">Ideal: 50–150 ng/mL</div>
+      </div></div><div style="padding: 9px 0px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start;">
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+          <span style="font-size:12px;font-weight:700;color:var(--text)">TSH (Thyroid)</span>
+          
+        </div>
+        <div style="font-size:11px;color:#aaa;line-height:1.5;margin-bottom:3px">Affects energy, metabolism, body weight, and cognitive function. A slow thyroid makes every other protocol less effective.</div>
+        <div style="font-size:9px;color:var(--green);font-family:'JetBrains Mono',monospace">Ideal: 0.4–2.5 mIU/L</div>
+      </div></div></div>
+    </div>
+
+    <!-- Testing schedule -->
+    <div style="background:var(--surface2);border-radius:8px;padding:12px;margin-top:10px;border:1px solid var(--border)">
+      <div style="font-size:10px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">📅 Testing Schedule</div>
+      <div style="font-size:12px;color:#aaa;line-height:1.7">
+        <div><span style="color:var(--accent);font-weight:700">Month 0:</span> Full baseline panel. This is your starting point — every future delta is measured from here.</div>
+        <div><span style="color:var(--accent);font-weight:700">Month 3:</span> Retest core markers (testosterone, glucose, HbA1c, hsCRP, Vitamin D). 90 days is enough time for lifestyle changes to show up in blood.</div>
+        <div><span style="color:var(--accent);font-weight:700">Month 6:</span> Spot-check anything that was off at baseline. Adjust protocols.</div>
+        <div><span style="color:var(--accent);font-weight:700">Annually:</span> Full panel + body composition + epigenetic age test (TruDiagnostic TruAge ~$300).</div>
+      </div>
+    </div>
   </div>
 
+  <!-- ── ROW 4: Supplement Stack + Protocols ── -->
   <div class="two-col">
     <div>
       <div class="card">
-        <div class="card-header"><div class="card-title">💊 Supplement Stack</div><div class="badge badge-green">Tiered</div></div>
+        <div class="card-header"><div class="card-title">💊 Supplement Stack</div><div class="badge badge-green">Tiered by Budget</div></div>
         <div id="bp-supp-tiers"><div style="margin-bottom: 14px;"><div style="font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1px solid var(--border); font-family: &quot;JetBrains Mono&quot;, monospace;">Tier 1 — Foundation ($30–50/mo)</div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 7px 0px; border-bottom: 1px solid rgba(37, 37, 37, 0.5);"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-top: 1px; transition: 0.2s;"></div><div style="flex: 1 1 0%;"><div style="font-size:13px;color:#aaa;line-height:1.3">Creatine Monohydrate 5g</div>
         <div style="font-size:11px;color:var(--muted);margin-top:2px;line-height:1.4">Muscle, brain, longevity. Most studied.</div></div></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 7px 0px; border-bottom: 1px solid rgba(37, 37, 37, 0.5);"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-top: 1px; transition: 0.2s;"></div><div style="flex: 1 1 0%;"><div style="font-size:13px;color:#aaa;line-height:1.3">Vitamin D3 + K2</div>
         <div style="font-size:11px;color:var(--muted);margin-top:2px;line-height:1.4">Immune, testosterone, bone density. Most deficient.</div></div></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 7px 0px; border-bottom: 1px solid rgba(37, 37, 37, 0.5);"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; margin-top: 1px; transition: 0.2s;"></div><div style="flex: 1 1 0%;"><div style="font-size:13px;color:#aaa;line-height:1.3">Magnesium Glycinate 400mg</div>
@@ -926,8 +1056,54 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
     </div>
   </div>
 
-</div>
+  <!-- ── ROW 5: Biomarker ↔ Protocol connection ── -->
+  <div class="card">
+    <div class="card-header"><div class="card-title">🔗 Protocol → Biomarker Map</div><div class="badge badge-orange">What moves what</div></div>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border)">
+            <th style="text-align:left;padding:6px 8px;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:700">Protocol</th>
+            <th style="text-align:left;padding:6px 8px;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:700">Biomarker it moves</th>
+            <th style="text-align:left;padding:6px 8px;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:700">Timeframe</th>
+          </tr>
+        </thead>
+        <tbody id="bp-protocol-map"><tr style="border-bottom: 1px solid var(--border); background: rgba(255, 255, 255, 0.01);">
+      <td style="padding:8px;color:var(--text);font-size:11px;line-height:1.4;vertical-align:top">Morning Light (5000K, 15–30 min)</td>
+      <td style="padding:8px;color:var(--accent2);font-size:11px;line-height:1.4;vertical-align:top;font-family:'JetBrains Mono',monospace;font-size:10px">Testosterone, Vitamin D, cortisol rhythm, glucose</td>
+      <td style="padding:8px;color:var(--muted);font-size:10px;white-space:nowrap;vertical-align:top;font-family:'JetBrains Mono',monospace">4–8 weeks</td></tr><tr style="border-bottom: 1px solid var(--border);">
+      <td style="padding:8px;color:var(--text);font-size:11px;line-height:1.4;vertical-align:top">Zone 2 Cardio 150+ min/week</td>
+      <td style="padding:8px;color:var(--accent2);font-size:11px;line-height:1.4;vertical-align:top;font-family:'JetBrains Mono',monospace;font-size:10px">Triglycerides ↓, HDL ↑, fasting insulin ↓, hsCRP ↓</td>
+      <td style="padding:8px;color:var(--muted);font-size:10px;white-space:nowrap;vertical-align:top;font-family:'JetBrains Mono',monospace">6–12 weeks</td></tr><tr style="border-bottom: 1px solid var(--border); background: rgba(255, 255, 255, 0.01);">
+      <td style="padding:8px;color:var(--text);font-size:11px;line-height:1.4;vertical-align:top">Strength Training 3–4×/week</td>
+      <td style="padding:8px;color:var(--accent2);font-size:11px;line-height:1.4;vertical-align:top;font-family:'JetBrains Mono',monospace;font-size:10px">Testosterone ↑, HbA1c ↓, muscle mass ↑, ferritin</td>
+      <td style="padding:8px;color:var(--muted);font-size:10px;white-space:nowrap;vertical-align:top;font-family:'JetBrains Mono',monospace">8–12 weeks</td></tr><tr style="border-bottom: 1px solid var(--border);">
+      <td style="padding:8px;color:var(--text);font-size:11px;line-height:1.4;vertical-align:top">Cold Shower Finish (30s)</td>
+      <td style="padding:8px;color:var(--accent2);font-size:11px;line-height:1.4;vertical-align:top;font-family:'JetBrains Mono',monospace;font-size:10px">hsCRP ↓, norepinephrine ↑ (hard to lab-test directly)</td>
+      <td style="padding:8px;color:var(--muted);font-size:10px;white-space:nowrap;vertical-align:top;font-family:'JetBrains Mono',monospace">Ongoing</td></tr><tr style="border-bottom: 1px solid var(--border); background: rgba(255, 255, 255, 0.01);">
+      <td style="padding:8px;color:var(--text);font-size:11px;line-height:1.4;vertical-align:top">Sleep Optimization (7–9hr, 65–68°F)</td>
+      <td style="padding:8px;color:var(--accent2);font-size:11px;line-height:1.4;vertical-align:top;font-family:'JetBrains Mono',monospace;font-size:10px">Testosterone ↑, glucose ↓, hsCRP ↓, cortisol ↓</td>
+      <td style="padding:8px;color:var(--muted);font-size:10px;white-space:nowrap;vertical-align:top;font-family:'JetBrains Mono',monospace">2–4 weeks</td></tr><tr style="border-bottom: 1px solid var(--border);">
+      <td style="padding:8px;color:var(--text);font-size:11px;line-height:1.4;vertical-align:top">Creatine 5g daily</td>
+      <td style="padding:8px;color:var(--accent2);font-size:11px;line-height:1.4;vertical-align:top;font-family:'JetBrains Mono',monospace;font-size:10px">Muscle output ↑, body composition, cognitive markers</td>
+      <td style="padding:8px;color:var(--muted);font-size:10px;white-space:nowrap;vertical-align:top;font-family:'JetBrains Mono',monospace">4–6 weeks</td></tr><tr style="border-bottom: 1px solid var(--border); background: rgba(255, 255, 255, 0.01);">
+      <td style="padding:8px;color:var(--text);font-size:11px;line-height:1.4;vertical-align:top">Vitamin D3 + K2 supplementation</td>
+      <td style="padding:8px;color:var(--accent2);font-size:11px;line-height:1.4;vertical-align:top;font-family:'JetBrains Mono',monospace;font-size:10px">Vitamin D levels ↑, testosterone ↑, immune markers</td>
+      <td style="padding:8px;color:var(--muted);font-size:10px;white-space:nowrap;vertical-align:top;font-family:'JetBrains Mono',monospace">8–12 weeks</td></tr><tr style="border-bottom: 1px solid var(--border);">
+      <td style="padding:8px;color:var(--text);font-size:11px;line-height:1.4;vertical-align:top">Sauna 4×/week (170°F, 20 min)</td>
+      <td style="padding:8px;color:var(--accent2);font-size:11px;line-height:1.4;vertical-align:top;font-family:'JetBrains Mono',monospace;font-size:10px">hsCRP ↓, cardiovascular markers, growth hormone ↑</td>
+      <td style="padding:8px;color:var(--muted);font-size:10px;white-space:nowrap;vertical-align:top;font-family:'JetBrains Mono',monospace">8–16 weeks</td></tr><tr style="border-bottom: 1px solid var(--border); background: rgba(255, 255, 255, 0.01);">
+      <td style="padding:8px;color:var(--text);font-size:11px;line-height:1.4;vertical-align:top">Omega-3 2–4g EPA/DHA daily</td>
+      <td style="padding:8px;color:var(--accent2);font-size:11px;line-height:1.4;vertical-align:top;font-family:'JetBrains Mono',monospace;font-size:10px">Triglycerides ↓, hsCRP ↓, HDL ↑</td>
+      <td style="padding:8px;color:var(--muted);font-size:10px;white-space:nowrap;vertical-align:top;font-family:'JetBrains Mono',monospace">8–12 weeks</td></tr><tr style="border-bottom: 1px solid var(--border);">
+      <td style="padding:8px;color:var(--text);font-size:11px;line-height:1.4;vertical-align:top">Time-Restricted Eating (8–10hr window)</td>
+      <td style="padding:8px;color:var(--accent2);font-size:11px;line-height:1.4;vertical-align:top;font-family:'JetBrains Mono',monospace;font-size:10px">Fasting glucose ↓, insulin ↓, HbA1c ↓</td>
+      <td style="padding:8px;color:var(--muted);font-size:10px;white-space:nowrap;vertical-align:top;font-family:'JetBrains Mono',monospace">4–8 weeks</td></tr></tbody>
+      </table>
+    </div>
+  </div>
 
+</div>
 
 <!-- METRIC MODAL -->
 <div class="modal-bg" id="metric-modal">
@@ -2297,6 +2473,8 @@ function addCardio(delta){
   const cur = getCardioDayMin(key);
   saveCardioDayMin(key, cur + delta);
   renderCardioTracker();
+  const ccEl = document.getElementById('bp-cardio-chart');
+  if(ccEl && ccEl.closest('.tab.active')) renderCardioTrendChart();
 }
 
 function renderCardioTracker(){
@@ -2363,6 +2541,8 @@ function autoLogWorkout(day){
   const logType = existing.type || day;
   saveWkLog(todayKey(), { type: logType, volume: vol, day: todayKey() });
   renderMonthMap();
+  const vcEl = document.getElementById('bp-volume-chart');
+  if(vcEl && vcEl.closest('.tab.active')) renderVolumeChart();
 }
 
 // ─── MONTHLY WORKOUT MAP ───
@@ -2578,74 +2758,299 @@ function syncWeightToHealth(){
   const el = document.getElementById('health-weight-today');
   if(el) el.textContent = w ? w.toFixed(1) : '—';
 }
+
+// ─── SHARED SVG CHART HELPERS ───
+function makeSVGChart({el, datasets, height=120, yLabel='', goalLine=null}){
+  if(!el) return;
+  const W = el.offsetWidth || 300;
+  const H = height;
+  const PAD = {top:10, right:12, bottom:22, left:36};
+  const chartW = W - PAD.left - PAD.right;
+  const chartH = H - PAD.top - PAD.bottom;
+
+  // Flatten all values to find global min/max
+  const allVals = datasets.flatMap(ds => ds.points.map(p => p.y)).filter(v => v != null && !isNaN(v));
+  if(allVals.length < 1){ el.innerHTML = '<div style="color:var(--muted);font-size:11px;text-align:center;padding:'+(H/2-8)+'px 0">No data yet — log some entries</div>'; return; }
+
+  const yMin = Math.min(...allVals) * 0.97;
+  const yMax = Math.max(...allVals) * 1.03;
+  const yRange = yMax - yMin || 1;
+
+  // Map point to SVG coords
+  const allXVals = datasets.flatMap(ds => ds.points.map(p => p.x));
+  const xMin = Math.min(...allXVals), xMax = Math.max(...allXVals) || 1;
+  const xRange = xMax - xMin || 1;
+
+  const px = x => PAD.left + ((x - xMin) / xRange) * chartW;
+  const py = y => PAD.top + chartH - ((y - yMin) / yRange) * chartH;
+
+  let svg = `<svg width="100%" height="${H}" viewBox="0 0 ${W} ${H}" style="overflow:visible;display:block">
+    <defs>`;
+
+  // Gradients for each dataset
+  datasets.forEach((ds, i) => {
+    svg += `<linearGradient id="g${i}${el.id}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${ds.color}" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="${ds.color}" stop-opacity="0"/>
+    </linearGradient>`;
+  });
+  svg += '</defs>';
+
+  // Grid lines
+  const yTicks = 3;
+  for(let i=0; i<=yTicks; i++){
+    const y = PAD.top + (chartH / yTicks) * i;
+    const val = yMax - (yRange / yTicks) * i;
+    svg += `<line x1="${PAD.left}" y1="${y}" x2="${W-PAD.right}" y2="${y}" stroke="rgba(37,37,37,0.8)" stroke-width="1"/>`;
+    svg += `<text x="${PAD.left - 4}" y="${y+3}" text-anchor="end" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono, monospace">${Math.round(val)}</text>`;
+  }
+
+  // Goal line
+  if(goalLine != null && goalLine >= yMin && goalLine <= yMax * 1.1){
+    const gy = py(goalLine);
+    svg += `<line x1="${PAD.left}" y1="${gy}" x2="${W-PAD.right}" y2="${gy}" stroke="rgba(61,220,132,0.5)" stroke-width="1.5" stroke-dasharray="4,3"/>`;
+    svg += `<text x="${W-PAD.right+3}" y="${gy+3}" font-size="8" fill="rgba(61,220,132,0.7)" font-family="JetBrains Mono,monospace">goal</text>`;
+  }
+
+  // Draw each dataset
+  datasets.forEach((ds, di) => {
+    const pts = ds.points.filter(p => p.y != null && !isNaN(p.y));
+    if(pts.length < 2) return;
+
+    const pathD = pts.map((p, i) => `${i===0?'M':'L'}${px(p.x).toFixed(1)} ${py(p.y).toFixed(1)}`).join(' ');
+    const areaD = pathD + ` L${px(pts[pts.length-1].x).toFixed(1)} ${(PAD.top+chartH).toFixed(1)} L${px(pts[0].x).toFixed(1)} ${(PAD.top+chartH).toFixed(1)} Z`;
+
+    svg += `<path d="${areaD}" fill="url(#g${di}${el.id})" />`;
+    svg += `<path d="${pathD}" fill="none" stroke="${ds.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+    // Dots on last 2 points
+    pts.slice(-2).forEach(p => {
+      svg += `<circle cx="${px(p.x).toFixed(1)}" cy="${py(p.y).toFixed(1)}" r="3" fill="${ds.color}" stroke="var(--bg)" stroke-width="1.5"/>`;
+    });
+  });
+
+  // X-axis labels (show ~5 evenly spaced)
+  const allPts = datasets[0]?.points || [];
+  const step = Math.max(1, Math.floor(allPts.length / 5));
+  allPts.filter((_, i) => i % step === 0 || i === allPts.length-1).forEach(p => {
+    svg += `<text x="${px(p.x).toFixed(1)}" y="${H-3}" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">${p.label||''}</text>`;
+  });
+
+  svg += '</svg>';
+  el.innerHTML = svg;
+}
+
+// ─── WEIGHT CHART ───
 function renderWeightLog(){
   const curEl = document.getElementById('bp-current-weight');
   const histEl = document.getElementById('bp-weight-history');
-  const chartEl = document.getElementById('bp-weight-chart');
-  if(!histEl) return;
+  const healthWt = document.getElementById('health-weight-today');
 
-  // Collect last 14 days
+  // Collect last 30 days
   const days = [];
-  for(let i=13; i>=0; i--){
+  for(let i=29; i>=0; i--){
     const d = new Date();
     d.setDate(d.getDate()-i);
     const k = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
     const w = parseFloat(ls(weightLogKey(k)))||null;
-    const label = d.toLocaleDateString('en-US',{weekday:'short'}).slice(0,2);
-    days.push({label, weight:w, key:k});
+    const label = (d.getMonth()+1)+'/'+(d.getDate());
+    days.push({label, weight:w, key:k, idx:29-i});
   }
 
-  const weights = days.filter(d=>d.weight).map(d=>d.weight);
-  const latest = weights[weights.length-1] || null;
+  const withData = days.filter(d=>d.weight);
+  const latest = withData[withData.length-1]?.weight || null;
+  const oldest = withData[0]?.weight || null;
+
   if(curEl) curEl.textContent = latest ? latest.toFixed(1) : '—';
+  if(healthWt) healthWt.textContent = latest ? latest.toFixed(1) : '—';
 
   // Streak
   const streakEl = document.getElementById('bp-weight-streak');
   if(streakEl){
     let streak=0;
-    for(let i=days.length-1;i>=0;i--){
-      if(days[i].weight) streak++;
-      else break;
-    }
-    streakEl.textContent = streak > 0 ? streak+' day streak 🔥' : 'Log today to start streak';
+    for(let i=days.length-1;i>=0;i--){ if(days[i].weight) streak++; else break; }
+    streakEl.textContent = streak>0 ? streak+' day streak 🔥' : 'Log today to start your streak';
   }
 
-  // Mini sparkline chart
-  if(chartEl && weights.length > 1){
-    const min=Math.min(...weights)-2, max=Math.max(...weights)+2;
-    const W=chartEl.offsetWidth||280, H=60;
-    const pts = days.filter(d=>d.weight).map((d,i,arr)=>{
-      const x = (days.indexOf(d)/13)*W;
-      const y = H-((d.weight-min)/(max-min))*(H-8)-4;
-      return [x,y];
+  // Delta label
+  const deltaEl = document.getElementById('bp-weight-delta');
+  if(deltaEl && latest && oldest && latest !== oldest){
+    const delta = (latest - oldest).toFixed(1);
+    const sign = delta > 0 ? '+' : '';
+    deltaEl.textContent = `${sign}${delta} lbs (30d)`;
+    deltaEl.style.color = delta < 0 ? 'var(--green)' : delta > 0 ? 'var(--accent3)' : 'var(--muted)';
+  }
+
+  // Range label
+  const rangeEl = document.getElementById('bp-weight-range-label');
+  if(rangeEl && withData.length > 1){
+    const mn = Math.min(...withData.map(d=>d.weight)).toFixed(1);
+    const mx = Math.max(...withData.map(d=>d.weight)).toFixed(1);
+    rangeEl.textContent = `${mn} – ${mx} lbs range`;
+  }
+
+  // Big chart
+  const chartEl = document.getElementById('bp-weight-chart-big');
+  if(chartEl && withData.length >= 2){
+    const pts = days.map(d => ({x:d.idx, y:d.weight, label:d.label}));
+    makeSVGChart({
+      el: chartEl,
+      datasets: [{color:'var(--accent)', points: pts}],
+      height: 120,
     });
-    if(pts.length>1){
-      const path = pts.map((p,i)=>(i===0?'M':'L')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
-      chartEl.innerHTML = `<svg width="100%" height="60" style="overflow:visible">
-        <defs><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.25"/>
-          <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
-        </linearGradient></defs>
-        <path d="${path} L${pts[pts.length-1][0]} ${H} L${pts[0][0]} ${H} Z" fill="url(#wg)"/>
-        <path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        ${pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="3" fill="var(--accent)"/>`).join('')}
-      </svg>`;
-    } else {
-      chartEl.innerHTML = '<div style="color:var(--muted);font-size:11px;text-align:center;padding:20px 0">Log more days to see chart</div>';
-    }
+  } else if(chartEl) {
+    chartEl.innerHTML = '<div style="color:var(--muted);font-size:11px;text-align:center;padding:40px 0">Log at least 2 days to see your weight trend</div>';
   }
 
-  // History pills
-  histEl.innerHTML = '';
-  [...days].reverse().slice(0,7).reverse().forEach(d => {
-    const pill = document.createElement('div');
-    pill.style.cssText='flex-shrink:0;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 8px;text-align:center;min-width:44px';
-    if(d.weight) pill.style.borderColor='rgba(200,255,71,.3)';
-    pill.innerHTML=`<div style="font-size:8px;color:var(--muted);font-family:'JetBrains Mono',monospace">${d.label}</div>
-      <div style="font-size:11px;font-weight:700;color:${d.weight?'var(--accent)':'var(--muted)'};font-family:'JetBrains Mono',monospace">${d.weight?d.weight.toFixed(1):'—'}</div>`;
-    histEl.appendChild(pill);
+  // History pills (last 7 days)
+  if(histEl){
+    histEl.innerHTML = '';
+    days.slice(-7).forEach(d => {
+      const pill = document.createElement('div');
+      pill.style.cssText='flex-shrink:0;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 8px;text-align:center;min-width:44px';
+      if(d.weight) pill.style.borderColor='rgba(200,255,71,.3)';
+      pill.innerHTML=`<div style="font-size:8px;color:var(--muted);font-family:'JetBrains Mono',monospace">${d.label}</div>
+        <div style="font-size:11px;font-weight:700;color:${d.weight?'var(--accent)':'var(--muted)'};font-family:'JetBrains Mono',monospace">${d.weight?d.weight.toFixed(1):'—'}</div>`;
+      histEl.appendChild(pill);
+    });
+  }
+
+  // Old bp-weight-chart (health tab sparkline) — keep for health tab compatibility
+  const oldChart = document.getElementById('bp-weight-chart');
+  if(oldChart && withData.length >= 2){
+    const pts = days.slice(-14).map(d => ({x:d.idx, y:d.weight, label:d.label}));
+    makeSVGChart({ el:oldChart, datasets:[{color:'var(--accent)', points:pts}], height:60 });
+  }
+}
+
+// ─── CARDIO TREND CHART ───
+function renderCardioTrendChart(){
+  const el = document.getElementById('bp-cardio-chart');
+  const avgEl = document.getElementById('bp-cardio-avg');
+  if(!el) return;
+
+  // Build 8 weeks of data
+  const weeks = [];
+  for(let w=7; w>=0; w--){
+    let total=0;
+    const d = new Date();
+    d.setDate(d.getDate() - d.getDay() - w*7); // start of that week (Sunday)
+    const label = (d.getMonth()+1)+'/'+(d.getDate());
+    for(let day=0; day<7; day++){
+      const dd = new Date(d);
+      dd.setDate(d.getDate()+day);
+      const k = dd.getFullYear()+'-'+(dd.getMonth()+1)+'-'+dd.getDate();
+      total += getCardioDayMin(k);
+    }
+    weeks.push({x:7-w, y:total||null, label});
+  }
+
+  const withData = weeks.filter(w=>w.y);
+  const avg = withData.length ? Math.round(withData.reduce((s,w)=>s+w.y,0)/withData.length) : 0;
+  if(avgEl) avgEl.textContent = avg ? avg+' min/wk avg' : '— min/wk avg';
+
+  makeSVGChart({
+    el, datasets:[{color:'var(--green)', points:weeks}],
+    height:120, goalLine:100
   });
 }
+
+// ─── VOLUME TREND CHART (Push/Pull/Full) ───
+function renderVolumeChart(){
+  const el = document.getElementById('bp-volume-chart');
+  const peakEl = document.getElementById('bp-vol-peak');
+  if(!el) return;
+
+  // Last 30 days, grouped by workout type
+  const types = ['push','pull','full'];
+  const colors = {'push':'var(--accent)','pull':'var(--accent2)','full':'var(--accent3)'};
+  const datasets = types.map(type => {
+    const pts = [];
+    for(let i=29; i>=0; i--){
+      const d = new Date();
+      d.setDate(d.getDate()-i);
+      const k = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+      const log = getWkLog(k);
+      const label = (d.getMonth()+1)+'/'+(d.getDate());
+      pts.push({
+        x: 29-i,
+        y: (log && log.type===type && log.volume>0) ? log.volume : null,
+        label
+      });
+    }
+    return {color: colors[type], points: pts, type};
+  });
+
+  // Peak volume
+  const allVols = datasets.flatMap(ds => ds.points.map(p=>p.y)).filter(v=>v);
+  if(peakEl) peakEl.textContent = allVols.length ? 'Peak: '+Math.max(...allVols).toLocaleString()+' lbs' : '';
+
+  makeSVGChart({el, datasets, height:140});
+}
+
+// ─── BIOMARKER GUIDE ───
+const BIOMARKER_GUIDE = [
+  {name:'HbA1c', why:'3-month blood sugar average. High = metabolic dysfunction, dementia risk, cardiovascular disease. Your zone 2 cardio and diet move this most.', ideal:'< 5.7%', fast:true},
+  {name:'Fasting Glucose + Insulin', why:'Catches insulin resistance years before HbA1c moves. Morning light protocol and sleep quality directly regulate this.', ideal:'< 100 mg/dL glucose', fast:true},
+  {name:'Testosterone (Total + Free)', why:'Key male vitality marker. Low levels = 40% higher all-cause mortality. Strength training, sleep, morning sunlight, and Vitamin D all raise it.', ideal:'400–900 ng/dL', fast:false},
+  {name:'Vitamin D', why:'Most people are deficient. Directly tied to testosterone, immune function, mood, and bone density. Your morning garage light protocol addresses this.', ideal:'40–60 ng/mL', fast:false},
+  {name:'HDL + LDL + Triglycerides', why:'Zone 2 cardio raises HDL and drops triglycerides within 6–8 weeks. Ask for ApoB too — more predictive than LDL alone.', ideal:'HDL >60 / TG <150', fast:true},
+  {name:'hsCRP', why:'Inflammation marker. Cold showers, zone 2, and sleep all reduce it. High hsCRP is a proxy for how well your recovery protocols are working.', ideal:'< 1.0 mg/L', fast:false},
+  {name:'Ferritin', why:'Iron storage. Low ferritin tanks energy and recovery even when everything else looks fine — often misses because standard panels skip it. Request it specifically.', ideal:'50–150 ng/mL', fast:false},
+  {name:'TSH (Thyroid)', why:'Affects energy, metabolism, body weight, and cognitive function. A slow thyroid makes every other protocol less effective.', ideal:'0.4–2.5 mIU/L', fast:false},
+];
+
+function renderBiomarkerGuide(){
+  const el = document.getElementById('bp-biomarker-guide');
+  if(!el) return;
+  el.innerHTML = '';
+  BIOMARKER_GUIDE.forEach(b => {
+    const div = document.createElement('div');
+    div.style.cssText='padding:9px 0;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:flex-start';
+    div.innerHTML=`
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+          <span style="font-size:12px;font-weight:700;color:var(--text)">${b.name}</span>
+          ${b.fast?'<span style="font-size:8px;color:var(--accent2);border:1px solid rgba(71,212,255,.3);border-radius:3px;padding:1px 5px;font-family:JetBrains Mono,monospace">FASTED</span>':''}
+        </div>
+        <div style="font-size:11px;color:#aaa;line-height:1.5;margin-bottom:3px">${b.why}</div>
+        <div style="font-size:9px;color:var(--green);font-family:\'JetBrains Mono\',monospace">Ideal: ${b.ideal}</div>
+      </div>`;
+    el.appendChild(div);
+  });
+}
+
+// ─── PROTOCOL MAP TABLE ───
+const PROTOCOL_MAP = [
+  {protocol:'Morning Light (5000K, 15–30 min)', marker:'Testosterone, Vitamin D, cortisol rhythm, glucose', time:'4–8 weeks'},
+  {protocol:'Zone 2 Cardio 150+ min/week', marker:'Triglycerides ↓, HDL ↑, fasting insulin ↓, hsCRP ↓', time:'6–12 weeks'},
+  {protocol:'Strength Training 3–4×/week', marker:'Testosterone ↑, HbA1c ↓, muscle mass ↑, ferritin', time:'8–12 weeks'},
+  {protocol:'Cold Shower Finish (30s)', marker:'hsCRP ↓, norepinephrine ↑ (hard to lab-test directly)', time:'Ongoing'},
+  {protocol:'Sleep Optimization (7–9hr, 65–68°F)', marker:'Testosterone ↑, glucose ↓, hsCRP ↓, cortisol ↓', time:'2–4 weeks'},
+  {protocol:'Creatine 5g daily', marker:'Muscle output ↑, body composition, cognitive markers', time:'4–6 weeks'},
+  {protocol:'Vitamin D3 + K2 supplementation', marker:'Vitamin D levels ↑, testosterone ↑, immune markers', time:'8–12 weeks'},
+  {protocol:'Sauna 4×/week (170°F, 20 min)', marker:'hsCRP ↓, cardiovascular markers, growth hormone ↑', time:'8–16 weeks'},
+  {protocol:'Omega-3 2–4g EPA/DHA daily', marker:'Triglycerides ↓, hsCRP ↓, HDL ↑', time:'8–12 weeks'},
+  {protocol:'Time-Restricted Eating (8–10hr window)', marker:'Fasting glucose ↓, insulin ↓, HbA1c ↓', time:'4–8 weeks'},
+];
+
+function renderProtocolMap(){
+  const el = document.getElementById('bp-protocol-map');
+  if(!el) return;
+  el.innerHTML = '';
+  PROTOCOL_MAP.forEach((row, i) => {
+    const tr = document.createElement('tr');
+    tr.style.borderBottom = '1px solid var(--border)';
+    if(i%2===0) tr.style.background = 'rgba(255,255,255,0.01)';
+    tr.innerHTML=`
+      <td style="padding:8px;color:var(--text);font-size:11px;line-height:1.4;vertical-align:top">${row.protocol}</td>
+      <td style="padding:8px;color:var(--accent2);font-size:11px;line-height:1.4;vertical-align:top;font-family:'JetBrains Mono',monospace;font-size:10px">${row.marker}</td>
+      <td style="padding:8px;color:var(--muted);font-size:10px;white-space:nowrap;vertical-align:top;font-family:'JetBrains Mono',monospace">${row.time}</td>`;
+    el.appendChild(tr);
+  });
+}
+
+
 
 // ─── HEALTH METRICS ───
 const METRIC_DEFAULTS = [
@@ -2814,7 +3219,11 @@ renderCardioTracker();
 renderMonthMap();
 renderIdeaBanks();
 renderWeightLog();
+renderCardioTrendChart();
+renderVolumeChart();
 renderMetrics();
+renderBiomarkerGuide();
+renderProtocolMap();
 renderSuppTiers();
 renderProtocols();
 syncWeightToHealth();
