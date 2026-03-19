@@ -277,19 +277,19 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
     <div class="tagline">Master System · Age 38</div>
   </div>
   <div class="header-right">
-    <div class="date-badge" id="dateBadge">Wed, Mar 18, 2026</div>
+    <div class="date-badge" id="dateBadge">Thu, Mar 19, 2026</div>
     <button class="hdr-btn" onclick="copyData()">📋 Copy Data</button>
     <button class="hdr-btn push" onclick="openPushModal()" id="push-btn">🚀 Push</button>
   </div>
 </div>
 
 <div class="nav">
-  <button class="nav-tab" onclick="showTab('overview',this)"><span class="ni">⚡</span>Overview</button>
+  <button class="nav-tab active" onclick="showTab('overview',this)"><span class="ni">⚡</span>Overview</button>
   <button class="nav-tab" onclick="showTab('hitlist',this)"><span class="ni">🎯</span>Hit List</button>
   <button class="nav-tab" onclick="showTab('routines',this)"><span class="ni">⚙️</span>Routines</button>
   <button class="nav-tab" onclick="showTab('health',this)"><span class="ni">🧪</span>Health</button>
   <button class="nav-tab" onclick="showTab('ideas',this)"><span class="ni">💡</span>Ideas</button>
-  <button class="nav-tab active" onclick="showTab('blueprint',this)"><span class="ni">🧬</span>Blueprint</button>
+  <button class="nav-tab" onclick="showTab('blueprint',this)"><span class="ni">🧬</span>Blueprint</button>
 </div>
 
 <!-- PUSH MODAL -->
@@ -315,7 +315,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 <div class="main">
 
 <!-- ══════════ OVERVIEW ══════════ -->
-<div class="tab" id="tab-overview">
+<div class="tab active" id="tab-overview">
 
   <div class="card" style="text-align:center">
     <div class="card-header" style="justify-content:center;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px">
@@ -358,7 +358,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
     <div class="card-header">
       <div>
         <div class="card-title">🎯 Daily Hit List</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date">Wednesday, Mar 18</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date">Thursday, Mar 19</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
         <span id="hitlist-pval" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">0/9</span>
@@ -418,7 +418,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           <input class="add-input" id="morning-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('morning')">
           <button class="add-btn" onclick="addRoutineItem('morning')">+ Add</button>
         </div>
-        <div class="last-reset" id="morning-last-reset">Last reset: 2026-3-18</div>
+        <div class="last-reset" id="morning-last-reset">Last reset: 2026-3-19</div>
       </div>
     </div>
     <div>
@@ -439,7 +439,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           <input class="add-input" id="evening-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('evening')">
           <button class="add-btn" onclick="addRoutineItem('evening')">+ Add</button>
         </div>
-        <div class="last-reset" id="evening-last-reset">Last reset: 2026-3-18</div>
+        <div class="last-reset" id="evening-last-reset">Last reset: 2026-3-19</div>
       </div>
     </div>
     <div>
@@ -460,7 +460,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           <input class="add-input" id="sbshift-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('sbshift')">
           <button class="add-btn" onclick="addRoutineItem('sbshift')">+ Add</button>
         </div>
-        <div class="last-reset" id="sbshift-last-reset">Last reset: 2026-3-18</div>
+        <div class="last-reset" id="sbshift-last-reset">Last reset: 2026-3-19</div>
       </div>
     </div>
   </div>
@@ -486,9 +486,9 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
       <div class="cardio-day-name">Mon</div>
       <div class="cardio-day-min zero">—</div></div><div class="cardio-day has-cardio" style="cursor: pointer;">
       <div class="cardio-day-name">Tue</div>
-      <div class="cardio-day-min">30</div></div><div class="cardio-day today" style="cursor: pointer; border-color: rgba(200, 255, 71, 0.3);">
+      <div class="cardio-day-min">30</div></div><div class="cardio-day" style="cursor: pointer;">
       <div class="cardio-day-name">Wed</div>
-      <div class="cardio-day-min zero">—</div></div><div class="cardio-day" style="cursor: pointer;">
+      <div class="cardio-day-min zero">—</div></div><div class="cardio-day today" style="cursor: pointer; border-color: rgba(200, 255, 71, 0.3);">
       <div class="cardio-day-name">Thu</div>
       <div class="cardio-day-min zero">—</div></div><div class="cardio-day" style="cursor: pointer;">
       <div class="cardio-day-name">Fri</div>
@@ -616,9 +616,42 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           <button class="add-btn" onclick="wbAddExercise()">+ Add</button>
           <button class="reset-btn" onclick="openExLib()" style="border-color:rgba(71,212,255,.4);color:var(--accent2);white-space:nowrap">📚 Library</button>
         </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px">
+          <button class="add-btn" id="wb-finish-btn" onclick="finishWorkout()" style="flex:1;background:var(--green);font-size:13px;padding:13px">✅ Finish Workout</button>
+          <div id="wb-finish-status" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)"></div>
+        </div>
       </div>
     </div>
     <div>
+
+      <div class="card">
+        <div class="card-header"><div class="card-title">💪 1RM Calculator</div><div class="badge badge-green">Epley Formula</div></div>
+        <p style="font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.5">Enter the weight you lifted and how many reps you got. Gets your estimated one-rep max using the Epley formula used by strength coaches.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+          <div>
+            <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;font-family:'JetBrains Mono',monospace">Weight Lifted</div>
+            <div style="display:flex;align-items:center;gap:6px">
+              <input class="add-input" id="orm-weight" type="number" placeholder="lbs" min="1" step="2.5" style="text-align:center">
+            </div>
+          </div>
+          <div>
+            <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;font-family:'JetBrains Mono',monospace">Reps Completed</div>
+            <div style="display:flex;align-items:center;gap:6px">
+              <input class="add-input" id="orm-reps" type="number" placeholder="reps" min="1" max="30" step="1" style="text-align:center">
+            </div>
+          </div>
+        </div>
+        <button class="add-btn" onclick="calc1RM()" style="width:100%;margin-bottom:14px">Calculate 1RM</button>
+        <div id="orm-result" style="display:none">
+          <div style="text-align:center;margin-bottom:12px">
+            <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;font-family:'JetBrains Mono',monospace">Estimated 1RM</div>
+            <div id="orm-max" style="font-size:38px;font-weight:800;color:var(--accent);font-family:'JetBrains Mono',monospace;line-height:1">—</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">lbs</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px" id="orm-percentages"></div>
+          <div style="font-size:9px;color:var(--muted);margin-top:10px;text-align:center;font-family:'JetBrains Mono',monospace" id="orm-formula-note"></div>
+        </div>
+      </div>
 
       <div class="card">
         <div class="card-header" style="margin-bottom:6px">
@@ -686,10 +719,10 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
       </div><div class="wk-day-cell push-day">
       <div class="wk-day-num">17</div>
       <div class="wk-day-type" style="color:var(--accent)">PUSH</div>
-      </div><div class="wk-day-cell push-day today">
+      </div><div class="wk-day-cell push-day">
       <div class="wk-day-num">18</div>
       <div class="wk-day-type" style="color:var(--accent)">PUSH</div>
-      </div><div class="wk-day-cell">
+      </div><div class="wk-day-cell today">
       <div class="wk-day-num">19</div>
       
       </div><div class="wk-day-cell">
@@ -769,7 +802,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 </div>
 
 <!-- ══════════ BLUEPRINT ══════════ -->
-<div class="tab active" id="tab-blueprint">
+<div class="tab" id="tab-blueprint">
 
   <!-- ── ROW 1: Weight + Cardio charts ── -->
   <div class="two-col">
@@ -1894,11 +1927,6 @@ function wbShowDay(day){
   if(activeBtn){activeBtn.style.borderColor='rgba(200,255,71,.4)';activeBtn.style.color='var(--accent)';}
   document.getElementById('wb-day-label').textContent=WB_DAY_LABELS[day]||day;
   renderWbList();
-  // Log the workout type for today when you open a day
-  const existingLog = getWkLog(todayKey());
-  if(!existingLog || existingLog.type === day){
-    autoLogWorkout(day);
-  }
 }
 
 // ── Superset helpers ──
@@ -2029,7 +2057,6 @@ function wbToggleSet(day,ei,si){
   const session=getWbSession(day);
   session[ei].sets[si].done=!session[ei].sets[si].done;
   saveWbSession(day,session);
-  autoLogWorkout(day);
   renderWbList();
 }
 
@@ -2575,14 +2602,59 @@ function calcSessionVolume(day){
   return Math.round(vol);
 }
 
-function autoLogWorkout(day){
+function autoLogWorkout(day, isFinish=false){
+  // Only log if explicitly finishing OR there is actual volume recorded
+  const session = getWbSession(day);
+  const doneSets = session.flatMap(ex=>ex.sets).filter(s=>s.done);
   const vol = calcSessionVolume(day);
+  // Guard: don't log if nothing is done
+  if(!isFinish && (doneSets.length === 0 || vol === 0)) return;
   const existing = getWkLog(todayKey()) || {};
   const logType = existing.type || day;
   saveWkLog(todayKey(), { type: logType, volume: vol, day: todayKey() });
   renderMonthMap();
   const vcEl = document.getElementById('bp-volume-chart');
-  if(vcEl && vcEl.closest('.tab.active')) renderVolumeChart();
+  if(vcEl) renderVolumeChart();
+}
+
+function finishWorkout(){
+  const day = _wbDay;
+  const session = getWbSession(day);
+  const doneSets = session.flatMap(ex=>ex.sets).filter(s=>s.done);
+  const vol = calcSessionVolume(day);
+
+  if(doneSets.length === 0){
+    const statusEl = document.getElementById('wb-finish-status');
+    if(statusEl){ statusEl.textContent = 'No sets logged yet.'; statusEl.style.color='var(--accent3)'; }
+    return;
+  }
+
+  // Save the workout log
+  autoLogWorkout(day, true);
+
+  // Update button state
+  const btn = document.getElementById('wb-finish-btn');
+  const statusEl = document.getElementById('wb-finish-status');
+  if(btn){
+    btn.textContent = '🏆 Logged!';
+    btn.style.background = 'var(--accent)';
+    btn.style.color = '#000';
+    setTimeout(()=>{
+      btn.textContent = '✅ Finish Workout';
+      btn.style.background = 'var(--green)';
+      btn.style.color = '';
+    }, 3000);
+  }
+  if(statusEl){
+    const label = {push:'Push',pull:'Pull',full:'Full Body',vo2:'VO₂'}[day]||day;
+    const volStr = vol>=1000?(vol/1000).toFixed(1)+'k lbs':vol+' lbs';
+    statusEl.textContent = label+' · '+doneSets.length+' sets · '+volStr;
+    statusEl.style.color = 'var(--green)';
+  }
+
+  // Also re-render cardio tracker in case on health tab
+  renderMonthMap();
+  renderVolumeChart();
 }
 
 // ─── MONTHLY WORKOUT MAP ───
@@ -3363,6 +3435,78 @@ function renderProtocols(){
     el.appendChild(div);
   });
 }
+
+
+// ─── 1RM CALCULATOR ───
+function calc1RM(){
+  const weight = parseFloat(document.getElementById('orm-weight').value);
+  const reps   = parseInt(document.getElementById('orm-reps').value);
+  const result = document.getElementById('orm-result');
+  const maxEl  = document.getElementById('orm-max');
+  const pctEl  = document.getElementById('orm-percentages');
+  const noteEl = document.getElementById('orm-formula-note');
+
+  if(!weight||!reps||weight<1||reps<1||reps>30){
+    result.style.display='none';
+    return;
+  }
+
+  // Epley formula: 1RM = weight × (1 + reps/30)
+  // For 1 rep, return the weight itself
+  let oneRM;
+  if(reps===1){
+    oneRM = weight;
+  } else {
+    oneRM = weight * (1 + reps/30);
+  }
+  oneRM = Math.round(oneRM);
+
+  maxEl.textContent = oneRM;
+  result.style.display = 'block';
+
+  // Percentage breakdown used for programming
+  const percentages = [
+    {pct:95, label:'95%', use:'Heavy single'},
+    {pct:90, label:'90%', use:'3–5 rep work'},
+    {pct:85, label:'85%', use:'5–6 rep work'},
+    {pct:80, label:'80%', use:'6–8 rep work'},
+    {pct:75, label:'75%', use:'8–10 reps'},
+    {pct:70, label:'70%', use:'10–12 reps'},
+    {pct:65, label:'65%', use:'12–15 reps'},
+    {pct:60, label:'60%', use:'15+ reps / warm-up'},
+  ];
+
+  pctEl.innerHTML = '';
+  pctEl.style.gridTemplateColumns = 'repeat(2,1fr)';
+  percentages.forEach(p=>{
+    const val = Math.round(oneRM * p.pct/100);
+    const box = document.createElement('div');
+    box.style.cssText = 'background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;gap:6px';
+    box.innerHTML = `
+      <div>
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-weight:700">${p.label}</div>
+        <div style="font-size:9px;color:var(--muted);margin-top:1px">${p.use}</div>
+      </div>
+      <div style="font-size:16px;font-weight:800;color:var(--accent);font-family:'JetBrains Mono',monospace">${val}</div>`;
+    pctEl.appendChild(box);
+  });
+
+  if(noteEl){
+    if(reps===1){
+      noteEl.textContent = 'Direct measure — actual 1RM';
+    } else {
+      noteEl.textContent = `Epley formula · Based on ${weight}lbs × ${reps} reps · ±5% accuracy`;
+    }
+  }
+}
+
+// Allow Enter key to trigger calculation
+document.addEventListener('DOMContentLoaded', ()=>{
+  ['orm-weight','orm-reps'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.addEventListener('keydown', e=>{ if(e.key==='Enter') calc1RM(); });
+  });
+});
 
 // ─── INIT ───
 document.getElementById('dateBadge').textContent=new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
