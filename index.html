@@ -110,7 +110,10 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 .routine-item{display:flex;align-items:center;gap:10px;padding:12px 4px;border-bottom:1px solid var(--border);border-radius:4px}
 .routine-item:last-child{border-bottom:none}
 .routine-item.dragging{opacity:.4}.routine-item.drag-over{border-top:2px solid var(--accent)}
-.drag-handle{color:var(--muted);font-size:16px;flex-shrink:0;user-select:none;touch-action:none}
+.drag-handle{color:var(--accent2);font-size:18px;flex-shrink:0;user-select:none;touch-action:none;padding:0 4px;cursor:grab;opacity:0.7}
+.drag-handle:active{opacity:1;cursor:grabbing}
+.routine-item.dragging{opacity:0.3;border:1px dashed var(--accent)}
+.routine-item.drag-over{border-top:2px solid var(--accent);background:rgba(200,255,71,.06)}
 .r-check{width:22px;height:22px;border:1.5px solid var(--border);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;cursor:pointer}
 .routine-item.done .r-check{background:var(--accent);border-color:var(--accent)}
 .routine-item.done .r-check::after{content:'✓';font-size:10px;color:#000;font-weight:900}
@@ -300,7 +303,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
     <div class="tagline">Master System · Age 38</div>
   </div>
   <div class="header-right">
-    <div class="date-badge" id="dateBadge">Fri, Mar 27, 2026</div>
+    <div class="date-badge" id="dateBadge">Fri, Apr 3, 2026</div>
     <button class="hdr-btn" onclick="copyData()">📋 Copy Data</button>
     <button class="hdr-btn push" onclick="openPushModal()" id="push-btn">🚀 Push</button>
   </div>
@@ -394,7 +397,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
     <div class="card-header">
       <div>
         <div class="card-title">🎯 Daily Hit List</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date">Friday, Mar 27</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date">Friday, Apr 3</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
         <span id="hitlist-pval" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">0/9</span>
@@ -446,15 +449,15 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           </div>
         </div>
         <div class="routine-progress">
-          <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="morning-val">0/15</span></div>
+          <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="morning-val">0/27</span></div>
           <div class="rp-bar"><div class="rp-fill" id="morning-fill" style="width:0%"></div></div>
         </div>
-        <ul class="routine-list" id="morning-list"><li class="routine-item" draggable="true" data-idx="0"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💧 16oz water immediately on waking</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="1"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">☀️ Sunlight in eyes within 30 min</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="2"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🧘 5–10 min stretch or mobility</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="3"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🏋️ 30 min Strength training</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="4"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🥤 Protein shake + 5g Creatine</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="5"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💊 Blues pills</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="6"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🐾 Feed dogs</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="7"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🧹 Vacuum Rug</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="8"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🍳 Breakfast with kids</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="9"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">👕 Get kids dressed + brush teeth</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="10"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🚶 Dog walk (15+ min Zone 2)</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="11"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🚿 Shower — end with 30 sec cold</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="12"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💧 Waterpik + Vitamin C + SPF Lotion</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="13"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🦷 Brush teeth</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="14"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📅 Do something on the HIT LIST</span><button class="r-del">✕</button></li></ul>
+        <ul class="routine-list" id="morning-list"><li class="routine-item" data-idx="0"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💧 16oz water immediately on waking</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="1"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">☀️ Sunlight in eyes within 30 min</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="2"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🧘 5–10 min stretch or mobility</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="3"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🏋️ 30 min Strength training</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="4"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🥤 Protein shake + 5g Creatine</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="5"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💊 Blues pills</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="6"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🐾 Feed dogs</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="7"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🧹 Vacuum Rug</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="8"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🍳 Breakfast with kids</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="9"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">👕 Get kids dressed + brush teeth</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="10"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🚶 Dog walk (15+ min Zone 2)</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="11"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🚿 Shower — end with 30 sec cold</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="12"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💧 Waterpik + Vitamin C + SPF Lotion</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="13"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🦷 Brush teeth</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="14"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📅 Do something on the HIT LIST</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="15"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💧 16oz mineralized water immediately<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Rehydrates + electrolytes after 8hr fast</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="16"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🌡️ Check body temp (baseline: 97–97.5°F)<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Running hot = illness/stress signal</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="17"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🧘 5 min breathwork / box breathing<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Activates parasympathetic before cortisol spike</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="18"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🏃 10 min stability work before lifting<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Attia's pillar 1 — joint health for 40 years</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="19"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🏋️ Strength training (Push/Pull/Legs)<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Peak testosterone window — AM fasted</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="20"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🚿 Shower — end with 60 sec max cold<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">NE +530%, dopamine +250%, anti-inflammatory</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="21"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🥤 Protein shake (2 scoops) + 5g Creatine<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Post-lift protein synthesis window</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="22"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💊 D3+K2 + Omega-3 + Vitamin C + Blues pills<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">AM fat-soluble vitamins absorb with food</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="23"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🍳 Protein-first breakfast with kids<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Protein anchor before carbs = flatter glucose</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="24"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">☀️ Coffee outside — morning sun in eyes<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">90 min post-wake caffeine timing is optimal</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="25"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🚶 Walk to school (morning light + Zone 2)<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Cortisol peak + circadian anchor + family time</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="26"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💧 Waterpik + SPF lotion if going outside</span><button class="r-del">✕</button></li></ul>
         <div class="add-row">
           <input class="add-input" id="morning-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('morning')">
           <button class="add-btn" onclick="addRoutineItem('morning')">+ Add</button>
         </div>
-        <div class="last-reset" id="morning-last-reset">Last reset: 2026-3-27</div>
+        <div class="last-reset" id="morning-last-reset">Last reset: 2026-4-3</div>
       </div>
     </div>
     <div>
@@ -467,15 +470,15 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           </div>
         </div>
         <div class="routine-progress">
-          <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="evening-val">0/18</span></div>
+          <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="evening-val">0/32</span></div>
           <div class="rp-bar"><div class="rp-fill" id="evening-fill" style="width:0%"></div></div>
         </div>
-        <ul class="routine-list" id="evening-list"><li class="routine-item" draggable="true" data-idx="0"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🏠 Close up the house</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="1"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">☕ Prep coffee for tomorrow</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="2"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🍽️ Run dishwasher</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="3"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💊 Vitamins</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="4"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💊 Blues Medicine</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="5"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🗑️ Take out trash</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="6"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🐾 Fill dog food + water</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="7"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🍽️ Wash Water Bottles</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="8"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🏠 Close up back of house</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="9"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🛋️ Cover the couch</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="10"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🛋️ Blue in Cage</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="11"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🌡️ Drop room temp to 65–68°F</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="12"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📵 Dim screens / blue light off after 9pm</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="13"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📅 Check calendar for tomorrow</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="14"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🧴 Wash face + Retinol or HA + PM Lotion</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="15"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🦷 Floss + brush teeth</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="16"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📱 Hard screens off by 8pm</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="17"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🛏️ Bed by 9pm</span><button class="r-del">✕</button></li></ul>
+        <ul class="routine-list" id="evening-list"><li class="routine-item" data-idx="0"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💭 Tongue scraper (Johnson protocol)<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Johnson: oral health = cardiovascular</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="1"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🛏️ Bed by 9:00pm<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Deep sleep window: first third of night</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="2"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💨 Magnesium Glycinate 400mg with vitamins<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Mg: sleep quality + muscle recovery</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="3"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🚶 10 min walk after dinner (whole family)<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Post-meal glucose spike blunted 30%</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="4"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🍽️ Dinner done by 6:00pm (4hr before bed)<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Johnson: HRBS + insulin sensitivity</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="5"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🏠 Close up the house</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="6"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">☕ Prep coffee for tomorrow</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="7"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🍽️ Run dishwasher</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="8"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💊 Vitamins</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="9"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💊 Blues Medicine</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="10"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🗑️ Take out trash</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="11"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🐾 Fill dog food + water</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="12"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🍽️ Wash Water Bottles</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="13"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🏠 Close up back of house</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="14"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🛋️ Cover the couch</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="15"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🛋️ Blue in Cage</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="16"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🌡️ Drop room temp to 65–68°F<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Core temp drop triggers sleep onset</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="17"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📵 Dim screens / blue light off after 9pm</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="18"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📅 Check calendar for tomorrow</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="19"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🧴 Wash face + Retinol or HA + PM Lotion</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="20"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🦷 Floss + brush teeth</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="21"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📱 Hard screens off by 8pm</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="22"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🛏️ Bed by 9pm</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="23"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🍽️ Dinner done by 6:00pm<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">4hr buffer before 10pm sleep</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="24"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🚶 Post-dinner walk 10–15 min<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Blunts glucose spike, aids digestion</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="25"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📵 Blue light off by 8pm (amber/red only)<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">2hr window protects melatonin</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="26"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📱 Hard screens off by 8:30pm<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Reduces cortisol + arousal before bed</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="27"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📖 Book in hand 10 min before sleep<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Signals CNS wind-down, replaces screens</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="28"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💊 Vitamins + Magnesium Glycinate 400mg<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Mag improves deep sleep quality</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="29"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🦷 Tongue scraper + Floss + Waterpik + Brush<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Oral health = cardiovascular health</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="30"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🛏️ Bed by 9–9:30pm<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Captures deep sleep window + GH surge</div></span><button class="r-del">✕</button></li><li class="routine-item" data-idx="31"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🎵 Delta wave audio if needed<br><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; margin-top: 2px; line-height: 1.3;">Entrains brain to sleep frequency</div></span><button class="r-del">✕</button></li></ul>
         <div class="add-row">
           <input class="add-input" id="evening-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('evening')">
           <button class="add-btn" onclick="addRoutineItem('evening')">+ Add</button>
         </div>
-        <div class="last-reset" id="evening-last-reset">Last reset: 2026-3-27</div>
+        <div class="last-reset" id="evening-last-reset">Last reset: 2026-4-3</div>
       </div>
     </div>
     <div>
@@ -491,12 +494,12 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           <div class="rp-meta"><span class="rp-label">Shift Progress</span><span class="rp-val" id="sbshift-val">0/10</span></div>
           <div class="rp-bar"><div class="rp-fill" id="sbshift-fill" style="width:0%"></div></div>
         </div>
-        <ul class="routine-list" id="sbshift-list"><li class="routine-item" draggable="true" data-idx="0"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🏢 Walk Reno Hub first — set the tone</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="1"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📞 Check in with Sparks supervisor</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="2"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📞 Check in with Wendover lead</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="3"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🐎 Verify Racebook boards accurate across all locations</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="4"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📋 Review overnight issues or guest complaints</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="5"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🎰 Scan casino floor — players to invite to the book?</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="6"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">👋 Greet at least 3 regulars by name at Reno Hub</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="7"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🏆 Acknowledge one team win today</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="8"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💡 Identify one thing to improve before end of shift</span><button class="r-del">✕</button></li><li class="routine-item" draggable="true" data-idx="9"><span class="drag-handle">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📊 End-of-shift check — anything to hand off?</span><button class="r-del">✕</button></li></ul>
+        <ul class="routine-list" id="sbshift-list"><li class="routine-item" data-idx="0"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🏢 Walk Reno Hub first — set the tone</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="1"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📞 Check in with Sparks supervisor</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="2"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📞 Check in with Wendover lead</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="3"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🐎 Verify Racebook boards accurate across all locations</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="4"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📋 Review overnight issues or guest complaints</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="5"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🎰 Scan casino floor — players to invite to the book?</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="6"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">👋 Greet at least 3 regulars by name at Reno Hub</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="7"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">🏆 Acknowledge one team win today</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="8"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">💡 Identify one thing to improve before end of shift</span><button class="r-del">✕</button></li><li class="routine-item" data-idx="9"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><span class="r-text editable-text" contenteditable="true">📊 End-of-shift check — anything to hand off?</span><button class="r-del">✕</button></li></ul>
         <div class="add-row">
           <input class="add-input" id="sbshift-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('sbshift')">
           <button class="add-btn" onclick="addRoutineItem('sbshift')">+ Add</button>
         </div>
-        <div class="last-reset" id="sbshift-last-reset">Last reset: 2026-3-27</div>
+        <div class="last-reset" id="sbshift-last-reset">Last reset: 2026-4-3</div>
       </div>
     </div>
   </div>
@@ -697,7 +700,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
         </div>
         <div class="wk-month-nav">
           <button class="wk-nav-btn" onclick="wkPrevMonth()">‹</button>
-          <span class="wk-month-label" id="wk-month-label">March 2026</span>
+          <span class="wk-month-label" id="wk-month-label">April 2026</span>
           <button class="wk-nav-btn" onclick="wkNextMonth()">›</button>
         </div>
         <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:4px">
@@ -705,13 +708,13 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           <div class="wk-dow-label">Wed</div><div class="wk-dow-label">Thu</div><div class="wk-dow-label">Fri</div>
           <div class="wk-dow-label">Sat</div>
         </div>
-        <div class="wk-month-grid" id="wk-month-grid"><div class="wk-day-cell">
+        <div class="wk-month-grid" id="wk-month-grid"><div class="wk-day-cell empty"></div><div class="wk-day-cell empty"></div><div class="wk-day-cell empty"></div><div class="wk-day-cell">
       <div class="wk-day-num">1</div>
       
       </div><div class="wk-day-cell">
       <div class="wk-day-num">2</div>
       
-      </div><div class="wk-day-cell">
+      </div><div class="wk-day-cell today">
       <div class="wk-day-num">3</div>
       
       </div><div class="wk-day-cell">
@@ -753,12 +756,12 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
       </div><div class="wk-day-cell">
       <div class="wk-day-num">16</div>
       
-      </div><div class="wk-day-cell push-day" title="Tap to remove workout" style="cursor: pointer;">
+      </div><div class="wk-day-cell">
       <div class="wk-day-num">17</div>
-      <div class="wk-day-type" style="color:var(--accent)">PUSH</div>
-      </div><div class="wk-day-cell push-day" title="Tap to remove workout" style="cursor: pointer;">
+      
+      </div><div class="wk-day-cell">
       <div class="wk-day-num">18</div>
-      <div class="wk-day-type" style="color:var(--accent)">PUSH</div>
+      
       </div><div class="wk-day-cell">
       <div class="wk-day-num">19</div>
       
@@ -783,7 +786,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
       </div><div class="wk-day-cell">
       <div class="wk-day-num">26</div>
       
-      </div><div class="wk-day-cell today">
+      </div><div class="wk-day-cell">
       <div class="wk-day-num">27</div>
       
       </div><div class="wk-day-cell">
@@ -794,9 +797,6 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
       
       </div><div class="wk-day-cell">
       <div class="wk-day-num">30</div>
-      
-      </div><div class="wk-day-cell">
-      <div class="wk-day-num">31</div>
       
       </div></div>
         <div class="wk-vol-total">
@@ -877,7 +877,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
     <defs><linearGradient id="g0bp-cardio-chart" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="var(--green)" stop-opacity="0.2"></stop>
       <stop offset="100%" stop-color="var(--green)" stop-opacity="0"></stop>
-    </linearGradient></defs><line x1="36" y1="10" x2="288" y2="10" stroke="rgba(37,37,37,0.8)" stroke-width="1"></line><text x="32" y="13" text-anchor="end" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono, monospace">31</text><line x1="36" y1="52.666666666666664" x2="288" y2="52.666666666666664" stroke="rgba(37,37,37,0.8)" stroke-width="1"></line><text x="32" y="55.666666666666664" text-anchor="end" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono, monospace">30</text><line x1="36" y1="95.33333333333333" x2="288" y2="95.33333333333333" stroke="rgba(37,37,37,0.8)" stroke-width="1"></line><text x="32" y="98.33333333333333" text-anchor="end" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono, monospace">30</text><line x1="36" y1="138" x2="288" y2="138" stroke="rgba(37,37,37,0.8)" stroke-width="1"></line><text x="32" y="141" text-anchor="end" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono, monospace">29</text><text x="36.0" y="157" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">2/1</text><text x="72.0" y="157" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">2/8</text><text x="108.0" y="157" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">2/15</text><text x="144.0" y="157" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">2/22</text><text x="180.0" y="157" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">3/1</text><text x="216.0" y="157" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">3/8</text><text x="252.0" y="157" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">3/15</text><text x="288.0" y="157" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">3/22</text></svg></div>
+    </linearGradient></defs><line x1="36" y1="10" x2="288" y2="10" stroke="rgba(37,37,37,0.8)" stroke-width="1"></line><text x="32" y="13" text-anchor="end" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono, monospace">31</text><line x1="36" y1="52.666666666666664" x2="288" y2="52.666666666666664" stroke="rgba(37,37,37,0.8)" stroke-width="1"></line><text x="32" y="55.666666666666664" text-anchor="end" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono, monospace">30</text><line x1="36" y1="95.33333333333333" x2="288" y2="95.33333333333333" stroke="rgba(37,37,37,0.8)" stroke-width="1"></line><text x="32" y="98.33333333333333" text-anchor="end" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono, monospace">30</text><line x1="36" y1="138" x2="288" y2="138" stroke="rgba(37,37,37,0.8)" stroke-width="1"></line><text x="32" y="141" text-anchor="end" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono, monospace">29</text><text x="36.0" y="157" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">2/8</text><text x="72.0" y="157" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">2/15</text><text x="108.0" y="157" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">2/22</text><text x="144.0" y="157" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">3/1</text><text x="180.0" y="157" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">3/8</text><text x="216.0" y="157" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">3/15</text><text x="252.0" y="157" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">3/22</text><text x="288.0" y="157" text-anchor="middle" font-size="8" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">3/29</text></svg></div>
       <div style="display:flex;justify-content:space-between;margin-top:4px">
         <span style="font-size:8px;color:var(--muted)">Last 8 weeks</span>
         <span style="font-size:8px;color:var(--muted)">CDC 100 · Good 150 · Attia 200 · Elite 300 min/wk</span>
@@ -1262,7 +1262,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
   ls("lifeOS_hitlist2","{\"items\": [{\"text\": \"Fix pipe under house\", \"key\": \"home\", \"idx\": 0, \"done\": false, \"icon\": \"\\ud83c\\udfe0\", \"label\": \"Home\", \"color\": \"var(--muted)\"}, {\"text\": \"Phone app welcome screen\", \"key\": \"work\", \"idx\": 0, \"done\": false, \"icon\": \"\\ud83d\\udcbc\", \"label\": \"Work\", \"color\": \"var(--accent2)\"}, {\"text\": \"Order car magnet\", \"key\": \"scoop\", \"idx\": 0, \"done\": false, \"icon\": \"\\ud83d\\udca9\", \"label\": \"Scoop\", \"color\": \"var(--accent3)\"}, {\"text\": \"Wash house\", \"key\": \"home\", \"idx\": 1, \"done\": false, \"icon\": \"\\ud83c\\udfe0\", \"label\": \"Home\", \"color\": \"var(--muted)\"}, {\"text\": \"Wendover Numbers\", \"key\": \"work\", \"idx\": 1, \"done\": false, \"icon\": \"\\ud83d\\udcbc\", \"label\": \"Work\", \"color\": \"var(--accent2)\"}, {\"text\": \"Blue Tennis Balls\", \"key\": \"scoop\", \"idx\": 1, \"done\": false, \"icon\": \"\\ud83d\\udca9\", \"label\": \"Scoop\", \"color\": \"var(--accent3)\"}, {\"text\": \"House Rules document\", \"key\": \"work\", \"idx\": 2, \"done\": false, \"icon\": \"\\ud83d\\udcbc\", \"label\": \"Work\", \"color\": \"var(--accent2)\"}, {\"text\": \"Set up Google My Business\", \"key\": \"scoop\", \"idx\": 2, \"done\": false, \"icon\": \"\\ud83d\\udca9\", \"label\": \"Scoop\", \"color\": \"var(--accent3)\"}, {\"text\": \"New website\", \"key\": \"scoop\", \"idx\": 3, \"done\": false, \"icon\": \"\\ud83d\\udca9\", \"label\": \"Scoop\", \"color\": \"var(--accent3)\"}], \"date\": \"2026-3-16\"}");
   ls("lifeOS_roadmap","[{\"year\": \"1 Year \\u2014 Apr 2026\", \"color\": \"var(--accent)\", \"items\": [{\"text\": \"\\u2705 Citi card paid off\", \"done\": true}, {\"text\": \"20 Scoop Squad clients (full day route)\", \"done\": false}, {\"text\": \"Car magnet + door hangers live\", \"done\": false}, {\"text\": \"Morning/evening routines locked in\", \"done\": true}]}, {\"year\": \"2 Years \\u2014 Apr 2027\", \"color\": \"var(--accent2)\", \"items\": [{\"text\": \"Debt free\", \"done\": false}, {\"text\": \"Scoop Squad second route\", \"done\": false}, {\"text\": \"First hire or partner\", \"done\": false}, {\"text\": \"Rental property optimized\", \"done\": false}]}, {\"year\": \"5 Years \\u2014 2029\", \"color\": \"var(--accent3)\", \"items\": [{\"text\": \"Hawaii trip with the kids\", \"done\": false}, {\"text\": \"Side hustle #2 launched\", \"done\": false}, {\"text\": \"Personal brand / content live\", \"done\": false}, {\"text\": \"Physical peak maintained\", \"done\": false}]}, {\"year\": \"10 Years \\u2014 2036\", \"color\": \"var(--accent4)\", \"items\": [{\"text\": \"Camper + annual family trips\", \"done\": false}, {\"text\": \"Second rental property\", \"done\": false}, {\"text\": \"Business #1 complete, #2 started\", \"done\": false}, {\"text\": \"Annual vacation savings funded\", \"done\": false}]}]");
   ls("lifeOS_slist_scoop-week","[]");
-  ls("lifeOS_routine_evening","{\"items\": [{\"text\": \"\\ud83c\\udfe0 Close up the house\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\u2615 Prep coffee for tomorrow\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83c\\udf7d\\ufe0f Run dishwasher\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udc8a Vitamins\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udc8a Blues Medicine\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\uddd1\\ufe0f Take out trash\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udc3e Fill dog food + water\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83c\\udf7d\\ufe0f Wash Water Bottles\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83c\\udfe0 Close up back of house\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udecb\\ufe0f Cover the couch\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udecb\\ufe0f Blue in Cage\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83c\\udf21\\ufe0f Drop room temp to 65\\u201368\\u00b0F\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udcf5 Dim screens / blue light off after 9pm\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udcc5 Check calendar for tomorrow\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83e\\uddf4 Wash face + Retinol or HA + PM Lotion\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83e\\uddb7 Floss + brush teeth\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udcf1 Hard screens off by 8pm\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udecf\\ufe0f Bed by 9pm\", \"sci\": \"\", \"done\": false}], \"lastReset\": \"2026-3-16\"}");
+  ls("lifeOS_routine_evening","{\"items\": [{\"text\": \"\\ud83c\\udf7d\\ufe0f Dinner done by 6:00pm (4hr before bed)\", \"sci\": \"Johnson: HRBS + insulin sensitivity\", \"done\": false}, {\"text\": \"\\ud83d\\udeb6 10 min walk after dinner (whole family)\", \"sci\": \"Post-meal glucose spike blunted 30%\", \"done\": false}, {\"text\": \"\\u2615 Prep coffee for tomorrow\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83c\\udf7d\\ufe0f Run dishwasher + take trash out\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udc3e Fill dog food + water + wash water bottles\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udecb\\ufe0f Cover the couch + Blue in cage\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udc76 Kids room ready + bath time\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udc8a Vitamins + Magnesium Glycinate 400mg\", \"sci\": \"Mg: sleep quality + muscle recovery\", \"done\": false}, {\"text\": \"\\ud83c\\udf21\\ufe0f Drop room temp to 65\\u201368\\u00b0F\", \"sci\": \"Core temp drop = faster sleep onset\", \"done\": false}, {\"text\": \"\\ud83d\\udcf5 Blue light off \\u2014 screens to red/amber mode\", \"sci\": \"Johnson: 2hr before bed blue light free\", \"done\": false}, {\"text\": \"\\ud83c\\udfe0 Close up the house\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udc15 Cash potty break\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83e\\uddb7 Tongue scraper + Waterpik + Floss + Brush teeth\", \"sci\": \"Johnson: oral health = cardiovascular\", \"done\": false}, {\"text\": \"\\ud83e\\uddf4 Retinol or Hyaluronic Acid + PM Lotion\", \"sci\": \"Skin longevity\", \"done\": false}, {\"text\": \"\\ud83d\\udcd3 3-win journal: write 3 wins from today\", \"sci\": \"Clears mental chatter \\u2192 faster sleep\", \"done\": false}, {\"text\": \"\\ud83d\\udcc5 Check calendar for tomorrow\", \"sci\": \"Reduces anticipatory cortisol overnight\", \"done\": false}, {\"text\": \"\\ud83d\\udcf1 Hard screens off \\u2014 book or nothing\", \"sci\": \"Johnson: screens off 60 min before bed\", \"done\": false}, {\"text\": \"\\ud83d\\udecf\\ufe0f Bed by 9:00pm\", \"sci\": \"Deep sleep window: first third of night\", \"done\": false}], \"lastReset\": \"2026-3-16\"}");
   ls("lifeOS_routine_morning","{\"items\": [{\"text\": \"\\ud83d\\udca7 16oz water immediately on waking\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\u2600\\ufe0f Sunlight in eyes within 30 min\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83e\\uddd8 5\\u201310 min stretch or mobility\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83c\\udfcb\\ufe0f 30 min Strength training\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83e\\udd64 Protein shake + 5g Creatine\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udc8a Blues pills\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udc3e Feed dogs\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83e\\uddf9 Vacuum Rug\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83c\\udf73 Breakfast with kids\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udc55 Get kids dressed + brush teeth\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udeb6 Dog walk (15+ min Zone 2)\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udebf Shower \\u2014 end with 30 sec cold\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udca7 Waterpik + Vitamin C + SPF Lotion\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83e\\uddb7 Brush teeth\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udcc5 Do something on the HIT LIST\", \"sci\": \"\", \"done\": false}], \"lastReset\": \"2026-3-16\"}");
   ls("lifeOS_routine_sbshift","{\"items\": [{\"text\": \"\\ud83c\\udfe2 Walk Reno Hub first \\u2014 set the tone\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udcde Check in with Sparks supervisor\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udcde Check in with Wendover lead\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udc0e Verify Racebook boards accurate across all locations\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udccb Review overnight issues or guest complaints\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83c\\udfb0 Scan casino floor \\u2014 players to invite to the book?\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udc4b Greet at least 3 regulars by name at Reno Hub\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83c\\udfc6 Acknowledge one team win today\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udca1 Identify one thing to improve before end of shift\", \"sci\": \"\", \"done\": false}, {\"text\": \"\\ud83d\\udcca End-of-shift check \\u2014 anything to hand off?\", \"sci\": \"\", \"done\": false}], \"lastReset\": \"2026-3-16\"}");
   ls("lifeOS_scoop","{\"clients\": 3, \"revenue\": 210, \"routes\": 1}");
@@ -1307,23 +1307,29 @@ const ROUTINE_DEFAULTS={
     {text:'⚡ Kick ass today',sci:''},
   ],
   evening:[
+    // ── DINNER WINDOW (target: done by 5:30-6pm) ──
+    {text:'🍽️ Dinner done by 6:00pm (4hr before bed)',sci:'Johnson: HRBS + insulin sensitivity'},
+    {text:'🚶 10 min walk after dinner (whole family)',sci:'Post-meal glucose spike blunted 30%'},
+    // ── HOUSE CLOSE (6–7pm) ──
     {text:'☕ Prep coffee for tomorrow',sci:''},
-    {text:'💊 Vitamins + Blue medicine @ 8:30pm',sci:''},
-    {text:'🏠 Close up the house',sci:''},
     {text:'🍽️ Run dishwasher + take trash out',sci:''},
     {text:'🐾 Fill dog food + water + wash water bottles',sci:''},
     {text:'🛋️ Cover the couch + Blue in cage',sci:''},
-    {text:'👶 Kids room ready',sci:''},
-    {text:'🌡️ Drop room temp to 65–68°F',sci:'Sleep science'},
-    {text:'📵 Dim screens / blue light off after 9pm',sci:'Melatonin'},
-    {text:'🧴 Wash face + Retinol or Hyaluronic Acid',sci:'Skin longevity'},
-    {text:'🧴 PM Lotion',sci:''},
-    {text:'🦷 Floss + brush teeth',sci:''},
-    {text:'📓 3-win journal: write 3 wins from today',sci:'Cortisol'},
-    {text:'📅 Check calendar for tomorrow',sci:''},
-    {text:'📱 Hard screens off by 11:30pm',sci:''},
+    {text:'👶 Kids room ready + bath time',sci:''},
+    // ── WIND DOWN (7pm+) ──
+    {text:'💊 Vitamins + Magnesium Glycinate 400mg',sci:'Mg: sleep quality + muscle recovery'},
+    {text:'🌡️ Drop room temp to 65–68°F',sci:'Core temp drop = faster sleep onset'},
+    {text:'📵 Blue light off — screens to red/amber mode',sci:'Johnson: 2hr before bed blue light free'},
+    {text:'🏠 Close up the house',sci:''},
     {text:'🐕 Cash potty break',sci:''},
-    {text:'🛏️ Bed by midnight',sci:''},
+    // ── SLEEP PREP (30 min before bed) ──
+    {text:'🧴 Wash face + Tongue scraper + Waterpik',sci:'Johnson: oral health = cardiovascular'},
+    {text:'🦷 Floss + brush teeth',sci:''},
+    {text:'🧴 Retinol or Hyaluronic Acid + PM Lotion',sci:'Skin longevity'},
+    {text:'📓 3-win journal: write 3 wins from today',sci:'Clears mental chatter → faster sleep'},
+    {text:'📅 Check calendar for tomorrow',sci:'Reduces anticipatory cortisol overnight'},
+    {text:'📱 Hard screens off — book or nothing',sci:'Johnson: screens off 60 min before bed'},
+    {text:'🛏️ Bed by 9:00pm',sci:'Deep sleep window: first third of night'},
   ],
   sbshift:[
     {text:'🏢 Walk Reno Hub first — set the tone',sci:'Flagship'},
@@ -1347,30 +1353,122 @@ function getRoutine(name){
   return{items:ROUTINE_DEFAULTS[name].map(i=>({...i,done:false})),lastReset:todayKey()};
 }
 function saveRoutine(name,data){ls('lifeOS_routine_'+name,JSON.stringify(data));}
+// ─── TOUCH DRAG STATE ───
+let _dragName=null,_dragFromIdx=null,_dragEl=null,_dragClone=null,_dragOffsetY=0,_dragOffsetX=0;
+
 function renderRoutine(name){
   const data=getRoutine(name);
   const ul=document.getElementById(name+'-list');
   if(!ul)return;
   ul.innerHTML='';
+
   data.items.forEach((item,idx)=>{
     const li=document.createElement('li');
     li.className='routine-item'+(item.done?' done':'');
-    li.draggable=true;li.dataset.idx=idx;
+    li.dataset.idx=idx;
+
+    // Drag handle
+    const handle=document.createElement('span');
+    handle.className='drag-handle';
+    handle.textContent='⠿';
+    handle.style.cursor='grab';
+
+    // Checkbox
+    const rCheck=document.createElement('div');
+    rCheck.className='r-check';
+    if(item.done) rCheck.style.background='var(--accent)';
+    rCheck.onclick=()=>toggleRoutineItem(name,idx);
+
+    // Text
     const rSpan=document.createElement('span');
-    rSpan.className='r-text editable-text';rSpan.contentEditable='true';rSpan.textContent=item.text;
-    rSpan.addEventListener('blur',()=>{const t=rSpan.textContent.trim();if(t&&t!==item.text){const d=getRoutine(name);d.items[idx].text=t;saveRoutine(name,d);}});
+    rSpan.className='r-text editable-text';
+    rSpan.contentEditable='true';
+    rSpan.textContent=item.text;
+    rSpan.addEventListener('blur',()=>{
+      const t=rSpan.textContent.trim();
+      if(t&&t!==item.text){const d=getRoutine(name);d.items[idx].text=t;saveRoutine(name,d);}
+    });
     rSpan.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();rSpan.blur();}});
-    li.innerHTML=`<span class="drag-handle">⠿</span>`;
-    const rCheck=document.createElement('div');rCheck.className='r-check';rCheck.onclick=()=>toggleRoutineItem(name,idx);
-    const rDel=document.createElement('button');rDel.className='r-del';rDel.textContent='✕';rDel.onclick=()=>deleteRoutineItem(name,idx);
-    li.appendChild(rCheck);li.appendChild(rSpan);li.appendChild(rDel);
-    li.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',idx);li.classList.add('dragging');});
-    li.addEventListener('dragend',()=>li.classList.remove('dragging'));
-    li.addEventListener('dragover',e=>{e.preventDefault();li.classList.add('drag-over');});
-    li.addEventListener('dragleave',()=>li.classList.remove('drag-over'));
-    li.addEventListener('drop',e=>{e.preventDefault();li.classList.remove('drag-over');const from=parseInt(e.dataTransfer.getData('text/plain')),to=idx;if(from===to)return;const d=getRoutine(name);const moved=d.items.splice(from,1)[0];d.items.splice(to,0,moved);saveRoutine(name,d);renderRoutine(name);});
+
+    // Science note
+    if(item.sci){
+      const sci=document.createElement('div');
+      sci.style.cssText='font-size:9px;color:var(--muted);font-family:\'JetBrains Mono\',monospace;margin-top:2px;line-height:1.3';
+      sci.textContent=item.sci;
+      rSpan.appendChild(document.createElement('br'));
+      rSpan.appendChild(sci);
+    }
+
+    // Delete
+    const rDel=document.createElement('button');
+    rDel.className='r-del';rDel.textContent='✕';
+    rDel.onclick=()=>deleteRoutineItem(name,idx);
+
+    li.appendChild(handle);
+    li.appendChild(rCheck);
+    li.appendChild(rSpan);
+    li.appendChild(rDel);
+
+    // ── TOUCH DRAG on handle (non-passive so preventDefault works) ──
+    handle.addEventListener('touchstart', e=>{
+      e.preventDefault();
+      e.stopPropagation();
+      const touch = e.touches[0];
+      _dragName = name; _dragFromIdx = idx; _dragEl = li;
+      const rect = li.getBoundingClientRect();
+      _dragOffsetY = touch.clientY - rect.top;
+      _dragOffsetX = touch.clientX - rect.left;
+      li.classList.add('dragging');
+      // Ghost clone
+      _dragClone = li.cloneNode(true);
+      _dragClone.style.cssText = 'position:fixed;left:'+rect.left+'px;width:'+li.offsetWidth+'px;opacity:0.85;z-index:9999;pointer-events:none;background:var(--surface2);border:1px solid var(--accent);border-radius:8px;top:'+(touch.clientY-_dragOffsetY)+'px;transition:none;';
+      document.body.appendChild(_dragClone);
+    }, {passive: false});
+
     ul.appendChild(li);
   });
+
+  // ── TOUCH MOVE ──
+  ul.addEventListener('touchmove', e=>{
+    if(!_dragEl || _dragName !== name) return;
+    e.preventDefault();
+    const touch = e.touches[0];
+    if(_dragClone) _dragClone.style.top = (touch.clientY - _dragOffsetY) + 'px';
+    const items = [...ul.querySelectorAll('.routine-item:not(.dragging)')];
+    const target = items.find(el => {
+      const r = el.getBoundingClientRect();
+      return touch.clientY >= r.top && touch.clientY <= r.bottom;
+    });
+    items.forEach(el => el.classList.remove('drag-over'));
+    if(target) target.classList.add('drag-over');
+  }, {passive: false});
+
+  ul.addEventListener('touchend', e=>{
+    if(!_dragEl || _dragName !== name) return;
+    const touch = e.changedTouches[0];
+    if(_dragClone){ _dragClone.remove(); _dragClone = null; }
+    _dragEl.classList.remove('dragging');
+    const items = [...ul.querySelectorAll('.routine-item')];
+    items.forEach(el => el.classList.remove('drag-over'));
+    const target = items.find(el => {
+      if(el === _dragEl) return false;
+      const r = el.getBoundingClientRect();
+      return touch.clientY >= r.top && touch.clientY <= r.bottom;
+    });
+    if(target){
+      const toIdx = parseInt(target.dataset.idx);
+      if(_dragFromIdx !== toIdx){
+        const d = getRoutine(name);
+        const moved = d.items.splice(_dragFromIdx, 1)[0];
+        d.items.splice(toIdx, 0, moved);
+        saveRoutine(name, d);
+        renderRoutine(name);
+      }
+    }
+    _dragName = null; _dragFromIdx = null; _dragEl = null;
+  });
+
+  // Stats bar
   const total=data.items.length,done=data.items.filter(i=>i.done).length,pct=total?Math.round((done/total)*100):0;
   const f=document.getElementById(name+'-fill'),v=document.getElementById(name+'-val');
   if(f)f.style.width=pct+'%';if(v)v.textContent=done+'/'+total;
@@ -3727,9 +3825,61 @@ function openDeleteWorkout(dateKey, log, cell){
 }
 
 
+
+// ─── ROUTINE UPGRADE: add new items if not already present ───
+function upgradeRoutine(name, newItems){
+  const data = getRoutine(name);
+  const existingTexts = data.items.map(i => i.text.replace(/[^a-zA-Z0-9]/g,'').toLowerCase());
+  let changed = false;
+  newItems.forEach(ni => {
+    const key = ni.text.replace(/[^a-zA-Z0-9]/g,'').toLowerCase();
+    if(!existingTexts.includes(key)){
+      data.items.push({...ni});
+      changed = true;
+    } else {
+      // Update sci field if it's been added/improved
+      const existing = data.items.find(i => i.text.replace(/[^a-zA-Z0-9]/g,'').toLowerCase() === key);
+      if(existing && ni.sci && !existing.sci){
+        existing.sci = ni.sci;
+        changed = true;
+      }
+    }
+  });
+  if(changed) saveRoutine(name, data);
+}
+
+// New evening items to merge in
+const NEW_EVENING_ITEMS = [{"text": "🍽️ Dinner done by 6:00pm", "sci": "4hr buffer before 10pm sleep", "done": false}, {"text": "🚶 Post-dinner walk 10–15 min", "sci": "Blunts glucose spike, aids digestion", "done": false}, {"text": "🌡️ Drop room temp to 65–68°F", "sci": "Core temp drop triggers sleep onset", "done": false}, {"text": "📵 Blue light off by 8pm (amber/red only)", "sci": "2hr window protects melatonin", "done": false}, {"text": "📱 Hard screens off by 8:30pm", "sci": "Reduces cortisol + arousal before bed", "done": false}, {"text": "📖 Book in hand 10 min before sleep", "sci": "Signals CNS wind-down, replaces screens", "done": false}, {"text": "🏠 Close up the house", "sci": "", "done": false}, {"text": "☕ Prep coffee for tomorrow", "sci": "", "done": false}, {"text": "🍽️ Run dishwasher", "sci": "", "done": false}, {"text": "🍽️ Wash water bottles", "sci": "", "done": false}, {"text": "🗑️ Take out trash", "sci": "", "done": false}, {"text": "🐾 Fill dog food + water", "sci": "", "done": false}, {"text": "🛋️ Cover the couch", "sci": "", "done": false}, {"text": "🛋️ Blue in cage", "sci": "", "done": false}, {"text": "📅 Check calendar for tomorrow", "sci": "", "done": false}, {"text": "💊 Vitamins + Magnesium Glycinate 400mg", "sci": "Mag improves deep sleep quality", "done": false}, {"text": "💊 Blues medicine", "sci": "", "done": false}, {"text": "🧴 Wash face + Retinol or HA + PM Lotion", "sci": "", "done": false}, {"text": "🦷 Tongue scraper + Floss + Waterpik + Brush", "sci": "Oral health = cardiovascular health", "done": false}, {"text": "🛏️ Bed by 9–9:30pm", "sci": "Captures deep sleep window + GH surge", "done": false}, {"text": "🎵 Delta wave audio if needed", "sci": "Entrains brain to sleep frequency", "done": false}];
+const NEW_MORNING_ITEMS = [{"text": "💧 16oz mineralized water immediately", "sci": "Rehydrates + electrolytes after 8hr fast", "done": false}, {"text": "🌡️ Check body temp (baseline: 97–97.5°F)", "sci": "Running hot = illness/stress signal", "done": false}, {"text": "🧘 5 min breathwork / box breathing", "sci": "Activates parasympathetic before cortisol spike", "done": false}, {"text": "🏃 10 min stability work before lifting", "sci": "Attia's pillar 1 — joint health for 40 years", "done": false}, {"text": "🏋️ Strength training (Push/Pull/Legs)", "sci": "Peak testosterone window — AM fasted", "done": false}, {"text": "🚿 Shower — end with 60 sec max cold", "sci": "NE +530%, dopamine +250%, anti-inflammatory", "done": false}, {"text": "🥤 Protein shake (2 scoops) + 5g Creatine", "sci": "Post-lift protein synthesis window", "done": false}, {"text": "💊 D3+K2 + Omega-3 + Vitamin C + Blues pills", "sci": "AM fat-soluble vitamins absorb with food", "done": false}, {"text": "🐾 Feed dogs", "sci": "", "done": false}, {"text": "🍳 Protein-first breakfast with kids", "sci": "Protein anchor before carbs = flatter glucose", "done": false}, {"text": "👕 Get kids dressed + brush teeth", "sci": "", "done": false}, {"text": "☀️ Coffee outside — morning sun in eyes", "sci": "90 min post-wake caffeine timing is optimal", "done": false}, {"text": "🚶 Walk to school (morning light + Zone 2)", "sci": "Cortisol peak + circadian anchor + family time", "done": false}, {"text": "💧 Waterpik + SPF lotion if going outside", "sci": "", "done": false}, {"text": "📅 Do something on the HIT LIST", "sci": "", "done": false}];
+
+
+
+// ─── ROUTINE MIGRATION: add new sleep protocol items if missing ───
+function migrateRoutines(){
+  const NEW_EVENING_ITEMS = [
+    {text:'\ud83c\udf7d\ufe0f Dinner done by 6:00pm (4hr before bed)',sci:'Johnson: HRBS + insulin sensitivity',done:false},
+    {text:'\ud83d\udeb6 10 min walk after dinner (whole family)',sci:'Post-meal glucose spike blunted 30%',done:false},
+    {text:'\ud83d\udca8 Magnesium Glycinate 400mg with vitamins',sci:'Mg: sleep quality + muscle recovery',done:false},
+    {text:'\ud83d\udecf\ufe0f Bed by 9:00pm',sci:'Deep sleep window: first third of night',done:false},
+    {text:'\ud83d\udcad Tongue scraper (Johnson protocol)',sci:'Johnson: oral health = cardiovascular',done:false},
+  ];
+  const ev = lsj('lifeOS_routine_evening', null);
+  if(!ev) return; // will use DEFAULTS on first render
+  let changed = false;
+  NEW_EVENING_ITEMS.forEach(newItem => {
+    const exists = ev.items.some(i => i.text.includes(newItem.text.substring(2, 20)));
+    if(!exists){ ev.items.unshift(newItem); changed = true; }
+  });
+  if(changed){ ls('lifeOS_routine_evening', JSON.stringify(ev)); }
+}
+
+
 // ─── INIT ───
+migrateRoutines();
 document.getElementById('dateBadge').textContent=new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
 document.getElementById('push-modal').classList.remove('open');
+upgradeRoutine('evening', NEW_EVENING_ITEMS);
+upgradeRoutine('morning', NEW_MORNING_ITEMS);
 renderRoutine('morning');renderRoutine('evening');renderRoutine('sbshift');
 ['scoop-daily','family-weekly'].forEach(k=>renderSimpleList(k));
 renderTodoBlock('home','todo-home-wrap');
