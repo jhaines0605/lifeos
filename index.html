@@ -558,6 +558,61 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
   </div>
 
   <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">❤️ Pre-Sleep HR</div>
+        <div id="hr-streak" style="font-size:9px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace">Log tonight to start streak</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span id="hr-current" style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 22px; font-weight: 700; color: var(--muted);">--</span>
+        <span style="font-size:9px;color:var(--muted)">bpm</span>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5">Log your heart rate lying in bed before sleep. Lower = better recovery protocols. Johnson targets &lt;45 bpm.</p>
+    <div style="display:flex;gap:8px;margin-bottom:10px">
+      <input class="add-input" id="hr-input" type="number" placeholder="BPM before sleep..." min="30" max="120" step="1" style="flex:1;text-align:center" onkeydown="if(event.key==='Enter')logHR()">
+      <button class="add-btn" onclick="logHR()">Log</button>
+    </div>
+    <div id="hr-chart" style="width:100%;height:80px;background:var(--surface2);border-radius:8px;padding:6px;box-sizing:border-box"><div style="color:var(--muted);font-size:11px;text-align:center;padding:22px 0">Log 2+ nights to see your trend</div></div>
+    <div style="display:flex;justify-content:space-between;margin-top:4px">
+      <span style="font-size:8px;color:var(--muted)">Last 14 nights</span>
+      <div style="display:flex;gap:12px">
+        <span style="font-size:8px;color:var(--muted)">Good: &lt;60 ·</span>
+        <span style="font-size:8px;color:var(--green)">Optimal: &lt;50 ·</span>
+        <span style="font-size:8px;color:var(--accent2)">Elite: &lt;45</span>
+      </div>
+    </div>
+    <div id="hr-history" style="display:flex;gap:6px;overflow-x:auto;padding:8px 0 2px;scrollbar-width:none;margin-top:4px"><div style="flex-shrink: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; text-align: center; min-width: 44px;"><div style="font-size:8px;color:var(--muted);font-family:JetBrains Mono,monospace">3/28</div><div style="font-size:13px;font-weight:700;color:var(--muted);font-family:JetBrains Mono,monospace">--</div></div><div style="flex-shrink: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; text-align: center; min-width: 44px;"><div style="font-size:8px;color:var(--muted);font-family:JetBrains Mono,monospace">3/29</div><div style="font-size:13px;font-weight:700;color:var(--muted);font-family:JetBrains Mono,monospace">--</div></div><div style="flex-shrink: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; text-align: center; min-width: 44px;"><div style="font-size:8px;color:var(--muted);font-family:JetBrains Mono,monospace">3/30</div><div style="font-size:13px;font-weight:700;color:var(--muted);font-family:JetBrains Mono,monospace">--</div></div><div style="flex-shrink: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; text-align: center; min-width: 44px;"><div style="font-size:8px;color:var(--muted);font-family:JetBrains Mono,monospace">3/31</div><div style="font-size:13px;font-weight:700;color:var(--muted);font-family:JetBrains Mono,monospace">--</div></div><div style="flex-shrink: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; text-align: center; min-width: 44px;"><div style="font-size:8px;color:var(--muted);font-family:JetBrains Mono,monospace">4/1</div><div style="font-size:13px;font-weight:700;color:var(--muted);font-family:JetBrains Mono,monospace">--</div></div><div style="flex-shrink: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; text-align: center; min-width: 44px;"><div style="font-size:8px;color:var(--muted);font-family:JetBrains Mono,monospace">4/2</div><div style="font-size:13px;font-weight:700;color:var(--muted);font-family:JetBrains Mono,monospace">--</div></div><div style="flex-shrink: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; text-align: center; min-width: 44px;"><div style="font-size:8px;color:var(--muted);font-family:JetBrains Mono,monospace">4/3</div><div style="font-size:13px;font-weight:700;color:var(--muted);font-family:JetBrains Mono,monospace">--</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">⏳ Fasting Window</div>
+        <div id="fast-streak" style="font-size:9px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace">Tap when you finish your last meal</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span id="fast-hours" style="font-family: &quot;JetBrains Mono&quot;, monospace; font-size: 22px; font-weight: 700; color: var(--muted);">--</span>
+        <span style="font-size:9px;color:var(--muted)">hrs</span>
+      </div>
+    </div>
+    <div id="fast-live" style="text-align:center;padding:10px 0;display:none">
+      <div style="font-size:30px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--green)" id="fast-timer-display">0:00:00</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:2px" id="fast-timer-sub">fasting since --</div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:8px">
+      <button class="add-btn" id="fast-start-btn" onclick="startFast()" style="flex:1">Last meal done - Start Fast</button>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:14px">
+      <button class="reset-btn" id="fast-break-btn" onclick="breakFast()" style="flex:1;border-color:rgba(200,255,71,.3);color:var(--accent)">☕ Break Fast (first meal now)</button>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:10px">
+      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:8px">What each window does</div>
+      <div id="fast-tiers"><div style="display: flex; gap: 10px; padding: 8px 10px; border-radius: 7px; margin-bottom: 6px; background: rgba(85, 85, 85, 0.1); border: 1px solid rgba(85, 85, 85, 0.3); align-items: flex-start;"><div style="flex-shrink:0;text-align:center;min-width:52px"><div style="font-size:11px;font-weight:700;color:var(--muted);font-family:JetBrains Mono,monospace">12 hrs</div><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:1px">Baseline</div></div><div style="font-size:11px;color:#aaa;line-height:1.5;flex:1">Glycogen stores begin depleting. Insulin drops to baseline. Body shifts toward fat oxidation.</div></div><div style="display: flex; gap: 10px; padding: 8px 10px; border-radius: 7px; margin-bottom: 6px; background: rgba(200, 255, 71, 0.06); border: 1px solid rgba(200, 255, 71, 0.3); align-items: flex-start;"><div style="flex-shrink:0;text-align:center;min-width:52px"><div style="font-size:11px;font-weight:700;color:var(--accent);font-family:JetBrains Mono,monospace">14-16 hrs</div><div style="font-size:8px;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-top:1px">Your Target</div></div><div style="font-size:11px;color:#aaa;line-height:1.5;flex:1">Insulin sensitivity improves 20-40%. Growth hormone elevates. Autophagy begins. HbA1c-improving territory.</div></div><div style="display: flex; gap: 10px; padding: 8px 10px; border-radius: 7px; margin-bottom: 6px; background: rgba(61, 220, 132, 0.06); border: 1px solid rgba(61, 220, 132, 0.3); align-items: flex-start;"><div style="flex-shrink:0;text-align:center;min-width:52px"><div style="font-size:11px;font-weight:700;color:var(--green);font-family:JetBrains Mono,monospace">16-18 hrs</div><div style="font-size:8px;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin-top:1px">Optimal</div></div><div style="font-size:11px;color:#aaa;line-height:1.5;flex:1">Autophagy significantly upregulated. Cells recycling damaged proteins and mitochondria. Meaningful fat oxidation. Inflammation markers drop.</div></div><div style="display: flex; gap: 10px; padding: 8px 10px; border-radius: 7px; margin-bottom: 6px; background: rgba(71, 212, 255, 0.06); border: 1px solid rgba(71, 212, 255, 0.3); align-items: flex-start;"><div style="flex-shrink:0;text-align:center;min-width:52px"><div style="font-size:11px;font-weight:700;color:var(--accent2);font-family:JetBrains Mono,monospace">18-20 hrs</div><div style="font-size:8px;color:var(--accent2);text-transform:uppercase;letter-spacing:.5px;margin-top:1px">Deep Fast</div></div><div style="font-size:11px;color:#aaa;line-height:1.5;flex:1">Peak autophagy window. Ketone production increases. Johnson eats 6am-11am only. Significant metabolic reset.</div></div><div style="display: flex; gap: 10px; padding: 8px 10px; border-radius: 7px; margin-bottom: 6px; background: rgba(180, 127, 254, 0.06); border: 1px solid rgba(180, 127, 254, 0.3); align-items: flex-start;"><div style="flex-shrink:0;text-align:center;min-width:52px"><div style="font-size:11px;font-weight:700;color:var(--accent4);font-family:JetBrains Mono,monospace">20+ hrs</div><div style="font-size:8px;color:var(--accent4);text-transform:uppercase;letter-spacing:.5px;margin-top:1px">Extended</div></div><div style="font-size:11px;color:#aaa;line-height:1.5;flex:1">Therapeutic territory. Not a daily target. Occasional extended fasts provide deeper cellular repair. Muscle loss risk past 24hrs without protein.</div></div></div>
+    </div>
+  </div>
+
+  <div class="card">
     <div class="card-header"><div class="card-title">⏱️ Rest Timer</div><div class="badge badge-green">Weightlifting</div></div>
     <div id="rt-display" style="font-family:'JetBrains Mono',monospace;font-size:52px;font-weight:700;color:var(--accent);text-align:center;padding:14px 0 8px;letter-spacing:3px;line-height:1">2:00</div>
     <div class="progress-bar" style="margin-bottom:14px;height:6px"><div class="rp-fill" id="rt-prog" style="width:100%;background:var(--accent)"></div></div>
@@ -3856,6 +3911,200 @@ const NEW_MORNING_ITEMS = [{"text": "💧 16oz mineralized water immediately", "
 
 
 
+// HR TRACKER
+function hrKey(dateKey){return 'lifeOS_hr_'+dateKey;}
+function getHR(dateKey){return parseInt(ls(hrKey(dateKey))||'0')||null;}
+function saveHR(dateKey,val){ls(hrKey(dateKey),String(val));}
+function logHR(){
+  const input=document.getElementById('hr-input');
+  const val=parseInt(input?.value);
+  if(!val||val<30||val>120)return;
+  saveHR(todayKey(),val);
+  input.value='';
+  renderHRTracker();
+}
+function hrColor(bpm){
+  if(!bpm)return 'var(--muted)';
+  if(bpm<45)return 'var(--accent2)';
+  if(bpm<55)return 'var(--green)';
+  if(bpm<65)return 'var(--accent)';
+  return 'var(--accent3)';
+}
+function hrLabel(bpm){
+  if(!bpm)return '';
+  if(bpm<45)return 'Elite';
+  if(bpm<55)return 'Optimal';
+  if(bpm<65)return 'Good';
+  return 'High';
+}
+function renderHRTracker(){
+  const curEl=document.getElementById('hr-current');
+  const histEl=document.getElementById('hr-history');
+  const chartEl=document.getElementById('hr-chart');
+  const streakEl=document.getElementById('hr-streak');
+  if(!curEl)return;
+  const days=[];
+  for(let i=13;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const k=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+    const label=(d.getMonth()+1)+'/'+(d.getDate());
+    days.push({label,hr:getHR(k),key:k,idx:13-i});
+  }
+  const withData=days.filter(d=>d.hr);
+  const latest=withData[withData.length-1]?.hr||null;
+  const avg=withData.length?Math.round(withData.reduce((s,d)=>s+d.hr,0)/withData.length):null;
+  curEl.textContent=latest||'--';
+  curEl.style.color=hrColor(latest);
+  if(streakEl){
+    let streak=0;
+    for(let i=days.length-1;i>=0;i--){if(days[i].hr)streak++;else break;}
+    const avgStr=avg?' avg '+avg+' bpm':'';
+    streakEl.textContent=streak>0?streak+' night streak'+avgStr:'Log tonight to start streak';
+  }
+  if(chartEl&&withData.length>=2){
+    const W=chartEl.offsetWidth||280,H=68;
+    const PAD={top:6,right:10,bottom:16,left:28};
+    const cW=W-PAD.left-PAD.right,cH=H-PAD.top-PAD.bottom;
+    const vals=withData.map(d=>d.hr);
+    const yMin=Math.min(...vals)-5,yMax=Math.max(...vals)+5,yRange=yMax-yMin||10;
+    const px=x=>PAD.left+(x/13)*cW;
+    const py=y=>PAD.top+cH-((y-yMin)/yRange)*cH;
+    const goals=[
+      {val:65,color:'rgba(255,107,53,0.4)',label:'65'},
+      {val:55,color:'rgba(61,220,132,0.4)',label:'55'},
+      {val:45,color:'rgba(71,212,255,0.5)',label:'45'},
+    ];
+    let svg='<svg width="100%" height="'+H+'" viewBox="0 0 '+W+' '+H+'" style="overflow:visible;display:block">';
+    goals.forEach(g=>{
+      if(g.val>=yMin&&g.val<=yMax*1.1){
+        const gy=py(g.val);
+        svg+='<line x1="'+PAD.left+'" y1="'+gy+'" x2="'+(W-PAD.right)+'" y2="'+gy+'" stroke="'+g.color+'" stroke-width="1" stroke-dasharray="3,3"/>';
+        svg+='<text x="'+(PAD.left-3)+'" y="'+(gy+3)+'" text-anchor="end" font-size="7" fill="'+g.color+'" font-family="JetBrains Mono,monospace">'+g.label+'</text>';
+      }
+    });
+    const validPts=days.filter(p=>p.hr);
+    if(validPts.length>=2){
+      const pathD=validPts.map((p,i)=>(i===0?'M':'L')+px(p.idx).toFixed(1)+' '+py(p.hr).toFixed(1)).join(' ');
+      const col=hrColor(latest);
+      svg+='<path d="'+pathD+'" fill="none" stroke="'+col+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+      const last=validPts[validPts.length-1];
+      svg+='<circle cx="'+px(last.idx).toFixed(1)+'" cy="'+py(last.hr).toFixed(1)+'" r="3.5" fill="'+col+'" stroke="var(--bg)" stroke-width="1.5"/>';
+    }
+    const step=Math.max(1,Math.floor(days.length/5));
+    days.filter((_,i)=>i%step===0||i===days.length-1).forEach(p=>{
+      svg+='<text x="'+px(p.idx).toFixed(1)+'" y="'+(H-1)+'" text-anchor="middle" font-size="7" fill="rgba(85,85,85,0.8)" font-family="JetBrains Mono,monospace">'+p.label+'</text>';
+    });
+    svg+='</svg>';
+    chartEl.innerHTML=svg;
+  } else if(chartEl){
+    chartEl.innerHTML='<div style="color:var(--muted);font-size:11px;text-align:center;padding:22px 0">Log 2+ nights to see your trend</div>';
+  }
+  if(histEl){
+    histEl.innerHTML='';
+    days.slice(-7).forEach(d=>{
+      const pill=document.createElement('div');
+      pill.style.cssText='flex-shrink:0;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 8px;text-align:center;min-width:44px';
+      pill.innerHTML='<div style="font-size:8px;color:var(--muted);font-family:JetBrains Mono,monospace">'+d.label+'</div><div style="font-size:13px;font-weight:700;color:'+hrColor(d.hr)+';font-family:JetBrains Mono,monospace">'+(d.hr||'--')+'</div>'+(d.hr?'<div style="font-size:7px;color:'+hrColor(d.hr)+'">'+hrLabel(d.hr)+'</div>':'');
+      histEl.appendChild(pill);
+    });
+  }
+}
+
+
+// FASTING TRACKER
+const FAST_TIERS=[
+  {hours:'12 hrs',color:'var(--muted)',bg:'rgba(85,85,85,0.1)',border:'rgba(85,85,85,0.3)',label:'Baseline',benefit:'Glycogen stores begin depleting. Insulin drops to baseline. Body shifts toward fat oxidation.'},
+  {hours:'14-16 hrs',color:'var(--accent)',bg:'rgba(200,255,71,0.06)',border:'rgba(200,255,71,0.3)',label:'Your Target',benefit:'Insulin sensitivity improves 20-40%. Growth hormone elevates. Autophagy begins. HbA1c-improving territory.'},
+  {hours:'16-18 hrs',color:'var(--green)',bg:'rgba(61,220,132,0.06)',border:'rgba(61,220,132,0.3)',label:'Optimal',benefit:'Autophagy significantly upregulated. Cells recycling damaged proteins and mitochondria. Meaningful fat oxidation. Inflammation markers drop.'},
+  {hours:'18-20 hrs',color:'var(--accent2)',bg:'rgba(71,212,255,0.06)',border:'rgba(71,212,255,0.3)',label:'Deep Fast',benefit:"Peak autophagy window. Ketone production increases. Johnson eats 6am-11am only. Significant metabolic reset."},
+  {hours:'20+ hrs',color:'var(--accent4)',bg:'rgba(180,127,254,0.06)',border:'rgba(180,127,254,0.3)',label:'Extended',benefit:'Therapeutic territory. Not a daily target. Occasional extended fasts provide deeper cellular repair. Muscle loss risk past 24hrs without protein.'},
+];
+function fastStartKey(){return 'lifeOS_fast_start';}
+function fastBreakKey(){return 'lifeOS_fast_break';}
+function fastStreakKey(){return 'lifeOS_fast_streak';}
+function getFastStart(){return parseInt(ls(fastStartKey())||'0')||null;}
+function getFastBreak(){return parseInt(ls(fastBreakKey())||'0')||null;}
+let _fastInterval=null;
+function startFast(){ls(fastStartKey(),String(Date.now()));localStorage.removeItem(fastBreakKey());renderFastingTracker();}
+function breakFast(){
+  const start=getFastStart();if(!start)return;
+  const elapsed=(Date.now()-start)/3600000;
+  ls(fastBreakKey(),String(Date.now()));
+  const sd=lsj(fastStreakKey(),[]);
+  sd.push({date:todayKey(),hours:Math.round(elapsed*10)/10});
+  if(sd.length>30)sd.splice(0,sd.length-30);
+  ls(fastStreakKey(),JSON.stringify(sd));
+  renderFastingTracker();
+}
+function fastTierColor(h){
+  if(h>=20)return 'var(--accent4)';if(h>=18)return 'var(--accent2)';
+  if(h>=16)return 'var(--green)';if(h>=14)return 'var(--accent)';
+  return 'var(--muted)';
+}
+function fastTierLabel(h){
+  if(h>=20)return 'Extended';if(h>=18)return 'Deep Fast';
+  if(h>=16)return 'Optimal';if(h>=14)return 'Target';
+  if(h>=12)return 'Baseline';return 'Building...';
+}
+function renderFastingTracker(){
+  const hoursEl=document.getElementById('fast-hours');
+  const liveEl=document.getElementById('fast-live');
+  const displayEl=document.getElementById('fast-timer-display');
+  const subEl=document.getElementById('fast-timer-sub');
+  const startBtn=document.getElementById('fast-start-btn');
+  const streakEl=document.getElementById('fast-streak');
+  if(!hoursEl)return;
+  if(_fastInterval){clearInterval(_fastInterval);_fastInterval=null;}
+  renderFastTiers();
+  const start=getFastStart(),broke=getFastBreak();
+  if(!start){
+    hoursEl.textContent='--';hoursEl.style.color='var(--muted)';
+    if(liveEl)liveEl.style.display='none';
+    if(startBtn)startBtn.textContent='Last meal done - Start Fast';
+    if(streakEl)streakEl.textContent='Tap when you finish your last meal';
+    return;
+  }
+  const startTime=new Date(start);
+  const startStr=startTime.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
+  if(liveEl)liveEl.style.display='block';
+  if(broke){
+    const elapsed=(broke-start)/3600000;
+    const hh=Math.floor(elapsed),mm=Math.round((elapsed-hh)*60);
+    hoursEl.textContent=hh+(mm>0?':'+String(mm).padStart(2,'0'):'');
+    hoursEl.style.color=fastTierColor(elapsed);
+    if(displayEl){displayEl.textContent=hh+'h '+String(mm).padStart(2,'0')+'m';displayEl.style.color=fastTierColor(elapsed);}
+    if(subEl)subEl.textContent=fastTierLabel(elapsed)+' started '+startStr;
+    if(startBtn)startBtn.textContent='New Fast';
+  } else {
+    if(startBtn)startBtn.textContent='Reset Fast';
+    function tick(){
+      const elapsed=(Date.now()-start)/3600000;
+      const hh=Math.floor(elapsed),mm=Math.floor((elapsed-hh)*60),ss=Math.floor(((elapsed-hh)*60-mm)*60);
+      const col=fastTierColor(elapsed);
+      if(displayEl){displayEl.textContent=hh+':'+String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');displayEl.style.color=col;}
+      hoursEl.textContent=hh+':'+String(mm).padStart(2,'0');hoursEl.style.color=col;
+      if(subEl)subEl.textContent=fastTierLabel(elapsed)+' started '+startStr;
+    }
+    tick();_fastInterval=setInterval(tick,1000);
+  }
+  if(streakEl){
+    const sd=lsj(fastStreakKey(),[]);
+    const recent=sd.slice(-7);
+    const avg=recent.length?Math.round(recent.reduce((s,d)=>s+d.hours,0)/recent.length*10)/10:null;
+    streakEl.textContent=avg?'7-day avg: '+avg+' hrs fasted':(start?'Fast in progress...':'');
+  }
+}
+function renderFastTiers(){
+  const el=document.getElementById('fast-tiers');
+  if(!el||el.children.length>0)return;
+  FAST_TIERS.forEach(tier=>{
+    const row=document.createElement('div');
+    row.style.cssText='display:flex;gap:10px;padding:8px 10px;border-radius:7px;margin-bottom:6px;background:'+tier.bg+';border:1px solid '+tier.border+';align-items:flex-start';
+    row.innerHTML='<div style="flex-shrink:0;text-align:center;min-width:52px"><div style="font-size:11px;font-weight:700;color:'+tier.color+';font-family:JetBrains Mono,monospace">'+tier.hours+'</div><div style="font-size:8px;color:'+tier.color+';text-transform:uppercase;letter-spacing:.5px;margin-top:1px">'+tier.label+'</div></div><div style="font-size:11px;color:#aaa;line-height:1.5;flex:1">'+tier.benefit+'</div>';
+    el.appendChild(row);
+  });
+}
+
 document.getElementById('dateBadge').textContent=new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
 document.getElementById('push-modal').classList.remove('open');
 upgradeRoutine('evening', NEW_EVENING_ITEMS, 'v3');
@@ -3886,6 +4135,8 @@ renderPerfTiers();
 renderSuppTiers();
 renderProtocols();
 syncWeightToHealth();
+renderHRTracker();
+renderFastingTracker();
 renderScoop();
 renderScoopIdeas();
 
