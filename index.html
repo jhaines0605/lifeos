@@ -311,8 +311,8 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 </div>
 
 <div class="nav">
-  <button class="nav-tab" onclick="showTab('hitlist',this)"><span class="ni">🎯</span>Hit List</button>
-  <button class="nav-tab active" onclick="showTab('routines',this)"><span class="ni">⚙️</span>Routines</button>
+  <button class="nav-tab active" onclick="showTab('hitlist',this)"><span class="ni">🎯</span>Hit List</button>
+  <button class="nav-tab" onclick="showTab('routines',this)"><span class="ni">⚙️</span>Routines</button>
   <button class="nav-tab" onclick="showTab('health',this)"><span class="ni">🧪</span>Health</button>
   <button class="nav-tab" onclick="showTab('blueprint',this)"><span class="ni">🧬</span>Blueprint</button>
 </div>
@@ -371,14 +371,14 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 
 
 <!-- ══════════ HIT LIST ══════════ -->
-<div class="tab" id="tab-hitlist">
+<div class="tab active" id="tab-hitlist">
 
   <div class="card">
     <div class="card-header" style="margin-bottom:10px">
       <div class="card-title">🎯 2026 Goals</div>
       <div class="badge badge-yellow">Yearly</div>
     </div>
-    <div id="ov-yearly-goals"><div><div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px"><span style="color:var(--muted)">Progress</span><span style="font-family:'JetBrains Mono',monospace;color:var(--accent)">0/7</span></div><div class="progress-bar" style="margin-bottom:12px;height:5px"><div class="progress-fill" style="width:0%;background:var(--accent)"></div></div></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">20 Scoop Squad clients (full day route)</span></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">HbA1c down to 5.1% or below</span></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">VO2 max above 50 ml/kg/min</span></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">Consistent 6am wake + full morning protocol</span></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">Home gym complete: rack + barbell + bench + bike</span></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">Debt free</span></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">90-day blood work showing all markers optimal</span></div><div class="add-row" style="margin-top: 10px;"><input class="add-input" id="yearly-goal-input" placeholder="Add a 2026 goal..." onkeydown="if(event.key==='Enter')addYearlyGoal()"><button class="add-btn" onclick="addYearlyGoal()">+ Add</button></div></div>
+    <div id="ov-yearly-goals"><div><div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px"><span style="color:var(--muted)">Progress</span><span style="font-family:'JetBrains Mono',monospace;color:var(--accent)">0/7</span></div><div class="progress-bar" style="margin-bottom:12px;height:5px"><div class="progress-fill" style="width:0%;background:var(--accent)"></div></div></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">20 Scoop Squad clients (full day route)</span><button aria-label="Delete goal" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0px 2px; flex-shrink: 0; margin-top: 1px;">✕</button></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">HbA1c down to 5.1% or below</span><button aria-label="Delete goal" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0px 2px; flex-shrink: 0; margin-top: 1px;">✕</button></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">VO2 max above 50 ml/kg/min</span><button aria-label="Delete goal" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0px 2px; flex-shrink: 0; margin-top: 1px;">✕</button></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">Consistent 6am wake + full morning protocol</span><button aria-label="Delete goal" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0px 2px; flex-shrink: 0; margin-top: 1px;">✕</button></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">Home gym complete: rack + barbell + bench + bike</span><button aria-label="Delete goal" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0px 2px; flex-shrink: 0; margin-top: 1px;">✕</button></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">Debt free</span><button aria-label="Delete goal" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0px 2px; flex-shrink: 0; margin-top: 1px;">✕</button></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">90-day blood work showing all markers optimal</span><button aria-label="Delete goal" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0px 2px; flex-shrink: 0; margin-top: 1px;">✕</button></div><div class="add-row" style="margin-top: 10px;"><input class="add-input" id="yearly-goal-input" placeholder="Add a 2026 goal..." onkeydown="if(event.key==='Enter')addYearlyGoal()"><button class="add-btn" onclick="addYearlyGoal()">+ Add</button></div></div>
   </div>
 
 
@@ -427,7 +427,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 </div>
 
 <!-- ══════════ ROUTINES ══════════ -->
-<div class="tab active" id="tab-routines">
+<div class="tab" id="tab-routines">
   <div class="three-col">
     <div>
       <div class="card">
@@ -743,63 +743,6 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 <!-- ══════════ BLUEPRINT ══════════ -->
 <div class="tab" id="tab-blueprint">
 
-  <!-- ── ROW 1: Weight + Cardio charts ── -->
-  <div class="two-col">
-
-    <div class="card">
-      <div class="card-header">
-        <div>
-          <div class="card-title">⚖️ Weight Trend</div>
-          <div id="bp-weight-streak" style="font-size:9px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace">Log today to start your streak</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span id="bp-current-weight" style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--accent)">—</span>
-          <span style="font-size:9px;color:var(--muted)">lbs</span>
-        </div>
-      </div>
-      <div style="display:flex;gap:8px;margin-bottom:12px">
-        <input class="add-input" id="bp-weight-input" type="number" placeholder="Today's weight..." step="0.1" style="flex:1">
-        <button class="add-btn" onclick="logWeight()">Log</button>
-      </div>
-      <div id="bp-weight-chart-big" style="width:100%;height:120px;position:relative"><div style="color:var(--muted);font-size:11px;text-align:center;padding:40px 0">Log at least 2 days to see your weight trend</div></div>
-      <div style="display:flex;justify-content:space-between;margin-top:4px">
-        <span style="font-size:8px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="bp-weight-range-label"></span>
-        <div style="display:flex;gap:12px">
-          <span style="font-size:9px;color:var(--muted)" id="bp-weight-delta"></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">🏃 Cardio Trend</div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green)" id="bp-cardio-avg">— min/wk avg</div>
-      </div>
-      <div id="bp-cardio-chart" style="width:100%;height:160px;position:relative"><div style="color:var(--muted);font-size:11px;text-align:center;padding:72px 0">No data yet — log some entries</div></div>
-      <div style="display:flex;justify-content:space-between;margin-top:4px">
-        <span style="font-size:8px;color:var(--muted)">Last 8 weeks</span>
-        <span style="font-size:8px;color:var(--muted)">CDC 100 · Good 150 · Attia 200 · Elite 300 min/wk</span>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ── ROW 2: Volume Chart (Push/Pull/Full lines) ── -->
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">💪 Volume Trend</div>
-      <div style="display:flex;gap:10px">
-        <span style="font-size:9px;color:var(--accent);font-family:'JetBrains Mono',monospace">— Push</span>
-        <span style="font-size:9px;color:var(--accent2);font-family:'JetBrains Mono',monospace">— Pull</span>
-        <span style="font-size:9px;color:var(--accent3);font-family:'JetBrains Mono',monospace">— Full</span>
-      </div>
-    </div>
-    <div id="bp-volume-chart" style="width:100%;height:140px;position:relative"><div style="color:var(--muted);font-size:11px;text-align:center;padding:62px 0">No data yet — log some entries</div></div>
-    <div style="display:flex;justify-content:space-between;margin-top:4px">
-      <span style="font-size:8px;color:var(--muted)">Last 30 days · lbs moved</span>
-      <span style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="bp-vol-peak"></span>
-    </div>
-  </div>
 
   <!-- ── ROW 3: Blood Work ── -->
   <div class="card">
@@ -3848,13 +3791,25 @@ function renderYearlyGoals(){
     const lbl=document.createElement('span');
     lbl.style.cssText=`flex:1;font-size:13px;line-height:1.4;${g.done?'text-decoration:line-through;color:var(--muted)':'color:#ccc'}`;
     lbl.textContent=g.text;
-    row.appendChild(chk);row.appendChild(lbl);
+    const del=document.createElement('button');
+    del.textContent='✕';
+    del.setAttribute('aria-label','Delete goal');
+    del.style.cssText='background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;line-height:1;padding:0 2px;flex-shrink:0;margin-top:1px';
+    del.onclick=(e)=>{e.stopPropagation();deleteYearlyGoal(i);};
+    row.appendChild(chk);row.appendChild(lbl);row.appendChild(del);
     row.onclick=()=>{const d=getYearlyGoals();d[i].done=!d[i].done;saveYearlyGoals(d);renderYearlyGoals();};
     el.appendChild(row);
   });
   const ar=document.createElement('div');ar.className='add-row';ar.style.marginTop='10px';
   ar.innerHTML=`<input class="add-input" id="yearly-goal-input" placeholder="Add a 2026 goal..." onkeydown="if(event.key==='Enter')addYearlyGoal()"><button class="add-btn" onclick="addYearlyGoal()">+ Add</button>`;
   el.appendChild(ar);
+}
+function deleteYearlyGoal(i){
+  const d=getYearlyGoals();
+  if(i<0||i>=d.length)return;
+  d.splice(i,1);
+  saveYearlyGoals(d);
+  renderYearlyGoals();
 }
 function addYearlyGoal(){
   const inp=document.getElementById('yearly-goal-input');
@@ -4196,8 +4151,6 @@ function renderAll(){
   renderMonthMap();
   renderIdeaBanks();
   renderWeightLog();
-  renderCardioTrendChart();
-  renderVolumeChart();
   renderMetrics();
   renderBiomarkerGuide();
   renderProtocolMap();
