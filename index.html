@@ -304,16 +304,17 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
   </div>
   <div class="header-right">
     <div class="date-badge" id="dateBadge">Mon, Jul 6, 2026</div>
+    <button class="hdr-btn" onclick="openSyncModal()" id="sync-btn"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--muted);display:inline-block;margin-right:5px;vertical-align:middle"></span>Sync</button>
     <button class="hdr-btn" onclick="copyData()">📋 Copy Data</button>
     <button class="hdr-btn push" onclick="openPushModal()" id="push-btn">🚀 Push</button>
   </div>
 </div>
 
 <div class="nav">
-  <button class="nav-tab active" onclick="showTab('hitlist',this)"><span class="ni">🎯</span>Hit List</button>
+  <button class="nav-tab" onclick="showTab('hitlist',this)"><span class="ni">🎯</span>Hit List</button>
   <button class="nav-tab" onclick="showTab('routines',this)"><span class="ni">⚙️</span>Routines</button>
   <button class="nav-tab" onclick="showTab('health',this)"><span class="ni">🧪</span>Health</button>
-  <button class="nav-tab" onclick="showTab('blueprint',this)"><span class="ni">🧬</span>Blueprint</button>
+  <button class="nav-tab active" onclick="showTab('blueprint',this)"><span class="ni">🧬</span>Blueprint</button>
 </div>
 
 <!-- PUSH MODAL -->
@@ -336,13 +337,41 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
   </div>
 </div>
 
+<!-- SYNC MODAL -->
+<div class="modal-bg" id="sync-modal">
+  <div class="modal">
+    <div class="modal-title">☁️ Cloud Sync</div>
+    <p style="font-size:12px;color:#aaa;margin-bottom:12px;line-height:1.6">Syncs your data — to-dos, routines, health, weight — across every device through a GitHub file. Uses a token with <strong style="color:#ddd">repo</strong> scope. <a href="https://github.com/settings/tokens/new" target="_blank" style="color:var(--accent2)">Create one here</a>.</p>
+    <div style="background:rgba(255,107,53,.08);border:1px solid rgba(255,107,53,.28);border-radius:8px;padding:10px 12px;margin-bottom:14px">
+      <div style="font-size:10px;font-weight:700;color:var(--accent3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">⚠️ Use a PRIVATE repo</div>
+      <div style="font-size:11px;color:#bbb;line-height:1.5">Anyone can read this file if the repo is public. Create a new <b style="color:#ddd">private</b> repo (e.g. <b style="color:#ddd">lifeos-data</b>) and point sync there. Do NOT reuse your public site repo.</div>
+    </div>
+    <input id="sync-token" type="password" class="add-input" placeholder="ghp_xxxx  (repo scope)" style="margin-bottom:10px;width:100%">
+    <input id="sync-repo" class="add-input" placeholder="username/private-repo" style="margin-bottom:10px;width:100%">
+    <input id="sync-file" class="add-input" placeholder="lifeos-data.json" style="margin-bottom:10px;width:100%">
+    <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#aaa;margin-bottom:12px;cursor:pointer">
+      <input type="checkbox" id="sync-enable" style="accent-color:var(--accent)"> Enable auto-sync on this device
+    </label>
+    <p id="sync-status" style="font-size:11px;color:var(--muted);min-height:18px;margin-bottom:12px;font-family:'JetBrains Mono',monospace"></p>
+    <div style="display:flex;gap:8px;margin-bottom:12px">
+      <button class="cardio-quick-btn" style="flex:1;padding:11px" onclick="syncPullManual()">⬇ Pull now</button>
+      <button class="cardio-quick-btn" style="flex:1;padding:11px" onclick="syncPushManual()">⬆ Push now</button>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-secondary" onclick="closeSyncModal()">Close</button>
+      <button class="btn-primary" onclick="saveSyncSettings()">Save</button>
+    </div>
+    <p style="font-size:10px;color:var(--muted);margin-top:10px;line-height:1.5">💡 Once enabled: pulls on open, saves automatically a couple seconds after each change, and picks up other devices when you return to the app.</p>
+  </div>
+</div>
+
 <div class="main">
 
 <!-- ══════════ OVERVIEW ══════════ -->
 
 
 <!-- ══════════ HIT LIST ══════════ -->
-<div class="tab active" id="tab-hitlist">
+<div class="tab" id="tab-hitlist">
 
   <div class="card">
     <div class="card-header" style="margin-bottom:10px">
@@ -376,7 +405,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
       </div>
       <div class="card">
         <div class="card-header"><div class="card-title">💼 Work</div></div>
-        <div id="todo-work-wrap"><ul class="simple-list" id="todo-work-list"><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">Phone app welcome screen</span><button class="s-del">✕</button></li><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">Wendover Numbers</span><button class="s-del">✕</button></li><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">House Rules document</span><button class="s-del">✕</button></li><li class="done"><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">Rental AC filter — Neil Rd</span><button class="s-del">✕</button></li></ul><div class="add-row"><input class="add-input" id="todo-work-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addTodoItem('work')"><button class="add-btn" onclick="addTodoItem('work')">+ Add</button></div></div>
+        <div id="todo-work-wrap"><ul class="simple-list" id="todo-work-list"><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">Phone app welcome screen</span><button class="s-del">✕</button></li><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">Wendover Numbers</span><button class="s-del">✕</button></li><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">House Rules document</span><button class="s-del">✕</button></li></ul><div class="add-row"><input class="add-input" id="todo-work-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addTodoItem('work')"><button class="add-btn" onclick="addTodoItem('work')">+ Add</button></div></div>
       </div>
     </div>
     <div>
@@ -409,10 +438,10 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           </div>
         </div>
         <div class="routine-progress">
-          <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="morning-val">0/29</span></div>
+          <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="morning-val">0/15</span></div>
           <div class="rp-bar"><div class="rp-fill" id="morning-fill" style="width:0%"></div></div>
         </div>
-        <ul class="routine-list" id="morning-list"><li class="routine-item" data-idx="0"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💧 16oz water immediately on waking</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Cortisol + hydration</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="1"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">☀️ Sunlight in eyes within 30 min (outside or window)</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Huberman: circadian</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="2"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💊 Blues pills</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="3"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🐾 Feed dogs + vacuum rug</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="4"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🚶 Walk Bob (15+ min Zone 2)</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Zone 2 base</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="5"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🍳 Breakfast with kids — "What are we working on today?"</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="6"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">👕 Get kids dressed + brush teeth</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="7"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🏋️ Strength training (Push/Pull/Full Body per split)</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Attia: muscle health</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="8"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🧘 5–10 min stretch or mobility</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Injury prevention</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="9"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🥤 Protein shake + 5g Creatine</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Examine.com verified</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="10"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🚿 Shower — end with 30 sec cold</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">+250% dopamine</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="11"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💧 Waterpik + Vitamin C + SPF Lotion</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Longevity basics</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="12"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🦷 Brush teeth</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="13"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">📅 Write 3 targets that make today a win</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Execution focus</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="14"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">⚡ Kick ass today</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="15"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💧 16oz mineralized water immediately</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Rehydrates + electrolytes after 8hr fast</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="16"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🌡️ Check body temp (baseline: 97–97.5°F)</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Running hot = illness/stress signal</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="17"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🧘 5 min breathwork / box breathing</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Activates parasympathetic before cortisol spike</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="18"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🏃 10 min stability work before lifting</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Attia's pillar 1 — joint health for 40 years</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="19"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🏋️ Strength training (Push/Pull/Legs)</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Peak testosterone window — AM fasted</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="20"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🚿 Shower — end with 60 sec max cold</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">NE +530%, dopamine +250%, anti-inflammatory</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="21"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🥤 Protein shake (2 scoops) + 5g Creatine</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Post-lift protein synthesis window</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="22"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💊 D3+K2 + Omega-3 + Vitamin C + Blues pills</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">AM fat-soluble vitamins absorb with food</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="23"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🐾 Feed dogs</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="24"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🍳 Protein-first breakfast with kids</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Protein anchor before carbs = flatter glucose</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="25"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">☀️ Coffee outside — morning sun in eyes</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">90 min post-wake caffeine timing is optimal</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="26"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🚶 Walk to school (morning light + Zone 2)</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Cortisol peak + circadian anchor + family time</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="27"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💧 Waterpik + SPF lotion if going outside</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="28"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">📅 Do something on the HIT LIST</span></div><button class="r-del">✕</button></li></ul>
+        <ul class="routine-list" id="morning-list"><li class="routine-item" data-idx="0"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💧 16oz water immediately on waking</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Cortisol + hydration</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="1"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">☀️ Sunlight in eyes within 30 min (outside or window)</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Huberman: circadian</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="2"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💊 Blues pills</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="3"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🐾 Feed dogs + vacuum rug</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="4"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🚶 Walk Bob (15+ min Zone 2)</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Zone 2 base</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="5"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🍳 Breakfast with kids — "What are we working on today?"</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="6"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">👕 Get kids dressed + brush teeth</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="7"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🏋️ Strength training (Push/Pull/Full Body per split)</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Attia: muscle health</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="8"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🧘 5–10 min stretch or mobility</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Injury prevention</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="9"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🥤 Protein shake + 5g Creatine</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Examine.com verified</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="10"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🚿 Shower — end with 30 sec cold</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">+250% dopamine</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="11"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💧 Waterpik + Vitamin C + SPF Lotion</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Longevity basics</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="12"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🦷 Brush teeth</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="13"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">📅 Write 3 targets that make today a win</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Execution focus</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="14"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">⚡ Kick ass today</span></div><button class="r-del">✕</button></li></ul>
         <div class="add-row">
           <input class="add-input" id="morning-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('morning')">
           <button class="add-btn" onclick="addRoutineItem('morning')">+ Add</button>
@@ -430,10 +459,10 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           </div>
         </div>
         <div class="routine-progress">
-          <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="evening-val">0/27</span></div>
+          <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="evening-val">0/0</span></div>
           <div class="rp-bar"><div class="rp-fill" id="evening-fill" style="width:0%"></div></div>
         </div>
-        <ul class="routine-list" id="evening-list"><li class="routine-item" data-idx="0"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🏠 Close up the house</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="1"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">☕ Prep coffee for tomorrow</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="2"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🍽️ Run dishwasher</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="3"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💊 Vitamins</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="4"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💊 Blues Medicine</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="5"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🗑️ Take out trash</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="6"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🐾 Fill dog food + water</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="7"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🍽️ Wash Water Bottles</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="8"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🏠 Close up back of house</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="9"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🛋️ Cover the couch</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="10"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🛋️ Blue in Cage</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="11"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🌡️ Drop room temp to 65–68°F</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Core temp drop triggers sleep onset</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="12"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">📵 Dim screens / blue light off after 9pm</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="13"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">📅 Check calendar for tomorrow</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="14"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🧴 Wash face + Retinol or HA + PM Lotion</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="15"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🦷 Floss + brush teeth</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="16"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">📱 Hard screens off by 8pm</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="17"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🛏️ Bed by 9pm</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="18"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🍽️ Dinner done by 6:00pm</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">4hr buffer before 10pm sleep</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="19"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🚶 Post-dinner walk 10–15 min</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Blunts glucose spike, aids digestion</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="20"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">📵 Blue light off by 8pm (amber/red only)</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">2hr window protects melatonin</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="21"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">📱 Hard screens off by 8:30pm</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Reduces cortisol + arousal before bed</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="22"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">📖 Book in hand 10 min before sleep</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Signals CNS wind-down, replaces screens</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="23"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💊 Vitamins + Magnesium Glycinate 400mg</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Mag improves deep sleep quality</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="24"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🦷 Tongue scraper + Floss + Waterpik + Brush</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Oral health = cardiovascular health</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="25"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🛏️ Bed by 9–9:30pm</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Captures deep sleep window + GH surge</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="26"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🎵 Delta wave audio if needed</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Entrains brain to sleep frequency</div></div><button class="r-del">✕</button></li></ul>
+        <ul class="routine-list" id="evening-list"></ul>
         <div class="add-row">
           <input class="add-input" id="evening-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('evening')">
           <button class="add-btn" onclick="addRoutineItem('evening')">+ Add</button>
@@ -451,10 +480,10 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
           </div>
         </div>
         <div class="routine-progress">
-          <div class="rp-meta"><span class="rp-label">Shift Progress</span><span class="rp-val" id="sbshift-val">0/10</span></div>
+          <div class="rp-meta"><span class="rp-label">Shift Progress</span><span class="rp-val" id="sbshift-val">0/0</span></div>
           <div class="rp-bar"><div class="rp-fill" id="sbshift-fill" style="width:0%"></div></div>
         </div>
-        <ul class="routine-list" id="sbshift-list"><li class="routine-item" data-idx="0"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🏢 Walk Reno Hub first — set the tone</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="1"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">📞 Check in with Sparks supervisor</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="2"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">📞 Check in with Wendover lead</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="3"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🐎 Verify Racebook boards accurate across all locations</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="4"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">📋 Review overnight issues or guest complaints</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="5"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🎰 Scan casino floor — players to invite to the book?</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="6"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">👋 Greet at least 3 regulars by name at Reno Hub</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="7"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🏆 Acknowledge one team win today</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="8"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💡 Identify one thing to improve before end of shift</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="9"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">📊 End-of-shift check — anything to hand off?</span></div><button class="r-del">✕</button></li></ul>
+        <ul class="routine-list" id="sbshift-list"></ul>
         <div class="add-row">
           <input class="add-input" id="sbshift-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('sbshift')">
           <button class="add-btn" onclick="addRoutineItem('sbshift')">+ Add</button>
@@ -712,7 +741,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 
 
 <!-- ══════════ BLUEPRINT ══════════ -->
-<div class="tab" id="tab-blueprint">
+<div class="tab active" id="tab-blueprint">
 
   <!-- ── ROW 1: Weight + Cardio charts ── -->
   <div class="two-col">
@@ -1145,7 +1174,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 // ─── CORE HELPERS ───
 function todayKey(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
 function mondayKey(){const d=new Date(),day=d.getDay(),diff=d.getDate()-day+(day===0?-6:1),m=new Date(d.setDate(diff));return m.getFullYear()+'-'+(m.getMonth()+1)+'-'+m.getDate();}
-function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){}return null;}
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);if(k&&k.indexOf('lifeOS_')===0&&typeof scheduleSyncPush==='function')scheduleSyncPush();}catch(e){}return null;}
 function lsj(k,def){try{return JSON.parse(ls(k)||'null')||def;}catch(e){return def;}}
 
 // ─── NAV ───
@@ -1773,6 +1802,182 @@ async function pushToGitHub(){
     statusEl.style.color='var(--accent3)';
     statusEl.textContent='❌ Network error: '+e.message;
   }
+}
+
+
+// ─── CLOUD SYNC (GitHub data file) ───
+let _syncTimer=null,_syncApplying=false,_syncBusy=false,_syncPulledSession=false;
+const SYNC_EXCLUDE=['lifeOS_gh_token','lifeOS_sync_repo','lifeOS_sync_file','lifeOS_sync_on','lifeOS_lastPushedAt','lifeOS_lastPulledAt'];
+
+function syncCfg(){
+  return {
+    token: ls('lifeOS_gh_token')||'',
+    repo: ls('lifeOS_sync_repo')||'',
+    file: ls('lifeOS_sync_file')||'lifeos-data.json',
+    on: ls('lifeOS_sync_on')==='1'
+  };
+}
+function syncEnabled(){const c=syncCfg();return !!(c.on&&c.token&&c.repo&&c.file);}
+
+function setSyncStatus(txt,color){
+  const el=document.getElementById('sync-status');
+  if(el){el.textContent=txt;el.style.color=color||'var(--muted)';}
+  const dot=document.getElementById('sync-dot');
+  if(dot)dot.style.background=color||'var(--muted)';
+}
+function updateSyncButton(){
+  const dot=document.getElementById('sync-dot');
+  if(dot)dot.style.background=syncEnabled()?'var(--green)':'var(--muted)';
+}
+
+function collectSyncData(){
+  const data={};
+  for(let i=0;i<localStorage.length;i++){
+    const k=localStorage.key(i);
+    if(k&&k.indexOf('lifeOS_')===0&&SYNC_EXCLUDE.indexOf(k)===-1){data[k]=localStorage.getItem(k);}
+  }
+  return data;
+}
+function applySyncData(obj){
+  if(!obj||typeof obj!=='object')return false;
+  const remoteKeys=Object.keys(obj);
+  _syncApplying=true;
+  try{
+    // Replace local lifeOS_ keys with remote set (deletes propagate); never touch excluded keys
+    const toRemove=[];
+    for(let i=0;i<localStorage.length;i++){
+      const k=localStorage.key(i);
+      if(k&&k.indexOf('lifeOS_')===0&&SYNC_EXCLUDE.indexOf(k)===-1&&remoteKeys.indexOf(k)===-1)toRemove.push(k);
+    }
+    toRemove.forEach(k=>localStorage.removeItem(k));
+    remoteKeys.forEach(k=>{if(k.indexOf('lifeOS_')===0&&SYNC_EXCLUDE.indexOf(k)===-1&&typeof obj[k]==='string')localStorage.setItem(k,obj[k]);});
+  }finally{_syncApplying=false;}
+  return true;
+}
+
+function ghContentsUrl(c){return 'https://api.github.com/repos/'+c.repo+'/contents/'+c.file.split('/').map(encodeURIComponent).join('/');}
+
+async function syncPull(opts){
+  opts=opts||{};
+  const c=syncCfg();
+  if(!c.token||!c.repo||!c.file){if(!opts.silent)setSyncStatus('Fill in token + repo first','var(--accent3)');return;}
+  if(_syncBusy){return;}
+  _syncBusy=true;
+  setSyncStatus('Pulling…','var(--accent2)');
+  try{
+    const res=await fetch(ghContentsUrl(c)+'?ref=main&t='+Date.now(),{
+      headers:{'Authorization':'token '+c.token,'Accept':'application/vnd.github.v3+json'},cache:'no-store'
+    });
+    if(res.status===404){
+      _syncBusy=false;
+      setSyncStatus('No cloud file yet — creating it…','var(--accent2)');
+      await syncPush({});
+      return;
+    }
+    if(res.status===401||res.status===403){setSyncStatus('Auth failed — check token scope (repo)','var(--accent3)');return;}
+    if(!res.ok){setSyncStatus('Pull failed ('+res.status+')','var(--accent3)');return;}
+    const j=await res.json();
+    let payload;
+    try{payload=JSON.parse(decodeURIComponent(escape(atob((j.content||'').replace(/\s/g,'')))));}
+    catch(e){setSyncStatus('Cloud file unreadable — skipping','var(--accent3)');return;}
+    const data=payload&&payload.data?payload.data:null;
+    if(!data||Object.keys(data).length===0){
+      _syncBusy=false;
+      setSyncStatus('Cloud is empty — pushing this device…','var(--accent2)');
+      await syncPush({});
+      return;
+    }
+    applySyncData(data);
+    ls('lifeOS_lastPulledAt',String(Date.now()));
+    if(typeof renderAll==='function')renderAll();
+    const when=payload._syncedAt?new Date(payload._syncedAt).toLocaleString():'';
+    setSyncStatus('✓ Up to date'+(when?' · '+when:''),'var(--green)');
+  }catch(e){
+    setSyncStatus('Offline / pull error','var(--accent3)');
+  }finally{_syncBusy=false;}
+}
+
+async function syncPush(opts){
+  opts=opts||{};
+  const c=syncCfg();
+  if(!c.token||!c.repo||!c.file){if(!opts.silent)setSyncStatus('Fill in token + repo first','var(--accent3)');return;}
+  if(_syncBusy){scheduleSyncPush();return;}
+  _syncBusy=true;
+  setSyncStatus('Saving…','var(--accent2)');
+  try{
+    let sha=null;
+    const getRes=await fetch(ghContentsUrl(c)+'?ref=main&t='+Date.now(),{
+      headers:{'Authorization':'token '+c.token,'Accept':'application/vnd.github.v3+json'},cache:'no-store'
+    });
+    if(getRes.ok){sha=(await getRes.json()).sha;}
+    else if(getRes.status===401||getRes.status===403){setSyncStatus('Auth failed — check token scope (repo)','var(--accent3)');return;}
+    else if(getRes.status!==404){setSyncStatus('Save failed — check repo name','var(--accent3)');return;}
+    const payload={_syncedAt:new Date().toISOString(),_device:(navigator.userAgent||'').slice(0,80),data:collectSyncData()};
+    const encoded=btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2))));
+    const body={message:'Life OS data sync — '+new Date().toLocaleString(),content:encoded,branch:'main'};
+    if(sha)body.sha=sha;
+    const putRes=await fetch(ghContentsUrl(c),{
+      method:'PUT',
+      headers:{'Authorization':'token '+c.token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify(body)
+    });
+    if(putRes.ok){
+      ls('lifeOS_lastPushedAt',String(Date.now()));
+      setSyncStatus('✓ Saved · '+new Date().toLocaleTimeString(),'var(--green)');
+    }else{
+      const err=await putRes.json().catch(()=>({}));
+      setSyncStatus('Save failed: '+(err.message||putRes.status),'var(--accent3)');
+    }
+  }catch(e){
+    setSyncStatus('Offline / save error','var(--accent3)');
+  }finally{_syncBusy=false;}
+}
+
+function scheduleSyncPush(){
+  if(!syncEnabled()||_syncApplying)return;
+  if(_syncTimer)clearTimeout(_syncTimer);
+  setSyncStatus('Pending…','var(--accent)');
+  _syncTimer=setTimeout(()=>{_syncTimer=null;syncPush({silent:true});},2500);
+}
+function flushSyncPush(){
+  if(!syncEnabled())return;
+  if(_syncTimer){clearTimeout(_syncTimer);_syncTimer=null;syncPush({silent:true});}
+}
+
+function openSyncModal(){
+  const c=syncCfg();
+  document.getElementById('sync-token').value=c.token;
+  document.getElementById('sync-repo').value=c.repo;
+  document.getElementById('sync-file').value=c.file||'lifeos-data.json';
+  document.getElementById('sync-enable').checked=c.on;
+  setSyncStatus(syncEnabled()?'Sync is on':'Not set up yet',syncEnabled()?'var(--green)':'var(--muted)');
+  document.getElementById('sync-modal').classList.add('open');
+}
+function closeSyncModal(){document.getElementById('sync-modal').classList.remove('open');}
+function saveSyncSettings(){
+  const token=document.getElementById('sync-token').value.trim();
+  const repo=document.getElementById('sync-repo').value.trim();
+  const file=document.getElementById('sync-file').value.trim()||'lifeos-data.json';
+  const on=document.getElementById('sync-enable').checked;
+  if(token)ls('lifeOS_gh_token',token);
+  ls('lifeOS_sync_repo',repo);
+  ls('lifeOS_sync_file',file);
+  ls('lifeOS_sync_on',on?'1':'0');
+  updateSyncButton();
+  setSyncStatus(on?(syncEnabled()?'✓ Saved — sync on':'Add token + repo to enable'):'Saved — sync off',on&&syncEnabled()?'var(--green)':'var(--muted)');
+}
+async function syncPullManual(){saveSyncSettings();await syncPull({});}
+async function syncPushManual(){saveSyncSettings();await syncPush({});}
+
+function initSync(){
+  updateSyncButton();
+  if(!syncEnabled())return;
+  if(!_syncPulledSession){_syncPulledSession=true;syncPull({silent:true});}
+  document.addEventListener('visibilitychange',()=>{
+    if(document.visibilityState==='hidden')flushSyncPush();
+    else if(document.visibilityState==='visible'&&syncEnabled()&&!_syncBusy)syncPull({silent:true});
+  });
+  window.addEventListener('pagehide',flushSyncPush);
 }
 
 
@@ -3971,37 +4176,42 @@ document.getElementById('dateBadge').textContent=new Date().toLocaleDateString('
 document.getElementById('push-modal').classList.remove('open');
 upgradeRoutine('evening', NEW_EVENING_ITEMS, 'v3');
 upgradeRoutine('morning', NEW_MORNING_ITEMS, 'v3');
-renderRoutine('morning');renderRoutine('evening');renderRoutine('sbshift');
-['scoop-daily','family-weekly'].forEach(k=>renderSimpleList(k));
-renderTodoBlock('home','todo-home-wrap');
-renderTodoBlock('work','todo-work-wrap');
-renderTodoBlock('scoop','todo-scoop-wrap');
-renderYearlyGoals();
-renderProtocolCalendar('proto-current',CURRENT_PROTOCOL);
-renderProtocolCalendar('proto-goal',GOAL_PROTOCOL);
-renderProtocolLegend('proto-legend-current',PROTO_LEGEND);
-renderProtocolLegend('proto-legend-goal',PROTO_LEGEND);
-loadJournal();
-renderRoadmap();
-renderHitList();
-renderCardioTracker();
-renderMiniCardio();
-renderMonthMap();
-renderIdeaBanks();
-renderWeightLog();
-renderCardioTrendChart();
-renderVolumeChart();
-renderMetrics();
-renderBiomarkerGuide();
-renderProtocolMap();
-renderPerfTiers();
-renderSuppTiers();
-renderProtocols();
-syncWeightToHealth();
-renderHRTracker();
-renderFastingTracker();
-renderScoop();
-renderScoopIdeas();
+
+function renderAll(){
+  renderRoutine('morning');renderRoutine('evening');renderRoutine('sbshift');
+  ['scoop-daily','family-weekly'].forEach(k=>renderSimpleList(k));
+  renderTodoBlock('home','todo-home-wrap');
+  renderTodoBlock('work','todo-work-wrap');
+  renderTodoBlock('scoop','todo-scoop-wrap');
+  renderYearlyGoals();
+  renderProtocolCalendar('proto-current',CURRENT_PROTOCOL);
+  renderProtocolCalendar('proto-goal',GOAL_PROTOCOL);
+  renderProtocolLegend('proto-legend-current',PROTO_LEGEND);
+  renderProtocolLegend('proto-legend-goal',PROTO_LEGEND);
+  loadJournal();
+  renderRoadmap();
+  renderHitList();
+  renderCardioTracker();
+  renderMiniCardio();
+  renderMonthMap();
+  renderIdeaBanks();
+  renderWeightLog();
+  renderCardioTrendChart();
+  renderVolumeChart();
+  renderMetrics();
+  renderBiomarkerGuide();
+  renderProtocolMap();
+  renderPerfTiers();
+  renderSuppTiers();
+  renderProtocols();
+  syncWeightToHealth();
+  renderHRTracker();
+  renderFastingTracker();
+  renderScoop();
+  renderScoopIdeas();
+}
+renderAll();
+initSync();
 
 </script>
 
