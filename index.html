@@ -243,9 +243,40 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 .vol-badge{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);font-weight:700}
 
 /* BLUEPRINT CHARTS */
-#bp-weight-chart-big,#bp-cardio-chart,#bp-volume-chart{
+#bp-weight-chart-big,#bp-cardio-chart,#bp-volume-chart,#str-chart{
   background:var(--surface2);border-radius:8px;padding:8px;box-sizing:border-box;
 }
+
+/* ── DRAG TO REORDER ── */
+.wb-drag-handle{
+  cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;
+  color:var(--muted);font-size:13px;line-height:1;padding:4px 5px;margin-right:2px;
+  border-radius:4px;flex-shrink:0;
+}
+.wb-drag-handle:active{cursor:grabbing;background:rgba(200,255,71,.12);color:var(--accent)}
+.wb-drag-unit{transition:transform .14s ease,opacity .14s ease}
+.wb-drag-unit.dragging{opacity:.9;transform:scale(1.015);position:relative;z-index:50;
+  box-shadow:0 8px 24px rgba(0,0,0,.6);border-radius:8px;outline:1px solid rgba(200,255,71,.35)}
+.wb-drop-line{height:2px;background:var(--accent);border-radius:2px;margin:4px 0;
+  box-shadow:0 0 8px rgba(200,255,71,.6)}
+body.wb-dragging{overflow:hidden}
+
+/* ── BODYWEIGHT CHIP ── */
+.wb-bw-chip{background:transparent;border:1px solid var(--border);color:var(--muted);
+  border-radius:4px;padding:2px 6px;font-size:8.5px;font-family:'JetBrains Mono',monospace;
+  font-weight:600;letter-spacing:.5px;cursor:pointer;flex-shrink:0;white-space:nowrap}
+.wb-bw-chip.on{border-color:rgba(71,212,255,.45);color:var(--accent2);background:rgba(71,212,255,.07)}
+.wb-bw-note{font-family:'JetBrains Mono',monospace;font-size:8.5px;color:var(--muted);
+  padding:4px 0 2px;line-height:1.4}
+
+/* ── STRENGTH TREND ── */
+.str-metric-btn{background:transparent;border:1px solid var(--border);color:var(--muted);
+  border-radius:5px;padding:4px 9px;font-size:9px;font-family:'JetBrains Mono',monospace;
+  text-transform:uppercase;letter-spacing:.8px;cursor:pointer}
+.str-metric-btn.active{border-color:rgba(200,255,71,.45);color:var(--accent)}
+.str-stat{background:var(--surface2);border-radius:7px;padding:8px 6px;text-align:center}
+.str-stat-val{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;line-height:1.1}
+.str-stat-lbl{font-size:7.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-top:3px;font-family:'JetBrains Mono',monospace}
 
 /* PROTOCOL CALENDARS */
 .proto-week{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
@@ -664,6 +695,40 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 
 
     </div>
+  </div>
+
+  <!-- ── STRENGTH PROGRESSION ── -->
+  <div class="card">
+    <div class="card-header" style="margin-bottom:8px">
+      <div>
+        <div class="card-title">📈 Strength Trend</div>
+        <div style="font-size:9px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace">Session-over-session · same day type</div>
+      </div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end">
+        <button class="reset-btn" id="str-tab-push" onclick="strShowDay('push')" style="border-color:rgba(200,255,71,.4);color:var(--accent)">Push</button>
+        <button class="reset-btn" id="str-tab-pull" onclick="strShowDay('pull')">Pull</button>
+        <button class="reset-btn" id="str-tab-upper" onclick="strShowDay('upper')">Upper</button>
+        <button class="reset-btn" id="str-tab-legs" onclick="strShowDay('legs')">Legs</button>
+        <button class="reset-btn" id="str-tab-full" onclick="strShowDay('full')">Full</button>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap">
+      <button class="str-metric-btn active" id="str-m-volume" onclick="strShowMetric('volume')">Total Volume</button>
+      <button class="str-metric-btn" id="str-m-avgLoad" onclick="strShowMetric('avgLoad')">Avg Load / Rep</button>
+      <button class="str-metric-btn" id="str-m-volPerSet" onclick="strShowMetric('volPerSet')">Volume / Set</button>
+    </div>
+
+    <div id="str-chart" style="width:100%;height:150px;position:relative"></div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px">
+      <div class="str-stat"><div class="str-stat-val" id="str-last" style="color:var(--accent)">—</div><div class="str-stat-lbl">Last</div></div>
+      <div class="str-stat"><div class="str-stat-val" id="str-delta" style="color:var(--muted)">—</div><div class="str-stat-lbl">vs Prev</div></div>
+      <div class="str-stat"><div class="str-stat-val" id="str-avg4" style="color:var(--accent2)">—</div><div class="str-stat-lbl">4-Sess Avg</div></div>
+      <div class="str-stat"><div class="str-stat-val" id="str-best" style="color:var(--green)">—</div><div class="str-stat-lbl">Best</div></div>
+    </div>
+
+    <div id="str-readout" style="font-size:10px;color:var(--muted);line-height:1.6;margin-top:11px;padding-top:10px;border-top:1px solid var(--border)"></div>
   </div>
 
   <!-- ── CALORIE TARGETS ── -->
@@ -1176,6 +1241,8 @@ function showTab(id,btn){
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
+  // Charts need a visible container to measure width
+  if(id==='health'&&typeof renderStrengthChart==='function') setTimeout(renderStrengthChart,0);
 }
 
 // ─── ROUTINE ENGINE ───
@@ -2187,6 +2254,8 @@ function getWbSession(day){
   const fresh=def.map((ex,ei)=>({
     name:ex.name,
     ssGroup: (saved&&saved[ei]) ? (saved[ei].ssGroup||ex.ssGroup||null) : (ex.ssGroup||null),
+    bw:    (saved&&saved[ei]&&saved[ei].bw!==undefined) ? saved[ei].bw : (ex.bw!==undefined?ex.bw:bwIsBodyweight(ex.name)),
+    bwPct: (saved&&saved[ei]&&saved[ei].bwPct!==undefined) ? saved[ei].bwPct : (ex.bwPct!=null?ex.bwPct:null),
     sets:ex.sets.map((s,si)=>({
       weight: (saved&&saved[ei]&&saved[ei].sets[si]) ? saved[ei].sets[si].weight : s.weight,
       reps:   (saved&&saved[ei]&&saved[ei].sets[si]) ? saved[ei].sets[si].reps   : s.reps,
@@ -2202,8 +2271,10 @@ function persistWbToDef(day,session){
   const def=getWbDef(day);
   session.forEach((ex,ei)=>{
     if(!def[ei])return;
-    // Persist ssGroup
+    // Persist ssGroup + bodyweight settings
     def[ei].ssGroup=ex.ssGroup||null;
+    def[ei].bw=!!ex.bw;
+    def[ei].bwPct=ex.bwPct!=null?ex.bwPct:null;
     ex.sets.forEach((s,si)=>{
       if(!def[ei].sets[si])return;
       def[ei].sets[si].weight=s.weight;
@@ -2267,26 +2338,44 @@ function buildExerciseCard(day,session,ei){
   const canLink = ei < session.length-1;
   const linkLabel = isLinkedBelow ? '⛓ Unlink' : '⛓';
   const linkClass = isLinkedBelow ? 'wb-link-btn linked' : 'wb-link-btn';
+  const bwPct = ex.bw ? Math.round((ex.bwPct!=null?ex.bwPct:bwDefaultPct(ex.name))*100) : 0;
+  const bwChip = `<button class="wb-bw-chip${ex.bw?' on':''}" onclick="wbToggleBW('${day}',${ei})" title="Bodyweight load">${ex.bw?'BW '+bwPct+'%':'BW'}</button>`;
   headerDiv.innerHTML=`
+    <span class="wb-drag-handle" title="Drag to reorder">⠿</span>
     <span class="wb-ex-name">${ex.name}</span>
     <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)">${completedSets}/${totalSets}</span>
+    ${bwChip}
     <button class="wb-add-set" onclick="wbAddSet('${day}',${ei})">+ Set</button>
     ${canLink?`<button class="${linkClass}" onclick="wbLinkSuperset('${day}',${ei})" title="Superset with next exercise">${linkLabel}</button>`:''}
     <button class="wb-del" onclick="wbDelExercise('${day}',${ei})">✕</button>`;
   div.appendChild(headerDiv);
 
+  // Bodyweight base readout
+  if(ex.bw && bwPct>0){
+    const base=Math.round(getCurrentBodyweight()*(bwPct/100));
+    const note=document.createElement('div');
+    note.className='wb-bw-note';
+    note.innerHTML=`${getCurrentBodyweight()} lb × ${bwPct}% = <b style="color:var(--accent)">${base} lb</b> base &nbsp;·&nbsp; lbs column = added / <span style="color:var(--accent3)">−assist</span>`;
+    div.appendChild(note);
+  }
+
   // Sets table — all inputs are numeric, placeholder "BW", value turns white when filled
+  const isBW = !!ex.bw && bwPct>0;
   const table=document.createElement('table');table.className='wb-sets-table';
-  table.innerHTML='<thead><tr><th>Set</th><th>lbs</th><th>Reps</th><th>Done</th><th></th></tr></thead>';
+  table.innerHTML='<thead><tr><th>Set</th><th>'+(isBW?'+lbs':'lbs')+'</th><th>Reps</th><th>Done</th><th></th></tr></thead>';
   const tbody=document.createElement('tbody');
   ex.sets.forEach((s,si)=>{
     const tr=document.createElement('tr');
     const wtVal=s.weight&&s.weight!=='BW'?s.weight:'';
     const repVal=s.reps||'';
+    const eff=isBW?bwEffectiveLoad(ex,s):null;
+    const setCell=isBW
+      ? `${si+1} <span style="color:var(--accent);font-size:9px">${eff}</span>`
+      : `${si+1}`;
     tr.innerHTML=`
-      <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">${si+1}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);white-space:nowrap">${setCell}</td>
       <td><input class="wb-input-sm${wtVal?' has-val':''}" type="number"
-        value="${wtVal}" placeholder="BW" min="0" step="2.5"
+        value="${wtVal}" placeholder="${isBW?'+0':'BW'}" ${isBW?'':'min="0"'} step="2.5"
         oninput="this.classList.toggle('has-val',this.value.trim()!=='');wbSaveSet('${day}',${ei},${si},'weight',this.value)"></td>
       <td><input class="wb-input-sm${repVal?' has-val':''}" type="number" value="${repVal}" placeholder="—" min="0"
         oninput="this.classList.toggle('has-val',this.value.trim()!=='');wbSaveSet('${day}',${ei},${si},'reps',this.value)"></td>
@@ -2297,6 +2386,168 @@ function buildExerciseCard(day,session,ei){
   table.appendChild(tbody);
   div.appendChild(table);
   return div;
+}
+
+// ─── BODYWEIGHT LOAD ───
+// Fraction of bodyweight actually moved. Estimates from limb-mass/force-plate
+// research — push-ups sit near 65% of BW, pull-ups/dips are effectively 100%.
+const BW_FACTORS = [
+  [/pull-?up|chin-?up|muscle-?up/i, 1.00],
+  [/dip/i,                          1.00],
+  [/nordic/i,                       0.85],
+  [/pike push|handstand/i,          0.75],
+  [/decline push/i,                 0.75],
+  [/diamond|close-?grip push/i,     0.70],
+  [/push-?up/i,                     0.65],
+  [/incline push/i,                 0.45],
+  [/inverted row/i,                 0.55],
+  [/lunge|split squat|step-?up|pistol/i, 0.70],
+  [/squat/i,                        0.68],
+  [/glute bridge|hip thrust/i,      0.45],
+  [/calf raise/i,                   0.90],
+  [/burpee|box jump|jump/i,         0.65],
+  [/leg raise|knee raise|v-?up|sit-?up|crunch|hollow|russian/i, 0.35],
+  [/plank|wall sit|hold|dead bug/i, 0.00],
+  [/run|walk|rope|climber|high knee|bear crawl|jack/i, 0.00],
+];
+function bwDefaultPct(name){
+  for(const [re,v] of BW_FACTORS) if(re.test(name)) return v;
+  return 0.65;
+}
+function bwIsBodyweight(name){
+  const lib = (typeof EX_LIBRARY!=='undefined') ? EX_LIBRARY.find(e=>e.name===name) : null;
+  if(lib) return !!lib.bw;
+  return /push-?up|pull-?up|chin-?up|dip|plank|squat$|lunge|crunch|sit-?up|raise|burpee|bridge|crawl|nordic|hold/i.test(name);
+}
+// Most recent logged bodyweight (looks back 60 days), fallback 185
+function getCurrentBodyweight(){
+  for(let i=0;i<60;i++){
+    const d=new Date(); d.setDate(d.getDate()-i);
+    const k=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+    const w=parseFloat(ls(weightLogKey(k)));
+    if(w) return w;
+  }
+  return 185;
+}
+// Effective load for one set, accounting for bodyweight + any added/assisted weight
+function bwEffectiveLoad(ex, set){
+  const added = parseFloat(set.weight) || 0;
+  if(!ex || !ex.bw) return added;
+  const pct = (ex.bwPct != null) ? ex.bwPct : bwDefaultPct(ex.name);
+  return Math.round(getCurrentBodyweight() * pct) + added;
+}
+
+function wbToggleBW(day, ei){
+  const session=getWbSession(day);
+  const ex=session[ei]; if(!ex) return;
+  const cur = ex.bw ? Math.round((ex.bwPct!=null?ex.bwPct:bwDefaultPct(ex.name))*100) : Math.round(bwDefaultPct(ex.name)*100);
+  const ans = prompt(
+    ex.name+'\n\n% of bodyweight this movement actually loads.\n'+
+    'Push-ups ≈ 65 · Pull-ups/dips ≈ 100 · Inverted row ≈ 55\n'+
+    'Enter 0 to turn bodyweight tracking off.',
+    String(cur));
+  if(ans===null) return;
+  const v=parseFloat(ans);
+  if(!v||isNaN(v)||v<=0){ ex.bw=false; ex.bwPct=null; }
+  else { ex.bw=true; ex.bwPct=Math.min(150,v)/100; }
+  saveWbSession(day,session);
+  persistWbToDef(day,session);
+  renderWbList();
+}
+
+// ── Group model: a "unit" is either one exercise or a whole superset ──
+function wbBuildUnits(session){
+  const units=[];let i=0;
+  while(i<session.length){
+    const grp=session[i].ssGroup||null;
+    let j=i+1;
+    if(grp){ while(j<session.length && session[j].ssGroup===grp) j++; }
+    units.push({start:i,end:j-1,size:j-i});
+    i=j;
+  }
+  return units;
+}
+
+// Move unit at index `from` so it sits at unit position `to`
+function wbMoveUnit(day,from,to){
+  if(from===to||from<0||to<0)return;
+  const session=getWbSession(day);
+  const def=getWbDef(day);
+  const units=wbBuildUnits(session);
+  if(from>=units.length||to>units.length)return;
+
+  const reorder=(arr)=>{
+    const chunks=units.map(u=>arr.slice(u.start,u.end+1));
+    const moved=chunks.splice(from,1)[0];
+    chunks.splice(to>from?to-1:to,0,moved);
+    return chunks.flat();
+  };
+  const newSession=reorder(session);
+  // def can be shorter/longer if out of sync — only reorder when lengths match
+  const newDef = def.length===session.length ? reorder(def) : def;
+
+  saveWbSession(day,newSession);
+  saveWbDef(day,newDef);
+  renderWbList();
+}
+
+// ── Pointer-based drag (works with mouse + touch) ──
+let _wbDrag=null;
+function wbStartDrag(e,unitEl,listEl,day){
+  e.preventDefault();
+  const units=Array.from(listEl.querySelectorAll(':scope > .wb-drag-unit'));
+  const fromIdx=units.indexOf(unitEl);
+  if(fromIdx<0)return;
+
+  const marker=document.createElement('div');marker.className='wb-drop-line';
+  unitEl.classList.add('dragging');
+  document.body.classList.add('wb-dragging');
+  const startY=e.clientY;
+  const baseTop=unitEl.getBoundingClientRect().top;
+  _wbDrag={unitEl,listEl,day,fromIdx,marker,startY,baseTop,targetIdx:fromIdx};
+  listEl.insertBefore(marker,unitEl);
+
+  const move=(ev)=>{
+    if(!_wbDrag)return;
+    ev.preventDefault();
+    const dy=ev.clientY-_wbDrag.startY;
+    _wbDrag.unitEl.style.transform='translateY('+dy+'px) scale(1.015)';
+    // Find insertion point among sibling units
+    const sibs=Array.from(listEl.querySelectorAll(':scope > .wb-drag-unit')).filter(n=>n!==_wbDrag.unitEl);
+    let idx=sibs.length;
+    for(let k=0;k<sibs.length;k++){
+      const r=sibs[k].getBoundingClientRect();
+      if(ev.clientY < r.top + r.height/2){ idx=k; break; }
+    }
+    const ref=sibs[idx]||null;
+    listEl.insertBefore(_wbDrag.marker,ref);
+    // Convert visual index back to unit index accounting for removed self
+    _wbDrag.targetIdx = idx <= _wbDrag.fromIdx ? idx : idx+1;
+  };
+  const up=()=>{
+    if(!_wbDrag)return;
+    const {unitEl:ue,day:d,fromIdx:f,targetIdx:t,marker:m}=_wbDrag;
+    ue.classList.remove('dragging');ue.style.transform='';
+    document.body.classList.remove('wb-dragging');
+    if(m.parentNode)m.parentNode.removeChild(m);
+    window.removeEventListener('pointermove',move);
+    window.removeEventListener('pointerup',up);
+    window.removeEventListener('pointercancel',up);
+    _wbDrag=null;
+    if(t!==f && t!==f+1) wbMoveUnit(d,f,t); else renderWbList();
+  };
+  window.addEventListener('pointermove',move,{passive:false});
+  window.addEventListener('pointerup',up);
+  window.addEventListener('pointercancel',up);
+}
+
+function wbAttachDrag(listEl,day){
+  listEl.querySelectorAll('.wb-drag-handle').forEach(h=>{
+    h.addEventListener('pointerdown',e=>{
+      const unit=h.closest('.wb-drag-unit');
+      if(unit) wbStartDrag(e,unit,listEl,day);
+    });
+  });
 }
 
 function renderWbList(){
@@ -2320,7 +2571,7 @@ function renderWbList(){
         members.push(j);j++;
       }
       // Wrap them in a superset container
-      const wrapper=document.createElement('div');wrapper.className='ss-wrapper';
+      const wrapper=document.createElement('div');wrapper.className='ss-wrapper wb-drag-unit';
       const label=document.createElement('div');label.className='ss-label';
       label.innerHTML='⛓ Superset';
       wrapper.appendChild(label);
@@ -2335,10 +2586,13 @@ function renderWbList(){
       el.appendChild(wrapper);
       i=j; // skip past all members
     } else {
-      el.appendChild(buildExerciseCard(day,session,i));
+      const card=buildExerciseCard(day,session,i);
+      card.classList.add('wb-drag-unit');
+      el.appendChild(card);
       i++;
     }
   }
+  wbAttachDrag(el,day);
 }
 
 function wbSaveSet(day,ei,si,field,val){
@@ -2401,7 +2655,8 @@ function wbAddExercise(nameOverride){
   const name=(nameOverride||nameEl.value).trim();
   if(!name)return;
   const day=_wbDay;
-  const newEx={name,sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]};
+  const _bw=bwIsBodyweight(name);
+  const newEx={name,bw:_bw,bwPct:_bw?bwDefaultPct(name):null,sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]};
   const def=getWbDef(day);def.push({...newEx,sets:[...newEx.sets.map(s=>({...s}))]});saveWbDef(day,def);
   const session=getWbSession(day);session.push({...newEx});saveWbSession(day,session);
   if(nameEl)nameEl.value='';
@@ -2515,7 +2770,8 @@ function renderExLib(){
 }
 function wbAddFromLib(name,_unused){
   const day=_wbDay;
-  const newEx={name,sets:[
+  const isBW=bwIsBodyweight(name);
+  const newEx={name,bw:isBW,bwPct:isBW?bwDefaultPct(name):null,sets:[
     {weight:'',reps:'',done:false},
     {weight:'',reps:'',done:false}
   ]};
@@ -2902,31 +3158,43 @@ function getWkLog(dateKey){ return lsj(wkLogKey(dateKey), null); }
 function saveWkLog(dateKey, data){ ls(wkLogKey(dateKey), JSON.stringify(data)); }
 
 function calcSessionVolume(day){
-  // Sum weight*reps for all DONE sets across all exercises
+  // Bodyweight-aware volume load (see calcSessionStats)
+  return calcSessionStats(day).volume;
+}
+
+// Full stat block for a session: volume, sets, reps, avg load per rep
+function calcSessionStats(day){
   const session = getWbSession(day);
-  let vol = 0;
-  session.forEach(ex => {
-    ex.sets.forEach(s => {
-      if(s.done){
-        const w = parseFloat(s.weight) || 0;
-        const r = parseInt(s.reps) || 0;
-        vol += w * r;
-      }
-    });
-  });
-  return Math.round(vol);
+  let vol=0, sets=0, reps=0, loadedReps=0, topSet=0;
+  session.forEach(ex => ex.sets.forEach(s => {
+    if(!s.done) return;
+    const w = bwEffectiveLoad(ex, s);   // bodyweight-aware
+    const r = parseInt(s.reps) || 0;
+    sets++; reps += r; vol += w*r;
+    if(w>0){ loadedReps += r; if(w>topSet) topSet = w; }
+  }));
+  return {
+    volume: Math.round(vol),
+    sets,
+    reps,
+    topSet,
+    avgLoad: loadedReps ? Math.round(vol/loadedReps*10)/10 : 0,
+    volPerSet: sets ? Math.round(vol/sets) : 0
+  };
 }
 
 function autoLogWorkout(day, isFinish=false){
   // Only log if explicitly finishing OR there is actual volume recorded
   const session = getWbSession(day);
   const doneSets = session.flatMap(ex=>ex.sets).filter(s=>s.done);
-  const vol = calcSessionVolume(day);
+  const st = calcSessionStats(day);
+  const vol = st.volume;
   // Guard: don't log if nothing is done
   if(!isFinish && (doneSets.length === 0 || vol === 0)) return;
   const existing = getWkLog(todayKey()) || {};
   const logType = existing.type || day;
-  saveWkLog(todayKey(), { type: logType, volume: vol, day: todayKey() });
+  saveWkLog(todayKey(), { type: logType, volume: vol, day: todayKey(),
+    sets: st.sets, reps: st.reps, avgLoad: st.avgLoad, volPerSet: st.volPerSet, topSet: st.topSet });
   renderMonthMap();
   const vcEl = document.getElementById('bp-volume-chart');
   if(vcEl) renderVolumeChart();
@@ -2970,6 +3238,7 @@ function finishWorkout(){
   // Also re-render cardio tracker in case on health tab
   renderMonthMap();
   renderVolumeChart();
+  if(typeof renderStrengthChart==='function') renderStrengthChart();
 }
 
 // ─── MONTHLY WORKOUT MAP ───
@@ -3453,6 +3722,120 @@ function renderVolumeChart(){
   if(peakEl) peakEl.textContent = allVols.length ? 'Peak: '+Math.max(...allVols).toLocaleString()+' lbs' : '';
 
   makeSVGChart({el, datasets, height:140});
+}
+
+// ─── STRENGTH PROGRESSION CHART ───
+let _strDay = 'push';
+let _strMetric = 'volume';
+
+const STR_METRICS = {
+  volume:    {label:'Total Volume', unit:'lbs', color:'var(--accent)'},
+  avgLoad:   {label:'Avg Load / Rep', unit:'lbs', color:'var(--accent2)'},
+  volPerSet: {label:'Volume / Set', unit:'lbs', color:'var(--accent4)'}
+};
+
+// Pull every workout log out of storage, sorted oldest → newest
+function getAllWkLogs(){
+  const out=[];
+  for(let i=0;i<localStorage.length;i++){
+    const k=localStorage.key(i);
+    if(!k||k.indexOf('lifeOS_wklog_')!==0)continue;
+    if(k.indexOf('lifeOS_wklog_hidden_')===0)continue;
+    let v=null; try{ v=JSON.parse(localStorage.getItem(k)); }catch(e){}
+    if(!v||!v.volume)continue;
+    const dk = v.day || k.replace('lifeOS_wklog_','');
+    const p = dk.split('-').map(Number);
+    if(p.length<3||isNaN(p[0]))continue;
+    out.push({...v, dateKey:dk, ts:new Date(p[0],p[1]-1,p[2]).getTime()});
+  }
+  return out.sort((a,b)=>a.ts-b.ts);
+}
+
+function strShowDay(day){
+  _strDay=day;
+  ['push','pull','upper','legs','full'].forEach(d=>{
+    const b=document.getElementById('str-tab-'+d);
+    if(b){b.style.borderColor='';b.style.color='';}
+  });
+  const a=document.getElementById('str-tab-'+day);
+  if(a){a.style.borderColor='rgba(200,255,71,.4)';a.style.color='var(--accent)';}
+  renderStrengthChart();
+}
+
+function strShowMetric(m){
+  _strMetric=m;
+  Object.keys(STR_METRICS).forEach(k=>{
+    const b=document.getElementById('str-m-'+k);
+    if(b)b.classList.toggle('active',k===m);
+  });
+  renderStrengthChart();
+}
+
+function renderStrengthChart(){
+  const el=document.getElementById('str-chart');
+  if(!el)return;
+
+  const meta=STR_METRICS[_strMetric];
+  const logs=getAllWkLogs().filter(l=>l.type===_strDay).slice(-16);
+
+  // Back-fill metrics for older logs that only stored volume
+  const pts=logs.map((l,i)=>{
+    let y=l[_strMetric];
+    if(y==null&&_strMetric==='volume')y=l.volume;
+    if(y==null||y===0)y=null;
+    const d=new Date(l.ts);
+    return {x:i,y,label:(d.getMonth()+1)+'/'+d.getDate()};
+  });
+
+  const vals=pts.map(p=>p.y).filter(v=>v!=null);
+  const set=(id,txt,color)=>{const n=document.getElementById(id);if(n){n.textContent=txt;if(color)n.style.color=color;}};
+  const fmt=v=>v>=10000?(v/1000).toFixed(1)+'k':Math.round(v).toLocaleString();
+
+  if(vals.length<1){
+    el.innerHTML='<div style="color:var(--muted);font-size:11px;text-align:center;padding:63px 0">Finish a '+_strDay+' workout to start the trend</div>';
+    ['str-last','str-delta','str-avg4','str-best'].forEach(id=>set(id,'—'));
+    const r=document.getElementById('str-readout');
+    if(r)r.textContent='Tap ✅ Finish Workout after a session to log it here.';
+    return;
+  }
+
+  const last=vals[vals.length-1];
+  const prev=vals.length>1?vals[vals.length-2]:null;
+  const best=Math.max(...vals);
+  const avg4=vals.slice(-4).reduce((a,b)=>a+b,0)/Math.min(4,vals.length);
+
+  set('str-last',fmt(last));
+  if(prev!=null){
+    const d=last-prev, pct=prev?(d/prev*100):0;
+    set('str-delta',(d>=0?'+':'')+(Math.abs(pct)>=1?pct.toFixed(0)+'%':d.toFixed(0)),
+        d>0?'var(--green)':d<0?'var(--accent3)':'var(--muted)');
+  } else set('str-delta','—','var(--muted)');
+  set('str-avg4',fmt(avg4));
+  set('str-best',fmt(best));
+
+  makeSVGChart({el, datasets:[{color:meta.color, points:pts}], height:150});
+
+  // Trend readout: compare last 4 sessions vs the 4 before that
+  const r=document.getElementById('str-readout');
+  if(r){
+    let msg='';
+    if(vals.length>=4){
+      const recent=vals.slice(-4), older=vals.slice(-8,-4);
+      if(older.length>=2){
+        const ra=recent.reduce((a,b)=>a+b,0)/recent.length;
+        const oa=older.reduce((a,b)=>a+b,0)/older.length;
+        const pct=((ra-oa)/oa*100);
+        const dir=pct>2?'trending up':pct<-2?'trending down':'holding flat';
+        const col=pct>2?'var(--green)':pct<-2?'var(--accent3)':'var(--accent2)';
+        msg='<span style="color:'+col+';font-weight:700">'+meta.label+' '+dir+'</span> — last 4 sessions averaging '+fmt(ra)+' '+meta.unit+' vs '+fmt(oa)+' before that ('+(pct>=0?'+':'')+pct.toFixed(1)+'%).';
+      }
+    }
+    if(!msg) msg=vals.length+' session'+(vals.length===1?'':'s')+' logged. Need ~6 to read a reliable trend.';
+    if(_strMetric==='volume'&&vals.length>=2){
+      msg+=' <span style="color:var(--muted)">Cross-check with <b>Avg Load / Rep</b> — if volume rises while load per rep falls, you added reps, not strength.</span>';
+    }
+    r.innerHTML=msg;
+  }
 }
 
 // ─── BIOMARKER GUIDE ───
@@ -4248,6 +4631,7 @@ function renderAll(){
   renderMonthMap();
   renderIdeaBanks();
   renderWeightLog();
+  renderStrengthChart();
   renderMetrics();
   renderBiomarkerGuide();
   renderProtocolMap();
