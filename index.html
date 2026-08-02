@@ -118,6 +118,12 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 .routine-item.done .r-check{background:var(--accent);border-color:var(--accent)}
 .routine-item.done .r-check::after{content:'✓';font-size:10px;color:#000;font-weight:900}
 .routine-item.done .r-text{text-decoration:line-through;color:var(--muted)}
+.routine-item.done{opacity:.55}
+.routine-item.first-done{border-top:1px dashed rgba(85,85,85,.5);margin-top:8px;padding-top:14px}
+.routine-item.done .drag-handle{visibility:hidden}
+.r-collapse{padding:6px 9px!important;font-size:12px!important;line-height:1}
+.routine-card-title{cursor:pointer;user-select:none}
+.routine-done-count{font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-left:6px}
 .r-text{flex:1;font-size:14px;color:#ccc;line-height:1.4}
 .r-sci{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--accent2);background:rgba(71,212,255,.07);padding:2px 5px;border-radius:2px;white-space:nowrap;flex-shrink:0}
 .r-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:2px 4px;flex-shrink:0}
@@ -243,7 +249,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 .vol-badge{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);font-weight:700}
 
 /* BLUEPRINT CHARTS */
-#bp-weight-chart-big,#bp-cardio-chart,#bp-volume-chart,#str-chart{
+#bp-weight-chart-big,#bp-cardio-chart,#bp-volume-chart,#str-chart,#z2-chart{
   background:var(--surface2);border-radius:8px;padding:8px;box-sizing:border-box;
 }
 
@@ -334,7 +340,7 @@ body.wb-dragging{overflow:hidden}
     <div class="tagline">Master System · Age 38</div>
   </div>
   <div class="header-right">
-    <div class="date-badge" id="dateBadge">Mon, Jul 27, 2026</div>
+    <div class="date-badge" id="dateBadge">Sat, Aug 1, 2026</div>
     <button class="hdr-btn" onclick="openSyncModal()" id="sync-btn"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--muted);display:inline-block;margin-right:5px;vertical-align:middle"></span>Sync</button>
     <button class="hdr-btn" onclick="copyData()">📋 Copy Data</button>
     <button class="hdr-btn push" onclick="openPushModal()" id="push-btn">🚀 Push</button>
@@ -418,7 +424,7 @@ body.wb-dragging{overflow:hidden}
     <div class="card-header">
       <div>
         <div class="card-title">🎯 Daily Hit List</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date">Monday, Jul 27</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date">Saturday, Aug 1</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
         <span id="hitlist-pval" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">0/9</span>
@@ -464,29 +470,30 @@ body.wb-dragging{overflow:hidden}
     <div>
       <div class="card">
         <div class="card-header">
-          <div class="card-title">☀️ Morning Stack</div>
+          <div class="card-title routine-card-title" onclick="toggleRoutineCollapse('morning')">☀️ Morning Stack<span class="routine-done-count" id="morning-dc">0/13</span></div>
           <div style="display:flex;align-items:center;gap:8px">
-            <button class="reset-btn" onclick="resetRoutine('morning')">↺ Reset</button>
+            <button class="reset-btn r-collapse" id="morning-chev" onclick="toggleRoutineCollapse('morning')">▾</button><button class="reset-btn" onclick="resetRoutine('morning')">↺ Reset</button>
           </div>
         </div>
         <div class="routine-progress">
           <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="morning-val">0/13</span></div>
           <div class="rp-bar"><div class="rp-fill" id="morning-fill" style="width:0%"></div></div>
         </div>
-        <ul class="routine-list" id="morning-list"><li class="routine-item" data-idx="0"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💧 16oz water immediately on waking</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Cortisol + hydration</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="1"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">☀️ Sunlight in eyes within 30 min (outside or window)</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Huberman: circadian</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="2"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💊 Blues pills</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="3"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🐾 Feed dogs + vacuum rug</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="4"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🚶 Walk Bob (15+ min Zone 2)</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Zone 2 base</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="5"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🍳 Breakfast with kids — "What are we working on today?"</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="6"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">👕 Get kids dressed + brush teeth</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="7"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🏋️ Strength training (Push/Pull/Full Body per split)</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Attia: muscle health</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="8"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🧘 5–10 min stretch or mobility</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Injury prevention</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="9"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🥤 Protein shake + 5g Creatine</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Examine.com verified</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="10"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🚿 Shower — end with 30 sec cold</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">+250% dopamine</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="11"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💧 Waterpik + Vitamin C + SPF Lotion</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Longevity basics</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="12"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🦷 Brush teeth</span></div><button class="r-del">✕</button></li></ul>
+        <div class="routine-body" id="morning-body"><ul class="routine-list" id="morning-list"><li class="routine-item" data-idx="0"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💧 16oz water immediately on waking</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Cortisol + hydration</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="1"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">☀️ Sunlight in eyes within 30 min (outside or window)</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Huberman: circadian</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="2"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💊 Blues pills</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="3"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🐾 Feed dogs + vacuum rug</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="4"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🚶 Walk Bob (15+ min Zone 2)</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Zone 2 base</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="5"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🍳 Breakfast with kids — "What are we working on today?"</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="6"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">👕 Get kids dressed + brush teeth</span></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="7"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🏋️ Strength training (Push/Pull/Full Body per split)</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Attia: muscle health</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="8"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🧘 5–10 min stretch or mobility</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Injury prevention</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="9"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🥤 Protein shake + 5g Creatine</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Examine.com verified</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="10"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🚿 Shower — end with 30 sec cold</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">+250% dopamine</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="11"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">💧 Waterpik + Vitamin C + SPF Lotion</span><div style="font-size: 9px; color: var(--muted); font-family: &quot;JetBrains Mono&quot;, monospace; line-height: 1.3; pointer-events: none; user-select: none;">Longevity basics</div></div><button class="r-del">✕</button></li><li class="routine-item" data-idx="12"><span class="drag-handle" style="cursor: grab;">⠿</span><div class="r-check"></div><div style="flex: 1 1 0%; min-width: 0px; display: flex; flex-direction: column; gap: 0px;"><span class="r-text editable-text" contenteditable="true">🦷 Brush teeth</span></div><button class="r-del">✕</button></li></ul>
         <div class="add-row">
           <input class="add-input" id="morning-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('morning')">
           <button class="add-btn" onclick="addRoutineItem('morning')">+ Add</button>
         </div>
-        <div class="last-reset" id="morning-last-reset">Last reset: 2026-7-27</div>
+        <div class="last-reset" id="morning-last-reset">Last reset: 2026-8-1</div>
+        </div>
       </div>
     </div>
     <div>
       <div class="card">
         <div class="card-header">
-          <div class="card-title">🌙 Evening Stack</div>
+          <div class="card-title routine-card-title" onclick="toggleRoutineCollapse('evening')">🌙 Evening Stack<span class="routine-done-count" id="evening-dc">0/0</span></div>
           <div style="display:flex;align-items:center;gap:8px">
-            <button class="reset-btn" onclick="resetRoutine('evening')">↺ Reset</button>
+            <button class="reset-btn r-collapse" id="evening-chev" onclick="toggleRoutineCollapse('evening')">▾</button><button class="reset-btn" onclick="resetRoutine('evening')">↺ Reset</button>
             <div class="badge badge-blue">Sleep</div>
           </div>
         </div>
@@ -494,20 +501,21 @@ body.wb-dragging{overflow:hidden}
           <div class="rp-meta"><span class="rp-label">Progress</span><span class="rp-val" id="evening-val">0/0</span></div>
           <div class="rp-bar"><div class="rp-fill" id="evening-fill" style="width:0%"></div></div>
         </div>
-        <ul class="routine-list" id="evening-list"></ul>
+        <div class="routine-body" id="evening-body"><ul class="routine-list" id="evening-list"></ul>
         <div class="add-row">
           <input class="add-input" id="evening-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('evening')">
           <button class="add-btn" onclick="addRoutineItem('evening')">+ Add</button>
         </div>
-        <div class="last-reset" id="evening-last-reset">Last reset: 2026-7-27</div>
+        <div class="last-reset" id="evening-last-reset">Last reset: 2026-8-1</div>
+        </div>
       </div>
     </div>
     <div>
       <div class="card">
         <div class="card-header">
-          <div class="card-title">🎰 Sportsbook Shift</div>
+          <div class="card-title routine-card-title" onclick="toggleRoutineCollapse('sbshift')">🎰 Sportsbook Shift<span class="routine-done-count" id="sbshift-dc">0/0</span></div>
           <div style="display:flex;gap:8px;align-items:center">
-            <button class="reset-btn" onclick="resetRoutine('sbshift')">↺ Reset</button>
+            <button class="reset-btn r-collapse" id="sbshift-chev" onclick="toggleRoutineCollapse('sbshift')">▾</button><button class="reset-btn" onclick="resetRoutine('sbshift')">↺ Reset</button>
             <div class="badge badge-blue">Daily</div>
           </div>
         </div>
@@ -515,12 +523,13 @@ body.wb-dragging{overflow:hidden}
           <div class="rp-meta"><span class="rp-label">Shift Progress</span><span class="rp-val" id="sbshift-val">0/0</span></div>
           <div class="rp-bar"><div class="rp-fill" id="sbshift-fill" style="width:0%"></div></div>
         </div>
-        <ul class="routine-list" id="sbshift-list"></ul>
+        <div class="routine-body" id="sbshift-body"><ul class="routine-list" id="sbshift-list"></ul>
         <div class="add-row">
           <input class="add-input" id="sbshift-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('sbshift')">
           <button class="add-btn" onclick="addRoutineItem('sbshift')">+ Add</button>
         </div>
-        <div class="last-reset" id="sbshift-last-reset">Last reset: 2026-7-27</div>
+        <div class="last-reset" id="sbshift-last-reset">Last reset: 2026-8-1</div>
+        </div>
       </div>
     </div>
   </div>
@@ -737,6 +746,49 @@ body.wb-dragging{overflow:hidden}
     </div>
 
     <div id="str-readout" style="font-size:10px;color:var(--muted);line-height:1.6;margin-top:11px;padding-top:10px;border-top:1px solid var(--border)">Tap ✅ Finish Workout after a session to log it here.</div>
+  </div>
+
+  <!-- ── ZONE 2 CARDIO ── -->
+  <div class="card">
+    <div class="card-header" style="margin-bottom:8px">
+      <div>
+        <div class="card-title">🫀 Zone 2 Cardio</div>
+        <div style="font-size:9px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace">109–127 bpm · aerobic base</div>
+      </div>
+      <div style="text-align:right">
+        <div id="z2-week-total" style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--green);line-height:1">0</div>
+        <div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px">min this week</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:8px">
+      <input class="add-input" id="z2-input" type="number" inputmode="numeric" placeholder="Minutes… (e.g. 45)" style="flex:1">
+      <button class="add-btn" onclick="logZ2()" style="background:var(--green)">Log</button>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:8px">
+      <div id="z2-today" style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace">Today: 0 min</div>
+      <button class="reset-btn" onclick="undoZ2()" style="padding:4px 9px;font-size:10px">↩ Undo last</button>
+    </div>
+
+    <div class="cardio-goal-bar" style="margin-top:11px"><div class="cardio-goal-fill" id="z2-goal-fill" style="width:0%"></div></div>
+    <div id="z2-goal-note" style="font-size:9px;color:var(--muted);margin-top:5px;font-family:'JetBrains Mono',monospace">0 / 150 min weekly target  ·  150 to go</div>
+
+    <div style="display:flex;gap:5px;margin:15px 0 10px;flex-wrap:wrap">
+      <button class="str-metric-btn active" id="z2-m-minutes" onclick="z2ShowMetric('minutes')">Weekly Minutes</button>
+      <button class="str-metric-btn" id="z2-m-sessions" onclick="z2ShowMetric('sessions')">Sessions / Week</button>
+      <button class="str-metric-btn" id="z2-m-avgLen" onclick="z2ShowMetric('avgLen')">Avg Session</button>
+    </div>
+
+    <div id="z2-chart" style="width:100%;height:170px;position:relative"><div style="color:var(--muted);font-size:11px;text-align:center;padding:73px 0">Log a session to start the trend</div></div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px">
+      <div class="str-stat"><div class="str-stat-val" id="z2-s-this" style="color:var(--green)">—</div><div class="str-stat-lbl">This Wk</div></div>
+      <div class="str-stat"><div class="str-stat-val" id="z2-s-delta" style="color:var(--muted)">—</div><div class="str-stat-lbl">vs Last</div></div>
+      <div class="str-stat"><div class="str-stat-val" id="z2-s-avg4" style="color:var(--accent2)">—</div><div class="str-stat-lbl">4-Wk Avg</div></div>
+      <div class="str-stat"><div class="str-stat-val" id="z2-s-best" style="color:var(--accent)">—</div><div class="str-stat-lbl">Best Wk</div></div>
+    </div>
+
+    <div id="z2-readout" style="font-size:10px;color:var(--muted);line-height:1.6;margin-top:11px;padding-top:10px;border-top:1px solid var(--border)">Type minutes and hit Log after a Zone 2 session.</div>
   </div>
 
   <!-- ── CALORIE TARGETS ── -->
@@ -1250,7 +1302,10 @@ function showTab(id,btn){
   document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
   // Charts need a visible container to measure width
-  if(id==='health'&&typeof renderStrengthChart==='function') setTimeout(renderStrengthChart,0);
+  if(id==='health'){
+    if(typeof renderStrengthChart==='function') setTimeout(renderStrengthChart,0);
+    if(typeof renderZ2==='function') setTimeout(renderZ2,0);
+  }
 }
 
 // ─── ROUTINE ENGINE ───
@@ -1328,9 +1383,18 @@ function renderRoutine(name){
   if(!ul)return;
   ul.innerHTML='';
 
-  data.items.forEach((item,idx)=>{
+  // Render order: everything still open first, completed items sink to the
+  // bottom. The stored array order NEVER changes — this is a view-level sort
+  // only, so your drag order survives the nightly reset.
+  const _all=data.items.map((_,i)=>i);
+  const _view=_all.filter(i=>!data.items[i].done).concat(_all.filter(i=>data.items[i].done));
+  let _firstDone=true;
+
+  _view.forEach(idx=>{
+    const item=data.items[idx];
     const li=document.createElement('li');
     li.className='routine-item'+(item.done?' done':'');
+    if(item.done&&_firstDone){li.className+=' first-done';_firstDone=false;}
     li.dataset.idx=idx;
 
     // Drag handle
@@ -1379,7 +1443,8 @@ function renderRoutine(name){
     li.appendChild(rDel);
 
     // ── TOUCH DRAG on handle (non-passive so preventDefault works) ──
-    handle.addEventListener('touchstart', e=>{
+    // Completed items are parked at the bottom and aren't draggable.
+    if(!item.done) handle.addEventListener('touchstart', e=>{
       e.preventDefault();
       e.stopPropagation();
       const touch = e.touches[0];
@@ -1442,6 +1507,22 @@ function renderRoutine(name){
   const f=document.getElementById(name+'-fill'),v=document.getElementById(name+'-val');
   if(f)f.style.width=pct+'%';if(v)v.textContent=done+'/'+total;
   const r=document.getElementById(name+'-last-reset');if(r)r.textContent='Last reset: '+data.lastReset;
+  const dc=document.getElementById(name+'-dc');if(dc)dc.textContent=done+'/'+total;
+  applyRoutineCollapse(name);
+}
+
+// ─── COLLAPSIBLE ROUTINE CARDS ───
+function isRoutineCollapsed(name){return ls('lifeOS_rcollapse_'+name)==='1';}
+function applyRoutineCollapse(name){
+  const body=document.getElementById(name+'-body');
+  const chev=document.getElementById(name+'-chev');
+  const c=isRoutineCollapsed(name);
+  if(body)body.style.display=c?'none':'';
+  if(chev)chev.textContent=c?'▸':'▾';
+}
+function toggleRoutineCollapse(name){
+  ls('lifeOS_rcollapse_'+name,isRoutineCollapsed(name)?'0':'1');
+  applyRoutineCollapse(name);
 }
 function toggleRoutineItem(name,idx){const d=getRoutine(name);d.items[idx].done=!d.items[idx].done;saveRoutine(name,d);renderRoutine(name);}
 function deleteRoutineItem(name,idx){const d=getRoutine(name);d.items.splice(idx,1);saveRoutine(name,d);renderRoutine(name);}
@@ -3167,6 +3248,202 @@ function renderCardioTracker(){
   });
 }
 
+
+// ═══════════════════════════════════════════════════════════════
+// ZONE 2 CARDIO TRACKER
+// Daily totals live in the existing lifeOS_cardio_<date> key so any
+// history you already had carries over. Individual session lengths are
+// stored alongside in lifeOS_z2sess_<date> so we can show avg session
+// length — continuous duration is what drives mitochondrial density,
+// not just weekly volume.
+// ═══════════════════════════════════════════════════════════════
+const Z2_GOAL = 150;              // min/week — ACSM/AHA aerobic floor
+const Z2_WEEKS = 12;              // chart window
+let _z2Metric = 'minutes';
+
+const Z2_METRICS = {
+  minutes:  {label:'Weekly Minutes', unit:'min', color:'var(--green)'},
+  sessions: {label:'Sessions / Week', unit:'',   color:'var(--accent2)'},
+  avgLen:   {label:'Avg Session',     unit:'min',color:'var(--accent4)'}
+};
+
+function z2SessKey(dateKey){ return 'lifeOS_z2sess_' + dateKey; }
+function getZ2Sessions(dateKey){
+  const arr = lsj(z2SessKey(dateKey), null);
+  if(Array.isArray(arr) && arr.length) return arr.filter(n=>typeof n==='number'&&n>0);
+  // Legacy day with a total but no session breakdown — treat as one session
+  const tot = getCardioDayMin(dateKey);
+  return tot > 0 ? [tot] : [];
+}
+function saveZ2Sessions(dateKey, arr){ ls(z2SessKey(dateKey), JSON.stringify(arr)); }
+
+function logZ2(){
+  const inp = document.getElementById('z2-input');
+  if(!inp) return;
+  const v = parseInt(inp.value, 10);
+  if(!v || v <= 0){ inp.value=''; return; }
+  const min = Math.min(v, 600);
+  const k = todayKey();
+  const sess = getZ2Sessions(k);
+  sess.push(min);
+  saveZ2Sessions(k, sess);
+  saveCardioDayMin(k, sess.reduce((s,n)=>s+n,0));
+  inp.value = '';
+  inp.blur();
+  renderZ2();
+  if(typeof renderMiniCardio==='function') renderMiniCardio();
+  if(typeof renderCardioTracker==='function') renderCardioTracker();
+}
+
+function undoZ2(){
+  const k = todayKey();
+  const sess = getZ2Sessions(k);
+  if(!sess.length) return;
+  sess.pop();
+  saveZ2Sessions(k, sess);
+  saveCardioDayMin(k, sess.reduce((s,n)=>s+n,0));
+  renderZ2();
+  if(typeof renderMiniCardio==='function') renderMiniCardio();
+  if(typeof renderCardioTracker==='function') renderCardioTracker();
+}
+
+function z2ShowMetric(m){
+  _z2Metric = m;
+  Object.keys(Z2_METRICS).forEach(k=>{
+    const b = document.getElementById('z2-m-'+k);
+    if(b) b.classList.toggle('active', k===m);
+  });
+  renderZ2();
+}
+
+// Build the last N weeks (Sun-start) of aggregated Zone 2 data
+function getZ2Weeks(n){
+  const weeks = [];
+  for(let w=n-1; w>=0; w--){
+    const start = new Date();
+    start.setDate(start.getDate() - start.getDay() - w*7);
+    let minutes = 0; const lens = [];
+    for(let d=0; d<7; d++){
+      const dd = new Date(start);
+      dd.setDate(start.getDate()+d);
+      const k = dd.getFullYear()+'-'+(dd.getMonth()+1)+'-'+dd.getDate();
+      const s = getZ2Sessions(k);
+      s.forEach(len=>{ minutes += len; lens.push(len); });
+    }
+    weeks.push({
+      idx: n-1-w,
+      label: (start.getMonth()+1)+'/'+start.getDate(),
+      minutes,
+      sessions: lens.length,
+      avgLen: lens.length ? Math.round(minutes/lens.length) : 0,
+      isCurrent: w===0
+    });
+  }
+  return weeks;
+}
+
+function renderZ2(){
+  const el = document.getElementById('z2-chart');
+  if(!el) return;
+
+  const weeks = getZ2Weeks(Z2_WEEKS);
+  const cur = weeks[weeks.length-1];
+  const prev = weeks[weeks.length-2] || {minutes:0};
+
+  // ── Header + today + goal bar ──
+  const wt = document.getElementById('z2-week-total');
+  if(wt) wt.textContent = cur.minutes;
+  const todaySess = getZ2Sessions(todayKey());
+  const todayMin = todaySess.reduce((s,n)=>s+n,0);
+  const te = document.getElementById('z2-today');
+  if(te) te.textContent = 'Today: ' + todayMin + ' min' + (todaySess.length>1 ? ' ('+todaySess.length+' sessions)' : '');
+  const gf = document.getElementById('z2-goal-fill');
+  if(gf) gf.style.width = Math.min(100, Math.round(cur.minutes/Z2_GOAL*100)) + '%';
+  const gn = document.getElementById('z2-goal-note');
+  if(gn){
+    const left = Z2_GOAL - cur.minutes;
+    gn.textContent = cur.minutes + ' / ' + Z2_GOAL + ' min weekly target' +
+      (left > 0 ? '  ·  ' + left + ' to go' : '  ·  target hit ✓');
+  }
+
+  // ── Stat tiles (always in minutes — the number he cares about) ──
+  const closed = weeks.filter(w=>!w.isCurrent && w.minutes>0);
+  const avg4 = (()=>{
+    const last4 = weeks.filter(w=>!w.isCurrent).slice(-4);
+    const withData = last4.filter(w=>w.minutes>0);
+    return withData.length ? Math.round(withData.reduce((s,w)=>s+w.minutes,0)/withData.length) : 0;
+  })();
+  const best = weeks.reduce((m,w)=>Math.max(m,w.minutes),0);
+  const setTxt=(id,txt,color)=>{const e=document.getElementById(id);if(e){e.textContent=txt;if(color)e.style.color=color;}};
+  setTxt('z2-s-this', cur.minutes || '—');
+  if(prev.minutes){
+    const d = cur.minutes - prev.minutes;
+    setTxt('z2-s-delta', (d>=0?'+':'')+d, d>=0?'var(--green)':'var(--accent3)');
+  } else setTxt('z2-s-delta','—','var(--muted)');
+  setTxt('z2-s-avg4', avg4 || '—');
+  setTxt('z2-s-best', best || '—');
+
+  // ── Chart ──
+  const meta = Z2_METRICS[_z2Metric];
+  const pts = weeks.map(w=>({x:w.idx, y:w[_z2Metric] || null, label:w.label}));
+  const datasets = [{color:meta.color, points:pts}];
+
+  // 4-week rolling average overlay on the minutes view — smooths out the
+  // week-to-week noise so the actual direction is readable.
+  if(_z2Metric === 'minutes'){
+    const roll = weeks.map((w,i)=>{
+      const win = weeks.slice(Math.max(0,i-3), i+1).map(x=>x.minutes);
+      const nz = win.filter(v=>v>0);
+      return {x:w.idx, y: nz.length>=2 ? Math.round(win.reduce((s,v)=>s+v,0)/win.length) : null, label:w.label};
+    });
+    datasets.push({color:'rgba(71,212,255,0.75)', points:roll, dashed:true});
+  }
+
+  if(!pts.some(p=>p.y)){
+    el.innerHTML = '<div style="color:var(--muted);font-size:11px;text-align:center;padding:73px 0">Log a session to start the trend</div>';
+  } else if(_z2Metric === 'minutes'){
+    makeSVGChart({el, datasets, height:170, goalLines:[
+      {val:100, label:'CDC',   color:'rgba(85,85,85,0.55)',   tc:'rgba(140,140,140,0.9)'},
+      {val:150, label:'Good',  color:'rgba(61,220,132,0.45)', tc:'rgba(61,220,132,0.9)'},
+      {val:200, label:'Attia', color:'rgba(71,212,255,0.5)',  tc:'rgba(71,212,255,0.9)'},
+      {val:300, label:'Elite', color:'rgba(200,255,71,0.6)',  tc:'rgba(200,255,71,0.95)'}
+    ]});
+  } else if(_z2Metric === 'sessions'){
+    makeSVGChart({el, datasets, height:170, goalLines:[
+      {val:2, label:'Min',  color:'rgba(85,85,85,0.55)',    tc:'rgba(140,140,140,0.9)'},
+      {val:3, label:'Good', color:'rgba(61,220,132,0.45)',  tc:'rgba(61,220,132,0.9)'}
+    ]});
+  } else {
+    makeSVGChart({el, datasets, height:170, goalLines:[
+      {val:45, label:'45m+', color:'rgba(61,220,132,0.45)', tc:'rgba(61,220,132,0.9)'}
+    ]});
+  }
+
+  // ── Readout ──
+  const ro = document.getElementById('z2-readout');
+  if(ro){
+    if(!cur.sessions && !closed.length){
+      ro.textContent = 'Type minutes and hit Log after a Zone 2 session.';
+    } else {
+      const parts = [];
+      parts.push('<b style="color:var(--text)">'+cur.sessions+'</b> session'+(cur.sessions===1?'':'s')+' this week'+
+                 (cur.avgLen? ', averaging <b style="color:var(--text)">'+cur.avgLen+' min</b>' : ''));
+      if(prev.minutes){
+        const pctd = Math.round((cur.minutes-prev.minutes)/prev.minutes*100);
+        parts.push('Week over week: '+(pctd>=0?'+':'')+pctd+'%');
+      }
+      if(cur.avgLen && cur.avgLen < 30){
+        parts.push('Sessions under 30 min are still useful, but the mitochondrial and lactate-clearance adaptations Zone 2 is prized for show up most reliably in continuous 45–60 min blocks. Fewer, longer beats more, shorter.');
+      } else if(cur.minutes && cur.minutes < Z2_GOAL){
+        parts.push('One more '+Math.max(15,Z2_GOAL-cur.minutes)+'-min session clears the 150 min/wk floor.');
+      } else if(cur.minutes >= Z2_GOAL){
+        parts.push('Above the aerobic floor. Zone 2 is the lever that moves HDL and HbA1c — 8+ consistent weeks is where the bloodwork responds.');
+      }
+      ro.innerHTML = parts.join(' · ');
+    }
+  }
+}
+
 // ─── WORKOUT LOG (daily record of type + volume) ───
 function wkLogKey(dateKey){ return 'lifeOS_wklog_' + dateKey; }
 function getWkLog(dateKey){ return lsj(wkLogKey(dateKey), null); }
@@ -3544,11 +3821,13 @@ function makeSVGChart({el, datasets, height=120, yLabel='', goalLine=null, goalL
     const pathD = pts.map((p, i) => `${i===0?'M':'L'}${px(p.x).toFixed(1)} ${py(p.y).toFixed(1)}`).join(' ');
     const areaD = pathD + ` L${px(pts[pts.length-1].x).toFixed(1)} ${(PAD.top+chartH).toFixed(1)} L${px(pts[0].x).toFixed(1)} ${(PAD.top+chartH).toFixed(1)} Z`;
 
-    svg += `<path d="${areaD}" fill="url(#g${di}${el.id})" />`;
-    svg += `<path d="${pathD}" fill="none" stroke="${ds.color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+    // Dashed datasets (e.g. rolling averages) draw as a bare line — no area
+    // fill, so they read as an overlay instead of a second stacked series.
+    if(!ds.dashed) svg += `<path d="${areaD}" fill="url(#g${di}${el.id})" />`;
+    svg += `<path d="${pathD}" fill="none" stroke="${ds.color}" stroke-width="${ds.dashed?1.5:2}"${ds.dashed?' stroke-dasharray="5,4"':''} stroke-linecap="round" stroke-linejoin="round"/>`;
 
     // Dots on last 2 points
-    pts.slice(-2).forEach(p => {
+    if(!ds.dashed) pts.slice(-2).forEach(p => {
       svg += `<circle cx="${px(p.x).toFixed(1)}" cy="${py(p.y).toFixed(1)}" r="3" fill="${ds.color}" stroke="var(--bg)" stroke-width="1.5"/>`;
     });
   });
@@ -4655,6 +4934,7 @@ function renderAll(){
   _safe('idea-banks',()=>renderIdeaBanks());
   _safe('weight',()=>renderWeightLog());
   _safe('strength-chart',()=>renderStrengthChart());
+  _safe('zone2',()=>renderZ2());
   _safe('metrics',()=>renderMetrics());
   _safe('biomarkers',()=>renderBiomarkerGuide());
   _safe('protocol-map',()=>renderProtocolMap());
@@ -4666,6 +4946,10 @@ function renderAll(){
   _safe('workout-builder',()=>renderWbList());
 }
 renderAll();
+(function(){
+  const zi=document.getElementById('z2-input');
+  if(zi) zi.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();logZ2();}});
+})();
 initSync();
 
 </script>
