@@ -330,6 +330,20 @@ body.wb-dragging{overflow:hidden}
 }
 .push-btn-desktop{display:none !important}
 @media(min-width:1024px){.push-btn-desktop{display:block !important}}
+/* ── WEEKLY MUSCLE VOLUME ── */
+.mv-row{display:grid;grid-template-columns:70px 1fr 56px;gap:8px;align-items:center;margin-bottom:7px}
+.mv-name{font-size:9.5px;font-weight:700;color:#bbb;text-transform:uppercase;letter-spacing:.6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mv-track{position:relative;height:16px;background:var(--surface2);border-radius:5px;overflow:hidden}
+.mv-band{position:absolute;top:0;bottom:0;z-index:2;pointer-events:none;background:rgba(255,255,255,.07);border-left:1px dashed rgba(255,255,255,.45);border-right:1px dashed rgba(255,255,255,.45)}
+.mv-fill{position:absolute;top:0;bottom:0;left:0;border-radius:5px 0 0 5px;transition:width .25s ease}
+.mv-fill.ind{opacity:.32}
+.mv-val{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-align:right;line-height:1.15}
+.mv-freq{font-size:8px;color:var(--muted);font-family:'JetBrains Mono',monospace;display:block;font-weight:400}
+.mv-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:10px;padding-top:9px;border-top:1px solid var(--border)}
+.mv-legend i{width:9px;height:9px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:-1px;font-style:normal}
+.mv-fix-row{display:grid;grid-template-columns:1fr 118px;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}
+.mv-fix-name{font-size:12px;color:#ddd}
+.mv-sel{background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:7px 8px;font-size:11px;font-family:'Syne',sans-serif;width:100%}
 </style>
 </head>
 <body>
@@ -340,7 +354,7 @@ body.wb-dragging{overflow:hidden}
     <div class="tagline">Master System · Age 38</div>
   </div>
   <div class="header-right">
-    <div class="date-badge" id="dateBadge">Sat, Aug 1, 2026</div>
+    <div class="date-badge" id="dateBadge">Mon, Aug 3, 2026</div>
     <button class="hdr-btn" onclick="openSyncModal()" id="sync-btn"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--muted);display:inline-block;margin-right:5px;vertical-align:middle"></span>Sync</button>
     <button class="hdr-btn" onclick="copyData()">📋 Copy Data</button>
     <button class="hdr-btn push" onclick="openPushModal()" id="push-btn">🚀 Push</button>
@@ -403,6 +417,18 @@ body.wb-dragging{overflow:hidden}
   </div>
 </div>
 
+<!-- MUSCLE MAP FIX MODAL -->
+<div class="modal-bg" id="mv-fix-modal">
+  <div class="modal">
+    <div class="modal-title">🎯 Assign muscles</div>
+    <p style="font-size:12px;color:#aaa;margin-bottom:12px;line-height:1.6">These exercises aren't in the mapper yet. Pick the primary muscle for each — it's remembered from now on.</p>
+    <div id="mv-fix-list"></div>
+    <div class="modal-btns" style="margin-top:14px">
+      <button class="btn-primary" onclick="mvCloseFix()">Done</button>
+    </div>
+  </div>
+</div>
+
 <div class="main">
 
 <!-- ══════════ OVERVIEW ══════════ -->
@@ -424,7 +450,7 @@ body.wb-dragging{overflow:hidden}
     <div class="card-header">
       <div>
         <div class="card-title">🎯 Daily Hit List</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date">Saturday, Aug 1</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date">Monday, Aug 3</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
         <span id="hitlist-pval" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">0/9</span>
@@ -484,7 +510,7 @@ body.wb-dragging{overflow:hidden}
           <input class="add-input" id="morning-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('morning')">
           <button class="add-btn" onclick="addRoutineItem('morning')">+ Add</button>
         </div>
-        <div class="last-reset" id="morning-last-reset">Last reset: 2026-8-1</div>
+        <div class="last-reset" id="morning-last-reset">Last reset: 2026-8-3</div>
         </div>
       </div>
     </div>
@@ -506,7 +532,7 @@ body.wb-dragging{overflow:hidden}
           <input class="add-input" id="evening-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('evening')">
           <button class="add-btn" onclick="addRoutineItem('evening')">+ Add</button>
         </div>
-        <div class="last-reset" id="evening-last-reset">Last reset: 2026-8-1</div>
+        <div class="last-reset" id="evening-last-reset">Last reset: 2026-8-3</div>
         </div>
       </div>
     </div>
@@ -528,7 +554,7 @@ body.wb-dragging{overflow:hidden}
           <input class="add-input" id="sbshift-new-input" placeholder="Add task..." onkeydown="if(event.key==='Enter')addRoutineItem('sbshift')">
           <button class="add-btn" onclick="addRoutineItem('sbshift')">+ Add</button>
         </div>
-        <div class="last-reset" id="sbshift-last-reset">Last reset: 2026-8-1</div>
+        <div class="last-reset" id="sbshift-last-reset">Last reset: 2026-8-3</div>
         </div>
       </div>
     </div>
@@ -746,6 +772,44 @@ body.wb-dragging{overflow:hidden}
     </div>
 
     <div id="str-readout" style="font-size:10px;color:var(--muted);line-height:1.6;margin-top:11px;padding-top:10px;border-top:1px solid var(--border)">Tap ✅ Finish Workout after a session to log it here.</div>
+  </div>
+
+
+  <!-- ── WEEKLY MUSCLE VOLUME ── -->
+  <div class="card">
+    <div class="card-header" style="margin-bottom:8px">
+      <div>
+        <div class="card-title">💪 Weekly Muscle Volume</div>
+        <div style="font-size:9px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="mv-range">8/3–8/9 · hard sets per muscle</div>
+      </div>
+      <div style="display:flex;gap:5px;align-items:center">
+        <button class="reset-btn" onclick="mvShiftWeek(-1)">‹</button>
+        <button class="reset-btn" id="mv-week-btn" onclick="mvShiftWeek(0)" style="border-color:rgba(200,255,71,.4);color:var(--accent)">This Week</button>
+        <button class="reset-btn" onclick="mvShiftWeek(1)">›</button>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:5px;margin-bottom:11px;flex-wrap:wrap">
+      <button class="str-metric-btn active" id="mv-m-total" onclick="mvShowMode('total')">Direct + Indirect</button>
+      <button class="str-metric-btn" id="mv-m-direct" onclick="mvShowMode('direct')">Direct Only</button>
+    </div>
+
+    <div id="mv-bars"><div style="color:var(--muted);font-size:11px;text-align:center;padding:26px 0">No lifting sets logged this week yet.</div></div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px">
+      <div class="str-stat"><div class="str-stat-val" id="mv-s-ontarget" style="color:var(--green)">—</div><div class="str-stat-lbl">On Target</div></div>
+      <div class="str-stat"><div class="str-stat-val" id="mv-s-sets" style="color:var(--accent)">—</div><div class="str-stat-lbl">Hard Sets</div></div>
+      <div class="str-stat"><div class="str-stat-val" id="mv-s-days" style="color:var(--accent2)">—</div><div class="str-stat-lbl">Sessions</div></div>
+    </div>
+
+    <div class="mv-legend">
+      <span><i style="background:var(--green)"></i>In range</span>
+      <span><i style="background:var(--accent3)"></i>Under</span>
+      <span><i style="background:var(--accent4)"></i>Over</span>
+      <span><i style="background:#555"></i>Indirect ½ credit</span>
+    </div>
+
+    <div id="mv-readout" style="font-size:10px;color:var(--muted);line-height:1.6;margin-top:10px;padding-top:9px;border-top:1px solid var(--border)">Check off sets in the Workout Builder and they land here automatically.</div>
   </div>
 
   <!-- ── ZONE 2 CARDIO ── -->
@@ -2704,6 +2768,7 @@ function wbToggleSet(day,ei,si){
   session[ei].sets[si].done=!session[ei].sets[si].done;
   saveWbSession(day,session);
   renderWbList();
+  if(typeof renderMuscleVolume==='function') renderMuscleVolume();
 }
 
 function wbAddSet(day,ei){
@@ -3531,6 +3596,7 @@ function finishWorkout(){
   renderMonthMap();
   renderVolumeChart();
   if(typeof renderStrengthChart==='function') renderStrengthChart();
+  if(typeof renderMuscleVolume==='function') renderMuscleVolume();
 }
 
 // ─── MONTHLY WORKOUT MAP ───
@@ -4913,6 +4979,295 @@ function _safe(label, fn){
   catch(e){ console.error('[LifeOS] render failed: '+label, e); }
 }
 
+
+/* ══════════════════════════════════════════════════════════════
+   WEEKLY MUSCLE VOLUME
+   Counts hard sets per muscle group per week.
+   Primary mover = 1.0 set. Meaningful secondary = 0.5 set.
+   Reads straight from saved builder sessions, so it back-fills
+   history automatically and updates the moment a set is checked.
+   ══════════════════════════════════════════════════════════════ */
+
+const MUSCLE_GROUPS=[
+  {key:'chest',   label:'Chest',   min:10,max:14},
+  {key:'back',    label:'Back',    min:10,max:16},
+  {key:'delts',   label:'Delts',   min:10,max:16},
+  {key:'biceps',  label:'Biceps',  min:8, max:14},
+  {key:'triceps', label:'Triceps', min:8, max:14},
+  {key:'quads',   label:'Quads',   min:10,max:14},
+  {key:'hams',    label:'Hams',    min:8, max:12},
+  {key:'glutes',  label:'Glutes',  min:8, max:14},
+  {key:'calves',  label:'Calves',  min:6, max:12},
+  {key:'core',    label:'Core',    min:6, max:12},
+  {key:'forearm', label:'Forearms',min:4, max:10},
+];
+const MUSCLE_KEYS=MUSCLE_GROUPS.map(g=>g.key);
+
+// name → { muscle: credit }.  1 = primary mover, .5 = meaningful secondary.
+// Empty object = conditioning; counted as cardio, not as hypertrophy volume.
+const MUSCLE_MAP={
+  // ── Push ──
+  'DB Bench Press':{chest:1,triceps:.5,delts:.5},
+  'DB Incline Press':{chest:1,delts:.5,triceps:.5},
+  'DB Decline Press':{chest:1,triceps:.5},
+  'DB Chest Fly':{chest:1},
+  'DB Shoulder Press':{delts:1,triceps:.5},
+  'DB Overhead Press':{delts:1,triceps:.5,core:.5},
+  'DB Arnold Press':{delts:1,triceps:.5},
+  'DB Lateral Raises':{delts:1},
+  'DB Front Raises':{delts:1},
+  'DB Overhead Tricep Extension':{triceps:1},
+  'DB Tricep Kickback':{triceps:1},
+  'Push-Ups':{chest:1,triceps:.5,delts:.5,core:.5},
+  'Pike Push-Ups':{delts:1,triceps:.5,core:.5},
+  'Diamond Push-Ups':{triceps:1,chest:.5},
+  'Close-Grip Push-Ups':{triceps:1,chest:.5},
+  'Tricep Dips':{triceps:1,chest:.5,delts:.5},
+  // ── Pull ──
+  'DB Single-Arm Row':{back:1,biceps:.5,forearm:.5},
+  'DB Bent-Over Row':{back:1,biceps:.5,forearm:.5},
+  'DB Renegade Row':{back:1,biceps:.5,core:.5},
+  'DB Shrug':{back:1,forearm:.5},
+  'DB Curl':{biceps:1,forearm:.5},
+  'DB Hammer Curl':{biceps:1,forearm:.5},
+  'Hammer Curls':{biceps:1,forearm:.5},
+  'DB Concentration Curl':{biceps:1},
+  'DB Reverse Curl':{forearm:1,biceps:.5},
+  'Pull-Ups':{back:1,biceps:.5,forearm:.5,core:.5},
+  'Neutral-Grip Pull-Ups':{back:1,biceps:.5,forearm:.5},
+  'Chin-Ups':{back:1,biceps:.5,forearm:.5},
+  'Inverted Row':{back:1,biceps:.5,core:.5},
+  // ── Legs ──
+  'DB Goblet Squat':{quads:1,glutes:.5,core:.5},
+  'DB Sumo Squat':{quads:1,glutes:.5,hams:.5},
+  'DB Romanian Deadlift':{hams:1,glutes:.5,back:.5},
+  'DB Walking Lunges':{quads:1,glutes:.5},
+  'DB Reverse Lunges':{glutes:1,quads:.5},
+  'DB Step-Ups':{quads:1,glutes:.5},
+  'DB Bulgarian Split Squat':{quads:1,glutes:.5},
+  'DB Calf Raises':{calves:1},
+  'Squat':{quads:1,glutes:.5,core:.5},
+  'Jump Squats':{quads:1,glutes:.5,calves:.5},
+  'Glute Bridge':{glutes:1,hams:.5},
+  'Nordic Curl':{hams:1,glutes:.5},
+  'Wall Sit':{quads:1},
+  // ── Core ──
+  'Plank':{core:1},'Side Plank':{core:1},'Dead Bug':{core:1},
+  'Hollow Body Hold':{core:1},'Bicycle Crunches':{core:1},
+  'Russian Twists':{core:1},'Leg Raises':{core:1},'V-Ups':{core:1},
+  'Ab Wheel Rollout':{core:1,back:.5},
+  'Hanging Knee Raises':{core:1,forearm:.5},
+  // ── Conditioning (not hypertrophy volume) ──
+  'Burpees':{},'Jump Rope Intervals':{},'Mountain Climbers':{},
+  'Box Jumps':{},'High Knees':{},'Bear Crawl':{},
+  'Zone 2 Run / Walk':{},'Sprint Intervals':{},'Jumping Jacks':{},
+};
+
+// User overrides for custom exercises: { "Cable Crossover": {chest:1} }
+function mvOverrides(){return lsj('lifeOS_mv_overrides',{});}
+function mvSaveOverride(name,muscle){
+  const o=mvOverrides();
+  if(!muscle) delete o[name]; else o[name]={[muscle]:1};
+  ls('lifeOS_mv_overrides',JSON.stringify(o));
+  renderMuscleVolume();
+}
+
+// Keyword fallback so custom exercises still land somewhere sensible.
+function mvGuess(name){
+  const n=(name||'').toLowerCase();
+  const has=(...w)=>w.some(x=>n.includes(x));
+  if(has('run','jog','walk','bike','rope','burpee','sprint','jack','climber','erg','rower','elliptical','stair','row machine')&&!has('barbell row','db row'))
+    return {};
+  if(has('wrist','grip','farmer'))                       return {forearm:1};
+  if(has('calf','calve'))                                return {calves:1};
+  if(has('hammer curl','reverse curl'))                  return {biceps:1,forearm:.5};
+  if(has('leg curl','ham curl','nordic'))                return {hams:1};
+  if(has('curl'))                                        return {biceps:1,forearm:.5};
+  if(has('tricep','skull','pushdown','overhead extension')) return {triceps:1};
+  if(has('dip'))                                         return {triceps:1,chest:.5};
+  if(has('lateral raise','side raise','front raise','rear delt','face pull','upright row','delt'))
+                                                         return {delts:1};
+  if(has('overhead press','shoulder press','ohp','arnold','pike push'))
+                                                         return {delts:1,triceps:.5};
+  if(has('romanian','rdl','stiff-leg','stiff leg','good morning'))
+                                                         return {hams:1,glutes:.5,back:.5};
+  if(has('deadlift'))                                    return {back:1,hams:.5,glutes:.5};
+  if(has('hip thrust','bridge','glute','kickback (glute)'))return {glutes:1,hams:.5};
+  if(has('lunge','split squat','step-up','step up'))      return {quads:1,glutes:.5};
+  if(has('squat','leg press','leg extension'))            return {quads:1,glutes:.5};
+  if(has('pull-up','pullup','chin-up','chinup','pulldown','lat '))
+                                                         return {back:1,biceps:.5,forearm:.5};
+  if(has('row','shrug'))                                 return {back:1,biceps:.5,forearm:.5};
+  if(has('bench','chest','fly','flye','crossover','pec deck','push-up','pushup','press'))
+                                                         return {chest:1,triceps:.5,delts:.5};
+  if(has('plank','crunch','sit-up','situp',' ab','ab ','abs','hollow','twist','leg raise','knee raise','dead bug'))
+                                                         return {core:1};
+  return null;
+}
+
+function mvContrib(name){
+  const o=mvOverrides();
+  if(o[name])                      return o[name];
+  if(MUSCLE_MAP[name]!==undefined) return MUSCLE_MAP[name]; // explicit {} = conditioning
+  return mvGuess(name);
+}
+
+let _mvWeekOffset=0, _mvMode='total';
+
+function mvWeekStart(offset){
+  const d=new Date(), day=d.getDay();
+  d.setDate(d.getDate()-(day===0?6:day-1)+(offset*7));
+  d.setHours(0,0,0,0);
+  return d;
+}
+
+// Walk every saved builder session and total up sets per muscle for one week.
+function mvCollectWeek(offset){
+  const start=mvWeekStart(offset), end=new Date(start); end.setDate(end.getDate()+7);
+  const totals={}; MUSCLE_KEYS.forEach(k=>totals[k]={direct:0,indirect:0,days:{}});
+  const days={}; let hardSets=0, cardioSets=0; const unknown={};
+
+  for(let i=0;i<localStorage.length;i++){
+    const k=localStorage.key(i);
+    if(!k||k.indexOf('lifeOS_wb_sess3_')!==0)continue;
+    const tail=k.replace('lifeOS_wb_sess3_','');
+    const us=tail.indexOf('_'); if(us<0)continue;
+    const dateKey=tail.slice(us+1);
+    const p=dateKey.split('-').map(Number);
+    if(p.length<3||isNaN(p[0]))continue;
+    const dt=new Date(p[0],p[1]-1,p[2]);
+    if(dt<start||dt>=end)continue;
+
+    let sess=null; try{ sess=JSON.parse(localStorage.getItem(k)); }catch(e){}
+    if(!Array.isArray(sess))continue;
+
+    sess.forEach(ex=>{
+      const done=(ex.sets||[]).filter(s=>s&&s.done).length;
+      if(!done)return;
+      const c=mvContrib(ex.name);
+      if(c===null){ unknown[ex.name]=(unknown[ex.name]||0)+done; return; }
+      if(!Object.keys(c).length){ cardioSets+=done; return; }
+      hardSets+=done; days[dateKey]=true;
+      Object.entries(c).forEach(([m,w])=>{
+        if(!totals[m])return;
+        if(w>=1) totals[m].direct+=done; else totals[m].indirect+=done*w;
+        totals[m].days[dateKey]=true;
+      });
+    });
+  }
+  return {start,totals,hardSets,cardioSets,unknown,sessions:Object.keys(days).length};
+}
+
+function mvShiftWeek(dir){
+  _mvWeekOffset = dir===0 ? 0 : _mvWeekOffset+dir;
+  if(_mvWeekOffset>0)_mvWeekOffset=0;   // no future weeks
+  renderMuscleVolume();
+}
+function mvShowMode(m){
+  _mvMode=m;
+  ['total','direct'].forEach(x=>{
+    const b=document.getElementById('mv-m-'+x);
+    if(b)b.classList.toggle('active',x===m);
+  });
+  renderMuscleVolume();
+}
+
+function renderMuscleVolume(){
+  const wrap=document.getElementById('mv-bars');
+  if(!wrap)return;
+  const d=mvCollectWeek(_mvWeekOffset);
+  const fmt=n=>(Math.round(n*10)/10).toString();
+  const short=dt=>(dt.getMonth()+1)+'/'+dt.getDate();
+  const endDt=new Date(d.start); endDt.setDate(endDt.getDate()+6);
+
+  const rangeEl=document.getElementById('mv-range');
+  if(rangeEl)rangeEl.textContent=short(d.start)+'–'+short(endDt)+' · hard sets per muscle';
+  const wkBtn=document.getElementById('mv-week-btn');
+  if(wkBtn)wkBtn.textContent=_mvWeekOffset===0?'This Week':Math.abs(_mvWeekOffset)+' wk ago';
+
+  if(!d.hardSets){
+    wrap.innerHTML='<div style="color:var(--muted);font-size:11px;text-align:center;padding:26px 0">No lifting sets logged '+(_mvWeekOffset===0?'this week yet.':'that week.')+'</div>';
+    ['mv-s-ontarget','mv-s-sets','mv-s-days'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent='—';});
+    const r0=document.getElementById('mv-readout');
+    if(r0)r0.textContent='Check off sets in the Workout Builder and they land here automatically.';
+    return;
+  }
+
+  wrap.innerHTML='';
+  let onTarget=0; const under=[], over=[];
+
+  MUSCLE_GROUPS.forEach(g=>{
+    const t=d.totals[g.key];
+    const direct=t.direct, total=t.direct+t.indirect;
+    const val=_mvMode==='direct'?direct:total;
+    const freq=Object.keys(t.days).length;
+
+    let color='var(--accent3)', status='under';
+    if(val>=g.min&&val<=g.max){ color='var(--green)'; status='ok'; onTarget++; }
+    else if(val>g.max){ color='var(--accent4)'; status='over'; }
+    if(status==='under'&&val<g.min) under.push(g.label.toLowerCase()+' '+fmt(val));
+    if(status==='over') over.push(g.label.toLowerCase());
+
+    const scale=g.max*1.75;
+    const pct=v=>Math.min(100,(v/scale)*100);
+    const row=document.createElement('div');
+    row.className='mv-row';
+    row.innerHTML=
+      '<div class="mv-name">'+g.label+'</div>'+
+      '<div class="mv-track">'+
+        (_mvMode==='total'&&t.indirect>0
+          ? '<div class="mv-fill ind" style="width:'+pct(total)+'%;background:'+color+'"></div>'
+          : '')+
+        '<div class="mv-fill" style="width:'+pct(direct)+'%;background:'+color+'"></div>'+
+        '<div class="mv-band" style="left:'+pct(g.min)+'%;width:'+(pct(g.max)-pct(g.min))+'%"></div>'+
+      '</div>'+
+      '<div class="mv-val" style="color:'+color+'">'+fmt(val)+
+        '<span class="mv-freq">'+(freq?'×'+freq+(freq===1?' day':' days'):'—')+'</span></div>';
+    wrap.appendChild(row);
+  });
+
+  const se=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+  se('mv-s-ontarget',onTarget+'/'+MUSCLE_GROUPS.length);
+  se('mv-s-sets',fmt(d.hardSets));
+  se('mv-s-days',d.sessions);
+
+  const notes=[];
+  notes.push(_mvMode==='direct'
+    ? 'Direct sets only — indirect work on compounds is excluded.'
+    : 'Primary mover = 1 set, secondary = ½ set. Solid bar is direct, faded is indirect.');
+  if(under.length) notes.push('Below range: '+under.slice(0,4).join(', ')+'.');
+  if(over.length)  notes.push('Above range: '+over.slice(0,4).join(', ')+' — fine if recovery holds.');
+  if(d.cardioSets) notes.push(d.cardioSets+' conditioning sets logged (not counted as volume).');
+  const unk=Object.keys(d.unknown);
+  if(unk.length) notes.push('<span style="color:var(--accent3);cursor:pointer" onclick="mvOpenFix()">⚠ '+unk.length+' unmapped exercise'+(unk.length>1?'s':'')+' — tap to assign.</span>');
+  const ro=document.getElementById('mv-readout');
+  if(ro)ro.innerHTML=notes.join(' ');
+}
+
+// ── Assign a muscle to exercises the mapper doesn't recognize ──
+function mvOpenFix(){
+  const d=mvCollectWeek(_mvWeekOffset);
+  const names=Object.keys(d.unknown);
+  const list=document.getElementById('mv-fix-list');
+  if(!list)return;
+  list.innerHTML='';
+  if(!names.length){ list.innerHTML='<div style="color:var(--muted);font-size:12px;padding:10px 0">Everything is mapped.</div>'; }
+  names.forEach(n=>{
+    const row=document.createElement('div');
+    row.className='mv-fix-row';
+    const opts=MUSCLE_GROUPS.map(g=>'<option value="'+g.key+'">'+g.label+'</option>').join('');
+    row.innerHTML='<div class="mv-fix-name">'+n+'</div>'+
+      '<select class="mv-sel" onchange="mvSaveOverride('+JSON.stringify(n).replace(/"/g,'&quot;')+',this.value)">'+
+      '<option value="">Pick muscle…</option>'+opts+'</select>';
+    list.appendChild(row);
+  });
+  document.getElementById('mv-fix-modal').classList.add('open');
+}
+function mvCloseFix(){
+  document.getElementById('mv-fix-modal').classList.remove('open');
+  renderMuscleVolume();
+}
+
 function renderAll(){
   _safe('routines',()=>{renderRoutine('morning');renderRoutine('evening');renderRoutine('sbshift');});
   _safe('simple-lists',()=>['scoop-daily','family-weekly','want-gym','want-wife','want-house','want-dad'].forEach(k=>renderSimpleList(k)));
@@ -4934,6 +5289,7 @@ function renderAll(){
   _safe('idea-banks',()=>renderIdeaBanks());
   _safe('weight',()=>renderWeightLog());
   _safe('strength-chart',()=>renderStrengthChart());
+  _safe('muscle-volume',()=>renderMuscleVolume());
   _safe('zone2',()=>renderZ2());
   _safe('metrics',()=>renderMetrics());
   _safe('biomarkers',()=>renderBiomarkerGuide());
