@@ -233,8 +233,10 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;paddin
 .wk-day-cell.pull-day{background:rgba(71,212,255,.07);border-color:rgba(71,212,255,.3)}
 .wk-day-cell.full-day{background:rgba(255,107,53,.07);border-color:rgba(255,107,53,.3)}
 .wk-day-cell.vo2-day{background:rgba(180,127,254,.07);border-color:rgba(180,127,254,.3)}
-.wk-day-cell.legs-day{background:rgba(255,71,160,.07);border-color:rgba(255,71,160,.3)}
-.wk-day-cell.legs-day{background:rgba(255,71,160,.07);border-color:rgba(255,71,160,.3)}
+.wk-day-cell.uppera-day{background:rgba(61,220,132,.07);border-color:rgba(61,220,132,.3)}
+.wk-day-cell.upperb-day{background:rgba(255,217,61,.07);border-color:rgba(255,217,61,.3)}
+.wk-day-cell.lowera-day{background:rgba(255,71,160,.07);border-color:rgba(255,71,160,.3)}
+.wk-day-cell.lowerb-day{background:rgba(255,158,196,.07);border-color:rgba(255,158,196,.3)}
 .wk-day-cell.rest-day{background:transparent}
 .wk-month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .wk-month-label{font-size:11px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:1px}
@@ -618,10 +620,12 @@ body.wb-dragging{overflow:hidden}
           <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">
             <button class="reset-btn" id="wb-tab-push" onclick="wbShowDay('push')" style="border-color: rgba(200, 255, 71, 0.4); color: var(--accent);">Push</button>
             <button class="reset-btn" id="wb-tab-pull" onclick="wbShowDay('pull')">Pull</button>
-            <button class="reset-btn" id="wb-tab-upper" onclick="wbShowDay('upper')">Upper</button>
+            <button class="reset-btn" id="wb-tab-upper" onclick="wbShowDay('upper')">Upper A</button>
+            <button class="reset-btn" id="wb-tab-upperb" onclick="wbShowDay('upperb')">Upper B</button>
             <button class="reset-btn" id="wb-tab-full" onclick="wbShowDay('full')">Full</button>
             <button class="reset-btn" id="wb-tab-vo2" onclick="wbShowDay('vo2')">VO₂</button>
-            <button class="reset-btn" id="wb-tab-legs" onclick="wbShowDay('legs')">Legs</button>
+            <button class="reset-btn" id="wb-tab-legs" onclick="wbShowDay('legs')">Lower A</button>
+            <button class="reset-btn" id="wb-tab-lowerb" onclick="wbShowDay('lowerb')">Lower B</button>
           </div>
         </div>
         <div id="wb-day-label" style="font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:10px;font-family:'JetBrains Mono',monospace">💥 Push Day</div>
@@ -750,8 +754,10 @@ body.wb-dragging{overflow:hidden}
       <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end">
         <button class="reset-btn" id="str-tab-push" onclick="strShowDay('push')" style="border-color:rgba(200,255,71,.4);color:var(--accent)">Push</button>
         <button class="reset-btn" id="str-tab-pull" onclick="strShowDay('pull')">Pull</button>
-        <button class="reset-btn" id="str-tab-upper" onclick="strShowDay('upper')">Upper</button>
-        <button class="reset-btn" id="str-tab-legs" onclick="strShowDay('legs')">Legs</button>
+        <button class="reset-btn" id="str-tab-upper" onclick="strShowDay('upper')">Upper A</button>
+        <button class="reset-btn" id="str-tab-upperb" onclick="strShowDay('upperb')">Upper B</button>
+        <button class="reset-btn" id="str-tab-legs" onclick="strShowDay('legs')">Lower A</button>
+        <button class="reset-btn" id="str-tab-lowerb" onclick="strShowDay('lowerb')">Lower B</button>
         <button class="reset-btn" id="str-tab-full" onclick="strShowDay('full')">Full</button>
       </div>
     </div>
@@ -2381,18 +2387,26 @@ const WB_DEFAULTS={
     {name:'Jump Rope Intervals',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
     {name:'Mountain Climbers',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
   ],
-  legs:[
-    {name:'DB Goblet Squat',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+  upperb:[
+    {name:'DB Bench Press',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'Pull-Ups',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'DB Incline Press',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'DB Chest Fly',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'DB Hammer Curl',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'Tricep Dips',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+  ],
+  lowerb:[
     {name:'DB Romanian Deadlift',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
-    {name:'DB Walking Lunges',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
     {name:'DB Reverse Lunges',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
-    {name:'DB Bulgarian Split Squat',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
-    {name:'DB Sumo Squat',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
     {name:'Glute Bridge',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'DB Sumo Squat',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
+    {name:'Nordic Curl',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
     {name:'DB Calf Raises',sets:[{weight:'',reps:'',done:false},{weight:'',reps:'',done:false}]},
   ],
 };
-const WB_DAY_LABELS={push:'💥 Push Day',pull:'🔗 Pull Day',upper:'💪 Upper Body',full:'🤝 Full Body',vo2:'🔥 VO₂ Max',legs:'🦵 Leg Day'};
+const WB_DAY_LABELS={push:'💥 Push Day',pull:'🔗 Pull Day',upper:'💪 Upper A · Row + Shoulder',upperb:'💪 Upper B · Chest + Pull-Up',legs:'🦵 Lower A · Quad Focus',lowerb:'🦵 Lower B · Ham + Glute',full:'🤝 Full Body',vo2:'🔥 VO₂ Max'};
+const DAY_SHORT_LABELS={push:'Push',pull:'Pull',upper:'Upper A',upperb:'Upper B',legs:'Lower A',lowerb:'Lower B',full:'Full Body',vo2:'VO\u2082'};
+const WB_DAY_ORDER=['push','pull','upper','upperb','legs','lowerb','full','vo2'];
 let _wbDay='push';
 
 // Persistent def (user's custom exercise list per day)
@@ -2439,7 +2453,7 @@ function persistWbToDef(day,session){
 
 function wbShowDay(day){
   _wbDay=day;
-  ['push','pull','upper','full','vo2','legs'].forEach(d=>{
+  WB_DAY_ORDER.forEach(d=>{
     const btn=document.getElementById('wb-tab-'+d);
     if(btn){btn.style.borderColor='';btn.style.color='';}
   });
@@ -3586,7 +3600,7 @@ function finishWorkout(){
     }, 3000);
   }
   if(statusEl){
-    const label = {push:'Push',pull:'Pull',full:'Full Body',vo2:'VO₂'}[day]||day;
+    const label = DAY_SHORT_LABELS[day]||day;
     const volStr = vol>=1000?(vol/1000).toFixed(1)+'k lbs':vol+' lbs';
     statusEl.textContent = label+' · '+doneSets.length+' sets · '+volStr;
     statusEl.style.color = 'var(--green)';
@@ -3607,7 +3621,10 @@ const WK_TYPE_CONFIG = {
   pull: { label:'PULL', css:'pull-day', color:'var(--accent2)', hex:'#47d4ff' },
   full: { label:'FULL', css:'full-day', color:'var(--accent3)', hex:'#ff6b35' },
   vo2:  { label:'VO₂',  css:'vo2-day',  color:'var(--accent4)', hex:'#b47ffe' },
-  legs: { label:'LEGS', css:'legs-day', color:'#ff47a0',        hex:'#ff47a0' },
+  upper:  { label:'UPP A', css:'uppera-day', color:'#3ddc84', hex:'#3ddc84' },
+  upperb: { label:'UPP B', css:'upperb-day', color:'#ffd93d', hex:'#ffd93d' },
+  legs:   { label:'LOW A', css:'lowera-day', color:'#ff47a0', hex:'#ff47a0' },
+  lowerb: { label:'LOW B', css:'lowerb-day', color:'#ff9ec4', hex:'#ff9ec4' },
 };
 
 function wkPrevMonth(){
@@ -4113,7 +4130,7 @@ function getAllWkLogs(){
 
 function strShowDay(day){
   _strDay=day;
-  ['push','pull','upper','legs','full'].forEach(d=>{
+  ['push','pull','upper','upperb','legs','lowerb','full'].forEach(d=>{
     const b=document.getElementById('str-tab-'+d);
     if(b){b.style.borderColor='';b.style.color='';}
   });
@@ -4724,7 +4741,7 @@ function openDeleteWorkout(dateKey, log, cell){
   const btn   = document.getElementById('delete-workout-confirm');
   if(!modal||!info||!btn) return;
 
-  const typeLabel = {push:'Push',pull:'Pull',full:'Full Body',legs:'Legs',vo2:'VO\u2082'}[log.type] || log.type;
+  const typeLabel = DAY_SHORT_LABELS[log.type] || log.type;
   const vol = log.volume||0;
   const volStr = vol>=1000?(vol/1000).toFixed(1)+'k lbs':vol+' lbs';
   const d = new Date(dateKey.replace(/-/g,'/'));
