@@ -346,6 +346,47 @@ body.wb-dragging{overflow:hidden}
 .mv-fix-row{display:grid;grid-template-columns:1fr 118px;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}
 .mv-fix-name{font-size:12px;color:#ddd}
 .mv-sel{background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:7px 8px;font-size:11px;font-family:'Syne',sans-serif;width:100%}
+/* CAREER */
+.cr-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.cr-stats .stat-card{padding:12px}
+.cr-stats .stat-value{font-size:20px}
+.cr-next{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.cr-next-k{font-size:10px;color:var(--muted);margin-bottom:4px}
+.cr-next-t{font-size:15px;font-weight:700;line-height:1.35}
+.cr-next-p{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);margin-top:6px}
+.cr-phase{border:1px solid var(--border);border-radius:8px;margin-bottom:8px;background:var(--surface2)}
+.cr-phase-h{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer}
+.cr-phase-t{font-size:13px;font-weight:700;flex:1;min-width:0}
+.cr-phase-c{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+.cr-phase.complete .cr-phase-c{color:var(--green)}
+.cr-phase-chev{color:var(--muted);font-size:12px;transition:transform .2s}
+.cr-phase.open .cr-phase-chev{transform:rotate(180deg)}
+.cr-phase-b{display:none;padding:0 14px 12px}
+.cr-phase.open .cr-phase-b{display:block}
+.cr-phase .simple-list li{font-size:13px;padding:10px 0}
+.cr-group{font-size:10px;color:var(--muted);margin:12px 0 2px}
+.cr-group:first-child{margin-top:0}
+.cr-book{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.cr-book:last-child{border-bottom:none}
+.cr-book-main{flex:1;min-width:0}
+.cr-book-t{font-size:13px;font-weight:600;line-height:1.3}
+.cr-book-a{font-size:11px;color:var(--muted);margin-top:2px}
+.cr-book.done .cr-book-t{color:var(--muted);text-decoration:line-through}
+.cr-status{border:1px solid var(--border);background:none;border-radius:20px;padding:5px 10px;font-size:10px;font-weight:700;font-family:'Syne',sans-serif;color:var(--muted);cursor:pointer;white-space:nowrap;flex-shrink:0}
+.cr-status.s1{border-color:rgba(71,212,255,.4);color:var(--accent2)}
+.cr-status.s2{border-color:rgba(61,220,132,.4);color:var(--green)}
+.cr-win{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.cr-win:last-child{border-bottom:none}
+.cr-win-t{flex:1;font-size:13px;line-height:1.4;min-width:0}
+.cr-win-d{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px}
+.cr-amt{background:none;border:1px dashed var(--border);border-radius:6px;padding:4px 8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);cursor:pointer;flex-shrink:0}
+.cr-amt.set{border:1px solid rgba(61,220,132,.35);color:var(--green)}
+.cr-rank{display:flex;gap:10px;padding:8px 0;font-size:13px;line-height:1.4}
+.cr-rank b{color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:12px;min-width:14px}
+.cr-note{font-size:11px;color:var(--muted);line-height:1.5;margin-top:4px}
+.cr-learn-d{display:block;font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4}
+#tab-career .two-col>div{min-width:0}
+#tab-career .add-input{min-width:0}
 </style>
 </head>
 <body>
@@ -364,7 +405,7 @@ body.wb-dragging{overflow:hidden}
 </div>
 
 <div class="nav">
-  <button class="nav-tab active" onclick="showTab('hitlist',this)"><span class="ni">🎯</span>Hit List</button>
+  <button class="nav-tab active" onclick="showTab('career',this)"><span class="ni">📈</span>Career</button>
   <button class="nav-tab" onclick="showTab('routines',this)"><span class="ni">⚙️</span>Routines</button>
   <button class="nav-tab" onclick="showTab('health',this)"><span class="ni">🧪</span>Health</button>
   <button class="nav-tab" onclick="showTab('blueprint',this)"><span class="ni">🧬</span>Blueprint</button>
@@ -436,60 +477,9 @@ body.wb-dragging{overflow:hidden}
 <!-- ══════════ OVERVIEW ══════════ -->
 
 
-<!-- ══════════ HIT LIST ══════════ -->
-<div class="tab active" id="tab-hitlist">
-
-  <div class="card">
-    <div class="card-header" style="margin-bottom:10px">
-      <div class="card-title">🎯 2026 Goals</div>
-      <div class="badge badge-yellow">Yearly</div>
-    </div>
-    <div id="ov-yearly-goals"><div><div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px"><span style="color:var(--muted)">Progress</span><span style="font-family:'JetBrains Mono',monospace;color:var(--accent)">0/7</span></div><div class="progress-bar" style="margin-bottom:12px;height:5px"><div class="progress-fill" style="width:0%;background:var(--accent)"></div></div></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">20 Scoop Squad clients (full day route)</span><button aria-label="Delete goal" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0px 2px; flex-shrink: 0; margin-top: 1px;">✕</button></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">HbA1c down to 5.1% or below</span><button aria-label="Delete goal" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0px 2px; flex-shrink: 0; margin-top: 1px;">✕</button></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">VO2 max above 50 ml/kg/min</span><button aria-label="Delete goal" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0px 2px; flex-shrink: 0; margin-top: 1px;">✕</button></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">Consistent 6am wake + full morning protocol</span><button aria-label="Delete goal" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0px 2px; flex-shrink: 0; margin-top: 1px;">✕</button></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">Home gym complete: rack + barbell + bench + bike</span><button aria-label="Delete goal" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0px 2px; flex-shrink: 0; margin-top: 1px;">✕</button></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">Debt free</span><button aria-label="Delete goal" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0px 2px; flex-shrink: 0; margin-top: 1px;">✕</button></div><div style="display: flex; align-items: flex-start; gap: 10px; padding: 8px 0px; border-bottom: 1px solid var(--border); cursor: pointer;"><div style="width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: 0.2s; margin-top: 1px;"></div><span style="flex: 1 1 0%; font-size: 13px; line-height: 1.4; color: rgb(204, 204, 204);">90-day blood work showing all markers optimal</span><button aria-label="Delete goal" style="background: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0px 2px; flex-shrink: 0; margin-top: 1px;">✕</button></div><div class="add-row" style="margin-top: 10px;"><input class="add-input" id="yearly-goal-input" placeholder="Add a 2026 goal..." onkeydown="if(event.key==='Enter')addYearlyGoal()"><button class="add-btn" onclick="addYearlyGoal()">+ Add</button></div></div>
-  </div>
-
-
-  <div class="card">
-    <div class="card-header">
-      <div>
-        <div class="card-title">🎯 Daily Hit List</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace" id="hitlist-date">Monday, Aug 3</div>
-      </div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <span id="hitlist-pval" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">0/9</span>
-        <button class="reset-btn" onclick="regenerateHitList()">↺ Shuffle</button>
-      </div>
-    </div>
-    <div class="rp-bar" style="margin-bottom:16px"><div class="rp-fill" id="hitlist-pfill" style="width:0%"></div></div>
-    <div id="hitlist-grid"><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--muted)">🏠 Home</div><div class="hit-text">Fix pipe under house</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--accent2)">💼 Work</div><div class="hit-text">Phone app welcome screen</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--accent3)">💩 Scoop</div><div class="hit-text">Order car magnet</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--muted)">🏠 Home</div><div class="hit-text">Wash house</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--accent2)">💼 Work</div><div class="hit-text">Wendover Numbers</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--accent3)">💩 Scoop</div><div class="hit-text">Blue Tennis Balls</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--accent2)">💼 Work</div><div class="hit-text">House Rules document</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--accent3)">💩 Scoop</div><div class="hit-text">Set up Google My Business</div></div></div><div class="hit-item"><div class="hit-check"></div><div style="flex:1;min-width:0"><div class="hit-cat" style="color:var(--accent3)">💩 Scoop</div><div class="hit-text">New website</div></div></div></div>
-  </div>
-
-  <div class="two-col">
-    <div>
-      <div class="card">
-        <div class="card-header"><div class="card-title">🏠 Home</div></div>
-        <div id="todo-home-wrap"><ul class="simple-list" id="todo-home-list"><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">Fix pipe under house</span><button class="s-del">✕</button></li><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">Wash house</span><button class="s-del">✕</button></li></ul><div class="add-row"><input class="add-input" id="todo-home-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addTodoItem('home')"><button class="add-btn" onclick="addTodoItem('home')">+ Add</button></div></div>
-      </div>
-      <div class="card">
-        <div class="card-header"><div class="card-title">💼 Work</div></div>
-        <div id="todo-work-wrap"><ul class="simple-list" id="todo-work-list"><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">Phone app welcome screen</span><button class="s-del">✕</button></li><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">Wendover Numbers</span><button class="s-del">✕</button></li><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">House Rules document</span><button class="s-del">✕</button></li></ul><div class="add-row"><input class="add-input" id="todo-work-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addTodoItem('work')"><button class="add-btn" onclick="addTodoItem('work')">+ Add</button></div></div>
-      </div>
-    </div>
-    <div>
-      <div class="card">
-        <div class="card-header"><div class="card-title">💩 Scoop Squad</div></div>
-        <div id="todo-scoop-wrap"><ul class="simple-list" id="todo-scoop-list"><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">Order car magnet</span><button class="s-del">✕</button></li><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">Blue Tennis Balls</span><button class="s-del">✕</button></li><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">Set up Google My Business</span><button class="s-del">✕</button></li><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">New website</span><button class="s-del">✕</button></li></ul><div class="add-row"><input class="add-input" id="todo-scoop-input" placeholder="Add item..." onkeydown="if(event.key==='Enter')addTodoItem('scoop')"><button class="add-btn" onclick="addTodoItem('scoop')">+ Add</button></div></div>
-      </div>
-      <div class="card">
-        <div class="card-header"><div class="card-title">💖 Family</div></div>
-        <ul class="simple-list" id="family-weekly-list"><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">1-on-1 time with each kid this week</span><button class="s-del">✕</button></li><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">Weekly date night with wife</span><button class="s-del">✕</button></li><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">Tell each kid one specific thing you're proud of</span><button class="s-del">✕</button></li><li class=""><div class="s-check"></div><span class="s-label editable-text" contenteditable="true">10-min State of Us check-in with wife</span><button class="s-del">✕</button></li></ul>
-        <div class="add-row">
-          <input class="add-input" id="family-weekly-input" placeholder="Add habit..." onkeydown="if(event.key==='Enter')addSimpleItem('family-weekly')">
-          <button class="add-btn" onclick="addSimpleItem('family-weekly')">+ Add</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
+<!-- ══════════ CAREER ══════════ -->
+<div class="tab active" id="tab-career">
+  <div id="career-root"></div>
 </div>
 
 <!-- ══════════ ROUTINES ══════════ -->
@@ -5285,13 +5275,224 @@ function mvCloseFix(){
   renderMuscleVolume();
 }
 
+// ─── CAREER: Peppermill executive path ───
+const CAREER_KEY='lifeOS_career';
+const CAREER_REVISIT=new Date(2027,0,1);
+const CAREER_DEFAULTS={
+  phases:[
+    {title:'This week',items:[
+      'Start the wins log and put a $ figure on each win',
+      'Request the career conversation with ownership: "What\'s next for me, and what would you need to see?"',
+      'Start Financial Intelligence (audiobook)']},
+    {title:'First 30 days',items:[
+      'Full property P&L walkthrough with finance',
+      'Name your #2 and write their 90-day development plan',
+      'Pick the first front-door project: sportsbook guests into the player\'s club, and what they spend elsewhere']},
+    {title:'Days 30–90',items:[
+      'Hand off monthly variance reports to your #2 (they write, you review)',
+      'Finish a finance course',
+      'Shadow slots, F&B, hotel, marketing and finance (half a day each)']},
+    {title:'Months 3–6',items:[
+      'Present front-door project results to ownership with real numbers',
+      'Own one project outside the sportsbook with your name on it',
+      'Apply to EDP with Peppermill sponsorship']},
+    {title:'Months 6–12',items:[
+      'Your #2 runs the book day to day; you set strategy',
+      'Deliver an annual review: sportsbook results plus property-wide impact',
+      'Formal ask for expanded scope, title and pay, backed by the wins log']},
+    {title:'Months 12–24',items:[
+      'Formal second area of responsibility, or a Director of Gaming / Assistant GM title, while keeping the book']}
+  ],
+  books:[
+    {title:'Financial Intelligence',author:'Berman & Knight',fmt:'Audio'},
+    {title:'Extreme Ownership',author:'Willink & Babin',fmt:'Audio'},
+    {title:'What Got You Here Won\'t Get You There',author:'Marshall Goldsmith',fmt:'Audio'},
+    {title:'The First 90 Days',author:'Michael Watkins',fmt:'Audio'},
+    {title:'Multipliers',author:'Liz Wiseman',fmt:'Audio'},
+    {title:'Radical Candor',author:'Kim Scott',fmt:'Audio'},
+    {title:'The Effective Executive',author:'Peter Drucker',fmt:'Audio'},
+    {title:'Unreasonable Hospitality',author:'Will Guidara',fmt:'Audio'},
+    {title:'Setting the Table',author:'Danny Meyer',fmt:'Audio'},
+    {title:'Casino Operations Management',author:'Kilby, Fox & Lucas',fmt:'Print'}
+  ],
+  learn:[
+    {title:'UNR/UNLV Executive Development Program',detail:'Lake Tahoe, every November. About $9.3k (2024). Ask Peppermill to fund it.'},
+    {title:'G2E, Las Vegas',detail:'Sep 28 – Oct 1, 2026 at The Venetian Expo. If not this year, calendar 2027.'},
+    {title:'Finance course',detail:'Financial accounting on Coursera or similar, 6–8 weeks.'},
+    {title:'Toastmasters',detail:'Join a Reno club to sharpen how you present to ownership.'}
+  ],
+  wins:[
+    {text:'Wendover mobile deployment'},
+    {text:'In-game wagering rollout (retail first, then mobile)'},
+    {text:'Variance explanation framework for monthly reports'}
+  ],
+  rhythm:{
+    daily:['10 minutes of industry news','Audiobook on the commute or during a workout'],
+    weekly:['Ownership recap with one property-impact line','1:1 with your #2','Log any new win with a $ figure'],
+    monthly:['Review the full property P&L','Compare Peppermill to the NGCB Washoe County revenue release','Half-day shadow of another department']
+  }
+};
+function careerSeed(){
+  const D=CAREER_DEFAULTS;
+  return {
+    phases:D.phases.map(p=>({title:p.title,items:p.items.map(t=>({text:t,done:false}))})),
+    books:D.books.map(b=>({title:b.title,author:b.author,fmt:b.fmt,status:0})),
+    learn:D.learn.map(l=>({title:l.title,detail:l.detail,done:false})),
+    wins:D.wins.map(w=>({text:w.text,amount:'',date:''})),
+    rstate:{},
+    ideas:[]
+  };
+}
+function getCareer(){const d=lsj(CAREER_KEY,null);return (d&&Array.isArray(d.phases))?d:careerSeed();}
+function saveCareer(d){ls(CAREER_KEY,JSON.stringify(d));renderCareer();}
+function crEsc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function crMoney(n){return '$'+Math.round(n).toLocaleString('en-US');}
+function crPeriod(c){
+  const d=new Date();
+  if(c==='daily')return todayKey();
+  if(c==='weekly'){const m=new Date(d);m.setDate(d.getDate()-((d.getDay()+6)%7));return 'w'+m.getFullYear()+'-'+(m.getMonth()+1)+'-'+m.getDate();}
+  return 'm'+d.getFullYear()+'-'+(d.getMonth()+1);
+}
+function crRState(d,c){
+  if(!d.rstate)d.rstate={};
+  const p=crPeriod(c);
+  if(!d.rstate[c]||d.rstate[c].p!==p)d.rstate[c]={p:p,done:[]};
+  return d.rstate[c];
+}
+let crOpenPhase=null;
+
+function renderCareer(){
+  const root=document.getElementById('career-root');if(!root)return;
+  const d=getCareer();
+  let total=0,done=0,next=null;
+  d.phases.forEach((p,pi)=>p.items.forEach(it=>{total++;if(it.done)done++;else if(!next)next={text:it.text,phase:p.title};}));
+  if(crOpenPhase===null){crOpenPhase=d.phases.findIndex(p=>p.items.some(it=>!it.done));}
+  const booksDone=d.books.filter(b=>b.status===2).length;
+  const winTotal=d.wins.reduce((s,w)=>s+(typeof w.amount==='number'?w.amount:0),0);
+  const days=Math.max(0,Math.ceil((CAREER_REVISIT-new Date())/864e5));
+  let h='';
+
+  // Stats
+  h+='<div class="cr-stats">'+
+    '<div class="stat-card"><div class="stat-value" style="color:var(--accent)">'+done+'/'+total+'</div><div class="stat-sub">actions</div></div>'+
+    '<div class="stat-card"><div class="stat-value" style="color:var(--accent2)">'+booksDone+'/'+d.books.length+'</div><div class="stat-sub">books</div></div>'+
+    '<div class="stat-card"><div class="stat-value" style="color:var(--green)">'+crMoney(winTotal)+'</div><div class="stat-sub">wins logged</div></div>'+
+  '</div>';
+
+  // Next up
+  h+='<div class="cr-next">'+(next
+    ?'<div class="cr-next-k">Next up</div><div class="cr-next-t">'+crEsc(next.text)+'</div><div class="cr-next-p">'+crEsc(next.phase)+'</div>'
+    :'<div class="cr-next-t">Every action is checked off. Time to set the next target.</div>')+'</div>';
+
+  h+='<div class="two-col"><div>';
+
+  // Plan
+  h+='<div class="card"><div class="card-header"><div class="card-title">📈 Executive path</div><div class="badge badge-yellow">'+Math.round(total?done/total*100:0)+'%</div></div>';
+  h+='<div class="rp-bar" style="margin-bottom:14px"><div class="rp-fill" style="width:'+(total?done/total*100:0)+'%"></div></div>';
+  d.phases.forEach((p,pi)=>{
+    const pd=p.items.filter(i=>i.done).length,complete=p.items.length&&pd===p.items.length;
+    h+='<div class="cr-phase'+(complete?' complete':'')+(crOpenPhase===pi?' open':'')+'">'+
+      '<div class="cr-phase-h" onclick="crTogglePhase('+pi+')"><div class="cr-phase-t">'+crEsc(p.title)+'</div><div class="cr-phase-c">'+(complete?'✓ ':'')+pd+'/'+p.items.length+'</div><div class="cr-phase-chev">▾</div></div>'+
+      '<div class="cr-phase-b"><ul class="simple-list">';
+    p.items.forEach((it,ii)=>{
+      h+='<li class="'+(it.done?'done':'')+'"><div class="s-check" onclick="crToggleItem('+pi+','+ii+')"></div><span class="s-label">'+crEsc(it.text)+'</span><button class="s-del" onclick="crDelItem('+pi+','+ii+')" aria-label="Delete">✕</button></li>';
+    });
+    h+='</ul><div class="add-row"><input class="add-input" id="cr-add-'+pi+'" placeholder="Add action..." onkeydown="if(event.key===\'Enter\')crAddItem('+pi+')"><button class="add-btn" onclick="crAddItem('+pi+')">+ Add</button></div></div></div>';
+  });
+  h+='</div>';
+
+  // Wins log
+  h+='<div class="card"><div class="card-header"><div class="card-title">🏆 Wins log</div><div class="badge badge-green">'+crMoney(winTotal)+'</div></div>';
+  h+='<div class="cr-note" style="margin:-6px 0 8px">Tap an amount to set its dollar impact. This is your evidence at review time.</div>';
+  if(!d.wins.length)h+='<div class="cr-note">No wins yet. Add the first one below.</div>';
+  d.wins.forEach((w,i)=>{
+    const set=typeof w.amount==='number';
+    h+='<div class="cr-win"><div class="cr-win-t">'+crEsc(w.text)+(w.date?'<div class="cr-win-d">'+crEsc(w.date)+'</div>':'')+'</div>'+
+      '<button class="cr-amt'+(set?' set':'')+'" onclick="crEditWin('+i+')">'+(set?crMoney(w.amount):'+ $')+'</button>'+
+      '<button class="s-del" onclick="crDelWin('+i+')" aria-label="Delete">✕</button></div>';
+  });
+  h+='<div class="add-row"><input class="add-input" id="cr-win-text" placeholder="What did you deliver?" onkeydown="if(event.key===\'Enter\')crAddWin()"><input class="add-input" id="cr-win-amt" inputmode="numeric" placeholder="$" style="flex:0 0 80px" onkeydown="if(event.key===\'Enter\')crAddWin()"><button class="add-btn" onclick="crAddWin()">+ Add</button></div>';
+  h+='</div>';
+
+  h+='</div><div>';
+
+  // Rhythm
+  h+='<div class="card"><div class="card-header"><div class="card-title">🔁 Rhythm</div><div class="badge badge-blue">Auto-resets</div></div>';
+  [['daily','Today'],['weekly','This week'],['monthly','This month']].forEach(([c,label])=>{
+    const st=crRState(d,c);
+    h+='<div class="cr-group">'+label+'</div><ul class="simple-list">';
+    CAREER_DEFAULTS.rhythm[c].forEach((t,i)=>{
+      const on=st.done.indexOf(i)>-1;
+      h+='<li class="'+(on?'done':'')+'"><div class="s-check" onclick="crToggleRhythm(\''+c+'\','+i+')"></div><span class="s-label">'+crEsc(t)+'</span></li>';
+    });
+    h+='</ul>';
+  });
+  h+='</div>';
+
+  // Books
+  h+='<div class="card"><div class="card-header"><div class="card-title">🎧 Reading list</div><div class="badge badge-blue">'+booksDone+' done</div></div>';
+  h+='<div class="cr-note" style="margin:-6px 0 6px">Tap the status to move a book along. Aim for one every two weeks.</div>';
+  const sLabel=['Up next','Listening','Done'];
+  d.books.forEach((b,i)=>{
+    h+='<div class="cr-book'+(b.status===2?' done':'')+'"><div class="cr-book-main"><div class="cr-book-t">'+crEsc(b.title)+'</div><div class="cr-book-a">'+crEsc(b.author||'')+(b.fmt?(b.author?', ':'')+crEsc(b.fmt.toLowerCase()):'')+'</div></div>'+
+      '<button class="cr-status s'+(b.status||0)+'" onclick="crCycleBook('+i+')">'+sLabel[b.status||0]+'</button>'+
+      '<button class="s-del" onclick="crDelBook('+i+')" aria-label="Delete">✕</button></div>';
+  });
+  h+='<div class="add-row"><input class="add-input" id="cr-book-in" placeholder="Title by Author" onkeydown="if(event.key===\'Enter\')crAddBook()"><button class="add-btn" onclick="crAddBook()">+ Add</button></div>';
+  h+='</div>';
+
+  // Learning
+  h+='<div class="card"><div class="card-header"><div class="card-title">🎓 Classes and events</div></div><ul class="simple-list">';
+  d.learn.forEach((l,i)=>{
+    h+='<li class="'+(l.done?'done':'')+'"><div class="s-check" onclick="crToggleLearn('+i+')"></div><span class="s-label">'+crEsc(l.title)+'<span class="cr-learn-d">'+crEsc(l.detail)+'</span></span></li>';
+  });
+  h+='</ul></div>';
+
+  // Priorities + parking lot
+  h+='<div class="card"><div class="card-header"><div class="card-title">🔒 Priorities</div><div class="badge badge-purple">'+days+' days to revisit</div></div>'+
+    '<div class="cr-rank"><b>1</b><span>Peppermill executive path, keeping the sportsbook</span></div>'+
+    '<div class="cr-rank"><b>2</b><span>Scoop Squad, growing to 20 customers</span></div>'+
+    '<div class="cr-rank"><b>3</b><span>Websites as one-off cash only</span></div>'+
+    '<div class="cr-note">Locked until Jan 1, 2027. New ideas go in the parking lot, not into the plan.</div>'+
+    '<div class="cr-group" style="margin-top:14px">Idea parking lot</div><ul class="simple-list">';
+  d.ideas.forEach((t,i)=>{h+='<li><span class="s-label">'+crEsc(t)+'</span><button class="s-del" onclick="crDelIdea('+i+')" aria-label="Delete">✕</button></li>';});
+  h+='</ul><div class="add-row"><input class="add-input" id="cr-idea-in" placeholder="Park an idea..." onkeydown="if(event.key===\'Enter\')crAddIdea()"><button class="add-btn" onclick="crAddIdea()">+ Park</button></div></div>';
+
+  h+='</div></div>';
+  root.innerHTML=h;
+}
+
+function crTogglePhase(pi){crOpenPhase=(crOpenPhase===pi)?-1:pi;renderCareer();}
+function crToggleItem(pi,ii){const d=getCareer();d.phases[pi].items[ii].done=!d.phases[pi].items[ii].done;saveCareer(d);}
+function crDelItem(pi,ii){const d=getCareer();d.phases[pi].items.splice(ii,1);saveCareer(d);}
+function crAddItem(pi){const el=document.getElementById('cr-add-'+pi);const t=el&&el.value.trim();if(!t)return;const d=getCareer();d.phases[pi].items.push({text:t,done:false});crOpenPhase=pi;saveCareer(d);}
+function crToggleRhythm(c,i){const d=getCareer();const st=crRState(d,c);const k=st.done.indexOf(i);if(k>-1)st.done.splice(k,1);else st.done.push(i);saveCareer(d);}
+function crCycleBook(i){const d=getCareer();d.books[i].status=((d.books[i].status||0)+1)%3;saveCareer(d);}
+function crDelBook(i){const d=getCareer();d.books.splice(i,1);saveCareer(d);}
+function crAddBook(){const el=document.getElementById('cr-book-in');const t=el&&el.value.trim();if(!t)return;const m=t.split(/\s+by\s+/i);const d=getCareer();d.books.push({title:m[0].trim(),author:(m[1]||'').trim(),fmt:'Audio',status:0});saveCareer(d);}
+function crToggleLearn(i){const d=getCareer();d.learn[i].done=!d.learn[i].done;saveCareer(d);}
+function crParseAmt(s){const n=parseFloat(String(s||'').replace(/[^0-9.\-]/g,''));return isNaN(n)?'':n;}
+function crAddWin(){
+  const te=document.getElementById('cr-win-text'),ae=document.getElementById('cr-win-amt');
+  const t=te&&te.value.trim();if(!t)return;
+  const d=getCareer();
+  d.wins.unshift({text:t,amount:crParseAmt(ae&&ae.value),date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})});
+  saveCareer(d);
+}
+function crEditWin(i){
+  const d=getCareer();const w=d.wins[i];
+  const v=prompt('Dollar impact for: '+w.text,typeof w.amount==='number'?String(w.amount):'');
+  if(v===null)return;
+  w.amount=crParseAmt(v);saveCareer(d);
+}
+function crDelWin(i){const d=getCareer();if(!confirm('Delete this win?'))return;d.wins.splice(i,1);saveCareer(d);}
+function crAddIdea(){const el=document.getElementById('cr-idea-in');const t=el&&el.value.trim();if(!t)return;const d=getCareer();(d.ideas=d.ideas||[]).push(t);saveCareer(d);}
+function crDelIdea(i){const d=getCareer();d.ideas.splice(i,1);saveCareer(d);}
+
 function renderAll(){
+  _safe('career',()=>renderCareer());
   _safe('routines',()=>{renderRoutine('morning');renderRoutine('evening');renderRoutine('sbshift');});
   _safe('simple-lists',()=>['scoop-daily','family-weekly','want-gym','want-wife','want-house','want-dad'].forEach(k=>renderSimpleList(k)));
-  _safe('todo-home',()=>renderTodoBlock('home','todo-home-wrap'));
-  _safe('todo-work',()=>renderTodoBlock('work','todo-work-wrap'));
-  _safe('todo-scoop',()=>renderTodoBlock('scoop','todo-scoop-wrap'));
-  _safe('yearly-goals',()=>renderYearlyGoals());
   _safe('protocol-calendars',()=>{
     renderProtocolCalendar('proto-current',CURRENT_PROTOCOL);
     renderProtocolCalendar('proto-goal',GOAL_PROTOCOL);
@@ -5300,7 +5501,6 @@ function renderAll(){
   });
   _safe('journal',()=>loadJournal());
   _safe('roadmap',()=>renderRoadmap());
-  _safe('hitlist',()=>renderHitList());
   _safe('cardio',()=>{renderCardioTracker();renderMiniCardio();});
   _safe('month-map',()=>renderMonthMap());
   _safe('idea-banks',()=>renderIdeaBanks());
